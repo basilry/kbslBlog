@@ -16,25 +16,85 @@ by Kim Basilri.
 
 ### 전체 기술스택
 - F/E
-  - Next.js 13
-  - TypeScript
-  - Zustand
-  - Scss(Sass)
-  - Axios
+  - Next.js 13, TypeScript
+  - zustand, scss(Sass), axios
+  - classNames, lodash
+  - Prettier, Eslint
 - B/E
-  - Java
-  - Spring-Boot
-  - Redis
-  - MySQL
+  - Java, Spring-Boot, JPA
+  - Redis, MySQL
 - Infra
-  - EC2
-  - S3
-  - RDS
-  - CloudFront
-  - Route 53
+  - EC2, S3, RDS
+  - CloudFront, Route 53
+  - PM2
+- Analyze
+  - Sentry
+  - Google Analytics
 - Tool
   - F/E - VSCode
   - B/E - Intellij, DBeaver
+
+<br/>
+
+### 프로젝트 계획 플로우
+- [x] 프로젝트 구조 잡기
+  - [x] 레포생성
+  - [x] 프로젝트 기술스택 확정
+  - [x] 계획일정 작성
+- F/E
+  - [ ] 기본 프로젝트 개발환경 설정
+    - [x] 라이브러리 및 필요 스택 설치
+    - [x] eslint, prettier관련 json 설정
+    - [ ] 에디터 관련 라이브러리 찾기 및 설치
+  - [x] 폴더 및 파일 구조 구성하기
+    - app
+      - 대메뉴
+        - 소메뉴
+          - page.tsx, ~~container.tsx
+    - components
+      - atom, molecule
+    - interface
+    - lib
+      - common.ts, store.ts, axiosInstance.ts..
+    - service
+      - getDataService.ts, loginService.ts..
+    - slices
+      - loginSlice.ts..
+    - styles
+      - components
+        - atom, molecule
+      - pages
+  - [ ] 공통 레이아웃 구성하기
+    - [ ] Header
+      - [ ] 메인링크, 공지사항, white/black 버전 버튼, 로그인 버튼, 개별 유저 프로필 사진(클릭시 유저정보)
+    - [ ] Sidebar
+      - [ ] 검색 인풋, 메뉴 목록, 방문자 수, 월간 방문자 그래프, 기부버튼
+    - [ ] Footer
+      - [ ] copyright, 깃헙 링크, 로켓펀치 링크, 링크드인 링크
+  - [ ] 공통 컴포넌트 구성하기
+    - [ ] Input, Button, Textarea..
+  - [ ] 페이지 구성하기
+    - [ ] Main
+    - [ ] Login
+    - [ ] SignUp
+    - [ ] Introduce
+    - [ ] UserDetail
+    - [ ] PostingList
+    - [ ] NewPost
+    - [ ] PostDetail
+    - [ ] GuestBook
+    - [ ] GuestAnalyze
+    - [ ] Error
+- B/E
+  - [ ] 레이아웃 잡기
+  - [ ] xml 구성하기
+  - [ ] 보안요소 구성하기
+- Infra
+  - [ ] VPC, 라우팅 테이블, EC2 구성하기(F/E, B/E용으로 각 1개 씩)
+  - [ ] RDS 환경 설정 및 DB 툴 연결
+  - [ ] EC2 내부 프로젝트 런칭 환경 설정
+  - [ ] S3 및 CloudFront 연계 설정
+
 
 <br/>
 
@@ -42,5 +102,6 @@ by Kim Basilri.
 - 2023.09.03
   - 프로젝트 기술스택 초안 설정
   - F/E 프로젝트 레포 구성
-  - Next.js 13 버전 설치 및 전체 Layout 구성
+  - Next.js 13 버전 설치 및 필수 라이브러리 설치
+  - 전체 계획 흐름 작성
   
