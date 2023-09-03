@@ -20,6 +20,7 @@ by Kim Basilri.
   - TypeScript
   - Zustand
   - Scss(Sass)
+  - Axios
 - B/E
   - Java
   - Spring-Boot
