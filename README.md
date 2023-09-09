@@ -31,7 +31,7 @@ by Kim Basilri.
   - Sentry
   - Google Analytics
 - Tool
-  - F/E - VSCode
+  - F/E - Intellij
   - B/E - Intellij, DBeaver
 
 <br/>
@@ -42,30 +42,36 @@ by Kim Basilri.
   - [x] 프로젝트 기술스택 확정
   - [x] 계획일정 작성
 - F/E
-  - [ ] 기본 프로젝트 개발환경 설정
+  - [x] 기본 프로젝트 개발환경 설정
     - [x] 라이브러리 및 필요 스택 설치
     - [x] eslint, prettier관련 json 설정
-    - [ ] 에디터 관련 라이브러리 찾기 및 설치
+    - [x] 에디터 관련 라이브러리 찾기 및 설치
   - [x] 폴더 및 파일 구조 구성하기
     - app
       - 대메뉴
         - 소메뉴
           - page.tsx, ~~container.tsx
+      - page.tsx
+      - layout.tsx
+      - Authentication.tsx
     - components
       - atom, molecule
     - interface
+      - IUser.ts
     - lib
       - common.ts, store.ts, axiosInstance.ts..
     - service
       - getDataService.ts, loginService.ts..
-    - slices
-      - loginSlice.ts..
+    - stores
+      - loginStore.ts..
     - styles
       - components
         - atom, molecule
+      - layout
+        - layout.module.scss
       - pages
   - [ ] 공통 레이아웃 구성하기
-    - [ ] Header
+    - [x] Header
       - [ ] 메인링크, 공지사항, white/black 버전 버튼, 로그인 버튼, 개별 유저 프로필 사진(클릭시 유저정보)
     - [ ] Sidebar
       - [ ] 검색 인풋, 메뉴 목록, 방문자 수, 월간 방문자 그래프, 기부버튼
@@ -104,4 +110,14 @@ by Kim Basilri.
   - F/E 프로젝트 레포 구성
   - Next.js 13 버전 설치 및 필수 라이브러리 설치
   - 전체 계획 흐름 작성
-  
+  - prettier, eslint 설정 파일 작성
+
+
+- 2023.09.09
+  - 에디터 라이브러리 확정 및 설치 - quill
+  - axiosInstance.ts 파일 생성 및 axios 기본 설정
+    - 로그인 관련 api service 및 store 추가
+  - 전체 프로젝트 레이아웃 구성
+    - Layout.tsx 
+    - Header.tsx, Sidebar.tsx, Footer.tsx, Loading.tsx
+  - 네이버 무료폰트 적용 - 마루부리
