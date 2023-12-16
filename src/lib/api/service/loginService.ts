@@ -1,6 +1,6 @@
 import { AxiosPromise } from "axios"
 import { ILoginUser } from "@interface/IUser"
-import axiosInstance from "@lib/axiosInstance"
+import axiosInstance from "@lib/api/axiosInstance"
 
 export function login(param: ILoginUser): AxiosPromise {
     const covertParam = {

@@ -1,5 +1,5 @@
 import React from "react"
-import Layout from "@components/layout/Layout"
+import Container from "@components/layout/Container"
 import "@styles/global.scss"
 import "@styles/font.scss"
 
@@ -9,10 +9,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
             <head>
                 <meta charSet="utf-8" />
                 <title>Basilri Kim의 개인 블로그</title>
-                <link rel="icon" href="/favicon.svg" />
+                <link rel="icon" href="/myFace.png" />
             </head>
             <body>
-                <Layout>{children}</Layout>
+                <Container>{children}</Container>
             </body>
         </html>
     )

@@ -2,7 +2,7 @@
 
 import { ReactElement, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { useLoginStore } from "@lib/store"
+import { useLoginStore } from "@lib/stores/store"
 
 function Authentication(): ReactElement {
     const router = useRouter()

@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand"
 import { ILoginUser, loginUserInitData } from "@interface/IUser"
-import { login } from "@service/loginService"
+import { login } from "@lib/api/service/loginService"
 
 export interface IStoreLogin {
     loginState: boolean

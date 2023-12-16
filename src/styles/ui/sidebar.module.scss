@@ -1,3 +1,74 @@
+@import "@styles/variable.scss";
+
 .sidebarWrapper {
-    border: 1px solid blue;
+    position: absolute;
+
+    height: 100vh;
+    z-index: 10;
+    width: 0px;
+    visibility: hidden;
+    transition: all 0.3s ease-in;
+
+    &.open {
+        transform: translate(0px, 0px);
+        visibility: visible;
+        width: 400px;
+
+        background-color: $black-400;
+    }
+
+    &.dark {
+        background-color: $black-800;
+
+        li {
+            &:hover {
+                background-color: $black-700;
+            }
+        }
+    }
+
+    li {
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 70px 25px 25px;
+        opacity: 1;
+        visibility: inherit;
+        transform: translate(0px, 0px);
+
+        &:hover {
+            opacity: 0.5;
+            background-color: $black-100;
+        }
+
+        &.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50px, 0px);
+        }
+
+        &.nowPath {
+            color: $pink-pressed;
+            // background-color: $black-100;
+        }
+    }
+
+    .sideBarFooter {
+        padding-top: 120px;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        opacity: 1;
+        visibility: inherit;
+        transform: translate(0px, 0px);
+        transition: all 1.5s ease-in;
+
+        &.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0s ease-in;
+        }
+    }
 }

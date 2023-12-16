@@ -1,20 +1,56 @@
-.headerWrapper {
-    border: 1px solid red;
-    padding: 25px;
+@import '@styles/variable.scss';
 
+.headerWrapper {
+    position: fixed;
     display: flex;
     justify-content: space-between;
+    background-color: white;
+    width: 100%;
+    padding: 25px 30px 25px 30px;
+
+    &.darkMode {
+        transition: all 0.2s ease-in;
+        background-color: $black-700;
+    }
 
     .leftWrapper {
         display: flex;
+        align-items: center;
         justify-content: space-between;
+
+        .hamberger {
+            margin-right: 10px;
+            cursor: pointer;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
 
         .mainLink {
             //margin: 10px;
+            &:hover {
+                opacity: 0.5;
+            }
         }
     }
 
     .rightWrapper {
         display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        .darkToggleWrapper {
+            margin-right: 10px;
+        }
+        a {
+            margin-right: 10px;
+
+            &:hover {
+                color: $black-400;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
     }
 }
