@@ -1,0 +1,60 @@
+@import '@styles/variable.scss';
+
+.headerWrapper {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    background-color: $black-100;
+    width: 100%;
+    padding: 25px 30px 25px 30px;
+    z-index: 10;
+
+    &.darkMode {
+        transition: all 0.2s ease-in;
+        background-color: $black-800;
+    }
+
+    .leftWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .hamberger {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            cursor: pointer;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+
+        .mainLink {
+            //margin: 10px;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .rightWrapper {
+        display: flex;
+        align-items: center;
+        // margin-bottom: 8px;
+        .darkToggleWrapper {
+            margin-right: 10px;
+        }
+        a {
+            margin-right: 10px;
+
+            &:hover {
+                color: $black-400;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+}

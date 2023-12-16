@@ -1,0 +1,17 @@
+@import "@styles/variable.scss";
+
+.container {
+    height: 100%;
+
+    &.darkMode {
+        transition: all 0s ease-in;
+        background-color: $black-700;
+        color: $white;
+    }
+
+    .body {
+        padding: 86px 30px 100px 30px;
+        display: grid;
+        height: 100%;
+    }
+}
