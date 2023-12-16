@@ -1,24 +1,24 @@
 @import "@styles/variable.scss";
 
 .sidebarWrapper {
-    position: absolute;
-
+    position: fixed;
     height: 100vh;
     z-index: 10;
-    width: 0px;
+    width: 300px;
     visibility: hidden;
     transition: all 0.3s ease-in;
+    background-color: transparent;
 
     &.open {
-        transform: translate(0px, 0px);
         visibility: visible;
-        width: 400px;
-
+        transform: translate(0px, 0px);
+        transition: all 0.3s ease-in;
+        width: 300px;
         background-color: $black-400;
     }
 
     &.dark {
-        background-color: $black-800;
+        background-color: $black-900;
 
         li {
             &:hover {
@@ -32,25 +32,36 @@
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        padding: 25px 70px 25px 25px;
+        padding: 25px 25px 25px 25px;
         opacity: 1;
         visibility: inherit;
         transform: translate(0px, 0px);
+        transition: all 0.3s ease-in;
 
         &:hover {
+            transition: all 0s ease-in;
             opacity: 0.5;
             background-color: $black-100;
+            color: $pink-default;
         }
 
         &.hidden {
             opacity: 0;
             visibility: hidden;
             transform: translate(-50px, 0px);
+            transition: all 0.3s ease-in;
         }
 
         &.nowPath {
             color: $pink-pressed;
             // background-color: $black-100;
+        }
+
+        &.dark {
+            &:hover {
+                color: $pink-ligthen;
+                opacity: 0.7;
+            }
         }
     }
 
@@ -63,12 +74,25 @@
         opacity: 1;
         visibility: inherit;
         transform: translate(0px, 0px);
-        transition: all 1.5s ease-in;
+        transition: all 0.3s ease-in;
 
         &.hidden {
             opacity: 0;
             visibility: hidden;
+            transform: translate(-50px, 0px);
             transition: all 0s ease-in;
+        }
+
+        .socialLogoWrppaer {
+            display: flex;
+            flex-direction: row;
+            .socialLogo {
+                margin: 10px 30px 0 0;
+
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
         }
     }
 }

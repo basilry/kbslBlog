@@ -29,7 +29,9 @@ function Header(): ReactElement {
                 </div>
                 <div className={styles.mainLink}>
                     <Link href="/">
-                        <Image src={darkMode ? "/blog_logo_white.svg" : "/blog_logo.svg"} alt="blog_logo" width={150} height={26} />
+                        <TextBasic size="xx-large" bold="bold">
+                            {"KBSL's Blog"}
+                        </TextBasic>
                     </Link>
                 </div>
             </div>
@@ -39,7 +41,7 @@ function Header(): ReactElement {
                 </div>
                 <Link href="/login">
                     <TextBasic size="small" bold="bold">
-                        {"LogIn"}
+                        {"Login"}
                     </TextBasic>
                 </Link>
                 <Link href="/userProfile">

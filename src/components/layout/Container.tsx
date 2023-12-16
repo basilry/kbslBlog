@@ -24,9 +24,7 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
             <div className={styles.body} onClick={(): void => changeSideBarFold(false)}>
                 {children}
             </div>
-            <div>
-                <Footer />
-            </div>
+            <Footer />
         </div>
     ) : (
         <></>
