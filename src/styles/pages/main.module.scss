@@ -5,6 +5,7 @@
 
     .mainTop {
         margin-top: 60px;
+        margin-bottom: 130px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -40,12 +41,23 @@
                 &:nth-child(6) {
                     margin-left: 50px;
                 }
+                &:nth-child(7) {
+                  margin-left: 50px;
+              }
+            }
+
+            
+            &.english {
+                p {
+                    margin: 13px;
+                }
             }
         }
     }
 
     .mainMid {
         margin-top: 130px;
+        margin-bottom: 130px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -96,6 +108,12 @@
 
     .mainBot {
         margin-top: 130px;
+
+        .botImage {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
         .botBlock {
             display: flex;

@@ -52,7 +52,17 @@ const Main = (): JSX.Element => {
                     <p>{"Web FrontEnd 개발자,"}</p>
                     <p>{"'김바실리'입니다."}</p>
                 </div>
+                <div className={classNames(styles.paragraphWrapper, styles.english)}>
+                    <p>{"Hello!"}</p>
+                    <p>{"I'm aiming DevSecOps,"}</p>
+                    <p>{"a law student who dreams of"}</p>
+                    <p>{"becoming 'The Genuine developer'."}</p>
+                    <br />
+                    <p>{"Web FrontEnd Dev,"}</p>
+                    <p>{"'Basliri Kim'."}</p>
+                </div>
             </div>
+            <LineBasic />
             <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
                 <div className={styles.midBlock}>
                     <p>Total Career</p>
@@ -76,7 +86,20 @@ const Main = (): JSX.Element => {
                     <p className={styles.yearChar}>Years</p>
                 </div>
             </div>
+            <LineBasic />
             <div className={classNames(styles.mainBot, darkMode && styles.dark)}>
+                <div className={styles.botImage}>
+                    <div>
+                        <TextBasic size="xx-large" bold="bold">
+                            {"아래의 프로젝트들도 진행했어요!"}
+                        </TextBasic>
+                        <TextBasic size="large">{"I also worked on the projects below!"}</TextBasic>
+                        <LineBasic />
+                        <TextBasic size="small">{"자세한 내용은 Projects 페이지에서 확인해주세요! :)"}</TextBasic>
+                        <TextBasic size="x-small">{"Find out more on the Projects page! :)"}</TextBasic>
+                    </div>
+                    <Image src="/macbook_Face.png" alt="macbook" width={200} height={200} />
+                </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
                         <TextBasic size="xx-large" bold="bold">
