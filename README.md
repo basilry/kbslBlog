@@ -47,38 +47,17 @@ by Kim Basilri.
     - [x] eslint, prettier관련 json 설정
     - [x] 에디터 관련 라이브러리 찾기 및 설치
   - [x] 폴더 및 파일 구조 구성하기
-    - app
-      - 대메뉴
-        - 소메뉴
-          - page.tsx, ~~container.tsx
-      - page.tsx
-      - layout.tsx
-      - Authentication.tsx
-    - components
-      - atom, molecule
-    - interface
-      - IUser.ts
-    - lib
-      - common.ts, store.ts, axiosInstance.ts..
-    - service
-      - getDataService.ts, loginService.ts..
-    - stores
-      - loginStore.ts..
-    - styles
-      - components
-        - atom, molecule
-      - layout
-        - layout.module.scss
-      - pages
   - [ ] 공통 레이아웃 구성하기
     - [x] Header
-      - [ ] 메인링크, 공지사항, white/black 버전 버튼, 로그인 버튼, 개별 유저 프로필 사진(클릭시 유저정보)
-    - [ ] Sidebar
-      - [ ] 검색 인풋, 메뉴 목록, 방문자 수, 월간 방문자 그래프, 기부버튼
-    - [ ] Footer
-      - [ ] copyright, 깃헙 링크, 로켓펀치 링크, 링크드인 링크
+      - [x] 메인링크, white/black 버전 버튼, 로그인 버튼, 개별 유저 프로필 사진(클릭시 유저정보)
+    - [x] Sidebar
+      - [x] 검색, 자기소개, 공지사항, 포스팅, 프로젝트 목록, 방명록(통계포함), 후원
+      - [x] 깃헙 링크, 링크드인 링크, 네이버 블로그 링크
+    - [x] Footer
+      - [x] copyright, 지메일, 핸드폰번호
   - [ ] 공통 컴포넌트 구성하기
-    - [ ] Input, Button, Textarea..
+    - [x] DarkModeBasic, TextBasic, LineBasic
+    - [ ] ModalBasic
   - [ ] 페이지 구성하기
     - [ ] Main
     - [ ] Login
@@ -121,3 +100,14 @@ by Kim Basilri.
     - Layout.tsx 
     - Header.tsx, Sidebar.tsx, Footer.tsx, Loading.tsx
   - 네이버 무료폰트 적용 - 마루부리
+
+
+-2023.12.16 ~ 17
+  - layout 개발 1차 완료
+    - Header, Sidebar, Footer 개발 1차 완료
+    - Header쪽 로그인, 유저프로필은 추후 개발 진행
+    - Sidebar에 있는 메뉴리스트 각 페이지와 링크 연결 완료
+    - Footer는 기능 없음. 단순 렌더
+  - Main 페이지 개발 진행 중
+    - 소개글, 커리어연도, 프로젝트 간략한 소개로 구성
+    - 그 밑에 세미나 관련글, 블로그 글도 연동 예정
