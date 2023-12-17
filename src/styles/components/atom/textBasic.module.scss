@@ -1,7 +1,7 @@
 @import '@styles/variable.scss';
 
 .text {
-
+  user-select: none;
 
   // 폰트사이즈
   &.x-small {

@@ -29,6 +29,10 @@ a {
     text-decoration: none;
 }
 
+p {
+    user-select: none;
+}
+
 //스크롤
 ::-webkit-scrollbar {
     width: 6px;

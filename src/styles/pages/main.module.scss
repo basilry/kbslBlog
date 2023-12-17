@@ -2,6 +2,7 @@
 
 .mainWrapper {
     // border: 1px solid green;
+    user-select: none;
 
     .mainTop {
         margin-top: 60px;
@@ -77,6 +78,7 @@
             background-color: $black-300;
             border-radius: 10px;
             box-shadow: $shadow;
+            transition: all 0.3s ease-in;
 
             .yearChar {
                 text-align: right;
@@ -102,6 +104,7 @@
                 color: $pink-ligthen;
                 font-size: 3.5rem;
                 font-weight: 800;
+                user-select: none;
             }
         }
     }
@@ -130,13 +133,14 @@
                 padding: 12px 15px;
                 opacity: 0.8;
                 box-shadow: $shadow;
+                transition: all 0.3s ease-in;
 
                 &:nth-child(1) {
                     margin-right: 20px;
                 }
 
                 .contents {
-                  margin-top: 13px;
+                  margin-top: 6px;
                 }
 
                 &:hover {
@@ -145,6 +149,12 @@
                   transition: all 0.3s ease-in;
                   opacity: 1;
                 }
+            }
+
+            .ciLogo {
+                display: flex;
+                align-items: center;
+                margin-bottom: 7px;
             }
         }
 
