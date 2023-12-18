@@ -8,6 +8,8 @@
     visibility: hidden;
     transition: all 0.3s ease-in;
     background-color: transparent;
+    transform: translate(-50px, 0px);
+    overflow: auto;
 
     &.open {
         visibility: visible;
@@ -32,7 +34,7 @@
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        padding: 25px 25px 25px 25px;
+        padding: 28px 25px 28px 25px;
         opacity: 1;
         visibility: inherit;
         transform: translate(0px, 0px);
@@ -66,7 +68,7 @@
     }
 
     .sideBarFooter {
-        padding-top: 120px;
+        padding-top: 10px;
         padding-left: 20px;
         display: flex;
         flex-direction: column;

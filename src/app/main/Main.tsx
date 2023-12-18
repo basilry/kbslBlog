@@ -9,7 +9,6 @@ import TextBasic from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/main.module.scss"
 
-// TODO: 날짜 계산 로직 추가
 const FIRST_TOTAL_YEAR_DATE = "20210913"
 const FIRST_FRONT_YEAR_DATE = "20211201"
 const FIRST_BACK_YEAR_DATE = "20220101"
@@ -27,7 +26,6 @@ const Main = (): JSX.Element => {
     const [backYear, setBackYear] = useState(0)
 
     const [yearHover, setYearHover] = useState(initYearHover)
-    console.log("yearHover", yearHover)
 
     useEffect(() => {
         const doCalYear = setTimeout(() => {
@@ -73,21 +71,33 @@ const Main = (): JSX.Element => {
             </div>
             <LineBasic />
             <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
-                <div className={styles.midBlock} onMouseEnter={(): void => setYearHover({ id: "total", hover: true })} onMouseLeave={(): void => setYearHover(initYearHover)}>
+                <div
+                    className={styles.midBlock}
+                    onMouseEnter={(): void => setYearHover({ id: "total", hover: true })}
+                    onMouseLeave={(): void => setYearHover(initYearHover)}
+                >
                     <p>Total Career</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{totalYear}+</div>
                     </div>
                     <p className={styles.yearChar}>Years</p>
                 </div>
-                <div className={classNames(styles.midBlock)} onMouseEnter={(): void => setYearHover({ id: "front", hover: true })} onMouseLeave={(): void => setYearHover(initYearHover)}>
+                <div
+                    className={classNames(styles.midBlock)}
+                    onMouseEnter={(): void => setYearHover({ id: "front", hover: true })}
+                    onMouseLeave={(): void => setYearHover(initYearHover)}
+                >
                     <p>F/E Position</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{frontYear}+</div>
                     </div>
                     <p className={styles.yearChar}>Years</p>
                 </div>
-                <div className={classNames(styles.midBlock)} onMouseEnter={(): void => setYearHover({ id: "back", hover: true })} onMouseLeave={(): void => setYearHover(initYearHover)}>
+                <div
+                    className={classNames(styles.midBlock)}
+                    onMouseEnter={(): void => setYearHover({ id: "back", hover: true })}
+                    onMouseLeave={(): void => setYearHover(initYearHover)}
+                >
                     <p>B/E Exp </p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{backYear}+</div>
@@ -95,6 +105,8 @@ const Main = (): JSX.Element => {
                     <p className={styles.yearChar}>Years</p>
                 </div>
             </div>
+            {/* TODO: 커리어 호버시 그래프 보이는 부분 */}
+            {/* <div>{yearHover.id === "total" && yearHover.hover && <p>total</p>}</div> */}
             <LineBasic />
             <div className={classNames(styles.mainBot, darkMode && styles.dark)}>
                 <div className={styles.botImage}>
@@ -124,7 +136,9 @@ const Main = (): JSX.Element => {
                                 <Image src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
                             </div>
                             <TextBasic size="small" bold="bold">
-                                {"장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다."}
+                                {
+                                    "장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다."
+                                }
                             </TextBasic>
                         </div>
                     </div>
@@ -142,7 +156,9 @@ const Main = (): JSX.Element => {
                                 <Image src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
                             </div>
                             <TextBasic size="small" bold="bold">
-                                {"공단의 고시변경으로 비즈니스 로직 등 다수 기능 변경 필요로 인해 리뉴얼 작업이 진행되었습니다."}
+                                {
+                                    "공단의 고시변경으로 비즈니스 로직 등 다수 기능 변경 필요로 인해 리뉴얼 작업이 진행되었습니다."
+                                }
                             </TextBasic>
                         </div>
                     </div>
@@ -162,7 +178,9 @@ const Main = (): JSX.Element => {
                                 <Image src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
                             </div>
                             <TextBasic size="small" bold="bold">
-                                {"타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 앱 프로젝트입니다."}
+                                {
+                                    "타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 앱 프로젝트입니다."
+                                }
                             </TextBasic>
                         </div>
                     </div>
@@ -185,6 +203,7 @@ const Main = (): JSX.Element => {
                     </div>
                 </div>
             </div>
+            <LineBasic />
         </div>
     )
 }

@@ -11,6 +11,10 @@
         justify-content: center;
         align-items: center;
 
+        @include TABLET {
+            flex-direction: column;
+        }
+
         .imageWrapper {
         }
 
@@ -29,28 +33,53 @@
 
                 &:nth-child(2) {
                     margin-left: 50px;
+                    @include TABLET {
+                        margin-left: 0;
+                    }
                 }
                 &:nth-child(3) {
                     margin-left: 50px;
+                    @include TABLET {
+                        margin-left: 0;
+                    }
                 }
                 &:nth-child(4) {
                     margin-left: 50px;
+                    @include TABLET {
+                        margin-left: 0;
+                    }
                 }
                 &:nth-child(5) {
                     margin-left: 50px;
+                    @include TABLET {
+                        margin-left: 0;
+                    }
                 }
                 &:nth-child(6) {
                     margin-left: 50px;
+                    @include TABLET {
+                        margin-left: 0;
+                    }
                 }
                 &:nth-child(7) {
-                  margin-left: 50px;
-              }
+                    margin-left: 50px;
+                    @include TABLET {
+                        margin-left: 0;
+                    }
+                }
+
+                @include TABLET {
+                    margin-left: 0;
+                }
             }
 
-            
             &.english {
                 p {
                     margin: 13px;
+                }
+
+                @include TABLET {
+                    margin-left: 40px;
                 }
             }
         }
@@ -80,14 +109,24 @@
             box-shadow: $shadow;
             transition: all 0.3s ease-in;
 
+            @include TABLET {
+                margin: 0px 10px;
+                padding: 10px;
+                width: 120px;
+
+                p {
+                    font-size: 0.8rem;
+                }
+            }
+
             .yearChar {
                 text-align: right;
             }
 
             &:hover {
-              cursor: pointer;
-              transform: translate(0px, -10px);
-              transition: all 0.3s ease-in;
+                cursor: pointer;
+                transform: translate(0px, -10px);
+                transition: all 0.3s ease-in;
             }
         }
 
@@ -111,17 +150,23 @@
 
     .mainBot {
         margin-top: 130px;
+        margin-bottom: 130px;
 
         .botImage {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .botBlock {
             display: flex;
             flex-direction: row;
             justify-content: center;
+
+            @include TABLET {
+                flex-direction: column;
+                align-items: center;
+            }
 
             .workContents {
                 margin-top: 20px;
@@ -135,19 +180,28 @@
                 box-shadow: $shadow;
                 transition: all 0.3s ease-in;
 
+                @include TABLET {
+                    height: 200px;
+                    width: 490px;
+                }
+
                 &:nth-child(1) {
                     margin-right: 20px;
+
+                    @include TABLET {
+                        margin-right: 0px;
+                    }
                 }
 
                 .contents {
-                  margin-top: 6px;
+                    margin-top: 6px;
                 }
 
                 &:hover {
-                  cursor: pointer;
-                  transform: translate(0px, -10px);
-                  transition: all 0.3s ease-in;
-                  opacity: 1;
+                    cursor: pointer;
+                    transform: translate(0px, -10px);
+                    transition: all 0.3s ease-in;
+                    opacity: 1;
                 }
             }
 
