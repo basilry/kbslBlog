@@ -29,6 +29,10 @@ a {
     text-decoration: none;
 }
 
+p {
+    user-select: none;
+}
+
 //스크롤
 ::-webkit-scrollbar {
     width: 6px;
@@ -41,4 +45,16 @@ a {
 }
 ::-webkit-scrollbar-track {
     background-color: transparent !important;
+}
+
+#lightMode {
+    background-color: $white;
+    color: $black-700;
+    transition: all 0s ease-in;
+}
+
+#darkMode {
+    background-color: $black-700;
+    color: $white;
+    transition: all 0s ease-in;
 }

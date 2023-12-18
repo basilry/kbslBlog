@@ -2,6 +2,7 @@
 
 .container {
     height: 100%;
+    width: 100%;
 
     &.darkMode {
         transition: all 0s ease-in;
@@ -11,7 +12,8 @@
 
     .body {
         padding: 86px 30px 100px 30px;
-        display: grid;
+        // display: grid;
         height: 100%;
+        width: 100%;
     }
 }

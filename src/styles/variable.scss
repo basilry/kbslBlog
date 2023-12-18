@@ -64,3 +64,21 @@ $xx-large-font: 28px;
 $shadow:0 3px 10px rgba(37,58,106,0.1);
 $blue-shadow:0 4px 10px rgba(37,58,106,0.1);
 $bottom-shadow:0 4px 8px rgba(0, 0, 0, 0.04);
+
+// 전역변수 설정
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 768px;
+
+
+// 모바일 브레이크포인트
+@mixin MOBILE {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+@mixin TABLET {
+  @media (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
