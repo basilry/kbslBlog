@@ -79,7 +79,7 @@
                 }
 
                 @include TABLET {
-                    margin-left: 40px;
+                    margin-left: 0px;
                 }
             }
         }
@@ -107,7 +107,7 @@
             background-color: $black-300;
             border-radius: 10px;
             box-shadow: $shadow;
-            transition: all 0.3s ease-in;
+            transition: all 0.1s ease-in;
 
             @include TABLET {
                 margin: 0px 10px;
@@ -126,7 +126,7 @@
             &:hover {
                 cursor: pointer;
                 transform: translate(0px, -10px);
-                transition: all 0.3s ease-in;
+                transition: all 0.1s ease-in;
             }
         }
 
@@ -178,11 +178,11 @@
                 padding: 12px 15px;
                 opacity: 0.8;
                 box-shadow: $shadow;
-                transition: all 0.3s ease-in;
+                transition: all 0.1s ease-in;
 
                 @include TABLET {
-                    height: 200px;
-                    width: 490px;
+                    height: 100%;
+                    width: 100%;
                 }
 
                 &:nth-child(1) {
@@ -200,7 +200,7 @@
                 &:hover {
                     cursor: pointer;
                     transform: translate(0px, -10px);
-                    transition: all 0.3s ease-in;
+                    transition: all 0.1s ease-in;
                     opacity: 1;
                 }
             }

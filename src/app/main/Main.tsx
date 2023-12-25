@@ -76,7 +76,8 @@ const Main = (): JSX.Element => {
                     onMouseEnter={(): void => setYearHover({ id: "total", hover: true })}
                     onMouseLeave={(): void => setYearHover(initYearHover)}
                 >
-                    <p>Total Career</p>
+                    <p>Total</p>
+                    <p>Career</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{totalYear}+</div>
                     </div>
@@ -87,7 +88,8 @@ const Main = (): JSX.Element => {
                     onMouseEnter={(): void => setYearHover({ id: "front", hover: true })}
                     onMouseLeave={(): void => setYearHover(initYearHover)}
                 >
-                    <p>F/E Position</p>
+                    <p>F/E</p>
+                    <p>Position</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{frontYear}+</div>
                     </div>
@@ -98,7 +100,8 @@ const Main = (): JSX.Element => {
                     onMouseEnter={(): void => setYearHover({ id: "back", hover: true })}
                     onMouseLeave={(): void => setYearHover(initYearHover)}
                 >
-                    <p>B/E Exp </p>
+                    <p>B/E</p>
+                    <p>Exp</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{backYear}+</div>
                     </div>

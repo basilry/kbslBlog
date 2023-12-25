@@ -13,7 +13,10 @@ function Header(): ReactElement {
     const { darkMode, changeSideBarFold } = useCoreStore()
 
     return (
-        <div className={classNames(styles.headerWrapper, darkMode && styles.darkMode)} onClick={(): void => changeSideBarFold(false)}>
+        <div
+            className={classNames(styles.headerWrapper, darkMode && styles.darkMode)}
+            onClick={(): void => changeSideBarFold(false)}
+        >
             <div className={styles.leftWrapper}>
                 <div className={styles.hamberger}>
                     <Image
@@ -39,7 +42,7 @@ function Header(): ReactElement {
                 <div className={styles.darkToggleWrapper} onClick={(e): void => e.stopPropagation()}>
                     <DarkModeBasic />
                 </div>
-                <Link href="/login">
+                {/* <Link href="/login">
                     <TextBasic size="small" bold="bold">
                         {"Login"}
                     </TextBasic>
@@ -48,7 +51,7 @@ function Header(): ReactElement {
                     <TextBasic size="small" bold="bold">
                         {"UserProfile"}
                     </TextBasic>
-                </Link>
+                </Link> */}
             </div>
         </div>
     )
