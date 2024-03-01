@@ -151,7 +151,7 @@ const Introduce = (): JSX.Element => {
 
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"GC케어 계열 자회사 헥톤프로젝트 웹 개발자 재직 중 |"}</TextBasic>
+                            <TextBasic size="medium">{"GC케어 자회사 헥톤프로젝트 웹 개발자 재직 중 |"}</TextBasic>
                             <TextBasic size="medium" className={"careerYear"}>
                                 {"2021. 09. ~ 현 재"}
                             </TextBasic>

@@ -39,14 +39,9 @@
     margin-left: 10px;
     text-align: left;
     min-width: 185px;
-  }
-  &.careerNow {
-    margin-left: 10px;
-    margin-right: 44px;
-    text-align: left;
-  }
-  &.careerNow1 {
-    text-align: left;
-    margin-right: 15px;
+
+    @include TABLET {
+      text-align: right;
+    }
   }
 }

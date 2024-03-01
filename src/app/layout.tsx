@@ -10,6 +10,7 @@ import "@styles/font.scss"
 import "@styles/nprogress.scss"
 import "swiper/css"
 import "swiper/css/pagination"
+import "swiper/css/navigation"
 import { useCoreStore } from "@lib/stores/store"
 
 const inter = Inter({ subsets: ["latin"] })

@@ -15,7 +15,6 @@
 
   .picsWrapper {
     text-align: right;
-    
     .picsBlock {
       @include TABLET {
         display: flex;
@@ -30,8 +29,6 @@
       }
        
     }
-
-
   }
-  
+
 }

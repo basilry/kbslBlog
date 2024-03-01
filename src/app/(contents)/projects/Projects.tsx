@@ -1,11 +1,12 @@
 "use client"
 
-import { Pagination } from "swiper/modules"
+import { Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import classNames from "classnames"
 import Wrapper from "@components/layout/Wrapper"
 import styles from "@styles/pages/projects.module.scss"
 import Carenote from "./Carenote"
+import ImsPart1 from "./ImsPart1"
 import SolutionInit from "./SolutionInit"
 import SolutionRenewal from "./SolutionRenewal"
 
@@ -17,9 +18,10 @@ const Projects = (): JSX.Element => {
                 pagination={{
                     clickable: true,
                 }}
-                modules={[Pagination]}
+                modules={[Pagination, Navigation]}
                 loop={true}
                 className={classNames(styles.swiper, "mySwiper")}
+                navigation={true}
             >
                 <SwiperSlide className={styles.swiperSlide}>
                     <SolutionInit />
@@ -30,14 +32,9 @@ const Projects = (): JSX.Element => {
                 <SwiperSlide className={styles.swiperSlide}>
                     <Carenote />
                 </SwiperSlide>
-                {/* <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide> */}
+                <SwiperSlide className={styles.swiperSlide}>
+                    <ImsPart1 />
+                </SwiperSlide>
             </Swiper>
         </Wrapper>
     )

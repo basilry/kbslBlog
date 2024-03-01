@@ -19,7 +19,7 @@
     position: absolute;
     z-index: 9999;
     //right: 0px;
-    width: 100px;
+    width: 50px;
     height: 100%;
     opacity: 1;
     -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -61,8 +61,8 @@
     //background: rgba(255, 255, 255, 0.85);
 
     @include MOBILE {
-      width: 4rem;
-      height: 4rem;
+      width: 2rem;
+      height: 2rem;
       border: solid 5px transparent;
       border-top-color: $orangeCinamon;
       border-left-color: $orangeCinamon;

@@ -59,3 +59,18 @@ p {
     color: $white;
     transition: all 0s ease-in;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+    font-size: 20px !important;
+    color: white !important;
+    opacity: 0.4;
+    height: 100px !important;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+.swiper-pagination-bullet-active {
+    background-color: white !important;
+}
