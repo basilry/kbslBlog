@@ -2,7 +2,18 @@ import classNames from "classnames"
 import styles from "@styles/components/atom/textBasic.module.scss"
 
 const TextBasic = ({ children, bold, className, size }: ITextBasicProps): JSX.Element => {
-    return <div className={classNames(styles.text, className && styles[className], size && styles[size], bold && styles[bold])}>{children}</div>
+    return (
+        <div
+            className={classNames(
+                styles.text,
+                className && styles[className],
+                size && styles[size],
+                bold && styles[bold],
+            )}
+        >
+            {children}
+        </div>
+    )
 }
 
 export type TTextSize = "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large"

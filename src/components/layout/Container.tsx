@@ -5,6 +5,7 @@ import classNames from "classnames"
 import Footer from "@components/ui/Footer"
 import Header from "@components/ui/Header"
 import Sidebar from "@components/ui/Sidebar"
+import TopMoveButton from "@components/ui/TopMoveButton"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/layout/container.module.scss"
 
@@ -24,6 +25,7 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
             <div className={styles.body} onClick={(): void => changeSideBarFold(false)}>
                 {children}
             </div>
+            <TopMoveButton />
             <Footer />
         </div>
     ) : (

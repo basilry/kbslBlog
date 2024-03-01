@@ -1,0 +1,31 @@
+.wrapper {
+  opacity: 0.5;
+  transition: opacity 0.5s ease-in-out;
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  color: white;
+  background-color: black;
+  width: 55px;
+  height: 55px;
+  text-align: center;
+  align-items: center;
+  padding: 12px 10px;
+  border-radius: 30px;
+  &:hover {
+    cursor: pointer;
+    background-color: #a19c9c;
+    transition: all 0s ease-in;
+  }
+}
+
+.darkMode {
+  color: black;
+  background-color: white;
+  
+
+  &:hover {
+    background-color: #a19c9c;
+  }
+}

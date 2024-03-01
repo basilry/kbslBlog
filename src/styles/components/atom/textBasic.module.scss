@@ -30,4 +30,23 @@
   &.normal {
     font-weight: normal;
   }
+
+  // 별도
+  &.bar {
+    margin-left: 10px;
+  }
+  &.careerYear {
+    margin-left: 10px;
+    text-align: left;
+    min-width: 185px;
+  }
+  &.careerNow {
+    margin-left: 10px;
+    margin-right: 44px;
+    text-align: left;
+  }
+  &.careerNow1 {
+    text-align: left;
+    margin-right: 15px;
+  }
 }

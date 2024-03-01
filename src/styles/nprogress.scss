@@ -1,0 +1,98 @@
+@import "variable.scss";
+
+#nprogress {
+  pointer-events: none;
+
+  .bar {
+    background: $blue-600;
+    opacity: 0.4;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.3rem;
+  }
+
+  .peg {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    //right: 0px;
+    width: 100px;
+    height: 100%;
+    opacity: 1;
+    -webkit-transform: rotate(3deg) translate(0px, -4px);
+    -ms-transform: rotate(3deg) translate(0px, -4px);
+    transform: rotate(3deg) translate(0px, -4px);
+  }
+
+  .spinner {
+    top: 0;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    //top: 50%;
+    //right: 50%;
+    //bottom: 50%;
+    //left: 50%;
+
+    //@include TABLET {
+    //  bottom: 4.5rem;
+    //  left: 1.25rem;
+    //}
+  }
+
+  .spinner-icon {
+    z-index: 9999;
+    width: 3rem;
+    height: 3rem;
+    box-sizing: border-box;
+    border: solid 8px transparent;
+    border-top-color: $orangeCinamon;
+    border-left-color: $orangeCinamon;
+    border-radius: 50%;
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+    animation: nprogress-spinner 400ms linear infinite;
+    //background: rgba(255, 255, 255, 0.85);
+
+    @include MOBILE {
+      width: 4rem;
+      height: 4rem;
+      border: solid 5px transparent;
+      border-top-color: $orangeCinamon;
+      border-left-color: $orangeCinamon;
+    }
+  }
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+
+  #nprogress .spinner,
+  #nprogress .bar {
+    position: absolute;
+  }
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
