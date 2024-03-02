@@ -16,7 +16,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 16 # 원하는 Node.js 버전으로 설정
+        node-version: 16
 
     - name: Install Dependencies
       run: npm install
