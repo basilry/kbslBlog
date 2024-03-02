@@ -27,5 +27,5 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4.1.4
       with:
-        branch: gh-pages
-        folder: out
+        branch: gh-pages # 배포할 대상 브랜치
+        folder: out # Next.js의 export 명령어가 생성하는 폴더
