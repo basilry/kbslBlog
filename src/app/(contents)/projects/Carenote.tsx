@@ -101,7 +101,7 @@ const Carenote = (): JSX.Element => {
                 <div className={styles.picsWrapper}>
                     <div className={styles.picsBlock}>
                         <Image
-                            src="/carenotePics/carenote1.png"
+                            src="/kbslBlog/carenotePics/carenote1.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -110,7 +110,7 @@ const Carenote = (): JSX.Element => {
                             placeholder="blur"
                         />
                         <Image
-                            src="/carenotePics/carenote2.png"
+                            src="/kbslBlog/carenotePics/carenote2.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -121,7 +121,7 @@ const Carenote = (): JSX.Element => {
                     </div>
                     <div className={styles.picsBlock}>
                         <Image
-                            src="/carenotePics/carenote3.png"
+                            src="/kbslBlog/carenotePics/carenote3.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -130,7 +130,7 @@ const Carenote = (): JSX.Element => {
                             placeholder="blur"
                         />
                         <Image
-                            src="/carenotePics/carenote4.png"
+                            src="/kbslBlog/carenotePics/carenote4.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
