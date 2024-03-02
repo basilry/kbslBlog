@@ -121,3 +121,9 @@ by Kim Basilri.
     - giscus 설치하여 방명록 생성
   - Projects 개발 1차 완료
   - 배포 진행
+    - Github Pages로 정적 배포
+    - next/Image 컴포넌트 깨짐현상으로 별도 라이브러리 적용
+    - flow:
+      - dev 개발 후 push
+      - master PR
+      - 완료시 자동 배포 및 gh-pages pull 후 배포 진행

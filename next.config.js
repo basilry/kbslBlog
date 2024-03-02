@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withExportImages = require("next-export-optimize-images")
+
+const nextConfig = withExportImages({
     output: "export",
     basePath: "/kbslBlog",
     assetPrefix: "/kbslBlog/",
-}
+})
 
 module.exports = nextConfig
