@@ -94,6 +94,7 @@ const SolutionInit = (): JSX.Element => {
                 <div className={styles.picsWrapper}>
                     <div className={styles.picsBlock}>
                         <Image
+                            placeholder="blur"
                             src="/solutionPics/sirMast.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -102,6 +103,7 @@ const SolutionInit = (): JSX.Element => {
                             className={styles.pics}
                         />
                         <Image
+                            placeholder="blur"
                             src="/solutionPics/empMast1.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -112,6 +114,7 @@ const SolutionInit = (): JSX.Element => {
                     </div>
                     <div className={styles.picsBlock}>
                         <Image
+                            placeholder="blur"
                             src="/solutionPics/sirMast2.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -120,6 +123,7 @@ const SolutionInit = (): JSX.Element => {
                             className={styles.pics}
                         />
                         <Image
+                            placeholder="blur"
                             src="/solutionPics/empMast2.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -130,6 +134,7 @@ const SolutionInit = (): JSX.Element => {
                     </div>
                     <div className={styles.picsBlock}>
                         <Image
+                            placeholder="blur"
                             src="/solutionPics/careProv.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -138,6 +143,7 @@ const SolutionInit = (): JSX.Element => {
                             className={styles.pics}
                         />
                         <Image
+                            placeholder="blur"
                             src="/solutionPics/empMast4.png"
                             alt="myFace"
                             sizes={"100vw"}

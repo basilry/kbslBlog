@@ -115,6 +115,7 @@ by Kim Basilri.
 
 
 - 2024.03.01 ~ 02
+  - 폰트 변경 - Pretendard
   - 메인 종결
   - Introduce 개발 1차 완료
   - Visitor 개발 완료

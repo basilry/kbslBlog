@@ -47,7 +47,7 @@ const Main = (): JSX.Element => {
         <Wrapper>
             <div className={styles.mainTop}>
                 <div className={styles.imageWrapper}>
-                    <Image src="/my_face_hand.png" alt="myFace" width={250} height={250} />
+                    <Image placeholder="blur" src="/my_face_hand.png" alt="myFace" width={250} height={250} />
                 </div>
                 <div className={styles.paragraphWrapper}>
                     <p>{"안녕하세요! :)"}</p>
@@ -99,7 +99,7 @@ const Main = (): JSX.Element => {
                         <TextBasic size="small">{"자세한 내용은 Projects 페이지에서 확인해주세요! :)"}</TextBasic>
                         <TextBasic size="x-small">{"Find out more on the Projects page! :)"}</TextBasic>
                     </div>
-                    <Image src="/macbook_Face.png" alt="macbook" width={200} height={200} />
+                    <Image placeholder="blur" src="/macbook_Face.png" alt="macbook" width={200} height={200} />
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
@@ -112,8 +112,8 @@ const Main = (): JSX.Element => {
                         <LineBasic />
                         <div className={styles.contents}>
                             <div className={styles.ciLogo}>
-                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
-                                <Image src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
+                                <Image placeholder="blur" src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image placeholder="blur" src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
                             </div>
                             <TextBasic size="small" bold="bold">
                                 {
@@ -132,8 +132,8 @@ const Main = (): JSX.Element => {
                         <LineBasic />
                         <div className={styles.contents}>
                             <div className={styles.ciLogo}>
-                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
-                                <Image src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
+                                <Image placeholder="blur" src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image placeholder="blur" src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
                             </div>
                             <TextBasic size="small" bold="bold">
                                 {
@@ -154,8 +154,8 @@ const Main = (): JSX.Element => {
                         <LineBasic />
                         <div className={styles.contents}>
                             <div className={styles.ciLogo}>
-                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
-                                <Image src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
+                                <Image placeholder="blur" src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image placeholder="blur" src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
                             </div>
                             <TextBasic size="small" bold="bold">
                                 {
@@ -174,8 +174,8 @@ const Main = (): JSX.Element => {
                         <LineBasic />
                         <div className={styles.contents}>
                             <div className={styles.ciLogo}>
-                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
-                                <Image src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
+                                <Image placeholder="blur" src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image placeholder="blur" src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
                             </div>
                             <TextBasic size="small" bold="bold">
                                 {
@@ -196,7 +196,7 @@ const Main = (): JSX.Element => {
                         <LineBasic />
                         <div className={styles.contents}>
                             <div className={styles.ciLogo}>
-                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image placeholder="blur" src="/hecton.png" alt="logo" width={30} height={18} />
                             </div>
                             <TextBasic size="small" bold="bold">
                                 {"헥톤프로젝트 테크 블로그 사이드 프로젝트입니다."}
@@ -213,8 +213,8 @@ const Main = (): JSX.Element => {
                         <LineBasic />
                         <div className={styles.contents}>
                             <div className={styles.ciLogo}>
-                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
-                                <Image src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
+                                <Image placeholder="blur" src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image placeholder="blur" src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
                             </div>
                             <TextBasic size="small" bold="bold">
                                 {"미정"}

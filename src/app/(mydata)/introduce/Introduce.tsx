@@ -94,6 +94,7 @@ const Introduce = (): JSX.Element => {
                     </div>
                     <div className={styles.myPics}>
                         <Image
+                            placeholder="blur"
                             src="/myPics.jpg"
                             alt="myFace"
                             sizes={"100vw"}
