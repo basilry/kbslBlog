@@ -47,7 +47,7 @@ const Main = (): JSX.Element => {
         <Wrapper>
             <div className={styles.mainTop}>
                 <div className={styles.imageWrapper}>
-                    <Image src="/kbslBlog/my_face_hand.png" alt="myFace" width={250} height={250} />
+                    <Image placeholder="blur" src="/kbslBlog/my_face_hand.png" alt="myFace" width={250} height={250} />
                 </div>
                 <div className={styles.paragraphWrapper}>
                     <p>{"안녕하세요! :)"}</p>
@@ -103,7 +103,7 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"또하나의가족, Solution"}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
@@ -135,7 +135,7 @@ const Main = (): JSX.Element => {
                         </div>
                     </div>
                     <div className={styles.workContents}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"또하나의가족, Solution | Renewal"}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
@@ -169,7 +169,7 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"또하나의가족, 돌봄노트"}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
@@ -201,7 +201,7 @@ const Main = (): JSX.Element => {
                         </div>
                     </div>
                     <div className={styles.workContents}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"또하나의가족, 통합관리시스템 Part 1."}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
@@ -235,7 +235,7 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"헥톤프로젝트, 테크 블로그"}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
@@ -258,7 +258,7 @@ const Main = (): JSX.Element => {
                         </div>
                     </div>
                     <div className={styles.workContents}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"또하나의가족, 통합관리시스템 Part 2."}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
