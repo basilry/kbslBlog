@@ -103,7 +103,7 @@ const ImsPart1 = (): JSX.Element => {
                     <div className={styles.picsBlock}>
                         <Image
                             placeholder="blur"
-                            src="/imsPics/ims1.png"
+                            src="/kbslBlog/imsPics/ims1.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -112,7 +112,7 @@ const ImsPart1 = (): JSX.Element => {
                         />
                         <Image
                             placeholder="blur"
-                            src="/imsPics/ims2.png"
+                            src="/kbslBlog/imsPics/ims2.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -123,7 +123,7 @@ const ImsPart1 = (): JSX.Element => {
                     <div className={styles.picsBlock}>
                         <Image
                             placeholder="blur"
-                            src="/imsPics/ims3.png"
+                            src="/kbslBlog/imsPics/ims3.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -132,7 +132,7 @@ const ImsPart1 = (): JSX.Element => {
                         />
                         <Image
                             placeholder="blur"
-                            src="/imsPics/ims4.png"
+                            src="/kbslBlog/imsPics/ims4.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}

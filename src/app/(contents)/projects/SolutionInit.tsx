@@ -95,7 +95,7 @@ const SolutionInit = (): JSX.Element => {
                     <div className={styles.picsBlock}>
                         <Image
                             placeholder="blur"
-                            src="/solutionPics/sirMast.png"
+                            src="/kbslBlog/solutionPics/sirMast.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -104,27 +104,7 @@ const SolutionInit = (): JSX.Element => {
                         />
                         <Image
                             placeholder="blur"
-                            src="/solutionPics/empMast1.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                    </div>
-                    <div className={styles.picsBlock}>
-                        <Image
-                            placeholder="blur"
-                            src="/solutionPics/sirMast2.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                        <Image
-                            placeholder="blur"
-                            src="/solutionPics/empMast2.png"
+                            src="/kbslBlog/solutionPics/empMast1.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -135,7 +115,7 @@ const SolutionInit = (): JSX.Element => {
                     <div className={styles.picsBlock}>
                         <Image
                             placeholder="blur"
-                            src="/solutionPics/careProv.png"
+                            src="/kbslBlog/solutionPics/sirMast2.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
@@ -144,7 +124,27 @@ const SolutionInit = (): JSX.Element => {
                         />
                         <Image
                             placeholder="blur"
-                            src="/solutionPics/empMast4.png"
+                            src="/kbslBlog/solutionPics/empMast2.png"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={0}
+                            height={0}
+                            className={styles.pics}
+                        />
+                    </div>
+                    <div className={styles.picsBlock}>
+                        <Image
+                            placeholder="blur"
+                            src="/kbslBlog/solutionPics/careProv.png"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={0}
+                            height={0}
+                            className={styles.pics}
+                        />
+                        <Image
+                            placeholder="blur"
+                            src="/kbslBlog/solutionPics/empMast4.png"
                             alt="myFace"
                             sizes={"100vw"}
                             width={0}
