@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import styles from "@styles/pages/solutionInit.module.scss"
@@ -89,69 +88,6 @@ const SolutionInit = (): JSX.Element => {
                     </TextBasic>
                     <TextBasic size="small">{"- F/E: 4명"}</TextBasic>
                     <TextBasic size="small">{"- B/E: 2명"}</TextBasic>
-                </div>
-                {/*TODO: 이미지 클릭시 모달 띄워서 크게 보여주기 */}
-                <div className={styles.picsWrapper}>
-                    <div className={styles.picsBlock}>
-                        <Image
-                            placeholder="blur"
-                            src="/kbslBlog/solutionPics/sirMast.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                        <Image
-                            placeholder="blur"
-                            src="/kbslBlog/solutionPics/empMast1.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                    </div>
-                    <div className={styles.picsBlock}>
-                        <Image
-                            placeholder="blur"
-                            src="/kbslBlog/solutionPics/sirMast2.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                        <Image
-                            placeholder="blur"
-                            src="/kbslBlog/solutionPics/empMast2.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                    </div>
-                    <div className={styles.picsBlock}>
-                        <Image
-                            placeholder="blur"
-                            src="/kbslBlog/solutionPics/careProv.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                        <Image
-                            placeholder="blur"
-                            src="/kbslBlog/solutionPics/empMast4.png"
-                            alt="myFace"
-                            sizes={"100vw"}
-                            width={0}
-                            height={0}
-                            className={styles.pics}
-                        />
-                    </div>
                 </div>
             </div>
 

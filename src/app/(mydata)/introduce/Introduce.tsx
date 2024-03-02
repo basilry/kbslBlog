@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
@@ -93,8 +92,7 @@ const Introduce = (): JSX.Element => {
                         </div>
                     </div>
                     <div className={styles.myPics}>
-                        <Image
-                            placeholder="blur"
+                        <img
                             src="/kbslBlog/myPics.jpg"
                             alt="myFace"
                             sizes={"100vw"}

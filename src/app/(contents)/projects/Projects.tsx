@@ -8,6 +8,7 @@ import styles from "@styles/pages/projects.module.scss"
 import Carenote from "./Carenote"
 import ImsPart1 from "./ImsPart1"
 import SolutionInit from "./SolutionInit"
+import SolutionInitPics from "./SolutionInitPics"
 import SolutionRenewal from "./SolutionRenewal"
 
 const Projects = (): JSX.Element => {
@@ -25,6 +26,7 @@ const Projects = (): JSX.Element => {
             >
                 <SwiperSlide className={styles.swiperSlide}>
                     <SolutionInit />
+                    <SolutionInitPics />
                 </SwiperSlide>
                 <SwiperSlide className={styles.swiperSlide}>
                     <SolutionRenewal />

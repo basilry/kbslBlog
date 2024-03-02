@@ -27,7 +27,8 @@
     "import/no-unresolved": "off",
     "react/react-in-jsx-scope": "off",    
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",        
+    "react-hooks/exhaustive-deps": "warn",     
+    "@next/next/no-img-element": "off",  
     "react/no-unknown-property": [
       2,
       {

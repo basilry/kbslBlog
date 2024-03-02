@@ -15,20 +15,6 @@
 
   .picsWrapper {
     text-align: right;
-    .picsBlock {
-      @include TABLET {
-        display: flex;
-        flex-direction: column;
-      }
-      .pics {
-        width: 50%;
-        height: auto;
-        @include TABLET {
-          width: 100%;
-        }
-      }
-       
-    }
   }
 
 }
