@@ -5,7 +5,7 @@
   "homepage": "https://basilry.github.io/kbslBlog/",
   "scripts": {
     "dev": "next dev -p 3009",
-    "build": "next build && next-export-optimize-images",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "serve": "npx http-server out"
