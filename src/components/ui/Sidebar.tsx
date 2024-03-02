@@ -26,6 +26,7 @@ function Sidebar(): ReactElement {
                     onClick={(): void => changeSideBarFold(false)}
                 >
                     <Image
+                        placeholder="blur"
                         src={darkMode ? "xmark-solid_white.svg" : "xmark-solid.svg"}
                         alt="sidebarCloseBtn"
                         width={30}
@@ -69,6 +70,7 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://github.com/basilry">
                             <Image
+                                placeholder="blur"
                                 src={darkMode ? "/github_white.svg" : "/github.svg"}
                                 alt="github"
                                 width={20}
@@ -79,6 +81,7 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://www.linkedin.com/in/basilri-kim-4b6611218/">
                             <Image
+                                placeholder="blur"
                                 src={darkMode ? "/linkedin_white.svg" : "/linkedin.svg"}
                                 alt="linkedin"
                                 width={20}
@@ -89,6 +92,7 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://blog.naver.com/basilry">
                             <Image
+                                placeholder="blur"
                                 src={darkMode ? "/n-solid_white.svg" : "/n-solid.svg"}
                                 alt="n-solid"
                                 width={20}

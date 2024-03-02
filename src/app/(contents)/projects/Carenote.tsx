@@ -107,6 +107,7 @@ const Carenote = (): JSX.Element => {
                             width={0}
                             height={0}
                             className={styles.pics}
+                            placeholder="blur"
                         />
                         <Image
                             src="/carenotePics/carenote2.png"
@@ -115,6 +116,7 @@ const Carenote = (): JSX.Element => {
                             width={0}
                             height={0}
                             className={styles.pics}
+                            placeholder="blur"
                         />
                     </div>
                     <div className={styles.picsBlock}>
@@ -125,6 +127,7 @@ const Carenote = (): JSX.Element => {
                             width={0}
                             height={0}
                             className={styles.pics}
+                            placeholder="blur"
                         />
                         <Image
                             src="/carenotePics/carenote4.png"
@@ -133,6 +136,7 @@ const Carenote = (): JSX.Element => {
                             width={0}
                             height={0}
                             className={styles.pics}
+                            placeholder="blur"
                         />
                     </div>
                 </div>

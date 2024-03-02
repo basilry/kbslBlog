@@ -102,6 +102,7 @@ const ImsPart1 = (): JSX.Element => {
                 <div className={styles.picsWrapper}>
                     <div className={styles.picsBlock}>
                         <Image
+                            placeholder="blur"
                             src="/imsPics/ims1.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -110,6 +111,7 @@ const ImsPart1 = (): JSX.Element => {
                             className={styles.pics}
                         />
                         <Image
+                            placeholder="blur"
                             src="/imsPics/ims2.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -120,6 +122,7 @@ const ImsPart1 = (): JSX.Element => {
                     </div>
                     <div className={styles.picsBlock}>
                         <Image
+                            placeholder="blur"
                             src="/imsPics/ims3.png"
                             alt="myFace"
                             sizes={"100vw"}
@@ -128,6 +131,7 @@ const ImsPart1 = (): JSX.Element => {
                             className={styles.pics}
                         />
                         <Image
+                            placeholder="blur"
                             src="/imsPics/ims4.png"
                             alt="myFace"
                             sizes={"100vw"}
