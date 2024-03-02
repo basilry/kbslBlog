@@ -5,11 +5,10 @@
   "homepage": "https://basilry.github.io/kbslBlog/",
   "scripts": {
     "dev": "next dev -p 3009",
-    "build": "next build && next export",
+    "build": "next build && next export && rm -rf docs && mv out docs",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npx http-server out",
-    "deploy": "gh-pages -b main -d build"
+    "serve": "npx http-server out"
   },
   "dependencies": {
     "@types/nprogress": "^0.2.3",
