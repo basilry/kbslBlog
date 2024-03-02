@@ -29,11 +29,24 @@
             }
         }
 
-        .mainLink {
-            //margin: 10px;
-            &:hover {
-                opacity: 0.5;
+        .linkBlock {
+            display: flex;
+            .rootLink {
+                margin-right: 10px;
+                &:hover {
+                    opacity: 0.5;
+                }
             }
+            .menuLink {
+                margin-left: 10px;
+                &:hover {
+                    color: $black-400;
+                }
+                @include TABLET {
+                    display: none;
+                }
+            }
+            
         }
     }
 

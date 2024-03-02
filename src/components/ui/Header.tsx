@@ -10,10 +10,13 @@ import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/ui/header.module.scss"
 
 function Header(): ReactElement {
-    const { darkMode, changeSideBarFold } = useCoreStore()
+    const { darkMode, changeSideBarFold, nowMenuName, changeNowMenuName } = useCoreStore()
 
     return (
-        <div className={classNames(styles.headerWrapper, darkMode && styles.darkMode)} onClick={(): void => changeSideBarFold(false)}>
+        <div
+            className={classNames(styles.headerWrapper, darkMode && styles.darkMode)}
+            onClick={(): void => changeSideBarFold(false)}
+        >
             <div className={styles.leftWrapper}>
                 <div className={styles.hamberger}>
                     <Image
@@ -27,19 +30,31 @@ function Header(): ReactElement {
                         }}
                     />
                 </div>
-                <div className={styles.mainLink}>
-                    <Link href="/">
-                        <TextBasic size="xx-large" bold="bold">
-                            {"KBSL's Blog"}
-                        </TextBasic>
-                    </Link>
+                <div className={styles.linkBlock}>
+                    <div className={styles.rootLink}>
+                        <Link href="/" onClick={(): void => changeNowMenuName("MAIN")}>
+                            <TextBasic size="xx-large" bold="bold">
+                                {"KBSL's Blog"}
+                            </TextBasic>
+                        </Link>
+                    </div>
+                    <TextBasic size="xx-large" bold="bold">
+                        /
+                    </TextBasic>
+                    <div className={styles.menuLink}>
+                        <Link href={`/${nowMenuName.toLowerCase()}`}>
+                            <TextBasic size="xx-large" bold="bold">
+                                {nowMenuName}
+                            </TextBasic>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className={styles.rightWrapper}>
                 <div className={styles.darkToggleWrapper} onClick={(e): void => e.stopPropagation()}>
                     <DarkModeBasic />
                 </div>
-                <Link href="/login">
+                {/* <Link href="/login">
                     <TextBasic size="small" bold="bold">
                         {"Login"}
                     </TextBasic>
@@ -48,7 +63,7 @@ function Header(): ReactElement {
                     <TextBasic size="small" bold="bold">
                         {"UserProfile"}
                     </TextBasic>
-                </Link>
+                </Link> */}
             </div>
         </div>
     )

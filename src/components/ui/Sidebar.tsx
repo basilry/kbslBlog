@@ -8,12 +8,14 @@ import MenuItem from "@components/molecule/MenuItem"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/ui/sidebar.module.scss"
 
-const MENU_LIST = ["Main", "Search", "Introduce", "Notice", "Post", "Projects", "Visitor", "Donate"]
-const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
+// const MENU_LIST = ["Main", "Search", "Introduce", "Notice", "Post", "Projects", "Visitor", "Donate"]
+// const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
+const MENU_LIST = ["Main", "Introduce", "Projects", "Visitor"]
+const MENU_LIST_KR = ["메인", "자기소개", "프로젝트 목록", "방명록"]
 
 function Sidebar(): ReactElement {
     const pathName = usePathname()
-    const { darkMode, sideBarFold, changeSideBarFold } = useCoreStore()
+    const { darkMode, sideBarFold, changeSideBarFold, changeNowMenuName } = useCoreStore()
     const [focus, setFocus] = useState(0)
 
     return (
@@ -33,7 +35,10 @@ function Sidebar(): ReactElement {
                 {MENU_LIST.map((menuName, idx) => (
                     <Link key={menuName} href={`/${menuName.slice(0, 1).toLowerCase() + menuName.slice(1)}`}>
                         <li
-                            onClick={(): void => changeSideBarFold(false)}
+                            onClick={(): void => {
+                                changeNowMenuName(menuName.toUpperCase())
+                                changeSideBarFold(false)
+                            }}
                             className={classNames(
                                 !sideBarFold ? styles.hidden : styles.view,
                                 pathName.slice(1) === menuName.toLowerCase() && styles.nowPath,

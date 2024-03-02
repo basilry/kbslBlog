@@ -6,6 +6,7 @@ import Image from "next/image"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
+import Wrapper from "@components/layout/Wrapper"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/main.module.scss"
 
@@ -14,9 +15,8 @@ const FIRST_FRONT_YEAR_DATE = "20211201"
 const FIRST_BACK_YEAR_DATE = "20220101"
 const TODAY = dayjs().format("YYYYMMDD")
 const TOTAL_YEAR = dayjs(TODAY).diff(FIRST_TOTAL_YEAR_DATE, "year")
-const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "year")
-const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "year")
-const initYearHover = { id: "", hover: false }
+const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "month")
+const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "month")
 
 const Main = (): JSX.Element => {
     const { darkMode } = useCoreStore()
@@ -24,8 +24,6 @@ const Main = (): JSX.Element => {
     const [totalYear, setTotalYear] = useState(0)
     const [frontYear, setFrontYear] = useState(0)
     const [backYear, setBackYear] = useState(0)
-
-    const [yearHover, setYearHover] = useState(initYearHover)
 
     useEffect(() => {
         const doCalYear = setTimeout(() => {
@@ -38,7 +36,7 @@ const Main = (): JSX.Element => {
             if (TOTAL_YEAR === totalYear && FRONT_YEAR === frontYear && BACK_YEAR !== backYear) {
                 setBackYear(backYear + 1)
             }
-        }, 150)
+        }, 50)
 
         return () => {
             clearInterval(doCalYear)
@@ -46,63 +44,45 @@ const Main = (): JSX.Element => {
     }, [totalYear, frontYear, backYear])
 
     return (
-        <div className={styles.mainWrapper}>
+        <Wrapper>
             <div className={styles.mainTop}>
                 <div className={styles.imageWrapper}>
                     <Image src="/my_face_hand.png" alt="myFace" width={250} height={250} />
                 </div>
                 <div className={styles.paragraphWrapper}>
-                    <p>{"안녕하세요!"}</p>
-                    <p>{"DevSecOps를 지향하고,"}</p>
+                    <p>{"안녕하세요! :)"}</p>
+                    <p>{"Fullstack + DevSecOps를 지향하고,"}</p>
                     <p>{"진정한 개발자를 꿈꾸는 법학도."}</p>
                     <br />
                     <p>{"Web FrontEnd 개발자,"}</p>
                     <p>{"'김바실리'입니다."}</p>
                 </div>
-                <div className={classNames(styles.paragraphWrapper, styles.english)}>
-                    <p>{"Hello!"}</p>
-                    <p>{"I'm aiming DevSecOps,"}</p>
-                    <p>{"a law student who dreams of"}</p>
-                    <p>{"becoming 'The Genuine developer'."}</p>
-                    <br />
-                    <p>{"Web FrontEnd Dev,"}</p>
-                    <p>{"'Basliri Kim'."}</p>
-                </div>
             </div>
             <LineBasic />
             <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
-                <div
-                    className={styles.midBlock}
-                    onMouseEnter={(): void => setYearHover({ id: "total", hover: true })}
-                    onMouseLeave={(): void => setYearHover(initYearHover)}
-                >
-                    <p>Total Career</p>
+                <div className={styles.midBlock}>
+                    <p>Total</p>
+                    <p>Career</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{totalYear}+</div>
                     </div>
                     <p className={styles.yearChar}>Years</p>
                 </div>
-                <div
-                    className={classNames(styles.midBlock)}
-                    onMouseEnter={(): void => setYearHover({ id: "front", hover: true })}
-                    onMouseLeave={(): void => setYearHover(initYearHover)}
-                >
-                    <p>F/E Position</p>
+                <div className={classNames(styles.midBlock)}>
+                    <p>F/E</p>
+                    <p>Position</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{frontYear}+</div>
                     </div>
-                    <p className={styles.yearChar}>Years</p>
+                    <p className={styles.yearChar}>Months</p>
                 </div>
-                <div
-                    className={classNames(styles.midBlock)}
-                    onMouseEnter={(): void => setYearHover({ id: "back", hover: true })}
-                    onMouseLeave={(): void => setYearHover(initYearHover)}
-                >
-                    <p>B/E Exp </p>
+                <div className={classNames(styles.midBlock)}>
+                    <p>B/E</p>
+                    <p>Exp</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{backYear}+</div>
                     </div>
-                    <p className={styles.yearChar}>Years</p>
+                    <p className={styles.yearChar}>Months</p>
                 </div>
             </div>
             {/* TODO: 커리어 호버시 그래프 보이는 부분 */}
@@ -124,7 +104,7 @@ const Main = (): JSX.Element => {
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
                         <TextBasic size="xx-large" bold="bold">
-                            {"또하나의가족, Solution | Prototype"}
+                            {"또하나의가족, Solution"}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
                             {"2021.12 ~ 2023.06 | 1년 6개월"}
@@ -186,10 +166,32 @@ const Main = (): JSX.Element => {
                     </div>
                     <div className={styles.workContents}>
                         <TextBasic size="xx-large" bold="bold">
-                            {"또하나의가족, Store | 000 시스템"}
+                            {"또하나의가족, 통합관리시스템 Part 1."}
                         </TextBasic>
                         <TextBasic size="large" bold="bold">
-                            {"2024.02 ~ (미정)"}
+                            {"2024.02 ~ 2024.03 | 2개월"}
+                        </TextBasic>
+                        <LineBasic />
+                        <div className={styles.contents}>
+                            <div className={styles.ciLogo}>
+                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
+                            </div>
+                            <TextBasic size="small" bold="bold">
+                                {
+                                    "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다."
+                                }
+                            </TextBasic>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.botBlock}>
+                    <div className={styles.workContents}>
+                        <TextBasic size="xx-large" bold="bold">
+                            {"헥톤프로젝트, 테크 블로그"}
+                        </TextBasic>
+                        <TextBasic size="large" bold="bold">
+                            {"2024.02 ~ 진행 중 | 미정"}
                         </TextBasic>
                         <LineBasic />
                         <div className={styles.contents}>
@@ -197,14 +199,32 @@ const Main = (): JSX.Element => {
                                 <Image src="/hecton.png" alt="logo" width={30} height={18} />
                             </div>
                             <TextBasic size="small" bold="bold">
-                                {"미정입니다."}
+                                {"헥톤프로젝트 테크 블로그 사이드 프로젝트입니다."}
+                            </TextBasic>
+                        </div>
+                    </div>
+                    <div className={styles.workContents}>
+                        <TextBasic size="xx-large" bold="bold">
+                            {"또하나의가족, 통합관리시스템 Part 2."}
+                        </TextBasic>
+                        <TextBasic size="large" bold="bold">
+                            {"24년 상반기 예정"}
+                        </TextBasic>
+                        <LineBasic />
+                        <div className={styles.contents}>
+                            <div className={styles.ciLogo}>
+                                <Image src="/hecton.png" alt="logo" width={30} height={18} />
+                                <Image src="/ddoga_logo.svg" alt="logo" width={115} height={20} />
+                            </div>
+                            <TextBasic size="small" bold="bold">
+                                {"미정"}
                             </TextBasic>
                         </div>
                     </div>
                 </div>
             </div>
             <LineBasic />
-        </div>
+        </Wrapper>
     )
 }
 

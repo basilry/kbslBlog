@@ -1,6 +1,7 @@
 @import "@styles/variable.scss";
 
 .container {
+    min-height: 100vh;
     height: 100%;
     width: 100%;
 
@@ -15,5 +16,13 @@
         // display: grid;
         height: 100%;
         width: 100%;
+
+        @include TABLET {
+            // width: 768px;
+        }
+
+        @include MOBILE {
+            // width: 600px;
+        }
     }
 }

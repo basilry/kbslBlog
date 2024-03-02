@@ -1,9 +1,7 @@
+import Projects from "./Projects"
+
 const page = (): JSX.Element => {
-    return (
-        <div>
-            <h1>Projects</h1>
-        </div>
-    )
+    return <Projects />
 }
 
 export default page

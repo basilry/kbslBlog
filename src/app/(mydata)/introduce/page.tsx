@@ -1,5 +1,7 @@
+import Introduce from "./Introduce"
+
 const page = (): JSX.Element => {
-    return <div>자기소개</div>
+    return <Introduce />
 }
 
 export default page

@@ -1,0 +1,34 @@
+@import '@styles/variable.scss';
+
+.contentsWrapper {
+  display: flex;
+  flex-direction: row;
+
+  @include TABLET {
+    flex-direction: column;
+  }
+
+  .paragraphs {
+    min-width: 50%;
+    margin-bottom: 50px;
+  }
+
+  .picsWrapper {
+    text-align: right;
+    .picsBlock {
+      @include TABLET {
+        display: flex;
+        flex-direction: column;
+      }
+      .pics {
+        width: 50%;
+        height: auto;
+        @include TABLET {
+          width: 100%;
+        }
+      }
+       
+    }
+  }
+
+}
