@@ -7,6 +7,9 @@ const nextConfig = withExportImages({
     output: "export",
     basePath: "/kbslBlog",
     assetPrefix: "/kbslBlog/",
+    images: {
+        loader: "default",
+    },
 })
 
 module.exports = nextConfig
