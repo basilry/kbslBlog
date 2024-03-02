@@ -19,7 +19,9 @@ const DarkModeBasic = (): JSX.Element => {
             {mount && (
                 <div className={classNames(styles.modeToggleBtn, darkMode && styles.left)}>
                     <div className={classNames(styles.toggleRound)}>
-                        <div className={classNames(styles.toggleInnerColor, darkMode && styles.dark)}>{darkMode && <div className={styles.moon}></div>}</div>
+                        <div className={classNames(styles.toggleInnerColor, darkMode && styles.dark)}>
+                            {darkMode && <div className={styles.moon}></div>}
+                        </div>
                     </div>
                 </div>
             )}

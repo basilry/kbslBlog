@@ -2,11 +2,13 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://basilry.blog/",
   "scripts": {
     "dev": "next dev -p 3009",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "npx http-server out"
   },
   "dependencies": {
     "@types/nprogress": "^0.2.3",
