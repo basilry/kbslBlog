@@ -47,7 +47,7 @@ by Kim Basilri.
     - [x] eslint, prettier관련 json 설정
     - [x] 에디터 관련 라이브러리 찾기 및 설치
   - [x] 폴더 및 파일 구조 구성하기
-  - [ ] 공통 레이아웃 구성하기
+  - [x] 공통 레이아웃 구성하기
     - [x] Header
       - [x] 메인링크, white/black 버전 버튼, 로그인 버튼, 개별 유저 프로필 사진(클릭시 유저정보)
     - [x] Sidebar
@@ -59,15 +59,16 @@ by Kim Basilri.
     - [x] DarkModeBasic, TextBasic, LineBasic
     - [ ] ModalBasic
   - [ ] 페이지 구성하기
-    - [ ] Main
+    - [x] Main
     - [ ] Login
     - [ ] SignUp
-    - [ ] Introduce
+    - [x] Introduce
+    - [x] Projects
     - [ ] UserDetail
     - [ ] PostingList
     - [ ] NewPost
     - [ ] PostDetail
-    - [ ] GuestBook
+    - [x] Visitor
     - [ ] GuestAnalyze
     - [ ] Error
 - B/E
@@ -102,7 +103,7 @@ by Kim Basilri.
   - 네이버 무료폰트 적용 - 마루부리
 
 
--2023.12.16 ~ 17
+- 2023.12.16 ~ 17
   - layout 개발 1차 완료
     - Header, Sidebar, Footer 개발 1차 완료
     - Header쪽 로그인, 유저프로필은 추후 개발 진행
@@ -111,3 +112,12 @@ by Kim Basilri.
   - Main 페이지 개발 진행 중
     - 소개글, 커리어연도, 프로젝트 간략한 소개로 구성
     - 그 밑에 세미나 관련글, 블로그 글도 연동 예정
+
+
+- 2024.03.01 ~ 02
+  - 메인 종결
+  - Introduce 개발 1차 완료
+  - Visitor 개발 완료
+    - giscus 설치하여 방명록 생성
+  - Projects 개발 1차 완료
+  - 배포 진행
