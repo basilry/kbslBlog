@@ -1,5 +1,24 @@
 @import '@styles/variable.scss';
 
+.rangeLogo {
+  display: flex;
+  flex-direction: column;
+
+  .logos {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+
+    img {
+      &:nth-child(2) {
+        margin-left: 5px;
+      }
+    }
+    
+  }
+}
+
+
 .contentsWrapper {
   display: flex;
   flex-direction: row;
@@ -7,28 +26,36 @@
   @include TABLET {
     flex-direction: column;
   }
-
   .paragraphs {
     min-width: 50%;
-    margin-bottom: 50px;
+
+    &:nth-child(1) {
+      margin-right: 20px;
+    }
+
+
+    .skillImgs {
+      &:nth-child(n) {
+        margin-right: 7px;
+      }
+    }
+
+    .projectManpower {
+      display: flex;
+      align-items: center;
+
+      .peopleWrapper {
+        margin: 10px;
+
+        img {
+          margin: 0 5px;
+        }
+      }
+    }
   }
 
   .picsWrapper {
     text-align: right;
-    .picsBlock {
-      @include TABLET {
-        display: flex;
-        flex-direction: column;
-      }
-      .pics {
-        width: 50%;
-        height: auto;
-        @include TABLET {
-          width: 100%;
-        }
-      }
-       
-    }
   }
 
 }

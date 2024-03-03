@@ -114,7 +114,7 @@ by Kim Basilri.
     - 그 밑에 세미나 관련글, 블로그 글도 연동 예정
 
 
-- 2024.03.01 ~ 02
+- 2024.03.01 ~ 03
   - 폰트 변경 - Pretendard
   - 메인 종결
   - Introduce 개발 1차 완료
@@ -128,3 +128,4 @@ by Kim Basilri.
       - dev 개발 후 push
       - master PR
       - 완료시 자동 배포 및 gh-pages pull 후 배포 진행
+  - 1차 개발 목표 도달

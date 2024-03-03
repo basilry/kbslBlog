@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import styles from "@styles/pages/solutionInit.module.scss"
@@ -8,17 +10,22 @@ const SolutionRenewal = (): JSX.Element => {
     return (
         <div>
             <TextBasic size="xx-large" bold="bold">
-                {"2. 또하나의가족, Solution | Renewal"}
+                {"또하나의가족, Solution | Renewal"}
             </TextBasic>
             <br />
-            <TextBasic size="large" bold="bold">
-                {"2023.07 ~ 2023.09 | 3개월"}
-            </TextBasic>
+            <div className={styles.rangeLogo}>
+                <TextBasic size="large" bold="bold">
+                    {"2023.07 ~ 2023.09 | 3개월"}
+                </TextBasic>
+                <div className={styles.logos}>
+                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
+                    <Image placeholder="blur" src="/kbslBlog/ddogaLogo.svg" alt="logo" width={120} height={30} />
+                </div>
+            </div>
             <LineBasic />
             <br />
-            <br />
             <div className={styles.contentsWrapper}>
-                <div className={styles.paragraphs}>
+                <div className={classNames(styles.paragraphs, styles.renewal)}>
                     <TextBasic size="large" bold="bold">
                         {"설명"}
                     </TextBasic>
@@ -33,13 +40,95 @@ const SolutionRenewal = (): JSX.Element => {
                     <TextBasic size="large" bold="bold">
                         {"포지션"}
                     </TextBasic>
-                    <TextBasic size="small">{"- 프론트엔드 개발자."}</TextBasic>
+                    <TextBasic size="small">{"- 프론트엔드 개발자"}</TextBasic>
                     <br />
                     <br />
                     <TextBasic size="large" bold="bold">
+                        {"사용스택"}
+                    </TextBasic>
+                    <div>
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/typescript.svg"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/nextjs.svg"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/sass.svg"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/zustand.png"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={80}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/prettier.svg"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/eslint.svg"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/mysql.png"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                        <img
+                            className={styles.skillImgs}
+                            src="/kbslBlog/skills/aws.svg"
+                            alt="myFace"
+                            sizes={"100vw"}
+                            width={60}
+                            height={60}
+                        />
+                    </div>
+                    <br />
+                    <br />
+                    <TextBasic size="large" bold="bold">
+                        {"프로젝트 인원"}
+                    </TextBasic>
+                    <TextBasic size="small">{"- F/E: 3명"}</TextBasic>
+                    <TextBasic size="small">{"- B/E: 2명"}</TextBasic>
+                    <br />
+                    <br />
+                </div>
+                <div className={styles.paragraphs}>
+                    <TextBasic size="large" bold="bold">
                         {"성과"}
                     </TextBasic>
-                    <TextBasic size="medium">{"1. 프로젝트 구조 및 컴포넌트 개발"}</TextBasic>
+                    <TextBasic size="medium" bold="bold">
+                        {"1. 프로젝트 구조 및 컴포넌트 개발"}
+                    </TextBasic>
                     <TextBasic size="small">
                         {"- 프로젝트의 폴더 및 파일 구조 설계에 참여하여 전체 시스템의 안정성 강화."}
                     </TextBasic>
@@ -51,23 +140,10 @@ const SolutionRenewal = (): JSX.Element => {
                     <TextBasic size="small">
                         {"- 샘플링 페이지 개발로 사용자 경험 개선 및 디자인 일관성 유지에 기여."}
                     </TextBasic>
-                    <br />
-                    <br />
-                    <TextBasic size="large" bold="bold">
-                        {"사용스택"}
-                    </TextBasic>
-                    <TextBasic size="small">
-                        {"- TypeScript, Next.js 13v, Sass, Zustand, Prettier, ESLint, MySQL, AWS(EC2,ELB..)"}
-                    </TextBasic>
-                    <br />
-                    <br />
-                    <TextBasic size="large" bold="bold">
-                        {"프로젝트 인원"}
-                    </TextBasic>
-                    <TextBasic size="small">{"- F/E: 3명"}</TextBasic>
-                    <TextBasic size="small">{"- B/E: 2명"}</TextBasic>
                 </div>
             </div>
+
+            <br />
             <LineBasic />
         </div>
     )

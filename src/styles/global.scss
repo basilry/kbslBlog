@@ -72,5 +72,11 @@ p {
     }
 }
 .swiper-pagination-bullet-active {
-    background-color: white !important;
+    background-color: $orangeCinamon !important;
+}
+#bottomSlide{
+    width: 550px !important;
+}
+.swiper-pagination {
+    bottom: 5 !important;
 }
