@@ -21,7 +21,6 @@ const Projects = (): JSX.Element => {
         <Wrapper>
             <Swiper
                 onSlideChange={(e): void => {
-                    console.log(e.activeIndex, e.realIndex)
                     setIdx(e.realIndex)
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                 }}

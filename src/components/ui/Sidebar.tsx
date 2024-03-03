@@ -11,7 +11,7 @@ import styles from "@styles/ui/sidebar.module.scss"
 // const MENU_LIST = ["Main", "Search", "Introduce", "Notice", "Post", "Projects", "Visitor", "Donate"]
 // const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
 const MENU_LIST = ["Main", "Introduce", "Projects", "Visitor"]
-const MENU_LIST_KR = ["메인", "자기소개", "프로젝트 목록", "방명록"]
+const MENU_LIST_KR = ["메인", "자기소개", "프로젝트", "방명록"]
 
 function Sidebar(): ReactElement {
     const pathName = usePathname()

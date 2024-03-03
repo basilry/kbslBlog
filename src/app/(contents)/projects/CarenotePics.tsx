@@ -35,8 +35,8 @@ const CarenotePics = (): JSX.Element => {
                             src="/kbslBlog/carenotePics/carenote1.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -44,8 +44,8 @@ const CarenotePics = (): JSX.Element => {
                             src="/kbslBlog/carenotePics/carenote2.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -53,8 +53,8 @@ const CarenotePics = (): JSX.Element => {
                             src="/kbslBlog/carenotePics/carenote3.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -62,8 +62,8 @@ const CarenotePics = (): JSX.Element => {
                             src="/kbslBlog/carenotePics/carenote4.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -71,8 +71,8 @@ const CarenotePics = (): JSX.Element => {
                             src="/kbslBlog/carenotePics/carenote5.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -80,8 +80,8 @@ const CarenotePics = (): JSX.Element => {
                             src="/kbslBlog/carenotePics/carenote6.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={400}
                         />
                     </SwiperSlide>
                 </Swiper>

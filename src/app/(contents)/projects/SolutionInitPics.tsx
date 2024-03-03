@@ -37,7 +37,7 @@ const SolutionInitPics = (): JSX.Element => {
                             alt="myFace"
                             sizes={"100vw"}
                             width={600}
-                            height={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -46,7 +46,7 @@ const SolutionInitPics = (): JSX.Element => {
                             alt="myFace"
                             sizes={"100vw"}
                             width={600}
-                            height={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -55,7 +55,7 @@ const SolutionInitPics = (): JSX.Element => {
                             alt="myFace"
                             sizes={"100vw"}
                             width={600}
-                            height={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -64,7 +64,7 @@ const SolutionInitPics = (): JSX.Element => {
                             alt="myFace"
                             sizes={"100vw"}
                             width={600}
-                            height={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -73,7 +73,7 @@ const SolutionInitPics = (): JSX.Element => {
                             alt="myFace"
                             sizes={"100vw"}
                             width={600}
-                            height={300}
+                            height={400}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
@@ -82,7 +82,7 @@ const SolutionInitPics = (): JSX.Element => {
                             alt="myFace"
                             sizes={"100vw"}
                             width={600}
-                            height={300}
+                            height={400}
                         />
                     </SwiperSlide>
                 </Swiper>
