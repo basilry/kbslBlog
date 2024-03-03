@@ -31,22 +31,22 @@ const ImsPart1Pics = (): JSX.Element => {
                     className="mySwiper"
                 >
                     <SwiperSlide id="bottomSlide">
-                        <img src="/kbslBlog/imsPics/ims1.png" alt="myFace" sizes={"100vw"} width={500} height={600} />
+                        <img src="/kbslBlog/imsPics/ims1.png" alt="myFace" sizes={"100vw"} width={300} height={400} />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
-                        <img src="/kbslBlog/imsPics/ims2.png" alt="myFace" sizes={"100vw"} width={500} height={600} />
+                        <img src="/kbslBlog/imsPics/ims2.png" alt="myFace" sizes={"100vw"} width={300} height={400} />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
-                        <img src="/kbslBlog/imsPics/ims3.png" alt="myFace" sizes={"100vw"} width={500} height={600} />
+                        <img src="/kbslBlog/imsPics/ims3.png" alt="myFace" sizes={"100vw"} width={300} height={400} />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
-                        <img src="/kbslBlog/imsPics/ims4.png" alt="myFace" sizes={"100vw"} width={500} height={600} />
+                        <img src="/kbslBlog/imsPics/ims4.png" alt="myFace" sizes={"100vw"} width={300} height={400} />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
-                        <img src="/kbslBlog/imsPics/ims5.png" alt="myFace" sizes={"100vw"} width={500} height={600} />
+                        <img src="/kbslBlog/imsPics/ims5.png" alt="myFace" sizes={"100vw"} width={300} height={400} />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
-                        <img src="/kbslBlog/imsPics/ims6.png" alt="myFace" sizes={"100vw"} width={500} height={600} />
+                        <img src="/kbslBlog/imsPics/ims6.png" alt="myFace" sizes={"100vw"} width={300} height={400} />
                     </SwiperSlide>
                 </Swiper>
             </div>
