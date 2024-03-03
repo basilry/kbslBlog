@@ -1,10 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import classNames from "classnames"
 import Wrapper from "@components/layout/Wrapper"
-import NoImage from "@components/ui/NoImage"
 import styles from "@styles/pages/projects.module.scss"
 import Carenote from "./Carenote"
 import CarenotePics from "./CarenotePics"
@@ -15,17 +15,23 @@ import SolutionInitPics from "./SolutionInitPics"
 import SolutionRenewal from "./SolutionRenewal"
 
 const Projects = (): JSX.Element => {
+    const [idx, setIdx] = useState(0)
+
     return (
         <Wrapper>
             <Swiper
-                onSlideChange={(): void => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+                onSlideChange={(e): void => {
+                    console.log(e.activeIndex, e.realIndex)
+                    setIdx(e.realIndex)
+                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+                }}
                 spaceBetween={30}
                 pagination={{
                     clickable: true,
                 }}
                 modules={[Pagination, Navigation]}
                 loop={true}
-                className={classNames(styles.swiper, "mySwiper")}
+                className={classNames(styles.swiper, "mySwiper", idx === 1 && styles.noImage)}
                 navigation={true}
             >
                 <SwiperSlide className={styles.swiperSlide}>
@@ -34,7 +40,6 @@ const Projects = (): JSX.Element => {
                 </SwiperSlide>
                 <SwiperSlide className={styles.swiperSlide}>
                     <SolutionRenewal />
-                    <NoImage />
                 </SwiperSlide>
                 <SwiperSlide className={styles.swiperSlide}>
                     <Carenote />
