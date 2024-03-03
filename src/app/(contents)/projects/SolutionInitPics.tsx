@@ -1,5 +1,6 @@
 import { Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
+import classNames from "classnames"
 import styles from "@styles/pages/projectsPics.module.scss"
 
 const SolutionInitPics = (): JSX.Element => {
@@ -28,7 +29,7 @@ const SolutionInitPics = (): JSX.Element => {
                     }}
                     modules={[Navigation]}
                     loop={true}
-                    className="mySwiper"
+                    className={classNames("mySwiper", styles.height)}
                 >
                     <SwiperSlide id="bottomSlide">
                         <img

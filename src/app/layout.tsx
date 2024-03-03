@@ -34,8 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
         <html lang="ko" className={classNames(pretendardFont.className, inter.className)}>
             <head>
                 <meta charSet="utf-8" />
+                <meta name="author" content="Kim Basilri(Zannavi)" />
+                <meta name="application-name" content="KBSL's BLog" />
                 <title>{"KBSL's Blog"}</title>
-                <link rel="icon" href="/myFace.png" />
+                <link rel="icon" href="/kbslBlog/myFace.png" />
             </head>
             <body id={mode}>
                 <Container>{children}</Container>
