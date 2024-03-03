@@ -9,6 +9,10 @@
     margin-bottom: 130px;
     display: flex;
     justify-content: space-between;
+    @include TABLET {
+     
+      flex-direction: column;
+    }
     
     .pargraphs {
       width: 60%;
@@ -27,13 +31,16 @@
     .myPics {
       text-align: right;
       padding-top: 20px;
+      @include TABLET {
+        text-align: center;
+      }
 
       .pics {
         width: 60%;
         height: auto;
 
         @include TABLET {
-        display: none;
+          width: 100%;
         }
       }
 

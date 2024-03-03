@@ -111,57 +111,69 @@ const Introduce = (): JSX.Element => {
                         <br />
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"홍익대학교 법과대학 법학 학사 졸업 |"}</TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" bold="bold">
+                                {"홍익대학교 법과대학 법학 학사 졸업 |"}
+                            </TextBasic>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2012. 03. ~ 2017. 02."}
                             </TextBasic>
                         </div>
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"대한민국 공군 학사장교 제138기 단기복무 중위 제대 |"}</TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" bold="bold">
+                                {"대한민국 공군 학사장교 제138기 단기복무 중위 제대 |"}
+                            </TextBasic>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2017. 02. ~ 2020. 05."}
                             </TextBasic>
                         </div>
 
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"강화도 퓨전한식 요식업 창업 |"}</TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" bold="bold">
+                                {"강화도 퓨전한식 요식업 창업 |"}
+                            </TextBasic>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2020. 08. ~ 2021. 02."}
                             </TextBasic>
                         </div>
 
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"사설 소프트웨어 엔지니어링 부트캠프 수료 |"}</TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" bold="bold">
+                                {"사설 소프트웨어 엔지니어링 부트캠프 수료 |"}
+                            </TextBasic>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2021. 03. ~ 2021. 07."}
                             </TextBasic>
                         </div>
 
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"헬코더스 면접/알고리즘 스터디 모집 및 진행 |"}</TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" bold="bold">
+                                {"헬코더스 면접/알고리즘 스터디 모집 및 진행 |"}
+                            </TextBasic>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2021. 07. ~ 2021. 09."}
                             </TextBasic>
                         </div>
 
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">{"GC케어 자회사 헥톤프로젝트 웹 개발자 재직 중 |"}</TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" bold="bold">
+                                {"GC케어 자회사 헥톤프로젝트 웹 개발자 재직 중 |"}
+                            </TextBasic>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2021. 09. ~ 현 재"}
                             </TextBasic>
                         </div>
 
                         <br />
                         <div className={styles.cbParagraph}>
-                            <TextBasic size="medium">
+                            <TextBasic size="small" bold="bold">
                                 {"한국방송통신대학교 컴퓨터과학과 학사편입 후 재학 중 |"}
                             </TextBasic>
-                            <TextBasic size="medium" className={"careerYear"}>
+                            <TextBasic size="small" className={"careerYear"}>
                                 {"2022. 09. ~ 현 재"}
                             </TextBasic>
                         </div>

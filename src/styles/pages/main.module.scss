@@ -85,6 +85,10 @@
     align-items: center;
     justify-content: center;
 
+    @include TABLET {
+        flex-direction: column;
+    }
+
     p {
         font-size: 1rem;
         font-weight: 500;
@@ -102,7 +106,7 @@
         transition: all 0.1s ease-in;
 
         @include TABLET {
-            margin: 0px 10px;
+            margin: 10px 10px;
             padding: 10px;
             width: 120px;
 

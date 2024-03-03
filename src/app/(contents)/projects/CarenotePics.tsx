@@ -2,13 +2,13 @@ import { Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import styles from "@styles/pages/projectsPics.module.scss"
 
-const SolutionInitPics = (): JSX.Element => {
+const CarenotePics = (): JSX.Element => {
     return (
         <div className={styles.picsWrapper}>
             <div className={styles.picsBlock}>
                 <Swiper
                     slidesPerView={1}
-                    spaceBetween={100}
+                    spaceBetween={-30}
                     pagination={{
                         clickable: true,
                     }}
@@ -32,56 +32,56 @@ const SolutionInitPics = (): JSX.Element => {
                 >
                     <SwiperSlide id="bottomSlide">
                         <img
-                            src="/kbslBlog/solutionPics/sirMast.png"
+                            src="/kbslBlog/carenotePics/carenote1.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={600}
-                            height={300}
+                            width={500}
+                            height={500}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
                         <img
-                            src="/kbslBlog/solutionPics/empMast1.png"
+                            src="/kbslBlog/carenotePics/carenote2.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={600}
-                            height={300}
+                            width={500}
+                            height={500}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
                         <img
-                            src="/kbslBlog/solutionPics/sirMast2.png"
+                            src="/kbslBlog/carenotePics/carenote3.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={600}
-                            height={300}
+                            width={500}
+                            height={500}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
                         <img
-                            src="/kbslBlog/solutionPics/empMast2.png"
+                            src="/kbslBlog/carenotePics/carenote4.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={600}
-                            height={300}
+                            width={500}
+                            height={500}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
                         <img
-                            src="/kbslBlog/solutionPics/careProv.png"
+                            src="/kbslBlog/carenotePics/carenote5.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={600}
-                            height={300}
+                            width={500}
+                            height={500}
                         />
                     </SwiperSlide>
                     <SwiperSlide id="bottomSlide">
                         <img
-                            src="/kbslBlog/solutionPics/empMast4.png"
+                            src="/kbslBlog/carenotePics/carenote6.png"
                             alt="myFace"
                             sizes={"100vw"}
-                            width={600}
-                            height={300}
+                            width={500}
+                            height={500}
                         />
                     </SwiperSlide>
                 </Swiper>
@@ -90,4 +90,4 @@ const SolutionInitPics = (): JSX.Element => {
     )
 }
 
-export default SolutionInitPics
+export default CarenotePics
