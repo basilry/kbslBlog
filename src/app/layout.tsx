@@ -11,6 +11,7 @@ import "@styles/nprogress.scss"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
+import GoogleAnalytics from "@components/ui/GoogleAnalytics"
 import { useCoreStore } from "@lib/stores/store"
 // import Script from "next/script"
 
@@ -39,17 +40,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
                 <meta name="application-name" content="KBSL's BLog" />
                 <title>{"KBSL's Blog"}</title>
                 <link rel="icon" href="/kbslBlog/myFace.png" />
-                {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-GZDS0N484J" />
-                <script>
-                    {` window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-GZDS0N484J');`}
-                </script> */}
             </head>
             <body id={mode}>
                 <Container>{children}</Container>
+                <GoogleAnalytics />
             </body>
         </html>
     )
