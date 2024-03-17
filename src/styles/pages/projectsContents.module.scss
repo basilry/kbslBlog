@@ -1,5 +1,9 @@
 @import '@styles/variable.scss';
 
+.eachProjectWrapper {
+  min-height: 800px;
+}
+
 .rangeLogo {
   display: flex;
   flex-direction: column;
@@ -22,6 +26,7 @@
 .contentsWrapper {
   display: flex;
   flex-direction: row;
+  width: 99%;
 
   @include TABLET {
     flex-direction: column;

@@ -4,6 +4,9 @@
   user-select: none;
 
   // 폰트사이즈
+  &.xx-small {
+    font-size: $xx-small-font;
+  }
   &.x-small {
     font-size: $x-small-font;
   }

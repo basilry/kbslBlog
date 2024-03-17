@@ -11,7 +11,10 @@ import "@styles/nprogress.scss"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
+import SuspenseWrapper from "@components/layout/SuspenseWrapper"
+import GoogleAnalytics from "@components/ui/GoogleAnalytics"
 import { useCoreStore } from "@lib/stores/store"
+// import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
 const pretendardFont = localFont({
@@ -40,7 +43,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
                 <link rel="icon" href="/kbslBlog/myFace.png" />
             </head>
             <body id={mode}>
-                <Container>{children}</Container>
+                <SuspenseWrapper>
+                    <Container>{children}</Container>
+                    <GoogleAnalytics />
+                </SuspenseWrapper>
             </body>
         </html>
     )
