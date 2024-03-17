@@ -14,7 +14,7 @@ const MENU_LIST = ["Main", "Introduce", "Projects", "Visitor"]
 const MENU_LIST_KR = ["메인", "자기소개", "프로젝트", "방명록"]
 
 function Sidebar(): ReactElement {
-    const pathName = usePathname()
+    const pathName = usePathname().split("/")
     const { darkMode, sideBarFold, changeSideBarFold, changeNowMenuName } = useCoreStore()
     const [focus, setFocus] = useState(0)
 
@@ -42,16 +42,14 @@ function Sidebar(): ReactElement {
                             }}
                             className={classNames(
                                 !sideBarFold ? styles.hidden : styles.view,
-                                pathName.slice(1) === menuName.toLowerCase() && styles.nowPath,
+                                pathName[1] === menuName.toLowerCase() && styles.nowPath,
                                 darkMode && styles.dark,
                             )}
                             onMouseEnter={(): void => setFocus(idx)}
                             onMouseLeave={(): void => setFocus(-1)}
                         >
                             <MenuItem
-                                menuName={
-                                    pathName.slice(1) === menuName.toLowerCase() ? "{" + menuName + "}" : menuName
-                                }
+                                menuName={pathName[1] === menuName.toLowerCase() ? "{" + menuName + "}" : menuName}
                                 krName={focus === idx ? MENU_LIST_KR[idx] : ""}
                             />
                         </li>

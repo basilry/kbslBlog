@@ -1,25 +1,22 @@
-import Image from "next/image"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import styles from "@styles/pages/projectsContents.module.scss"
-import CarenotePics from "./CarenotePics"
 
-const Carenote = (): JSX.Element => {
+const HectonTechblog = (): JSX.Element => {
     return (
         <Wrapper>
             <div className={styles.eachProjectWrapper}>
                 <TextBasic size="xx-large" bold="bold">
-                    {"또하나의가족, 돌봄노트"}
+                    {"헥톤프로젝트, 테크 블로그"}
                 </TextBasic>
                 <br />
                 <div className={styles.rangeLogo}>
                     <TextBasic size="large" bold="bold">
-                        {"2023.09 ~ 2024.01 | 5개월"}
+                        {"2024.02 ~ 진행 중 | 미정(올해 말)"}
                     </TextBasic>
                     <div className={styles.logos}>
                         <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
-                        <Image placeholder="blur" src="/kbslBlog/ddoga_logo.svg" alt="logo" width={115} height={30} />
                     </div>
                 </div>
                 <LineBasic />
@@ -29,17 +26,13 @@ const Carenote = (): JSX.Element => {
                         <TextBasic size="large" bold="bold">
                             {"설명"}
                         </TextBasic>
-                        <TextBasic size="small">
-                            {
-                                "- 타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 프로젝트입니다."
-                            }
-                        </TextBasic>
+                        <TextBasic size="small">{"- 헥톤프로젝트 테크 블로그 사이드 프로젝트입니다."}</TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
                             {"포지션"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 프론트엔드 개발자."}</TextBasic>
+                        <TextBasic size="small">{"- 풀스택 개발자"}</TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
@@ -64,22 +57,12 @@ const Carenote = (): JSX.Element => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/sass.svg"
-                                alt="myFace"
-                                sizes={"100vw"}
-                                width={60}
-                                height={60}
-                            />
-                            <img
-                                className={styles.skillImgs}
                                 src="/kbslBlog/skills/zustand.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={80}
                                 height={60}
                             />
-                        </div>
-                        <div>
                             <img
                                 className={styles.skillImgs}
                                 src="/kbslBlog/skills/prettier.svg"
@@ -98,11 +81,53 @@ const Carenote = (): JSX.Element => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/mssql.png"
+                                src="/kbslBlog/skills/mui.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
-                                width={160}
+                                width={60}
+                                height={60}
+                            />
+                        </div>
+                        <div>
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/java.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={60}
                                 height={50}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/springboot.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={100}
+                                height={50}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/jpa.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={60}
+                                height={60}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/hibernate.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={140}
+                                height={50}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/querydsl.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={60}
+                                height={60}
                             />
                             <img
                                 className={styles.skillImgs}
@@ -118,8 +143,8 @@ const Carenote = (): JSX.Element => {
                         <TextBasic size="large" bold="bold">
                             {"프로젝트 인원"}
                         </TextBasic>
-                        <TextBasic size="small">{"- F/E: 2명"}</TextBasic>
-                        <TextBasic size="small">{"- B/E: 2명"}</TextBasic>
+                        <TextBasic size="small">{"- PM: 1명"}</TextBasic>
+                        <TextBasic size="small">{"- FullStack: 4명"}</TextBasic>
                         <br />
                         <br />
                     </div>
@@ -128,74 +153,41 @@ const Carenote = (): JSX.Element => {
                             {"성과"}
                         </TextBasic>
                         <TextBasic size="medium" bold="bold">
-                            {"1. 프로젝트 관리 및 커뮤니케이션"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 프론트엔드 WBS 작성 및 개발 전반 관리로 프로젝트 팀의 커뮤니케이션 및 협업 효율성 향상"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 팀원 간 협업을 최적화하고 작업 효율성을 극대화하기 위한 관리 및 조정 역할 수행"}
-                        </TextBasic>
-                        <br />
-                        <TextBasic size="medium" bold="bold">
-                            {"2. 개발 환경 및 시스템 안정성 강화"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 프로젝트의 폴더 및 파일 구조 설계를 전담, 개발 환경 구축 및 전체 시스템 안정성 강화"}
-                        </TextBasic>
-                        <br />
-                        <TextBasic size="medium" bold="bold">
-                            {"3. 프로젝트의 정량적인 개발 성과 기여"}
+                            {"1. 기술 스택 도입을 위한 기술 조사 및 검토 후 발표"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 아토믹 디자인 원칙을 적용한 공통 컴포넌트 분류 및 개발로 UI 개발의 일관성 및 효율성 증진"
+                                "- 스프링 부트 프레임워크를 사용한 백엔드 서버 구축과 추후 운영에 대한 기술 조사 및 검토 후 발표"
                             }
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- Zustand 기반 중앙 상태관리 및 Axios를 활용한 API 서비스 개발로 데이터 관리 및 서버 연동 강화"
+                                "- 조사과정 중 자바와 스프링 프레임워크, 그리고 JVM 등에 대한 역사와 장/단점 등에 대한 깊은 조사 및 공유를 통해 기술 스택 도입에 대한 정당성을 확보"
                             }
                         </TextBasic>
                         <br />
                         <TextBasic size="medium" bold="bold">
-                            {"4. 개발 속도 및 안정성 향상"}
+                            {"2. 백엔드 프로젝트 아키텍처 설계 및 구현을 위한 디자인 패턴 조사 및 검토 후 발표"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- 다양한 util(cookie.ts, constants.ts, common.ts, bridge.ts 등) 및 커스텀 훅 개발로 프로젝트 개발 속도 향상"
-                            }
+                            {"- 아키텍처 설계 레벨에서의 디자인 패턴 조사(Layerd Architecture)"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- types 폴더 구성 및 내부 공통 타입/인터페이스 module화 하여 23개의 .d.ts 파일로 관리 및 16개의 init 파일 구성으로 프로젝트 안정성 강화"
-                            }
+                            {"- 전반적인 폴더/파일 구조 형태 관련 디자인 패턴 조사(MVC)"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- ErrorBoundary 등 커스텀 에러 페이지를 통한 에러핸들링 및 Suspense Loading 처리와 같은 레이아웃 단위 관리 수행으로 UX 측면의 안정성 향상"
-                            }
-                        </TextBasic>
-                        <br />
-                        <TextBasic size="medium" bold="bold">
-                            {"5. 협업 및 프로젝트 기여"}
+                            {"- 비즈니스 로직 관련 디자인 패턴 조사(Factory Method Pattern)"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- 모바일 네이티브 앱과의 협업으로 연동 및 전체 프로젝트의 주요 페이지 개발로 정량적 성과 기여"
-                            }
+                            {"- JPA 도입을 위한 디자인 패턴 조사(Repository Pattern, Data Mapper Pattern)"}
                         </TextBasic>
                     </div>
                 </div>
-
                 <br />
-
                 <LineBasic />
-
-                <CarenotePics />
             </div>
         </Wrapper>
     )
 }
 
-export default Carenote
+export default HectonTechblog

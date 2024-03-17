@@ -13,10 +13,6 @@
   img {
     margin-top: 20px;
   }
-
-  @include TABLET {
-    height: 1200px;
-  }
 }
 
 .pics {
@@ -26,4 +22,20 @@
 
 .height {
   height: 60vh;
+}
+
+.mobilePics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 50%;
+    @include TABLET {
+      width: 100%;
+    }
+  }
+  
+
 }

@@ -16,7 +16,7 @@ const TextBasic = ({ children, bold, className, size }: ITextBasicProps): JSX.El
     )
 }
 
-export type TTextSize = "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large"
+export type TTextSize = "xx-small" | "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large"
 
 export type TTextBold = "normal" | "bold"
 
