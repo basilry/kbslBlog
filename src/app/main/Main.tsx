@@ -225,7 +225,7 @@ const Main = (): JSX.Element => {
                                 {"헥톤프로젝트, 테크 블로그"}
                             </TextBasic>
                             <TextBasic size="large" bold="bold">
-                                {"2024.02 ~ 진행 중 | 미정"}
+                                {"2024.02 ~ 진행 중 | 미정(올해 말)"}
                             </TextBasic>
                             <LineBasic />
                             <div className={styles.contents}>

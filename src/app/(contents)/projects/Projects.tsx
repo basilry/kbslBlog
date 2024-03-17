@@ -112,7 +112,7 @@ const Projects = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className={styles.workContents}>
-                        <Link href={"/projects/ims"}>
+                        <Link href={"/projects/imsPart1"}>
                             <TextBasic size="x-large" bold="bold">
                                 {"또하나의가족, 통합관리시스템 Part 1."}
                             </TextBasic>
@@ -142,7 +142,7 @@ const Projects = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects/hectonTechblog"}>
                             <TextBasic size="x-large" bold="bold">
                                 {"헥톤프로젝트, 테크 블로그"}
                             </TextBasic>
