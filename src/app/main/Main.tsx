@@ -20,7 +20,7 @@ const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "month")
 const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "month")
 
 const Main = (): JSX.Element => {
-    const { darkMode } = useCoreStore()
+    const { darkMode, changeNowMenuName } = useCoreStore()
 
     const [totalYear, setTotalYear] = useState(0)
     const [frontYear, setFrontYear] = useState(0)
@@ -104,7 +104,7 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects/solutionInit"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
                                 {"또하나의가족, Solution"}
                             </TextBasic>
@@ -132,7 +132,7 @@ const Main = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects/solutionRenewal"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
                                 {"또하나의가족, Solution | Renewal"}
                             </TextBasic>
@@ -162,7 +162,7 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects/carenote"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
                                 {"또하나의가족, 돌봄노트"}
                             </TextBasic>
@@ -190,7 +190,7 @@ const Main = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects/imsPart1"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
                                 {"또하나의가족, 통합관리시스템 Part 1."}
                             </TextBasic>
@@ -220,7 +220,7 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.botBlock}>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects/hectonTechblog"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
                                 {"헥톤프로젝트, 테크 블로그"}
                             </TextBasic>
@@ -239,7 +239,7 @@ const Main = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className={styles.workContents}>
-                        <Link href={"/projects"}>
+                        <Link href={"/projects"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
                                 {"또하나의가족, 통합관리시스템 Part 2."}
                             </TextBasic>
