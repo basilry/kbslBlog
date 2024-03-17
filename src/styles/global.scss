@@ -63,9 +63,10 @@ p {
 .swiper-button-prev,
 .swiper-button-next {
     font-size: 20px !important;
-    color: white !important;
+    color: black !important;
     opacity: 0.4;
     height: 100px !important;
+    font-weight: 900;
 
     &:hover {
         opacity: 1;

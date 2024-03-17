@@ -5,14 +5,13 @@
     height: 100vh;
     z-index: 10;
     width: 300px;
-    visibility: hidden;
-    transition: all 0.3s ease-in;
+    display: none;
     background-color: transparent;
     transform: translate(-50px, 0px);
     overflow: auto;
 
     &.open {
-        visibility: visible;
+        display: block;
         transform: translate(0px, 0px);
         transition: all 0.3s ease-in;
         width: 300px;
