@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "또하나의가족 솔루션 UI 라이브러리 비교 분석 보고",
+    "date": "20211013"
+  },
+  {
+    "id": 22,
+    "title": "헥톤프로젝트 | Code Convention 정리 및 공유",
+    "date": "20220208",
+    "url": "https://basilry-kim-frontend.notion.site/Code-Convention-e76562094ab4476487d6365e3d9a475d"
+  },
+  {
+    "id": 2,
+    "title": "AWS 아키텍트 어소시에이트 Ch 1. 분석 발표 - 개요",
+    "date": "20220513"
+  },
+  {
+    "id": 3,
+    "title": "AWS 아키텍트 어소시에이트 Ch 2. 분석 발표 - S3",
+    "date": "20220520"
+  },
+  {
+    "id": 4,
+    "title": "AWS 아키텍트 어소시에이트 Ch 3. 분석 발표 - VPC",
+    "date": "20220512"
+  },
+  {
+    "id": 5,
+    "title": "AWS 아키텍트 어소시에이트 Ch 4. 분석 발표 - EC2",
+    "date": "20220708"
+  },
+  {
+    "id": 55,
+    "title": "ESLint 분석 및 적용 방법 공유",
+    "date": "20220805",
+    "url": "https://basilry-kim-frontend.notion.site/ESLint-a77baa9a263f4976977fa783df784b8c"
+  },
+  {
+    "id": 56,
+    "title": "Redux 기술 정리 및 공유",
+    "date": "20221028",
+    "url": "https://basilry-kim-frontend.notion.site/Redux-8b4723cdb09748d3ae6daf47b10ded7a?pvs=74"
+  },
+  {
+    "id": 6,
+    "title": "LINE 오픈챗 서버가 100배 급증하는 트래픽을 다루는 방법 - 세미나 참여 분석 공유 및 발표",
+    "date": "20221212"
+  },
+  {
+    "id": 7,
+    "title": "Scouter 모니터링 시스템 연구 공유",
+    "date": "20230229"
+  },
+  {
+    "id": 8,
+    "title": "또하나의가족 솔루션 공통모듈 설계 관련 보고",
+    "date": "20230405"
+  },
+  {
+    "id": 9,
+    "title": "OpenAI GPT발 LLM모델 AI 본격화 시대에 대한 찍먹 - 세미나 발표",
+    "date": "20230526"
+  },
+  {
+    "id": 10,
+    "title": "AWS Korea Office Hour 외부교육 참여 및 보고",
+    "date": "20230907"
+  },
+  {
+    "id": 11,
+    "title": "헥톤프로젝트 제품군 클라우드 관련 조사 후 보고",
+    "date": "20231111"
+  },
+  {
+    "id": 12,
+    "title": "2023 대한민국 소프트웨어대전 참석 후 공유 및 보고",
+    "date": "20231130"
+  },
+  {
+    "id": 13,
+    "title": "헥톤 테크블로그 | Spring Boot 기술 도입 분석 후 공유 및 발표",
+    "date": "20240226"
+  },
+  {
+    "id": 14,
+    "title": "헥톤 테크블로그 | 백엔드 프로젝트 디자인패턴 도입 분석 후 공유 및 발표",
+    "date": "20240315"
+  },
+  {
+    "id": 15,
+    "title": "헥톤 테크블로그 | ERD 설계 건 공유",
+    "date": "20240403"
+  },
+  {
+    "id": 16,
+    "title": "헥톤 테크블로그 | JWT 기반작업 건 공유",
+    "date": "20240424"
+  },
+  {
+    "id": 17,
+    "title": "헥톤 테크블로그 | Spring Security 및 JWT 연계 작업 건 공유",
+    "date": "20240513"
+  },
+  {
+    "id": 18,
+    "title": "2024 AWS Summit 참가 보고서",
+    "date": "20240520"
+  }
+]

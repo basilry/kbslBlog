@@ -125,7 +125,7 @@ const Main = (): JSX.Element => {
                                 </div>
                                 <TextBasic size="small" bold="bold">
                                     {
-                                        "장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다."
+                                        "장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다. 어르신에 대한 모든 요양정보, 직원에 대한 근무기록 등 정보, 시설의 운영정보 등을 관리합니다."
                                     }
                                 </TextBasic>
                             </div>
@@ -134,7 +134,7 @@ const Main = (): JSX.Element => {
                     <div className={styles.workContents}>
                         <Link href={"/projects/solutionRenewal"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, Solution | Renewal"}
+                                {"또하나의가족, Solution 리뉴얼"}
                             </TextBasic>
                             <TextBasic size="large" bold="bold">
                                 {"2023.07 ~ 2023.09 | 3개월"}
@@ -192,7 +192,7 @@ const Main = (): JSX.Element => {
                     <div className={styles.workContents}>
                         <Link href={"/projects/imsPart1"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, 통합관리시스템 Part 1."}
+                                {"또하나의가족, IMS(통합관리시스템) Part 1."}
                             </TextBasic>
                             <TextBasic size="large" bold="bold">
                                 {"2024.02 ~ 2024.03 | 2개월"}
@@ -211,7 +211,7 @@ const Main = (): JSX.Element => {
                                 </div>
                                 <TextBasic size="small" bold="bold">
                                     {
-                                        "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다."
+                                        "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다. Part를 나누어 진행하며, Part 1은 로그인/마이페이지/수급자조회/직원관리/고객관리 등 기본기능을 구현했습니다."
                                     }
                                 </TextBasic>
                             </div>
@@ -222,7 +222,7 @@ const Main = (): JSX.Element => {
                     <div className={styles.workContents}>
                         <Link href={"/projects/hectonTechblog"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
-                                {"헥톤프로젝트, 테크 블로그"}
+                                {"헥톤프로젝트, 헥톤블로그"}
                             </TextBasic>
                             <TextBasic size="large" bold="bold">
                                 {"2024.02 ~ 진행 중 | 미정(올해 말)"}
@@ -233,7 +233,9 @@ const Main = (): JSX.Element => {
                                     <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
                                 </div>
                                 <TextBasic size="small" bold="bold">
-                                    {"헥톤프로젝트 테크 블로그 사이드 프로젝트입니다."}
+                                    {
+                                        "헥톤프로젝트 회사 공식블로그 사이드 프로젝트입니다. 24년 5월 23일 현재 프론트/백 모두 프로젝트 기반 작업 진행 중입니다."
+                                    }
                                 </TextBasic>
                             </div>
                         </Link>
@@ -241,10 +243,10 @@ const Main = (): JSX.Element => {
                     <div className={styles.workContents}>
                         <Link href={"/projects"} onClick={(): void => changeNowMenuName("PROJECTS")}>
                             <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, 통합관리시스템 Part 2."}
+                                {"또하나의가족, IMS(통합관리시스템) Part 2."}
                             </TextBasic>
                             <TextBasic size="large" bold="bold">
-                                {"24년 상반기 예정"}
+                                {"2024.04 ~ 2024.05 | 2개월"}
                             </TextBasic>
                             <LineBasic />
                             <div className={styles.contents}>
@@ -259,11 +261,44 @@ const Main = (): JSX.Element => {
                                     />
                                 </div>
                                 <TextBasic size="small" bold="bold">
-                                    {"미정"}
+                                    {
+                                        "24년 2월에 진행했던 IMS 프로젝트의 고도화 및 관리자 페이지 추가 프로젝트입니다. 수급자 조회내역/복지용구 구매가능&기 대여품목 조회 기능을 추가하였으며, 관리자 페이지는 기본적인 로그인/회원가입/공지사항(목록-필터/상세/등록/수정/삭제) 기능을 신규로 구현했습니다."
+                                    }
                                 </TextBasic>
                             </div>
                         </Link>
                     </div>
+                </div>
+                <div className={styles.botBlock}>
+                    <div className={styles.workContents}>
+                        <Link href={"/projects/hectonTechblog"} onClick={(): void => changeNowMenuName("PROJECTS")}>
+                            <TextBasic size="x-large" bold="bold">
+                                {"또하나의가족, 플랫폼 고도화 - 장기요양등급신청"}
+                            </TextBasic>
+                            <TextBasic size="large" bold="bold">
+                                {"2024.06 ~ 2024.07 | 2개월(예정)"}
+                            </TextBasic>
+                            <LineBasic />
+                            <div className={styles.contents}>
+                                <div className={styles.ciLogo}>
+                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
+                                    <Image
+                                        placeholder="blur"
+                                        src="/kbslBlog/ddoga_logo.svg"
+                                        alt="logo"
+                                        width={115}
+                                        height={20}
+                                    />
+                                </div>
+                                <TextBasic size="small" bold="bold">
+                                    {
+                                        "헥톤프로젝트의 대표 서비스 플랫폼인 또하나의가족에 수급자의 장기요양등급 신청을 편리하게 진행해주는 기능을 추가 개발합니다."
+                                    }
+                                </TextBasic>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className={styles.workContents} style={{ cursor: "auto", opacity: 0.3 }}></div>
                 </div>
             </div>
             <LineBasic />
