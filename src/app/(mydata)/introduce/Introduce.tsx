@@ -1,8 +1,12 @@
 "use client"
 
+import Link from "next/link"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
+import carrerJson from "@lib/json/career.json"
+import seminarJson from "@lib/json/seminar.json"
+import { DateFormat, formatDate } from "@lib/utils/common"
 import styles from "@styles/pages/introduce.module.scss"
 
 const Introduce = (): JSX.Element => {
@@ -110,181 +114,44 @@ const Introduce = (): JSX.Element => {
                         </TextBasic>
                         <br />
                         <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"홍익대학교 법과대학 법학 학사 졸업 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2012. 03. ~ 2017. 02."}
-                            </TextBasic>
-                        </div>
-                        <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"대한민국 공군 학사장교 제138기 단기복무 중위 제대 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2017. 02. ~ 2020. 05."}
-                            </TextBasic>
-                        </div>
-
-                        <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"강화도 퓨전한식 요식업 창업 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2020. 08. ~ 2021. 02."}
-                            </TextBasic>
-                        </div>
-
-                        <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"사설 소프트웨어 엔지니어링 부트캠프 수료 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2021. 03. ~ 2021. 07."}
-                            </TextBasic>
-                        </div>
-
-                        <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"헬코더스 면접/알고리즘 스터디 모집 및 진행 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2021. 07. ~ 2021. 09."}
-                            </TextBasic>
-                        </div>
-
-                        <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"GC케어 자회사 헥톤프로젝트 웹 개발자 재직 중 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2021. 09. ~ 현 재"}
-                            </TextBasic>
-                        </div>
-
-                        <br />
-                        <div className={styles.cbParagraph}>
-                            <TextBasic size="small" bold="bold">
-                                {"한국방송통신대학교 컴퓨터과학과 학사편입 후 재학 중 |"}
-                            </TextBasic>
-                            <TextBasic size="small" className={"careerYear"}>
-                                {"2022. 09. ~ 현 재"}
-                            </TextBasic>
-                        </div>
+                        {carrerJson.map((row) => (
+                            <>
+                                <div key={row.id} className={styles.cbParagraph}>
+                                    <TextBasic size="small" bold="bold">
+                                        {row.title}
+                                    </TextBasic>
+                                    <TextBasic size="small" className={"careerYear"}>
+                                        {formatDate(row.startDate, DateFormat.MONTH_DATE) +
+                                            " ~ " +
+                                            formatDate(row.endDate, DateFormat.MONTH_DATE)}
+                                    </TextBasic>
+                                </div>
+                                <br />
+                            </>
+                        ))}
                     </div>
                 </div>
                 <LineBasic />
                 <div className={styles.seminarAndRND}>
                     <TextBasic size="xx-large" bold="bold">
-                        {"Seminar | 연구개발"}
+                        {"Seminar | 연구개발 & 교육 & 보고"}
                     </TextBasic>
                     <br />
                     <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"또하나의가족 솔루션 UI 라이브러리 비교 분석 보고"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2021. 10. 13."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"AWS 아키텍트 어소시에이트 Ch 1. 분석 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2022. 05. 13."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"AWS 아키텍트 어소시에이트 Ch 2. 분석 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2022. 05. 20."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"AWS 아키텍트 어소시에이트 Ch 3. 분석 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2022. 06. 12"}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"AWS 아키텍트 어소시에이트 Ch 4. 분석 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2022. 07. 08."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"LINE 오픈챗 서버가 100배 급증하는 트래픽을 다루는 방법 - 세미나 참여 분석 공유 및 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2022. 12. 12."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"Scouter 모니터링 시스템 연구 공유"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2023. 02. 29."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"또하나의가족 솔루션 공통모듈 설계 관련 보고"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2023. 04. 05."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"OpenAI GPT발 LLM모델 AI 본격화 시대에 대한 찍먹 - 세미나 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2023. 05. 26."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"AWS Korea Office Hour 외부교육 참여 및 보고"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2023. 09. 07."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"헥톤프로젝트 제품군 클라우드 관련 조사 후 보고"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2023. 11. 11."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"2023 대한민국 소프트웨어대전 참석 후 공유 및 보고"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2023. 11. 30."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"헥톤 테크블로그 Spring Boot 기술 도입 분석 후 공유 및 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2024. 02. 26."}</TextBasic>
-                    </div>
-                    <br />
-                    <div className={styles.seminarBlock}>
-                        <TextBasic size="small" bold="bold">
-                            {"헥톤 테크블로그 백엔드 프로젝트 디자인패턴 도입 분석 후 공유 및 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">{"2024. 03. 15."}</TextBasic>
-                    </div>
+                    {seminarJson.map((seminar) => (
+                        <Link key={seminar.id} href={seminar.url ?? ""}>
+                            <div className={styles.seminarBlock} style={{ cursor: seminar.url ? "pointer" : "auto" }}>
+                                <TextBasic size="small" bold="bold">
+                                    {seminar.title}
+                                </TextBasic>
+                                <TextBasic size="small">{formatDate(seminar.date)}</TextBasic>
+                                <br />
+                            </div>
+                        </Link>
+                    ))}
                 </div>
             </div>
+            <LineBasic />
         </Wrapper>
     )
 }
