@@ -1,50 +1,53 @@
-@import '@styles/variable.scss';
+@import "@styles/variable.scss";
 
 .text {
-  user-select: none;
+    user-select: none;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-  // 폰트사이즈
-  &.xx-small {
-    font-size: $xx-small-font;
-  }
-  &.x-small {
-    font-size: $x-small-font;
-  }
-  &.small {
-    font-size: $small-font;
-  }
-  &.medium {
-    font-size: $medium-font;
-  }
-  &.large {
-    font-size: $large-font;
-  }
-  &.x-large {
-    font-size: $x-large-font;
-  }
-  &.xx-large {
-    font-size: $xx-large-font;
-  }
-
-  // 폰트굵기
-  &.bold {
-    font-weight: bold;
-  }
-  &.normal {
-    font-weight: normal;
-  }
-
-  // 별도
-  &.bar {
-    margin-left: 10px;
-  }
-  &.careerYear {
-    margin-left: 10px;
-    text-align: left;
-    min-width: 185px;
-
-    @include TABLET {
-      text-align: right;
+    // 폰트사이즈
+    &.xx-small {
+        font-size: $xx-small-font;
     }
-  }
+    &.x-small {
+        font-size: $x-small-font;
+    }
+    &.small {
+        font-size: $small-font;
+    }
+    &.medium {
+        font-size: $medium-font;
+    }
+    &.large {
+        font-size: $large-font;
+    }
+    &.x-large {
+        font-size: $x-large-font;
+    }
+    &.xx-large {
+        font-size: $xx-large-font;
+    }
+
+    // 폰트굵기
+    &.bold {
+        font-weight: bold;
+    }
+    &.normal {
+        font-weight: normal;
+    }
+
+    // 별도
+    &.bar {
+        margin-left: 10px;
+    }
+    &.careerYear {
+        margin-left: 10px;
+        text-align: left;
+        min-width: 185px;
+
+        @include TABLET {
+            text-align: right;
+        }
+    }
 }

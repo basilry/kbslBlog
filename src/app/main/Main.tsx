@@ -44,6 +44,10 @@ const Main = (): JSX.Element => {
         }
     }, [totalYear, frontYear, backYear])
 
+    useEffect(() => {
+        changeNowMenuName("MAIN")
+    }, [])
+
     return (
         <Wrapper>
             <div className={styles.mainTop}>
@@ -211,7 +215,7 @@ const Main = (): JSX.Element => {
                                 </div>
                                 <TextBasic size="small" bold="bold">
                                     {
-                                        "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다. Part를 나누어 진행하며, Part 1은 로그인/마이페이지/수급자조회/직원관리/고객관리 등 기본기능을 구현했습니다."
+                                        "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다."
                                     }
                                 </TextBasic>
                             </div>
