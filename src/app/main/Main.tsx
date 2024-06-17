@@ -8,6 +8,8 @@ import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
+import { IMainProjects } from "@interface/IMain"
+import mainProjects from "@lib/json/mainProjects.json"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/main.module.scss"
 
@@ -106,204 +108,38 @@ const Main = (): JSX.Element => {
                     </div>
                     <img src="/kbslBlog/macbook_Face.png" alt="macbook" width={200} height={200} />
                 </div>
-                <div className={styles.botBlock}>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects/solutionInit"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, Solution"}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2021.12 ~ 2023.06 | 1년 6개월"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                    <Image
-                                        placeholder="blur"
-                                        src="/kbslBlog/ddogaLogo.svg"
-                                        alt="logo"
-                                        width={120}
-                                        height={30}
-                                    />
-                                </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다. 어르신에 대한 모든 요양정보, 직원에 대한 근무기록 등 정보, 시설의 운영정보 등을 관리합니다."
-                                    }
+                {mainProjects.map((row: IMainProjects, idx: number) => (
+                    <div key={idx} className={styles.botBlock}>
+                        <div className={styles.workContents}>
+                            <Link href={"/projects/solutionInit"} onClick={(): void => changeNowMenuName("PROJECTS")}>
+                                <TextBasic size="x-large" bold="bold">
+                                    {row.title}
                                 </TextBasic>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects/solutionRenewal"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, Solution 리뉴얼"}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2023.07 ~ 2023.09 | 3개월"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                    <Image
-                                        placeholder="blur"
-                                        src="/kbslBlog/ddogaLogo.svg"
-                                        alt="logo"
-                                        width={120}
-                                        height={30}
-                                    />
-                                </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "공단의 고시변경으로 비즈니스 로직 등 다수 기능 변경 필요로 인해 리뉴얼 작업이 진행되었습니다."
-                                    }
+                                <TextBasic size="large" bold="bold">
+                                    {row.period}
                                 </TextBasic>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
-                <div className={styles.botBlock}>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects/carenote"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, 돌봄노트"}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2023.09 ~ 2024.01 | 4개월"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                    <Image
-                                        placeholder="blur"
-                                        src="/kbslBlog/ddoga_logo.svg"
-                                        alt="logo"
-                                        width={115}
-                                        height={20}
-                                    />
+                                <LineBasic />
+                                <div className={styles.contents}>
+                                    <div className={styles.ciLogo}>
+                                        {row?.logos?.map((logo, subIdx) => (
+                                            <Image
+                                                key={subIdx}
+                                                src={logo.src ?? ""}
+                                                alt={logo.alt ?? ""}
+                                                width={logo.width}
+                                                height={logo.height}
+                                                placeholder={"blur"}
+                                            />
+                                        ))}
+                                    </div>
+                                    <TextBasic size="small" bold="bold">
+                                        {row.description}
+                                    </TextBasic>
                                 </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 앱 프로젝트입니다."
-                                    }
-                                </TextBasic>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
                     </div>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects/imsPart1"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, IMS(통합관리시스템) Part 1."}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2024.02 ~ 2024.03 | 2개월"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                    <Image
-                                        placeholder="blur"
-                                        src="/kbslBlog/ddoga_logo.svg"
-                                        alt="logo"
-                                        width={115}
-                                        height={20}
-                                    />
-                                </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다."
-                                    }
-                                </TextBasic>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
-                <div className={styles.botBlock}>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects/hectonTechblog"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"헥톤프로젝트, 헥톤블로그"}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2024.02 ~ 진행 중 | 미정(올해 말)"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "헥톤프로젝트 회사 공식블로그 사이드 프로젝트입니다. 24년 5월 23일 현재 프론트/백 모두 프로젝트 기반 작업 진행 중입니다."
-                                    }
-                                </TextBasic>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, IMS(통합관리시스템) Part 2."}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2024.04 ~ 2024.05 | 2개월"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                    <Image
-                                        placeholder="blur"
-                                        src="/kbslBlog/ddoga_logo.svg"
-                                        alt="logo"
-                                        width={115}
-                                        height={20}
-                                    />
-                                </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "24년 2월에 진행했던 IMS 프로젝트의 고도화 및 관리자 페이지 추가 프로젝트입니다. 수급자 조회내역/복지용구 구매가능&기 대여품목 조회 기능을 추가하였으며, 관리자 페이지는 기본적인 로그인/회원가입/공지사항(목록-필터/상세/등록/수정/삭제) 기능을 신규로 구현했습니다."
-                                    }
-                                </TextBasic>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
-                <div className={styles.botBlock}>
-                    <div className={styles.workContents}>
-                        <Link href={"/projects/hectonTechblog"} onClick={(): void => changeNowMenuName("PROJECTS")}>
-                            <TextBasic size="x-large" bold="bold">
-                                {"또하나의가족, 플랫폼 고도화 - 장기요양등급신청"}
-                            </TextBasic>
-                            <TextBasic size="large" bold="bold">
-                                {"2024.06 ~ 2024.07 | 2개월(예정)"}
-                            </TextBasic>
-                            <LineBasic />
-                            <div className={styles.contents}>
-                                <div className={styles.ciLogo}>
-                                    <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={18} />
-                                    <Image
-                                        placeholder="blur"
-                                        src="/kbslBlog/ddoga_logo.svg"
-                                        alt="logo"
-                                        width={115}
-                                        height={20}
-                                    />
-                                </div>
-                                <TextBasic size="small" bold="bold">
-                                    {
-                                        "헥톤프로젝트의 대표 서비스 플랫폼인 또하나의가족에 수급자의 장기요양등급 신청을 편리하게 진행해주는 기능을 추가 개발합니다."
-                                    }
-                                </TextBasic>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className={styles.workContents} style={{ cursor: "auto", opacity: 0.3 }}></div>
-                </div>
+                ))}
             </div>
             <LineBasic />
         </Wrapper>

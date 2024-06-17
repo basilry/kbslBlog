@@ -4,7 +4,7 @@
   pointer-events: none;
 
   .bar {
-    background: $orangeCinamon;
+    background: $pink-pressed;
     opacity: 0.4;
     position: fixed;
     z-index: 9999;
@@ -53,8 +53,8 @@
     height: 3rem;
     box-sizing: border-box;
     border: solid 8px transparent;
-    border-top-color: $orangeCinamon;
-    border-left-color: $orangeCinamon;
+    border-top-color: $pink-pressed;
+    border-left-color: $pink-pressed;
     border-radius: 50%;
     -webkit-animation: nprogress-spinner 400ms linear infinite;
     animation: nprogress-spinner 400ms linear infinite;
@@ -64,8 +64,8 @@
       width: 2rem;
       height: 2rem;
       border: solid 5px transparent;
-      border-top-color: $orangeCinamon;
-      border-left-color: $orangeCinamon;
+      border-top-color: $pink-pressed;
+      border-left-color: $pink-pressed;
     }
   }
 }
