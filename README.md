@@ -37,50 +37,26 @@ by Kim Basilri.
 <br/>
 
 ### 프로젝트 계획 플로우
-- [x] 프로젝트 구조 잡기
-  - [x] 레포생성
-  - [x] 프로젝트 기술스택 확정
-  - [x] 계획일정 작성
-- F/E
-  - [x] 기본 프로젝트 개발환경 설정
-    - [x] 라이브러리 및 필요 스택 설치
-    - [x] eslint, prettier관련 json 설정
-    - [x] 에디터 관련 라이브러리 찾기 및 설치
-  - [x] 폴더 및 파일 구조 구성하기
-  - [x] 공통 레이아웃 구성하기
-    - [x] Header
-      - [x] 메인링크, white/black 버전 버튼, 로그인 버튼, 개별 유저 프로필 사진(클릭시 유저정보)
-    - [x] Sidebar
-      - [x] 검색, 자기소개, 공지사항, 포스팅, 프로젝트 목록, 방명록(통계포함), 후원
-      - [x] 깃헙 링크, 링크드인 링크, 네이버 블로그 링크
-    - [x] Footer
-      - [x] copyright, 지메일, 핸드폰번호
-  - [ ] 공통 컴포넌트 구성하기
-    - [x] DarkModeBasic, TextBasic, LineBasic
-    - [ ] ModalBasic
-  - [ ] 페이지 구성하기
-    - [x] Main
-    - [ ] Login
-    - [ ] SignUp
-    - [x] Introduce
-    - [x] Projects
-    - [ ] UserDetail
-    - [ ] PostingList
-    - [ ] NewPost
-    - [ ] PostDetail
-    - [x] Visitor
-    - [ ] GuestAnalyze
-    - [ ] Error
-- B/E
-  - [ ] 레이아웃 잡기
-  - [ ] xml 구성하기
-  - [ ] 보안요소 구성하기
-- Infra
-  - [ ] VPC, 라우팅 테이블, EC2 구성하기(F/E, B/E용으로 각 1개 씩)
-  - [ ] RDS 환경 설정 및 DB 툴 연결
-  - [ ] EC2 내부 프로젝트 런칭 환경 설정
-  - [ ] S3 및 CloudFront 연계 설정
-
+- F/E 리팩토링 진행
+  - [ ] Main
+  - [ ] Introduce
+  - [ ] Projects
+- B/E 신규개발 진행
+  - [ ] DB 스키마 및 ERD 설계
+  - [ ] MySQL RDS 생성
+  - [ ] Spring-Boot 프로젝트 생성
+  - [ ] Spring Security 및 JWT 등 보안 설정
+  - [ ] JPA 설정 및 Entity 생성
+  - [ ] 컨트롤러 및 서비스 파일 구성
+  - [ ] F/E 연동
+- AWS 인프라 EC2 셋팅
+  - [ ] F/E 배포
+  - [ ] B/E 배포
+- F/E 신규개발 진행
+  - [ ] Login
+  - [ ] PostWrite
+  - [ ] PostList
+  - [ ] PostDetail
 
 <br/>
 
