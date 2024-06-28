@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import dayjs from "dayjs"
-import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
@@ -122,13 +121,12 @@ const Main = (): JSX.Element => {
                                 <div className={styles.contents}>
                                     <div className={styles.ciLogo}>
                                         {row?.logos?.map((logo, subIdx) => (
-                                            <Image
+                                            <img
                                                 key={subIdx}
                                                 src={logo.src ?? ""}
                                                 alt={logo.alt ?? ""}
                                                 width={logo.width}
                                                 height={logo.height}
-                                                placeholder={"blur"}
                                             />
                                         ))}
                                     </div>
