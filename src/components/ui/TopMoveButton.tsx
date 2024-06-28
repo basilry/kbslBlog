@@ -24,7 +24,7 @@ const TopMoveButton = (): JSX.Element => {
             className={classNames(styles.wrapper, darkMode && styles.darkMode)}
             onClick={(): void => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
         >
-            <TextBasic size="large" bold="bold">
+            <TextBasic size="medium" bold="bold">
                 {"Top"}
             </TextBasic>
         </div>
