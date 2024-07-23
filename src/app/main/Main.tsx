@@ -1,7 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import dayjs from "dayjs"
+import React, { ReactElement, useEffect, useState } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
@@ -10,25 +9,33 @@ import Wrapper from "@components/layout/Wrapper"
 import { IMainProjects } from "@interface/IMain"
 import mainProjects from "@lib/json/mainProjects.json"
 import { useCoreStore } from "@lib/stores/store"
+import { BACK_YEAR, FRONT_YEAR, FULL_YEAR, TOTAL_YEAR } from "@lib/utils/constants"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/main.module.scss"
 
-const FIRST_TOTAL_YEAR_DATE = "20210913"
-const FIRST_FRONT_YEAR_DATE = "20211201"
-const FIRST_BACK_YEAR_DATE = "20220101"
-const FIRST_FULL_YEAR_DATE = "20240101"
-const TODAY = dayjs().format("YYYYMMDD")
-const TOTAL_YEAR = dayjs(TODAY).diff(FIRST_TOTAL_YEAR_DATE, "year")
-const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "month")
-const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "month")
-const FULL_YEAR = dayjs(TODAY).diff(FIRST_FULL_YEAR_DATE, "month")
+interface IYearMonthBlock {
+    title: string
+    subTitle: string
+    yearMonth: number
+    period: string
+}
 
-const Main = (): JSX.Element => {
+const Main = (): ReactElement => {
     const { darkMode, changeNowMenuName } = useCoreStore()
 
     const [totalYear, setTotalYear] = useState(0)
     const [frontYear, setFrontYear] = useState(0)
     const [backYear, setBackYear] = useState(0)
     const [fullYear, setFullYear] = useState(0)
+
+    const handleYearMonthBlock = (): IYearMonthBlock[] => {
+        return [
+            { title: "Total", subTitle: "Career", yearMonth: totalYear, period: "year" },
+            { title: "F/E", subTitle: "Position", yearMonth: frontYear, period: "month" },
+            { title: "B/E", subTitle: "Exp", yearMonth: backYear, period: "month" },
+            { title: "Fullstack", subTitle: "Position", yearMonth: fullYear, period: "month" },
+        ]
+    }
 
     useEffect(() => {
         const doCalYear = setTimeout(() => {
@@ -68,47 +75,25 @@ const Main = (): JSX.Element => {
                 </div>
                 <div className={styles.paragraphWrapper}>
                     <p>{"안녕하세요! :)"}</p>
-                    <p>{"Fullstack + DevSecOps를 지향하고,"}</p>
+                    <p>{"DevSecOps와 ML Engineer를 지향하고,"}</p>
                     <p>{"진정한 개발자를 꿈꾸는 법학도."}</p>
                     <br />
-                    <p>{"Web FrontEnd 개발자,"}</p>
+                    <p>{"Web FullStack 개발자,"}</p>
                     <p>{"'김바실리'입니다."}</p>
                 </div>
             </div>
             <LineBasic />
             <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
-                <div className={styles.midBlock}>
-                    <p>Total</p>
-                    <p>Career</p>
-                    <div className={styles.yearNumWrapper}>
-                        <div className={styles.yearNum}>{totalYear}+</div>
+                {handleYearMonthBlock().map((row) => (
+                    <div key={row.title} className={styles.midBlock}>
+                        <p>{row.title}</p>
+                        <p>{row.subTitle}</p>
+                        <div className={styles.yearNumWrapper}>
+                            <div className={styles.yearNum}>{row.yearMonth}+</div>
+                        </div>
+                        <p className={styles.yearChar}>{row.period}</p>
                     </div>
-                    <p className={styles.yearChar}>Years</p>
-                </div>
-                <div className={styles.midBlock}>
-                    <p>F/E</p>
-                    <p>Position</p>
-                    <div className={styles.yearNumWrapper}>
-                        <div className={styles.yearNum}>{frontYear}+</div>
-                    </div>
-                    <p className={styles.yearChar}>Months</p>
-                </div>
-                <div className={styles.midBlock}>
-                    <p>B/E</p>
-                    <p>Exp</p>
-                    <div className={styles.yearNumWrapper}>
-                        <div className={styles.yearNum}>{backYear}+</div>
-                    </div>
-                    <p className={styles.yearChar}>Months</p>
-                </div>
-                <div className={styles.midBlock}>
-                    <p>Fullstack</p>
-                    <p>Position</p>
-                    <div className={styles.yearNumWrapper}>
-                        <div className={styles.yearNum}>{fullYear}+</div>
-                    </div>
-                    <p className={styles.yearChar}>Months</p>
-                </div>
+                ))}
             </div>
             {/* TODO: 커리어 호버시 그래프 보이는 부분 */}
             {/* <div>{yearHover.id === "total" && yearHover.hover && <p>total</p>}</div> */}
@@ -129,7 +114,14 @@ const Main = (): JSX.Element => {
                 {mainProjects.map((row: IMainProjects, idx: number) => (
                     <div key={idx} className={styles.botBlock}>
                         <div className={styles.workContents}>
-                            <Link href={"/projects/solutionInit"} onClick={(): void => changeNowMenuName("PROJECTS")}>
+                            <Link
+                                href={row.url ?? ""}
+                                onClick={(): void => {
+                                    changeNowMenuName("PROJECTS")
+                                    toastCall("프로젝트 페이지로 이동합니다.", "success")
+                                }}
+                                scroll={false}
+                            >
                                 <TextBasic size="x-large" bold="bold">
                                     {row.title}
                                 </TextBasic>
@@ -141,7 +133,7 @@ const Main = (): JSX.Element => {
                                     <div className={styles.ciLogo}>
                                         {row?.logos?.map((logo, subIdx) => (
                                             <img
-                                                key={subIdx}
+                                                key={logo?.src + "_" + subIdx}
                                                 src={logo.src ?? ""}
                                                 alt={logo.alt ?? ""}
                                                 width={logo.width}

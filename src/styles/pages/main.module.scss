@@ -12,8 +12,8 @@
 
     .paragraphWrapper {
         p {
+            font-size: $large-font;
             margin: 10px;
-            font-size: 1.2rem;
             font-weight: 500;
             margin-bottom: 20px;
 
@@ -105,14 +105,14 @@
         box-shadow: $shadow;
         transition: all 0.1s ease-in;
 
+        p {
+            font-size: $large-font;
+        }
+
         @include TABLET {
             margin: 10px 10px;
             padding: 10px;
             width: 200px;
-
-            p {
-                font-size: 0.8rem;
-            }
         }
 
         .yearChar {
@@ -173,6 +173,7 @@
             margin-top: 20px;
             height: 210px;
             width: 500px;
+            max-width: 1000px;
             color: $black-700;
             background-color: $black-300;
             border-radius: 10px;
@@ -184,14 +185,6 @@
             @include TABLET {
                 height: 100%;
                 width: 100%;
-            }
-
-            &:nth-child(1) {
-                margin-right: 20px;
-
-                @include TABLET {
-                    margin-right: 0px;
-                }
             }
 
             .contents {

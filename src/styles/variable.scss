@@ -75,6 +75,11 @@ $bottom-shadow:0 4px 8px rgba(0, 0, 0, 0.04);
 $breakpoint-mobile: 600px;
 $breakpoint-tablet: 768px;
 
+// 폰트굵기
+$regular: 450;
+$medium: 540;
+$semi: 630;
+$bold: 730;
 
 // 모바일 브레이크포인트
 @mixin MOBILE {

@@ -6,4 +6,5 @@ export interface IMainProjects {
     period?: string
     logos?: ILogo[]
     description?: string
+    url?: string
 }
