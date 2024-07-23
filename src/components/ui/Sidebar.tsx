@@ -6,12 +6,12 @@ import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
 import MenuItem from "@components/molecule/MenuItem"
 import { useCoreStore } from "@lib/stores/store"
+import { MENU_LIST, MENU_LIST_KR } from "@lib/utils/constants"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/ui/sidebar.module.scss"
 
 // const MENU_LIST = ["Main", "Search", "Introduce", "Notice", "Post", "Projects", "Visitor", "Donate"]
 // const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
-const MENU_LIST = ["Main", "Introduce", "Projects", "Visitor"]
-const MENU_LIST_KR = ["메인", "자기소개", "프로젝트", "방명록"]
 
 function Sidebar(): ReactElement {
     const pathName = usePathname().split("/")
@@ -39,6 +39,7 @@ function Sidebar(): ReactElement {
                             onClick={(): void => {
                                 changeNowMenuName(menuName.toUpperCase())
                                 changeSideBarFold(false)
+                                toastCall(`${MENU_LIST_KR[idx]} 페이지로 이동합니다.`, "success")
                             }}
                             className={classNames(
                                 !sideBarFold ? styles.hidden : styles.view,

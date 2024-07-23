@@ -9,3 +9,6 @@ export const TOTAL_YEAR = dayjs(TODAY).diff(FIRST_TOTAL_YEAR_DATE, "year")
 export const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "month")
 export const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "month")
 export const FULL_YEAR = dayjs(TODAY).diff(FIRST_FULL_YEAR_DATE, "month")
+
+export const MENU_LIST = ["Main", "Introduce", "Projects", "Visitor"]
+export const MENU_LIST_KR = ["메인", "자기소개", "프로젝트", "방명록"]

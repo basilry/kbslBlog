@@ -120,7 +120,6 @@ const Main = (): ReactElement => {
                                     changeNowMenuName("PROJECTS")
                                     toastCall("프로젝트 페이지로 이동합니다.", "success")
                                 }}
-                                scroll={false}
                             >
                                 <TextBasic size="x-large" bold="bold">
                                     {row.title}
