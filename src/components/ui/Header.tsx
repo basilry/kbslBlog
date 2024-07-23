@@ -7,6 +7,8 @@ import classNames from "classnames"
 import DarkModeBasic from "@components/atom/DarkModeBasic"
 import TextBasic from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
+import { MENU_LIST, MENU_LIST_KR } from "@lib/utils/constants"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/ui/header.module.scss"
 
 function Header(): ReactElement {
@@ -33,7 +35,13 @@ function Header(): ReactElement {
                 </div>
                 <div className={styles.linkBlock}>
                     <div className={styles.rootLink}>
-                        <Link href="/" onClick={(): void => changeNowMenuName("MAIN")}>
+                        <Link
+                            href="/"
+                            onClick={(): void => {
+                                changeNowMenuName("MAIN")
+                                toastCall("메인 페이지로 이동합니다.", "success")
+                            }}
+                        >
                             <TextBasic size="xx-large" bold="bold">
                                 {"KBSL's Blog"}
                             </TextBasic>
@@ -43,7 +51,19 @@ function Header(): ReactElement {
                         /
                     </TextBasic>
                     <div className={styles.menuLink}>
-                        <Link href={`/${nowMenuName.toLowerCase()}`}>
+                        <Link
+                            href={`/${nowMenuName.toLowerCase()}`}
+                            onClick={(): void =>
+                                toastCall(
+                                    `${
+                                        MENU_LIST_KR[
+                                            MENU_LIST.indexOf(nowMenuName[0] + nowMenuName.slice(1).toLowerCase())
+                                        ]
+                                    } 페이지로 이동합니다.`,
+                                    "success",
+                                )
+                            }
+                        >
                             <TextBasic size="xx-large" bold="bold">
                                 {nowMenuName}
                             </TextBasic>
