@@ -15,9 +15,3 @@ export const toastCall = (msg: string, type: TToastType): any => {
             return toast.info(msg, { theme: "colored" })
     }
 }
-
-export const errorToast = (message?: string) => {
-    return toast.error(message || "일시적인 오류가 발생했어요. 잠시 후 다시 시도해 주세요.", {
-        theme: "colored",
-    })
-}
