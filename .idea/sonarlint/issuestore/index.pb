@@ -1,27 +1,14 @@
 
-B
-public/favicon.svg,5\f\5f2454f9d281fd54d8c45aa67bd4c92c65574e1f
 >
 .eslintrc.json,7\1\71c20a341bfe32aa5cd5b4384e94f942bab6a7d3
 @
 .prettierrc.json,1\e\1ee5d199ddbeaaa1717e65b449ac7a6f03bed689
-@
-src/lib/store.ts,c\b\cbf3abbe7aace6bfe953961781bde100155e748d
-H
-src/stores/loginStore.ts,a\8\a87e3b95a0290551b6858cd4436b6a9ea16fa506
 F
 src/interface/IUser.ts,3\3\335f57b5c42fd4aae6e9d27855e0240a0071521f
-H
-src/lib/axiosInstance.ts,f\4\f4ba29915da32bc96d151f225b9f6ba435e3427e
-:
-
-.env.local,1\f\1fa30fea3e9ae270a3c38a6113a3689d8987d108
 M
 src/components/ui/Loading.tsx,0\5\05e1ab447cb3db5025fdd3d59846c5ca71638e1e
 L
 src/components/ui/Footer.tsx,7\c\7c49fb91821360f5d48feb7f2fe47ed0d9da4eda
-K
-src/service/loginService.ts,0\7\07b6b73906edf1ee5fa00244922d0cdc6b020796
 F
 src/app/login/page.tsx,0\d\0de71383b279c151efbcd91d21333819635113ab
 J
@@ -44,10 +31,6 @@ B
 src/app/layout.tsx,c\f\cfb47de6ae0cae626eed46461300112ef521d977
 Q
 !src/styles/ui/sidebar.module.scss,f\d\fd058f9200af7c885f2b68fa3a5955ca5cfcc3ba
-P
- src/components/layout/Layout.tsx,c\4\c4332da4e8cbeb2c8db427c9af2489001d8d5030
-T
-$src/styles/layout/layout.module.scss,1\c\1cbf8f3121975601ee5746aa7e79d7e60d37531d
 Q
 !src/styles/pages/main.module.scss,4\4\44c45a6c05b16b33a6383852d4b1e6c2e93591db
 E
@@ -59,3 +42,15 @@ P
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 L
 src/components/ui/Header.tsx,3\2\3230080d5c49acfa5f911e8694366cb3f0982c32
+E
+src/app/main/Main.tsx,4\1\41b2dff3102686c28811bf9be59f664b0c4a993f
+W
+'src/components/ui/ProjectsNavigator.tsx,1\4\14d4417db16bcf79c46bc6207045aa0742fdd4fe
+I
+src/styles/nprogress.scss,9\9\99ee8f24db614d29eb5c36266ae10e756871a614
+N
+src/lib/json/mainProjects.json,3\c\3c5a39e75ca7f9948d0160b7b07d0d3c15d35f8a
+F
+src/interface/IMain.ts,a\c\ac8dc62ac308728c706d1642702638f95b20b3c8
+F
+src/interface/IRoot.ts,7\0\70fbcfd43672bb35ec6da560388fc4425852d37c

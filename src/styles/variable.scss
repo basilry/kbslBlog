@@ -54,6 +54,8 @@ $bg-orange:#fff0d9;
 $tx-orange:#ff7f00;
 $bg-pink:#fff0f8;
 
+//기준 크기
+$global-width: 460px;
 
 //폰트 사이즈
 $xx-small-font: 12px;
@@ -73,6 +75,11 @@ $bottom-shadow:0 4px 8px rgba(0, 0, 0, 0.04);
 $breakpoint-mobile: 600px;
 $breakpoint-tablet: 768px;
 
+// 폰트굵기
+$regular: 450;
+$medium: 540;
+$semi: 630;
+$bold: 730;
 
 // 모바일 브레이크포인트
 @mixin MOBILE {
