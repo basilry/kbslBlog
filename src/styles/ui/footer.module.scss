@@ -3,6 +3,7 @@
 .footer {
   // position: fixed;
   width: 100%;
+  min-width: $global-width;
   height: 50px;
   bottom: 0;
   padding: 25px 30px 20px 30px;

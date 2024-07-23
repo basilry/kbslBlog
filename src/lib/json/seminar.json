@@ -1,110 +1,131 @@
 [
-  {
-    "id": 1,
-    "title": "또하나의가족 솔루션 UI 라이브러리 비교 분석 보고",
-    "date": "20211013"
-  },
-  {
-    "id": 22,
-    "title": "헥톤프로젝트 | Code Convention 정리 및 공유",
-    "date": "20220208",
-    "url": "https://basilry-kim-frontend.notion.site/Code-Convention-e76562094ab4476487d6365e3d9a475d"
-  },
-  {
-    "id": 2,
-    "title": "AWS 아키텍트 어소시에이트 Ch 1. 분석 발표 - 개요",
-    "date": "20220513"
-  },
-  {
-    "id": 3,
-    "title": "AWS 아키텍트 어소시에이트 Ch 2. 분석 발표 - S3",
-    "date": "20220520"
-  },
-  {
-    "id": 4,
-    "title": "AWS 아키텍트 어소시에이트 Ch 3. 분석 발표 - VPC",
-    "date": "20220512"
-  },
-  {
-    "id": 5,
-    "title": "AWS 아키텍트 어소시에이트 Ch 4. 분석 발표 - EC2",
-    "date": "20220708"
-  },
-  {
-    "id": 55,
-    "title": "ESLint 분석 및 적용 방법 공유",
-    "date": "20220805",
-    "url": "https://basilry-kim-frontend.notion.site/ESLint-a77baa9a263f4976977fa783df784b8c"
-  },
-  {
-    "id": 56,
-    "title": "Redux 기술 정리 및 공유",
-    "date": "20221028",
-    "url": "https://basilry-kim-frontend.notion.site/Redux-8b4723cdb09748d3ae6daf47b10ded7a?pvs=74"
-  },
-  {
-    "id": 6,
-    "title": "LINE 오픈챗 서버가 100배 급증하는 트래픽을 다루는 방법 - 세미나 참여 분석 공유 및 발표",
-    "date": "20221212"
-  },
-  {
-    "id": 7,
-    "title": "Scouter 모니터링 시스템 연구 공유",
-    "date": "20230229"
-  },
-  {
-    "id": 8,
-    "title": "또하나의가족 솔루션 공통모듈 설계 관련 보고",
-    "date": "20230405"
-  },
-  {
-    "id": 9,
-    "title": "OpenAI GPT발 LLM모델 AI 본격화 시대에 대한 찍먹 - 세미나 발표",
-    "date": "20230526"
-  },
-  {
-    "id": 10,
-    "title": "AWS Korea Office Hour 외부교육 참여 및 보고",
-    "date": "20230907"
-  },
-  {
-    "id": 11,
-    "title": "헥톤프로젝트 제품군 클라우드 관련 조사 후 보고",
-    "date": "20231111"
-  },
-  {
-    "id": 12,
-    "title": "2023 대한민국 소프트웨어대전 참석 후 공유 및 보고",
-    "date": "20231130"
-  },
-  {
-    "id": 13,
-    "title": "헥톤 테크블로그 | Spring Boot 기술 도입 분석 후 공유 및 발표",
-    "date": "20240226"
-  },
-  {
-    "id": 14,
-    "title": "헥톤 테크블로그 | 백엔드 프로젝트 디자인패턴 도입 분석 후 공유 및 발표",
-    "date": "20240315"
-  },
-  {
-    "id": 15,
-    "title": "헥톤 테크블로그 | ERD 설계 건 공유",
-    "date": "20240403"
-  },
-  {
-    "id": 16,
-    "title": "헥톤 테크블로그 | JWT 기반작업 건 공유",
-    "date": "20240424"
-  },
-  {
-    "id": 17,
-    "title": "헥톤 테크블로그 | Spring Security 및 JWT 연계 작업 건 공유",
-    "date": "20240513"
-  },
-  {
-    "id": 18,
-    "title": "2024 AWS Summit 참가 보고서",
-    "date": "20240520"
-  }
+    {
+        "id": 1,
+        "title": "또하나의가족 솔루션 UI 라이브러리 비교 분석 보고",
+        "date": "20211013"
+    },
+    {
+        "id": 22,
+        "title": "헥톤프로젝트 | Code Convention 정리 및 공유",
+        "date": "20220208",
+        "url": "https://basilry-kim-frontend.notion.site/Code-Convention-e76562094ab4476487d6365e3d9a475d"
+    },
+    {
+        "id": 2,
+        "title": "AWS 아키텍트 어소시에이트 Ch 1. 분석 발표 - 개요",
+        "date": "20220513",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/aa3297ce-1109-4329-8aea-18b12d104f9e/(220513)%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC_AWS%EA%B3%B5%EC%9D%B8_%EC%95%84%ED%82%A4%ED%85%8D%ED%8A%B8_%EC%96%B4%EC%86%8C%EC%8B%9C%EC%97%90%EC%9D%B4%ED%8A%B8_Ch1.pdf?id=76ad5519-4171-401e-b055-337a045af85d&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=NvgZo8WYCDT8LM6iMQAZNeVpq-e7pvAmE7itSKQlNDA&downloadName=%28220513%29%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC_AWS%EA%B3%B5%EC%9D%B8_%EC%95%84%ED%82%A4%ED%85%8D%ED%8A%B8_%EC%96%B4%EC%86%8C%EC%8B%9C%EC%97%90%EC%9D%B4%ED%8A%B8_Ch1.pdf"
+    },
+    {
+        "id": 3,
+        "title": "AWS 아키텍트 어소시에이트 Ch 2. 분석 발표 - S3",
+        "date": "20220520",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/6c566875-9e2f-43e2-8c11-2dc968d764ae/(220520)%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC_AWS%EC%96%B4%EC%86%8C%EC%8B%9C%EC%97%90%EC%9D%B4%ED%8A%B8_Ch2.pdf?id=2c32c372-4f80-416d-9f54-994fb207986b&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=xtFgqVIi-GSLO4FSvPmW_BisblhNzOslHsZnQ0EbTs4&downloadName=%28220520%29%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC_AWS%EC%96%B4%EC%86%8C%EC%8B%9C%EC%97%90%EC%9D%B4%ED%8A%B8_Ch2.pdf"
+    },
+    {
+        "id": 4,
+        "title": "AWS 아키텍트 어소시에이트 Ch 3. 분석 발표 - VPC",
+        "date": "20220512",
+        "url": "https://basilry-kim-frontend.notion.site/AWS-VPC-f4c8f948ae2c47fc947b5fefb218cf8e"
+    },
+    {
+        "id": 5,
+        "title": "AWS 아키텍트 어소시에이트 Ch 4. 분석 발표 - EC2",
+        "date": "20220708",
+        "url": "https://basilry-kim-frontend.notion.site/AWS-EC2-Instance-a9a4ae8805174609a05607ef50402464?pvs=74"
+    },
+    {
+        "id": 55,
+        "title": "ESLint 분석 및 적용 방법 공유",
+        "date": "20220805",
+        "url": "https://basilry-kim-frontend.notion.site/ESLint-a77baa9a263f4976977fa783df784b8c"
+    },
+    {
+        "id": 56,
+        "title": "Redux 기술 정리 및 공유",
+        "date": "20221028",
+        "url": "https://basilry-kim-frontend.notion.site/Redux-8b4723cdb09748d3ae6daf47b10ded7a?pvs=74"
+    },
+    {
+        "id": 6,
+        "title": "LINE 오픈챗 서버가 100배 급증하는 트래픽을 다루는 방법 - 세미나 참여 분석 공유 및 발표",
+        "date": "20221212",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/bd8c1c9d-f9b5-46ad-9dfa-28c0b88ac408/(221212)P%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%84%B8%EB%AF%B8%EB%82%98_LINE_%EC%98%A4%ED%94%88%EC%B1%97_%EC%84%9C%EB%B2%84%EA%B0%80_100%EB%B0%B0_%EA%B8%89%EC%A6%9D%ED%95%98%EB%8A%94_%ED%8A%B8%EB%9E%98%ED%94%BD%EC%9D%84_%EB%8B%A4%EB%A3%A8%EB%8A%94_%EB%B0%A9%EB%B2%95(%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%ACPRO).pdf?id=538d3ed7-598b-49fc-abb2-7bca051e509d&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=YM6eaHG76IzAaLFjlJ2bfrjSzFbmNEnaQQaOhjYHTao&downloadName=%28221212%29P%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8+%EC%84%B8%EB%AF%B8%EB%82%98_LINE+%EC%98%A4%ED%94%88%EC%B1%97+%EC%84%9C%EB%B2%84%EA%B0%80+100%EB%B0%B0+%EA%B8%89%EC%A6%9D%ED%95%98%EB%8A%94+%ED%8A%B8%EB%9E%98%ED%94%BD%EC%9D%84+%EB%8B%A4%EB%A3%A8%EB%8A%94+%EB%B0%A9%EB%B2%95%28%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%ACPRO%29.pdf"
+    },
+    {
+        "id": 7,
+        "title": "Scouter 모니터링 시스템 연구 공유",
+        "date": "20230229",
+        "url": "https://www.notion.so/basilry-kim-frontend/Scouter-119dc0b445b8450eaf64ecc825db729d?pvs=4"
+    },
+    {
+        "id": 8,
+        "title": "또하나의가족 솔루션 공통모듈 설계 관련 보고",
+        "date": "20230405"
+    },
+    {
+        "id": 9,
+        "title": "OpenAI GPT발 LLM모델 AI 본격화 시대에 대한 찍먹 - 세미나 발표",
+        "date": "20230526",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/2dfa925d-2e92-445b-8ba5-043181b909a6/(230526)P%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%84%B8%EB%AF%B8%EB%82%98_OpenAI_GPT%EB%B0%9C_LLM%EB%AA%A8%EB%8D%B8_AI_%EB%B3%B8%EA%B2%A9%ED%99%94_%EC%8B%9C%EB%8C%80%EC%97%90_%EB%8C%80%ED%95%9C_%EC%B0%8D%EB%A8%B9(%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC_Pro.).pdf?id=ca00ed14-0644-4908-aa92-e680580fdde9&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=zt6YkjVoOb-yAQBHVJvSOLKt5TxhvfupevLMxWpNsj4&downloadName=%28230526%29P%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8+%EC%84%B8%EB%AF%B8%EB%82%98_OpenAI+GPT%EB%B0%9C+LLM%EB%AA%A8%EB%8D%B8+AI+%EB%B3%B8%EA%B2%A9%ED%99%94+%EC%8B%9C%EB%8C%80%EC%97%90+%EB%8C%80%ED%95%9C+%EC%B0%8D%EB%A8%B9%28%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC+Pro.%29.pdf"
+    },
+    {
+        "id": 10,
+        "title": "AWS Korea Office Hour 외부교육 참여 및 보고",
+        "date": "20230907"
+    },
+    {
+        "id": 11,
+        "title": "헥톤프로젝트 제품군 클라우드 관련 조사 후 보고",
+        "date": "20231111"
+    },
+    {
+        "id": 12,
+        "title": "2023 대한민국 소프트웨어대전 참석 후 공유 및 보고",
+        "date": "20231130"
+    },
+    {
+        "id": 13,
+        "title": "헥톤 테크블로그 | Spring Boot 기술 도입 분석 후 공유 및 발표",
+        "date": "20240226",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/a5f2fbd4-c337-4f9e-9887-766b7afc62fd/(240226)%EC%9B%B9%EA%B0%9C%EB%B0%9C_%EC%8A%A4%ED%84%B0%EB%94%94_SpringBoot_%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC(v2).pdf?id=68f819a5-84e1-4599-9529-9e0473a45a5f&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=bUe7O-MqGTC7AOWqSv6e1FPokhtoySAV77dXB4FPNNg&downloadName=%28240226%29%EC%9B%B9%EA%B0%9C%EB%B0%9C_%EC%8A%A4%ED%84%B0%EB%94%94_SpringBoot_%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC%28v2%29.pdf"
+    },
+    {
+        "id": 14,
+        "title": "헥톤 테크블로그 | 백엔드 프로젝트 디자인패턴 도입 분석 후 공유 및 발표",
+        "date": "20240315",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/ee1234ac-a98c-45bd-837f-5724fbbc470b/(240315)%ED%97%A5%ED%86%A4%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4.pdf?id=784aafa5-57b0-4b9c-8575-629587dc6b93&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=lbu6wSronm7pBQ5rj3MeEf91VvjBOdPm9Pr7PcD6X44&downloadName=%28240315%29%ED%97%A5%ED%86%A4%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4.pdf"
+    },
+    {
+        "id": 15,
+        "title": "헥톤 테크블로그 | ERD 설계 건 공유",
+        "date": "20240403"
+    },
+    {
+        "id": 16,
+        "title": "헥톤 테크블로그 | JWT 기반작업 건 공유",
+        "date": "20240424",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/0bf9289c-9e67-4a1c-b421-4e1307df5eca/(240424)%EC%9B%B9%EA%B0%9C%EB%B0%9C%EC%8A%A4%ED%84%B0%EB%94%94_JWT_%EA%B8%B0%EB%B0%98%EC%9E%91%EC%97%85_%EA%B4%80%EB%A0%A8_%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC.pdf?id=137e2a5f-9252-4649-931d-0415313ce1e3&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=uavIfbwD0RrJNQ6t9t1LyEIBAAVIeuOyB9JuwDly-es&downloadName=%28240424%29%EC%9B%B9%EA%B0%9C%EB%B0%9C%EC%8A%A4%ED%84%B0%EB%94%94_JWT_%EA%B8%B0%EB%B0%98%EC%9E%91%EC%97%85_%EA%B4%80%EB%A0%A8_%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC.pdf"
+    },
+    {
+        "id": 17,
+        "title": "헥톤 테크블로그 | Spring Security 및 JWT 연계 작업 건 공유",
+        "date": "20240513",
+        "url": "https://file.notion.so/f/f/6287247f-8045-4770-8558-791aefcba811/72be69ca-d380-4238-bab7-6fc9d0788be1/(240513)%EC%9B%B9%EA%B0%9C%EB%B0%9C%EC%8A%A4%ED%84%B0%EB%94%94_SpringSecurity_JWT_%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC.pdf?id=7eaccee5-1ea1-465e-83d1-0f7e9a88e7db&table=block&spaceId=6287247f-8045-4770-8558-791aefcba811&expirationTimestamp=1721844000000&signature=SUwJKK5ot0B6wJwd6W3TjXk-xSJYk7ND8RI4v3wpp2U&downloadName=%28240513%29%EC%9B%B9%EA%B0%9C%EB%B0%9C%EC%8A%A4%ED%84%B0%EB%94%94_SpringSecurity_JWT_%EA%B9%80%EB%B0%94%EC%8B%A4%EB%A6%AC.pdf"
+    },
+    {
+        "id": 18,
+        "title": "2024 AWS Summit 참가 보고서",
+        "date": "20240520"
+    },
+    {
+        "id": 19,
+        "title": "헥톤 테크블로그 | WireFrame 및 기획문서 작업 건 공유",
+        "date": "20240612"
+    },
+    {
+        "id": 20,
+        "title": "헥톤 테크블로그 | 메뉴 인터페이스 작업 건 공유",
+        "date": "20240626"
+    }
 ]

@@ -15,10 +15,12 @@ import styles from "@styles/pages/main.module.scss"
 const FIRST_TOTAL_YEAR_DATE = "20210913"
 const FIRST_FRONT_YEAR_DATE = "20211201"
 const FIRST_BACK_YEAR_DATE = "20220101"
+const FIRST_FULL_YEAR_DATE = "20240101"
 const TODAY = dayjs().format("YYYYMMDD")
 const TOTAL_YEAR = dayjs(TODAY).diff(FIRST_TOTAL_YEAR_DATE, "year")
 const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "month")
 const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "month")
+const FULL_YEAR = dayjs(TODAY).diff(FIRST_FULL_YEAR_DATE, "month")
 
 const Main = (): JSX.Element => {
     const { darkMode, changeNowMenuName } = useCoreStore()
@@ -26,6 +28,7 @@ const Main = (): JSX.Element => {
     const [totalYear, setTotalYear] = useState(0)
     const [frontYear, setFrontYear] = useState(0)
     const [backYear, setBackYear] = useState(0)
+    const [fullYear, setFullYear] = useState(0)
 
     useEffect(() => {
         const doCalYear = setTimeout(() => {
@@ -38,12 +41,20 @@ const Main = (): JSX.Element => {
             if (TOTAL_YEAR === totalYear && FRONT_YEAR === frontYear && BACK_YEAR !== backYear) {
                 setBackYear(backYear + 1)
             }
+            if (
+                TOTAL_YEAR === totalYear &&
+                FRONT_YEAR === frontYear &&
+                BACK_YEAR === backYear &&
+                FULL_YEAR !== fullYear
+            ) {
+                setFullYear(fullYear + 1)
+            }
         }, 50)
 
         return () => {
             clearInterval(doCalYear)
         }
-    }, [totalYear, frontYear, backYear])
+    }, [totalYear, frontYear, backYear, fullYear])
 
     useEffect(() => {
         changeNowMenuName("MAIN")
@@ -74,7 +85,7 @@ const Main = (): JSX.Element => {
                     </div>
                     <p className={styles.yearChar}>Years</p>
                 </div>
-                <div className={classNames(styles.midBlock)}>
+                <div className={styles.midBlock}>
                     <p>F/E</p>
                     <p>Position</p>
                     <div className={styles.yearNumWrapper}>
@@ -82,11 +93,19 @@ const Main = (): JSX.Element => {
                     </div>
                     <p className={styles.yearChar}>Months</p>
                 </div>
-                <div className={classNames(styles.midBlock)}>
+                <div className={styles.midBlock}>
                     <p>B/E</p>
                     <p>Exp</p>
                     <div className={styles.yearNumWrapper}>
                         <div className={styles.yearNum}>{backYear}+</div>
+                    </div>
+                    <p className={styles.yearChar}>Months</p>
+                </div>
+                <div className={styles.midBlock}>
+                    <p>Fullstack</p>
+                    <p>Position</p>
+                    <div className={styles.yearNumWrapper}>
+                        <div className={styles.yearNum}>{fullYear}+</div>
                     </div>
                     <p className={styles.yearChar}>Months</p>
                 </div>

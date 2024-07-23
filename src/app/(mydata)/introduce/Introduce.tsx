@@ -1,15 +1,19 @@
 "use client"
 
 import Link from "next/link"
+import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import carrerJson from "@lib/json/career.json"
 import seminarJson from "@lib/json/seminar.json"
+import { useCoreStore } from "@lib/stores/store"
 import { DateFormat, formatDate } from "@lib/utils/common"
 import styles from "@styles/pages/introduce.module.scss"
 
 const Introduce = (): JSX.Element => {
+    const { darkMode } = useCoreStore()
+
     return (
         <Wrapper>
             <div className={styles.wholeWrapper}>
@@ -134,18 +138,38 @@ const Introduce = (): JSX.Element => {
                 <LineBasic />
                 <div className={styles.seminarAndRND}>
                     <TextBasic size="xx-large" bold="bold">
-                        {"Seminar | 연구개발 & 교육 & 보고"}
+                        {"Activity | 연구개발 & 교육 & 보고 & 수료"}
                     </TextBasic>
+                    <div className={styles.dotWrapper}>
+                        <span className={styles.red}>*</span>
+                        <TextBasic size={"x-small"} bold={"normal"}>
+                            {": 외부 링크로 연결됩니다."}
+                        </TextBasic>
+                    </div>
                     <br />
                     <br />
                     {seminarJson.map((seminar) => (
-                        <Link key={seminar.id} href={seminar.url ?? ""}>
-                            <div className={styles.seminarBlock} style={{ cursor: seminar.url ? "pointer" : "auto" }}>
-                                <TextBasic size="small" bold="bold">
+                        <Link
+                            key={seminar.id}
+                            href={seminar.url ?? "#"}
+                            target={seminar.url ? "_blank" : ""}
+                            scroll={false}
+                        >
+                            <div
+                                className={classNames(
+                                    styles.seminarBlock,
+                                    seminar.url && styles.active,
+                                    darkMode && styles.dark,
+                                )}
+                                style={{
+                                    cursor: seminar.url ? "pointer" : "default",
+                                }}
+                            >
+                                <TextBasic className={styles.wrapper} size="small" bold="bold">
+                                    {seminar.url && <span className={styles.red}>*</span>}
                                     {seminar.title}
                                 </TextBasic>
                                 <TextBasic size="small">{formatDate(seminar.date)}</TextBasic>
-                                <br />
                             </div>
                         </Link>
                     ))}
