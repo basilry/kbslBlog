@@ -1,5 +1,6 @@
 "use client"
 
+import { Fragment } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
@@ -119,8 +120,8 @@ const Introduce = (): JSX.Element => {
                         <br />
                         <br />
                         {carrerJson.map((row) => (
-                            <>
-                                <div key={row.title} className={styles.cbParagraph}>
+                            <Fragment key={row.title}>
+                                <div className={styles.cbParagraph}>
                                     <TextBasic size="small" bold="bold">
                                         {row.title}
                                     </TextBasic>
@@ -131,7 +132,7 @@ const Introduce = (): JSX.Element => {
                                     </TextBasic>
                                 </div>
                                 <br />
-                            </>
+                            </Fragment>
                         ))}
                     </div>
                 </div>
