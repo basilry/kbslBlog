@@ -120,7 +120,7 @@ const Introduce = (): JSX.Element => {
                         <br />
                         {carrerJson.map((row) => (
                             <>
-                                <div key={row.id} className={styles.cbParagraph}>
+                                <div key={row.title} className={styles.cbParagraph}>
                                     <TextBasic size="small" bold="bold">
                                         {row.title}
                                     </TextBasic>
@@ -150,7 +150,7 @@ const Introduce = (): JSX.Element => {
                     <br />
                     {seminarJson.map((seminar) => (
                         <Link
-                            key={seminar.id}
+                            key={seminar.id + seminar.date}
                             href={seminar.url ?? "#"}
                             target={seminar.url ? "_blank" : ""}
                             scroll={false}
@@ -165,11 +165,18 @@ const Introduce = (): JSX.Element => {
                                     cursor: seminar.url ? "pointer" : "default",
                                 }}
                             >
-                                <TextBasic className={styles.wrapper} size="small" bold="bold">
+                                <TextBasic className={styles.wrapper} size="medium" bold="bold">
                                     {seminar.url && <span className={styles.red}>*</span>}
                                     {seminar.title}
                                 </TextBasic>
-                                <TextBasic size="small">{formatDate(seminar.date)}</TextBasic>
+                                {seminar.subTitle && (
+                                    <div className={styles.subTitle}>
+                                        <TextBasic className={styles.subTitle} size="x-small" bold="bold">
+                                            {"/ " + seminar.subTitle}
+                                        </TextBasic>
+                                    </div>
+                                )}
+                                <TextBasic size="x-small">{formatDate(seminar.date)}</TextBasic>
                             </div>
                         </Link>
                     ))}
