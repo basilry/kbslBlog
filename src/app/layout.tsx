@@ -23,7 +23,7 @@ const pretendardFont = localFont({
     src: "../../public/font/PretendardVariable.woff2",
 })
 
-export default function RootLayout({ children }: { children: React.ReactNode }): React.JSX.Element {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>): React.JSX.Element {
     const { darkMode } = useCoreStore()
 
     const [mode, setMode] = useState<"lightMode" | "darkMode">("lightMode")
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
                 <meta name="application-name" content="KBSL's BLog" />
                 <meta
                     name="viewport"
-                    content="minimum-scale=1.0, initial-scale=1.0, maximum-scale=2.0, width=device-width, height=device-height, shrink-to-fit=no, viewport-fit=cover, interactive-widget=resizes-content"
+                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                 />
                 <title>{"KBSL's Blog"}</title>
                 <link rel="icon" href="/kbslBlog/myFace.png" />
