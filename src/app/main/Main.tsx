@@ -9,9 +9,10 @@ import Wrapper from "@components/layout/Wrapper"
 import { IMainProjects } from "@interface/IMain"
 import mainProjects from "@lib/json/mainProjects.json"
 import { useCoreStore } from "@lib/stores/store"
-import { BACK_YEAR, FRONT_YEAR, FULL_YEAR, TOTAL_YEAR } from "@lib/utils/constants"
-import { toastCall } from "@lib/utils/toastCall"
+import { BACK_YEAR, FIRST_TOTAL_YEAR_DATE, FRONT_YEAR, FULL_YEAR, TODAY, TOTAL_YEAR } from "@lib/utils/constants";
+// import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/main.module.scss"
+import dayjs from "dayjs";
 
 interface IYearMonthBlock {
     title: string
@@ -115,11 +116,13 @@ const Main = (): ReactElement => {
                     <div key={idx} className={styles.botBlock}>
                         <div className={styles.workContents}>
                             <Link
-                                href={row.url ?? ""}
-                                onClick={(): void => {
-                                    changeNowMenuName("PROJECTS")
-                                    toastCall("프로젝트 페이지로 이동합니다.", "success")
-                                }}
+                                scroll={false}
+                                href={""}
+                                // href={row.url ?? ""}
+                                // onClick={(): void => {
+                                //     changeNowMenuName("PROJECTS")
+                                //     toastCall("프로젝트 페이지로 이동합니다.", "success")
+                                // }}
                             >
                                 <TextBasic size="x-large" bold="bold">
                                     {row.title}

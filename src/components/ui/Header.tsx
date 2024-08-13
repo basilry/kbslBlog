@@ -22,7 +22,6 @@ function Header(): ReactElement {
             <div className={styles.leftWrapper}>
                 <div className={styles.hamberger}>
                     <Image
-                        placeholder="blur"
                         src={darkMode ? "/kbslBlog/bars-solid_white.svg" : "/kbslBlog/bars-solid.svg"}
                         alt="sidebarBtn"
                         width={20}
