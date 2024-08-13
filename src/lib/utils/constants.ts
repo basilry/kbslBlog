@@ -12,5 +12,5 @@ export const FULL_YEAR = dayjs(TODAY).diff(FIRST_FULL_YEAR_DATE, "month")
 
 // const MENU_LIST = ["Main", "Search", "Introduce", "Notice", "Post", "Projects", "Visitor", "Donate"]
 // const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
-export const MENU_LIST = ["Main", "Introduce", "MyProfile", "Visitor"]
-export const MENU_LIST_KR = ["메인", "자기소개", "인간 '김바실리'", "방명록"]
+export const MENU_LIST = ["Main", "Introduce", "MyProfile", "Projects", "Visitor"]
+export const MENU_LIST_KR = ["메인", "자기소개", "인간 '김바실리'", "프로젝트 목록", "방명록"]

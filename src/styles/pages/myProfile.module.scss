@@ -10,27 +10,30 @@
   }
 }
 
-.pics {
-  margin-top: 30px;
-  border-radius: 5px;
-  width: 40%;
-  height: auto;
-
-  @include TABLET {
-    width: 60%;
-  }
-}
-
 .topBox {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   margin-bottom: 50px;
 
   @include TABLET {
+    display: flex;
     flex-direction: column;
   }
 
   .textWrapper {
     padding: 30px;
+  }
+
+  .pics {
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+
+    @include TABLET {
+      width: 100%;
+    }
   }
 }
 
@@ -41,6 +44,17 @@
   .osakaWrapper {
     display: flex;
     justify-content: center;
+  }
+
+  .pics {
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 40%;
+    height: auto;
+
+    @include TABLET {
+      width: 60%;
+    }
   }
 }
 
@@ -56,5 +70,16 @@
   .kyotoWrapper {
     display: flex;
     justify-content: center;
+  }
+
+  .pics {
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 40%;
+    height: auto;
+
+    @include TABLET {
+      width: 60%;
+    }
   }
 }
