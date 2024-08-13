@@ -55,55 +55,55 @@ const MyProfile = (): ReactElement => {
                 </div>
             </div>
 
-            <LineBasic />
+            {/*<LineBasic />*/}
 
-            <div className={classNames(styles.box, styles.secondBox, !darkMode && styles.dark)}>
-                <TextBasic size="xx-large" bold="bold">
-                    {"여행기록001"}
-                </TextBasic>
-                <br />
-                <TextBasic size="large">
-                    {
-                        "오사카 도톤보리의 뒷골목입니다. 좋아하는 분위기의 골목이었어요! 부부께서 하시는 이자카야도 정말 맛있었습니다. 일본어를 조금만 더 잘했으면 옆 테이블의 손님들과 이야기하며 즐겼을텐데 말이죠 ^^;"
-                    }
-                </TextBasic>
-                <div className={styles.osakaWrapper}>
-                    <img
-                        className={styles.pics}
-                        src={"/kbslBlog/osaka.jpg"}
-                        sizes={"100vw"}
-                        width={0}
-                        height={0}
-                        alt={"myPics2"}
-                    />
-                </div>
-            </div>
+            {/*<div className={classNames(styles.box, styles.secondBox, !darkMode && styles.dark)}>*/}
+            {/*    <TextBasic size="xx-large" bold="bold">*/}
+            {/*        {"여행기록001"}*/}
+            {/*    </TextBasic>*/}
+            {/*    <br />*/}
+            {/*    <TextBasic size="large">*/}
+            {/*        {*/}
+            {/*            "오사카 도톤보리의 뒷골목입니다. 좋아하는 분위기의 골목이었어요! 부부께서 하시는 이자카야도 정말 맛있었습니다. 일본어를 조금만 더 잘했으면 옆 테이블의 손님들과 이야기하며 즐겼을텐데 말이죠 ^^;"*/}
+            {/*        }*/}
+            {/*    </TextBasic>*/}
+            {/*    <div className={styles.osakaWrapper}>*/}
+            {/*        <img*/}
+            {/*            className={styles.pics}*/}
+            {/*            src={"/kbslBlog/osaka.jpg"}*/}
+            {/*            sizes={"100vw"}*/}
+            {/*            width={0}*/}
+            {/*            height={0}*/}
+            {/*            alt={"myPics2"}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
-            <LineBasic />
+            {/*<LineBasic />*/}
 
-            <div className={classNames(styles.box, styles.thirdBox, !darkMode && styles.dark)}>
-                <div className={styles.titleWrapper}>
-                    <TextBasic size="xx-large" bold="bold">
-                        {"여행기록002"}
-                    </TextBasic>
-                    <br />
-                    <TextBasic size="large">
-                        {
-                            "교토 료칸이 생각나네요.. 아라시야마의 료칸도 좋았고, 우리나라 북촌이랑 인사동 느낌이랑 비슷한 기요미즈데라 올라가는 길도 좋았습니다! 아쉽게도 기요미즈데라점 스타벅스는 사람이 너무 많아서 들어가지도 못하고 나왔네요 ㅎㅎ"
-                        }
-                    </TextBasic>
-                </div>
-                <div className={styles.kyotoWrapper}>
-                    <img
-                        className={styles.pics}
-                        src={"/kbslBlog/kyoto.jpg"}
-                        sizes={"100vw"}
-                        width={0}
-                        height={0}
-                        alt={"myPics2"}
-                    />
-                </div>
-            </div>
+            {/*<div className={classNames(styles.box, styles.thirdBox, !darkMode && styles.dark)}>*/}
+            {/*    <div className={styles.titleWrapper}>*/}
+            {/*        <TextBasic size="xx-large" bold="bold">*/}
+            {/*            {"여행기록002"}*/}
+            {/*        </TextBasic>*/}
+            {/*        <br />*/}
+            {/*        <TextBasic size="large">*/}
+            {/*            {*/}
+            {/*                "교토 료칸이 생각나네요.. 아라시야마의 료칸도 좋았고, 우리나라 북촌이랑 인사동 느낌이랑 비슷한 기요미즈데라 올라가는 길도 좋았습니다! 아쉽게도 기요미즈데라점 스타벅스는 사람이 너무 많아서 들어가지도 못하고 나왔네요 ㅎㅎ"*/}
+            {/*            }*/}
+            {/*        </TextBasic>*/}
+            {/*    </div>*/}
+            {/*    <div className={styles.kyotoWrapper}>*/}
+            {/*        <img*/}
+            {/*            className={styles.pics}*/}
+            {/*            src={"/kbslBlog/kyoto.jpg"}*/}
+            {/*            sizes={"100vw"}*/}
+            {/*            width={0}*/}
+            {/*            height={0}*/}
+            {/*            alt={"myPics2"}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             <LineBasic />
         </Wrapper>
