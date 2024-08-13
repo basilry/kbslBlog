@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment } from "react"
+import { Fragment, ReactElement } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
@@ -12,7 +12,7 @@ import { useCoreStore } from "@lib/stores/store"
 import { DateFormat, formatDate } from "@lib/utils/common"
 import styles from "@styles/pages/introduce.module.scss"
 
-const Introduce = (): JSX.Element => {
+const Introduce = (): ReactElement => {
     const { darkMode } = useCoreStore()
 
     return (

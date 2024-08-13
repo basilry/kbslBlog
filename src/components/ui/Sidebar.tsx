@@ -10,9 +10,6 @@ import { MENU_LIST, MENU_LIST_KR } from "@lib/utils/constants"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/ui/sidebar.module.scss"
 
-// const MENU_LIST = ["Main", "Search", "Introduce", "Notice", "Post", "Projects", "Visitor", "Donate"]
-// const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
-
 function Sidebar(): ReactElement {
     const pathName = usePathname().split("/")
     const { darkMode, sideBarFold, changeSideBarFold, changeNowMenuName } = useCoreStore()
@@ -26,7 +23,6 @@ function Sidebar(): ReactElement {
                     onClick={(): void => changeSideBarFold(false)}
                 >
                     <Image
-                        placeholder="blur"
                         src={darkMode ? "/kbslBlog/xmark-solid_white.svg" : "/kbslBlog/xmark-solid.svg"}
                         alt="sidebarCloseBtn"
                         width={30}
@@ -69,7 +65,6 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://github.com/basilry">
                             <Image
-                                placeholder="blur"
                                 src={darkMode ? "/kbslBlog/github_white.svg" : "/kbslBlog/github.svg"}
                                 alt="github"
                                 width={20}
@@ -80,7 +75,6 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://www.linkedin.com/in/basilri-kim-4b6611218/">
                             <Image
-                                placeholder="blur"
                                 src={darkMode ? "/kbslBlog/linkedin_white.svg" : "/kbslBlog/linkedin.svg"}
                                 alt="linkedin"
                                 width={20}
@@ -91,7 +85,6 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://blog.naver.com/basilry">
                             <Image
-                                placeholder="blur"
                                 src={darkMode ? "/kbslBlog/n-solid_white.svg" : "/kbslBlog/n-solid.svg"}
                                 alt="n-solid"
                                 width={20}
