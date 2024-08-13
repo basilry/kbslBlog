@@ -1,12 +1,12 @@
 1:HL["/kbslBlog/_next/static/media/a34f9d1faa5f3315-s.p.woff2",{"as":"font","type":"font/woff2"}]
 2:HL["/kbslBlog/_next/static/media/ff840cfebfb63b0c-s.p.woff2",{"as":"font","type":"font/woff2"}]
 3:HL["/kbslBlog/_next/static/css/af361edffe580427.css",{"as":"style"}]
-0:["bTyI2Xf0zCmDttKUk6St8",[[["",{"children":["(contents)",{"children":["projects",{"children":["hectonTechblog",{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",true],"$L4",[[["$","link","0",{"rel":"stylesheet","href":"/kbslBlog/_next/static/css/af361edffe580427.css","precedence":"next"}]],"$L5"]]]]
+0:["kCm7G9nbAa57oBnO6LiOd",[[["",{"children":["(contents)",{"children":["projects",{"children":["hectonTechblog",{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",true],"$L4",[[["$","link","0",{"rel":"stylesheet","href":"/kbslBlog/_next/static/css/af361edffe580427.css","precedence":"next"}]],"$L5"]]]]
 6:HL["/kbslBlog/_next/static/css/69b15d8a31521c17.css",{"as":"style"}]
-7:I{"id":7098,"chunks":["441:static/chunks/441-878ae5746ff7826e.js","42:static/chunks/42-4e185548cfabde1b.js","685:static/chunks/685-51a96a100045d9c8.js","730:static/chunks/730-e84746fad3412b24.js","185:static/chunks/app/layout-761c1cc36a56f8a8.js"],"name":"","async":false}
-8:I{"id":7767,"chunks":["272:static/chunks/webpack-2ab60770c7e14b2d.js","971:static/chunks/fd9d1056-c8340ac5bc8e71da.js","596:static/chunks/596-23b0990ce02c69cf.js"],"name":"default","async":false}
+7:I{"id":1226,"chunks":["441:static/chunks/441-878ae5746ff7826e.js","42:static/chunks/42-4e185548cfabde1b.js","685:static/chunks/685-51a96a100045d9c8.js","90:static/chunks/90-b088da86c6bde7d7.js","618:static/chunks/618-635f39463d0e9d3d.js","185:static/chunks/app/layout-459f6b02a5caa0fa.js"],"name":"","async":false}
+8:I{"id":7767,"chunks":["272:static/chunks/webpack-d79fb838d7927256.js","971:static/chunks/fd9d1056-c8340ac5bc8e71da.js","596:static/chunks/596-23b0990ce02c69cf.js"],"name":"default","async":false}
 9:I{"id":6569,"chunks":["818:static/chunks/app/(contents)/projects/layout-65ddd2e34104c2e1.js"],"name":"","async":false}
-a:I{"id":7920,"chunks":["272:static/chunks/webpack-2ab60770c7e14b2d.js","971:static/chunks/fd9d1056-c8340ac5bc8e71da.js","596:static/chunks/596-23b0990ce02c69cf.js"],"name":"default","async":false}
+a:I{"id":7920,"chunks":["272:static/chunks/webpack-d79fb838d7927256.js","971:static/chunks/fd9d1056-c8340ac5bc8e71da.js","596:static/chunks/596-23b0990ce02c69cf.js"],"name":"default","async":false}
 b:I{"id":6685,"chunks":["685:static/chunks/685-51a96a100045d9c8.js","160:static/chunks/app/not-found-07e2f0b9b1b769ee.js"],"name":"","async":false}
 c:"$Sreact.suspense"
 5:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"next-size-adjust"}]]
