@@ -1,16 +1,11 @@
 "use client"
 
 import { ReactElement } from "react"
-import classNames from "classnames"
-import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/introduce.module.scss"
 
 const Introduce = (): ReactElement => {
-    const { darkMode } = useCoreStore()
-
     return (
         <Wrapper>
             <div className={styles.introduceBlock}>
