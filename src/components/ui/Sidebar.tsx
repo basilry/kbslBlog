@@ -45,10 +45,7 @@ function Sidebar(): ReactElement {
                             onMouseEnter={(): void => setFocus(idx)}
                             onMouseLeave={(): void => setFocus(-1)}
                         >
-                            <MenuItem
-                                menuName={pathName[1] === menuName.toLowerCase() ? "{" + menuName + "}" : menuName}
-                                krName={focus === idx ? MENU_LIST_KR[idx] : ""}
-                            />
+                            <MenuItem menuName={menuName} krName={focus === idx ? MENU_LIST_KR[idx] : ""} />
                         </li>
                     </Link>
                 ))}

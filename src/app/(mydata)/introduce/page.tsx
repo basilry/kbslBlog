@@ -1,4 +1,4 @@
-import Introduce from "./Introduce"
+import Introduce from "@app/(mydata)/introduce/Introduce"
 
 const page = (): JSX.Element => {
     return <Introduce />

@@ -11,6 +11,17 @@
         color: $white;
     }
 
+    .progressBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2.5px;
+        background: $pink-pressed;
+        transform-origin: 0%;
+        z-index: 30;
+    }
+
     .body {
         padding: 86px 30px 100px 30px;
         // display: grid;

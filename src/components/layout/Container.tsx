@@ -1,6 +1,7 @@
 "use client"
 
 import React, { ReactElement, useEffect, useState } from "react"
+import { motion, useScroll } from "framer-motion"
 import classNames from "classnames"
 import Footer from "@components/ui/Footer"
 import Header from "@components/ui/Header"
@@ -11,6 +12,7 @@ import styles from "@styles/layout/container.module.scss"
 
 function Container({ children }: { children: React.ReactNode }): ReactElement {
     const { darkMode, changeSideBarFold } = useCoreStore()
+    const { scrollYProgress } = useScroll()
 
     const [mount, setMount] = useState(false)
 
@@ -20,6 +22,7 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
 
     return mount ? (
         <div className={classNames(styles.container, darkMode && styles.darkMode)}>
+            <motion.div className={styles.progressBar} style={{ scaleX: scrollYProgress }} />
             <Header />
             <Sidebar />
             <div className={styles.body} onClick={(): void => changeSideBarFold(false)}>
