@@ -39,7 +39,7 @@ by Kim Basilri.
 ### 프로젝트 계획 플로우
 - F/E 리팩토링 진행
   - [ ] Main
-  - [ ] Introduce
+  - [ ] Career
   - [ ] Projects
 - B/E 신규개발 진행
   - [ ] DB 스키마 및 ERD 설계
@@ -93,7 +93,7 @@ by Kim Basilri.
 - 2024.03.01 ~ 03
   - 폰트 변경 - Pretendard
   - 메인 종결
-  - Introduce 개발 1차 완료
+  - Career 개발 1차 완료
   - Visitor 개발 완료
     - giscus 설치하여 방명록 생성
   - Projects 개발 1차 완료

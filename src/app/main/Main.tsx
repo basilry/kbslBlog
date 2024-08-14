@@ -1,6 +1,7 @@
 "use client"
 
 import React, { ReactElement, useEffect, useState } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
@@ -86,12 +87,18 @@ const Main = (): ReactElement => {
             <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
                 {handleYearMonthBlock().map((row) => (
                     <div key={row.title} className={styles.midBlock}>
-                        <p>{row.title}</p>
-                        <p>{row.subTitle}</p>
-                        <div className={styles.yearNumWrapper}>
-                            <div className={styles.yearNum}>{row.yearMonth}+</div>
-                        </div>
-                        <p className={styles.yearChar}>{row.period}</p>
+                        <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                        >
+                            <p>{row.title}</p>
+                            <p>{row.subTitle}</p>
+                            <div className={styles.yearNumWrapper}>
+                                <div className={styles.yearNum}>{row.yearMonth}+</div>
+                            </div>
+                            <p className={styles.yearChar}>{row.period}</p>
+                        </motion.div>
                     </div>
                 ))}
             </div>
@@ -112,41 +119,48 @@ const Main = (): ReactElement => {
                     <img src="/kbslBlog/macbook_Face.png" alt="macbook" width={200} height={200} />
                 </div>
                 {mainProjects.map((row: IMainProjects, idx: number) => (
-                    <div key={idx} className={styles.botBlock}>
-                        <div className={styles.workContents}>
-                            <Link
-                                href={row.url ?? ""}
-                                onClick={(): void => {
-                                    changeNowMenuName("PROJECTS")
-                                    toastCall("프로젝트 페이지로 이동합니다.", "success")
-                                }}
-                            >
-                                <TextBasic size="x-large" bold="bold">
-                                    {row.title}
-                                </TextBasic>
-                                <TextBasic size="large" bold="bold">
-                                    {row.period}
-                                </TextBasic>
-                                <LineBasic />
-                                <div className={styles.contents}>
-                                    <div className={styles.ciLogo}>
-                                        {row?.logos?.map((logo, subIdx) => (
-                                            <img
-                                                key={logo?.src + "_" + subIdx}
-                                                src={logo.src ?? ""}
-                                                alt={logo.alt ?? ""}
-                                                width={logo.width}
-                                                height={logo.height}
-                                            />
-                                        ))}
-                                    </div>
-                                    <TextBasic size="small" bold="bold">
-                                        {row.description}
+                    <motion.div
+                        key={idx}
+                        initial="offscreen"
+                        whileInView="onscreen"
+                        viewport={{ once: true, amount: 0.8 }}
+                    >
+                        <motion.div className={styles.botBlock}>
+                            <div className={styles.workContents}>
+                                <Link
+                                    href={row.url ?? ""}
+                                    onClick={(): void => {
+                                        changeNowMenuName("PROJECTS")
+                                        toastCall("프로젝트 페이지로 이동합니다.", "success")
+                                    }}
+                                >
+                                    <TextBasic size="x-large" bold="bold">
+                                        {row.title}
                                     </TextBasic>
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
+                                    <TextBasic size="large" bold="bold">
+                                        {row.period}
+                                    </TextBasic>
+                                    <LineBasic />
+                                    <div className={styles.contents}>
+                                        <div className={styles.ciLogo}>
+                                            {row?.logos?.map((logo, subIdx) => (
+                                                <img
+                                                    key={logo?.src + "_" + subIdx}
+                                                    src={logo.src ?? ""}
+                                                    alt={logo.alt ?? ""}
+                                                    width={logo.width}
+                                                    height={logo.height}
+                                                />
+                                            ))}
+                                        </div>
+                                        <TextBasic size="small" bold="bold">
+                                            {row.description}
+                                        </TextBasic>
+                                    </div>
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </motion.div>
                 ))}
             </div>
             <LineBasic />

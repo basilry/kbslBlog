@@ -1,122 +1,128 @@
 @import "@styles/variable.scss";
 
-.wholeWrapper {
-    .block {
-        margin-bottom: 4rem;
+.box {
+  background-color: $black-600;
+  border-radius: 5px;
+  padding: 30px 20px;
+
+  &.dark {
+    background-color: $black-200;
+  }
+}
+
+.block {
+  margin-bottom: 4rem;
+}
+
+
+.introduceBlock {
+  margin-bottom: 80px;
+  display: flex;
+  justify-content: space-between;
+  @include TABLET {
+    flex-direction: column;
+  }
+
+  .pargraphs {
+    width: 60%;
+    @include TABLET {
+      width: 100%;
+    }
+  }
+
+  .firstBlock {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .myPics {
+    text-align: right;
+    padding-top: 20px;
+    @include TABLET {
+      text-align: center;
     }
 
-    .introduceBlock {
-        margin-bottom: 130px;
-        display: flex;
-        justify-content: space-between;
-        @include TABLET {
-            flex-direction: column;
-        }
+    .pics {
+      width: 60%;
+      height: auto;
 
-        .pargraphs {
-            width: 60%;
-            @include TABLET {
-                width: 100%;
-            }
-        }
-
-        .firstBlock {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .myPics {
-            text-align: right;
-            padding-top: 20px;
-            @include TABLET {
-                text-align: center;
-            }
-
-            .pics {
-                width: 60%;
-                height: auto;
-
-                @include TABLET {
-                    width: 100%;
-                }
-            }
-        }
+      @include TABLET {
+        width: 100%;
+      }
     }
-    .careerBlock {
-        margin-top: 130px;
-        margin-bottom: 130px;
+  }
+}
 
-        .careerParagraphs {
-            display: flex;
-            flex-direction: column;
-            text-align: right;
-            margin-bottom: 50px;
+.topBox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin-bottom: 50px;
 
-            .cbParagraph {
-                display: flex;
-                justify-content: flex-end;
+  @include TABLET {
+    display: flex;
+    flex-direction: column;
+  }
 
-                &:nth-child(2) {
-                    min-width: 300px;
-                }
+  .textWrapper {
+    padding: 30px;
+  }
 
-                @include TABLET {
-                    flex-direction: column;
-                }
-            }
-        }
+  .pics {
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+
+    @include TABLET {
+      width: 100%;
     }
+  }
+}
 
-    .seminarAndRND {
-        margin-top: 130px;
-        margin-bottom: 130px;
+.secondBox {
+  margin-top: 50px;
+  margin-bottom: 50px;
 
-        .red {
-            color: $pink-pressed;
-        }
+  .osakaWrapper {
+    display: flex;
+    justify-content: center;
+  }
 
-        .dotWrapper {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            font-weight: 700;
-        }
+  .pics {
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 40%;
+    height: auto;
 
-        .seminarBlock {
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            text-align: left;
-            border-radius: 5px;
-
-            .wrapper {
-                display: flex;
-                align-items: center;
-            }
-
-            .subTitle {
-                margin: 10px 0;
-            }
-
-            .conf {
-                font-size: $small-font;
-                color: $pink-ligthen;
-            }
-
-            &.active {
-                &:hover {
-                    background: $black-200;
-                }
-            }
-            &.dark {
-                &:hover {
-                    background: $black-600;
-                }
-            }
-
-            &:active {
-                opacity: 0.7;
-            }
-        }
+    @include TABLET {
+      width: 60%;
     }
+  }
+}
+
+.thirdBox {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  .titleWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kyotoWrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .pics {
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 40%;
+    height: auto;
+
+    @include TABLET {
+      width: 60%;
+    }
+  }
 }
