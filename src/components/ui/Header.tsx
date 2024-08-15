@@ -37,7 +37,7 @@ function Header(): ReactElement {
                         <Link
                             href="/"
                             onClick={(): void => {
-                                changeNowMenuName("MAIN")
+                                changeNowMenuName("")
                                 toastCall("메인 페이지로 이동합니다.", "success")
                             }}
                         >

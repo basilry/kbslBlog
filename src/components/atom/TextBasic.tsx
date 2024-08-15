@@ -8,6 +8,7 @@ const TextBasic = ({ children, bold, className, size, ...rest }: ITextBasicProps
             className={classNames(
                 styles.text,
                 className && styles[className],
+                className,
                 size && styles[size],
                 bold && styles[bold],
             )}
@@ -18,7 +19,16 @@ const TextBasic = ({ children, bold, className, size, ...rest }: ITextBasicProps
     )
 }
 
-export type TTextSize = "xx-small" | "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large"
+export type TTextSize =
+    | "xx-small"
+    | "x-small"
+    | "small"
+    | "medium"
+    | "large"
+    | "x-large"
+    | "xx-large"
+    | "xxx-large"
+    | "xxxx-large"
 
 export type TTextBold = "normal" | "bold"
 
