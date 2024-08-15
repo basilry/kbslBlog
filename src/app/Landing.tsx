@@ -241,7 +241,7 @@ const Landing = (): ReactElement => {
 
     return (
         <div>
-            <ScrollBlockWrapper ref={(el): HTMLDivElement => (sectionRefs.current[0] = el!)}>
+            <ScrollBlockWrapper ref={(el): any => (sectionRefs.current[0] = el!)}>
                 <div className={styles.landingWrapper}>
                     <VisibleText className={styles.titleWrapper1}>
                         <TextBasic className={styles.title} size={"xxxx-large"} bold={"bold"}>
@@ -276,10 +276,7 @@ const Landing = (): ReactElement => {
                     </VisibleText>
                 </div>
             </ScrollBlockWrapper>
-            <ScrollBlockWrapper
-                className={styles.secondBlock}
-                ref={(el): HTMLDivElement => (sectionRefs.current[1] = el!)}
-            >
+            <ScrollBlockWrapper className={styles.secondBlock} ref={(el): any => (sectionRefs.current[1] = el!)}>
                 <div className={styles.landingWrapper}>
                     <VisibleText className={styles.titleWrapper2}>
                         <TextBasic className={styles.title} size={"xxxx-large"} bold={"bold"}>
@@ -320,10 +317,7 @@ const Landing = (): ReactElement => {
                     </VisibleText>
                 </div>
             </ScrollBlockWrapper>
-            <ScrollBlockWrapper
-                className={styles.thirdBlock}
-                ref={(el): HTMLDivElement => (sectionRefs.current[2] = el!)}
-            >
+            <ScrollBlockWrapper className={styles.thirdBlock} ref={(el): any => (sectionRefs.current[2] = el!)}>
                 <div className={styles.blockWrapper}>
                     <div>
                         {[2024, 2023, 2022, 2021].map((row, idx) => (
@@ -362,10 +356,7 @@ const Landing = (): ReactElement => {
                     </div>
                 </div>
             </ScrollBlockWrapper>
-            <ScrollBlockWrapper
-                className={styles.forthBlock}
-                ref={(el): HTMLDivElement => (sectionRefs.current[3] = el!)}
-            >
+            <ScrollBlockWrapper className={styles.forthBlock} ref={(el): any => (sectionRefs.current[3] = el!)}>
                 <div className={styles.blockWrapper}>
                     <div className={styles.textWrapper}>
                         <VisibleText className={styles.titleWrapper2}>
