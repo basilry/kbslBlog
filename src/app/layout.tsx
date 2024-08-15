@@ -26,7 +26,7 @@ const pretendardFont = localFont({
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>): React.JSX.Element {
     const { darkMode } = useCoreStore()
 
-    const [mode, setMode] = useState<"lightMode" | "darkMode">("lightMode")
+    const [mode, setMode] = useState<"lightMode" | "darkMode">("darkMode")
     useEffect(() => {
         if (darkMode) {
             setMode("darkMode")
