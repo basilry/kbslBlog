@@ -39,12 +39,12 @@ const skillArrFirst = [
     { id: 3, name: "Java", file: "java.png" },
     { id: 4, name: "AWS", file: "aws.svg" },
 ]
-const skillArrSecond = [
-    { id: 5, name: "TypeScript", file: "typescript.svg" },
-    { id: 6, name: "Zustand", file: "zustand.png" },
-    { id: 7, name: "MySQL", file: "mysql.png" },
-    { id: 8, name: "SpringBoot", file: "springboot.png" },
-]
+// const skillArrSecond = [
+//     { id: 5, name: "TypeScript", file: "typescript.svg" },
+//     { id: 6, name: "Zustand", file: "zustand.png" },
+//     { id: 7, name: "MySQL", file: "mysql.png" },
+//     { id: 8, name: "SpringBoot", file: "springboot.png" },
+// ]
 
 // eslint-disable-next-line react/display-name
 const ScrollBlockWrapper = forwardRef<HTMLDivElement, IScrollBlockProps>(
@@ -327,10 +327,10 @@ const Landing = (): ReactElement => {
                 <div className={styles.blockWrapper}>
                     <div>
                         {[2024, 2023, 2022, 2021].map((row, idx) => (
-                            <ScrollGithubCalendarWrapper delay={idx * 0.5}>
+                            <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5}>
                                 <GitHubCalendar
                                     username="basilry"
-                                    transformData={(e) => selectLastHalfYear(e, row)}
+                                    transformData={(e): Activity[] => selectLastHalfYear(e, row)}
                                     year={row}
                                     colorScheme={darkMode ? "dark" : "light"}
                                 />
