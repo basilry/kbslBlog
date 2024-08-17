@@ -26,22 +26,39 @@ const Career = (): ReactElement => {
                         <br />
                         <br />
                         {careerJson.map((row) => (
-                            <Fragment key={row.title}>
-                                <div className={styles.cbParagraph}>
-                                    <TextBasic size="small" bold="bold">
-                                        {row.title}
-                                    </TextBasic>
-                                    <div>
-                                        <div className={styles.divider} />
-                                        <TextBasic size="small" className={"careerYear"}>
-                                            {formatDate(row.startDate, DateFormat.MONTH_DATE) +
-                                                " ~ " +
-                                                formatDate(row.endDate, DateFormat.MONTH_DATE)}
-                                        </TextBasic>
-                                    </div>
-                                </div>
-                                <br />
-                            </Fragment>
+                            <div key={row.id} className={classNames(styles.seminarBlock, darkMode && styles.dark)}>
+                                <TextBasic className={styles.wrapper} size="medium" bold="bold">
+                                    {row.title}
+                                </TextBasic>
+                                {/*{seminar.subTitle && (*/}
+                                {/*    <div className={styles.subTitle}>*/}
+                                {/*        <TextBasic className={styles.subTitle} size="x-small" bold="bold">*/}
+                                {/*            {"/ " + seminar.subTitle}*/}
+                                {/*        </TextBasic>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
+                                <TextBasic size="x-small">
+                                    {formatDate(row.startDate, DateFormat.MONTH_DATE) +
+                                        " ~ " +
+                                        formatDate(row.endDate, DateFormat.MONTH_DATE)}
+                                </TextBasic>
+                            </div>
+                            // <Fragment key={row.title}>
+                            //     <div className={styles.cbParagraph}>
+                            //         <TextBasic size="small" bold="bold">
+                            //             {row.title}
+                            //         </TextBasic>
+                            //         <div>
+                            //             <div className={styles.divider} />
+                            //             <TextBasic size="small" className={"careerYear"}>
+                            //                 {formatDate(row.startDate, DateFormat.MONTH_DATE) +
+                            //                     " ~ " +
+                            //                     formatDate(row.endDate, DateFormat.MONTH_DATE)}
+                            //             </TextBasic>
+                            //         </div>
+                            //     </div>
+                            //     <br />
+                            // </Fragment>
                         ))}
                     </div>
                 </div>

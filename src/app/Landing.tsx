@@ -34,19 +34,6 @@ interface IScrollGithubCalendarWrapper {
     className?: string
 }
 
-const skillArrFirst = [
-    { id: 1, name: "React.js", file: "reactjs.png" },
-    { id: 2, name: "Next.js", file: "nextjs.svg" },
-    { id: 3, name: "Java", file: "java.png" },
-    { id: 4, name: "AWS", file: "aws.svg" },
-]
-// const skillArrSecond = [
-//     { id: 5, name: "TypeScript", file: "typescript.svg" },
-//     { id: 6, name: "Zustand", file: "zustand.png" },
-//     { id: 7, name: "MySQL", file: "mysql.png" },
-//     { id: 8, name: "SpringBoot", file: "springboot.png" },
-// ]
-
 // eslint-disable-next-line react/display-name
 const ScrollBlockWrapper = forwardRef<HTMLDivElement, IScrollBlockProps>(
     ({ children, className }, ref): ReactElement => {

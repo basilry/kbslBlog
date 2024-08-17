@@ -47,41 +47,43 @@
             font-weight: 700;
         }
 
-        .seminarBlock {
+
+    }
+
+    .seminarBlock {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        text-align: left;
+        border-radius: 5px;
+
+        .wrapper {
             display: flex;
-            flex-direction: column;
-            padding: 20px;
-            text-align: left;
-            border-radius: 5px;
+            align-items: center;
+        }
 
-            .wrapper {
-                display: flex;
-                align-items: center;
-            }
+        .subTitle {
+            margin: 10px 0;
+        }
 
-            .subTitle {
-                margin: 10px 0;
-            }
+        .conf {
+            font-size: $small-font;
+            color: $pink-ligthen;
+        }
 
-            .conf {
-                font-size: $small-font;
-                color: $pink-ligthen;
+        &.active {
+            &:hover {
+                background: $black-200;
             }
+        }
+        &.dark {
+            &:hover {
+                background: $black-600;
+            }
+        }
 
-            &.active {
-                &:hover {
-                    background: $black-200;
-                }
-            }
-            &.dark {
-                &:hover {
-                    background: $black-600;
-                }
-            }
-
-            &:active {
-                opacity: 0.7;
-            }
+        &:active {
+            opacity: 0.7;
         }
     }
 }
