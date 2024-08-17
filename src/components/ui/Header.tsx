@@ -38,7 +38,7 @@ function Header(): ReactElement {
                             href="/"
                             onClick={(): void => {
                                 changeNowMenuName("")
-                                toastCall("메인 페이지로 이동합니다.", "success")
+                                toastCall("홈으로 이동합니다.", "success")
                             }}
                         >
                             <TextBasic size="xx-large" bold="bold">
