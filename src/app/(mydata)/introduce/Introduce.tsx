@@ -11,12 +11,12 @@ const Introduce = (): ReactElement => {
             <div className={styles.introduceBlock}>
                 <div className={styles.pargraphs}>
                     <div className={styles.block}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="xxx-large" bold="bold">
                             {"About Me | 소개"}
                         </TextBasic>
                         <br />
                         <br />
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"저는 꿈이 한 가지 있습니다."}
                         </TextBasic>
                         <br />
@@ -33,7 +33,7 @@ const Introduce = (): ReactElement => {
                         </TextBasic>
                     </div>
                     <div className={styles.block}>
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"처음에는"}
                         </TextBasic>
                         <br />
@@ -56,7 +56,7 @@ const Introduce = (): ReactElement => {
                         </TextBasic>
                     </div>
                     <div className={styles.block}>
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"진정한 개발자란,"}
                         </TextBasic>
                         <br />
@@ -77,7 +77,7 @@ const Introduce = (): ReactElement => {
                         </TextBasic>
                     </div>
                     <div className={styles.block}>
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic size="x-large" bold="bold">
                             {"그리고 언젠가는,"}
                         </TextBasic>
                         <br />

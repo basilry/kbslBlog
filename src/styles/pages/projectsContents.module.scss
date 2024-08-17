@@ -1,66 +1,116 @@
-@import '@styles/variable.scss';
+@import "@styles/variable.scss";
 
 .eachProjectWrapper {
-  min-height: 800px;
+    margin-bottom: 50px;
+    padding: 20px 30px;
+    min-height: 800px;
+    border-radius: 10px;
+
+    color: $black-700;
+    background-color: $black-300;
+
+    &.dark {
+        color: $white;
+        background-color: $black-600;
+    }
+
+    .imageTitle {
+        display: flex;
+        gap: 3px;
+        .red {
+            color: $pink-pressed;
+        }
+    }
+
+    .titleWrapper {
+        margin-top: 30px;
+    }
 }
 
 .rangeLogo {
-  display: flex;
-  flex-direction: column;
-
-  .logos {
-    margin-top: 5px;
     display: flex;
-    align-items: center;
-
-    img {
-      &:nth-child(2) {
-        margin-left: 5px;
-      }
-    }
-    
-  }
-}
-
-
-.contentsWrapper {
-  display: flex;
-  flex-direction: row;
-  width: 99%;
-
-  @include TABLET {
     flex-direction: column;
-  }
-  .paragraphs {
-    min-width: 50%;
 
-    &:nth-child(1) {
-      margin-right: 20px;
-    }
-
-
-    .skillImgs {
-      &:nth-child(n) {
-        margin-right: 7px;
-      }
-    }
-
-    .projectManpower {
-      display: flex;
-      align-items: center;
-
-      .peopleWrapper {
-        margin: 10px;
+    .logos {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
 
         img {
-          margin: 0 5px;
+            &:nth-child(2) {
+                margin-left: 5px;
+            }
         }
-      }
     }
-  }
+}
 
-  .picsWrapper {
-    text-align: right;
-  }
+.contentsWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 99%;
 
+    @include TABLET {
+        flex-direction: column;
+    }
+    .paragraphs {
+        min-width: 50%;
+
+        &:nth-child(1) {
+            margin-right: 20px;
+        }
+
+        .skillImgs {
+            &:nth-child(n) {
+                margin-right: 7px;
+            }
+        }
+
+        .projectManpower {
+            display: flex;
+            align-items: center;
+
+            .peopleWrapper {
+                margin: 10px;
+
+                img {
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+
+    .picsWrapper {
+        text-align: right;
+    }
+}
+
+.list {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 12px;
+
+    .link {
+        opacity: 0.9;
+        display: flex;
+        flex-direction: row;
+        gap: 3px;
+        padding: 7px 12px;
+        border-radius: 10px;
+        color: $black-700;
+        background-color: $black-300;
+
+        &.dark {
+            color: $white;
+            background-color: $black-600;
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        &:active {
+            opacity: 0.7;
+        }
+    }
 }

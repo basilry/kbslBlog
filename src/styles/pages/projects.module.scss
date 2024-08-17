@@ -1,6 +1,20 @@
 @import "@styles/variable.scss";
 .mainBot {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 50px;
+
+    @media (max-width: 1000px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include MOBILE {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
     .botBlock {
+
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -12,8 +26,10 @@
 
         .workContents {
             margin-top: 20px;
-            height: 210px;
-            width: 500px;
+            min-height: 210px;
+            height: 300px;
+
+            width: 100%;
             color: $black-700;
             background-color: $black-300;
             border-radius: 10px;
