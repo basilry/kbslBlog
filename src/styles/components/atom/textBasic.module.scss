@@ -24,15 +24,62 @@
     }
     &.x-large {
         font-size: $x-large-font;
+
+        @include TABLET {
+            font-size: $large-font;
+        }
+
+        @include MOBILE {
+            font-size: $medium-font;
+        }
+
+        @include S_MOBILE {
+            font-size: $small-font;
+        }
     }
     &.xx-large {
         font-size: $xx-large-font;
+
+        @include TABLET {
+            font-size: $x-large-font;
+        }
+
+        @include MOBILE {
+            font-size: $large-font;
+        }
+
+        @include S_MOBILE {
+            font-size: $medium-font;
+        }
     }
     &.xxx-large {
         font-size: $xxx-large-font;
+
+        @include TABLET {
+            font-size: $xx-large-font;
+        }
+
+        @include MOBILE {
+            font-size: $x-large-font;
+        }
+
+        @include S_MOBILE {
+            font-size: $large-font;
+        }
     }
     &.xxxx-large {
         font-size: $xxxx-large-font;
+        @include TABLET {
+            font-size: $xxx-large-font;
+        }
+
+        @include MOBILE {
+            font-size: $xx-large-font;
+        }
+
+        @include S_MOBILE {
+            font-size: $x-large-font;
+        }
     }
 
     // 폰트굵기

@@ -31,6 +31,7 @@ interface IVisibleTextProps {
 interface IScrollGithubCalendarWrapper {
     children: ReactElement
     delay: number
+    className?: string
 }
 
 const skillArrFirst = [
@@ -106,10 +107,11 @@ const VisibleText = ({ children, className, delay = 0.5, marginTop = 0 }: IVisib
     )
 }
 
-const ScrollGithubCalendarWrapper = ({ children, delay }: IScrollGithubCalendarWrapper): ReactElement => {
+const ScrollGithubCalendarWrapper = ({ children, delay, className }: IScrollGithubCalendarWrapper): ReactElement => {
     return (
         <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }}>
             <motion.div
+                className={className}
                 style={{ marginTop: delay !== 0 ? "2rem" : 0 }}
                 variants={{
                     offscreen: {
@@ -118,7 +120,7 @@ const ScrollGithubCalendarWrapper = ({ children, delay }: IScrollGithubCalendarW
                     },
                     onscreen: {
                         opacity: 1,
-                        y: 50,
+                        y: 30,
                         transition: {
                             type: "spring",
                             bounce: 0.4,
@@ -185,11 +187,15 @@ const Landing = (): ReactElement => {
         const currentIndex = Math.round(window.scrollY / window.innerHeight)
         const nextIndex = currentIndex + scrollDirection
 
+        console.log(scrollDirection, currentIndex, nextIndex, sectionRefs.current.length)
+
         if (nextIndex >= 0 && nextIndex < sectionRefs.current.length) {
             const nextSection = sectionRefs.current[nextIndex]
+            console.log(nextSection, nextSection.offsetTop)
             if (nextSection) {
+                const yOffset = nextSection.getBoundingClientRect().top + window.scrollY - 80
                 window.scrollTo({
-                    top: nextSection.offsetTop - 100,
+                    top: yOffset,
                     behavior: "smooth",
                 })
             }
@@ -240,11 +246,15 @@ const Landing = (): ReactElement => {
     }, [totalYear, frontYear, backYear, fullYear])
 
     return (
-        <div>
-            <ScrollBlockWrapper ref={(el): any => (sectionRefs.current[0] = el!)}>
-                <div className={styles.landingWrapper}>
+        <div className={styles.landingWrapper}>
+            <ScrollBlockWrapper className={styles.firstBlock} ref={(el): any => (sectionRefs.current[0] = el!)}>
+                <div>
                     <VisibleText className={styles.titleWrapper1}>
-                        <TextBasic className={styles.title} size={"xxxx-large"} bold={"bold"}>
+                        <TextBasic
+                            className={classNames(styles.title, !darkMode && styles.white)}
+                            size={"xxxx-large"}
+                            bold={"bold"}
+                        >
                             {`Web을 딛고 ML을 바라보다`}
                         </TextBasic>
                     </VisibleText>
@@ -271,7 +281,7 @@ const Landing = (): ReactElement => {
                     </VisibleText>
                     <VisibleText className={styles.titleWrapper1} delay={3.5}>
                         <TextBasic size={"xxx-large"} bold={"bold"}>
-                            {`개발자 "김바실리"입니다.`}
+                            {`매일 성장하는 개발자, "김바실리"입니다`}
                         </TextBasic>
                     </VisibleText>
                 </div>
@@ -279,7 +289,11 @@ const Landing = (): ReactElement => {
             <ScrollBlockWrapper className={styles.secondBlock} ref={(el): any => (sectionRefs.current[1] = el!)}>
                 <div className={styles.landingWrapper}>
                     <VisibleText className={styles.titleWrapper2}>
-                        <TextBasic className={styles.title} size={"xxxx-large"} bold={"bold"}>
+                        <TextBasic
+                            className={classNames(styles.title, !darkMode && styles.white)}
+                            size={"xxxx-large"}
+                            bold={"bold"}
+                        >
                             {`항상 새로운 기술에 목마른 개발자`}
                         </TextBasic>
                     </VisibleText>
@@ -311,8 +325,13 @@ const Landing = (): ReactElement => {
                     </VisibleText>
                     <br />
                     <VisibleText className={styles.titleWrapper2} delay={4}>
-                        <TextBasic size={"xxx-large"} bold={"bold"}>
-                            {"멈추지 않는 기술에 대한 열정을 가지고 달려왔습니다."}
+                        <TextBasic className={styles.break} size={"xxx-large"} bold={"bold"}>
+                            {"멈추지 않는 기술에 대한 열정을"}
+                        </TextBasic>
+                    </VisibleText>
+                    <VisibleText className={styles.titleWrapper2} delay={4.5}>
+                        <TextBasic className={styles.break} size={"xxx-large"} bold={"bold"}>
+                            {"갖고 달려왔습니다"}
                         </TextBasic>
                     </VisibleText>
                 </div>
@@ -321,19 +340,24 @@ const Landing = (): ReactElement => {
                 <div className={styles.blockWrapper}>
                     <div>
                         {[2024, 2023, 2022, 2021].map((row, idx) => (
-                            <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5}>
+                            <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5} className={styles.calendar1}>
                                 <GitHubCalendar
                                     username="basilry"
                                     transformData={(e): Activity[] => selectLastHalfYear(e, row)}
                                     year={row}
                                     colorScheme={darkMode ? "dark" : "light"}
+                                    blockSize={8}
                                 />
                             </ScrollGithubCalendarWrapper>
                         ))}
                     </div>
                     <div className={styles.titles}>
                         <VisibleText className={styles.topTitle}>
-                            <TextBasic className={styles.title} size={"xxxx-large"} bold={"bold"}>
+                            <TextBasic
+                                className={classNames(styles.title, !darkMode && styles.white)}
+                                size={"xxxx-large"}
+                                bold={"bold"}
+                            >
                                 {`꾸준함은 가장 큰 자산입니다`}
                             </TextBasic>
                         </VisibleText>
@@ -354,78 +378,147 @@ const Landing = (): ReactElement => {
                             </TextBasic>
                         </VisibleText>
                     </div>
+                    <div className={styles.calendarWrapper}>
+                        <div className={styles.calendarBlock}>
+                            {[2024, 2023].map((row, idx) => (
+                                <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5} className={styles.calendar2}>
+                                    <GitHubCalendar
+                                        username="basilry"
+                                        transformData={(e): Activity[] => selectLastHalfYear(e, row)}
+                                        year={row}
+                                        colorScheme={darkMode ? "dark" : "light"}
+                                        blockSize={4}
+                                        style={{}}
+                                    />
+                                </ScrollGithubCalendarWrapper>
+                            ))}
+                        </div>
+                        <div className={styles.calendarBlock}>
+                            {[2022, 2021].map((row, idx) => (
+                                <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5} className={styles.calendar2}>
+                                    <GitHubCalendar
+                                        username="basilry"
+                                        transformData={(e): Activity[] => selectLastHalfYear(e, row)}
+                                        year={row}
+                                        colorScheme={darkMode ? "dark" : "light"}
+                                        blockSize={4}
+                                    />
+                                </ScrollGithubCalendarWrapper>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </ScrollBlockWrapper>
             <ScrollBlockWrapper className={styles.forthBlock} ref={(el): any => (sectionRefs.current[3] = el!)}>
                 <div className={styles.blockWrapper}>
                     <div className={styles.textWrapper}>
-                        <VisibleText className={styles.titleWrapper2}>
-                            <TextBasic className={styles.title} size={"xxxx-large"} bold={"bold"}>
-                                {`경험과 기술`}
+                        <VisibleText className={styles.titleWrapper4}>
+                            <TextBasic
+                                className={classNames(styles.title, !darkMode && styles.white)}
+                                size={"xxxx-large"}
+                                bold={"bold"}
+                            >
+                                {`지금까지의 경험과 가능성`}
                             </TextBasic>
                         </VisibleText>
                         <br />
+                        <VisibleText className={styles.titleWrapper4} delay={1.5}>
+                            <TextBasic size={"xxx-large"} bold={"bold"}>
+                                {"전체 경력은 이제 3년 남짓이지만"}
+                            </TextBasic>
+                        </VisibleText>
+                        <VisibleText className={styles.titleWrapper4} delay={2}>
+                            <TextBasic size={"xxx-large"} bold={"bold"}>
+                                {"같은 연차에 비해 많은 경험을 쌓아왔고,"}
+                            </TextBasic>
+                        </VisibleText>
+                        <VisibleText className={styles.titleWrapper4} delay={2.5}>
+                            <TextBasic size={"xxx-large"} bold={"bold"}>
+                                {"앞으로도 그 발전 가능성을 믿고 있습니다"}
+                            </TextBasic>
+                        </VisibleText>
                     </div>
-                    <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
-                        {handleYearMonthBlock().map((row) => (
-                            <div key={row.title} className={styles.midBlock}>
-                                <motion.div
-                                    whileHover={{ scale: 1.2 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                >
-                                    <p>{row.title}</p>
-                                    <p>{row.subTitle}</p>
-                                    <div className={styles.yearNumWrapper}>
-                                        <div className={styles.yearNum}>{row.yearMonth}+</div>
+                    <div className={styles.blockController}>
+                        <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
+                            {handleYearMonthBlock()
+                                .slice(0, 2)
+                                .map((row) => (
+                                    <div key={row.title} className={styles.midBlock}>
+                                        <motion.div
+                                            whileHover={{ scale: 1.2 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        >
+                                            <p>{row.title}</p>
+                                            <p>{row.subTitle}</p>
+                                            <div className={styles.yearNumWrapper}>
+                                                <div className={styles.yearNum}>{row.yearMonth}+</div>
+                                            </div>
+                                            <p className={styles.yearChar}>{row.period}</p>
+                                        </motion.div>
                                     </div>
-                                    <p className={styles.yearChar}>{row.period}</p>
-                                </motion.div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
-                        {skillArrFirst.map((row) => (
-                            <div key={row.id} className={styles.midBlock}>
-                                <motion.div
-                                    whileHover={{ scale: 1.2 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                >
-                                    <p>{row.name}</p>
-                                    <div className={styles.yearNumWrapper}>
-                                        <img
-                                            src={`/kbslBlog/skills/${row.file}`}
-                                            width={120}
-                                            height={120}
-                                            alt={row.name}
-                                        />
+                                ))}
+                        </div>
+                        <div className={classNames(styles.mainMid, darkMode && styles.dark)}>
+                            {handleYearMonthBlock()
+                                .slice(2)
+                                .map((row) => (
+                                    <div key={row.title} className={styles.midBlock}>
+                                        <motion.div
+                                            whileHover={{ scale: 1.2 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        >
+                                            <p>{row.title}</p>
+                                            <p>{row.subTitle}</p>
+                                            <div className={styles.yearNumWrapper}>
+                                                <div className={styles.yearNum}>{row.yearMonth}+</div>
+                                            </div>
+                                            <p className={styles.yearChar}>{row.period}</p>
+                                        </motion.div>
                                     </div>
-                                </motion.div>
-                            </div>
-                        ))}
+                                ))}
+                        </div>
                     </div>
-                    {/*<div className={classNames(styles.mainMid, darkMode && styles.dark)}>*/}
-                    {/*    {skillArrSecond.map((row) => (*/}
-                    {/*        <div key={row.id} className={styles.midBlock}>*/}
-                    {/*            <motion.div*/}
-                    {/*                whileHover={{ scale: 1.2 }}*/}
-                    {/*                whileTap={{ scale: 0.9 }}*/}
-                    {/*                transition={{ type: "spring", stiffness: 400, damping: 17 }}*/}
-                    {/*            >*/}
-                    {/*                <p>{row.name}</p>*/}
-                    {/*                <div className={styles.yearNumWrapper}>*/}
-                    {/*                    <img*/}
-                    {/*                        src={`/kbslBlog/skills/${row.file}`}*/}
-                    {/*                        width={120}*/}
-                    {/*                        height={120}*/}
-                    {/*                        alt={row.name}*/}
-                    {/*                    />*/}
-                    {/*                </div>*/}
-                    {/*            </motion.div>*/}
-                    {/*        </div>*/}
-                    {/*    ))}*/}
-                    {/*</div>*/}
+                </div>
+            </ScrollBlockWrapper>
+            <ScrollBlockWrapper className={styles.fifthBLock} ref={(el): any => (sectionRefs.current[4] = el!)}>
+                <div className={styles.landingWrapper}>
+                    <VisibleText className={styles.titleWrapper5}>
+                        <TextBasic
+                            className={classNames(styles.title, !darkMode && styles.white)}
+                            size={"xxxx-large"}
+                            bold={"bold"}
+                        >
+                            {`멈추지 않는 열정으로`}
+                        </TextBasic>
+                    </VisibleText>
+                    <br />
+                    <VisibleText className={styles.titleWrapper5} delay={1.5}>
+                        <TextBasic size={"xxx-large"} bold={"bold"}>
+                            {"쫓고있는 꿈이 비록 멀지라도"}
+                        </TextBasic>
+                    </VisibleText>
+                    <VisibleText className={styles.titleWrapper5} delay={2}>
+                        <TextBasic size={"xxx-large"} bold={"bold"}>
+                            {"절대 포기하지 않고"}
+                        </TextBasic>
+                    </VisibleText>
+                    <VisibleText className={styles.titleWrapper5} delay={2.5}>
+                        <TextBasic size={"xxx-large"} bold={"bold"}>
+                            {"끊임없이 노력하는,"}
+                        </TextBasic>
+                    </VisibleText>
+                    <VisibleText className={styles.titleWrapper5} delay={3}>
+                        <TextBasic size={"xxx-large"} bold={"bold"}>
+                            {`저는 "개발자" 김바실리 입니다`}
+                        </TextBasic>
+                    </VisibleText>
+                    <VisibleText className={styles.titleWrapper5} delay={3.5}>
+                        <TextBasic size={"xxx-large"} bold={"bold"}>
+                            {`감사합니다`}
+                        </TextBasic>
+                    </VisibleText>
                 </div>
             </ScrollBlockWrapper>
         </div>
