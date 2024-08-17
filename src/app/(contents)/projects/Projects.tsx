@@ -49,7 +49,7 @@ const Projects = (): ReactElement => {
                                 <LineBasic />
                                 <div className={styles.contents}>
                                     <div className={styles.ciLogo}>
-                                        {row?.logos?.map((logo, subIdx) => (
+                                        {row?.logos?.map((logo) => (
                                             <img
                                                 key={logo.src}
                                                 src={logo.src ?? ""}
