@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
 import MenuItem from "@components/molecule/MenuItem"
@@ -14,6 +14,7 @@ function Sidebar(): ReactElement {
     const pathName = usePathname().split("/")
     const { darkMode, sideBarFold, changeSideBarFold, changeNowMenuName } = useCoreStore()
     const [focus, setFocus] = useState(0)
+    const router = useRouter()
 
     return (
         <div className={classNames(styles.sidebarWrapper, sideBarFold && styles.open, darkMode && styles.dark)}>
@@ -36,6 +37,7 @@ function Sidebar(): ReactElement {
                                 changeNowMenuName(menuName.toUpperCase())
                                 changeSideBarFold(false)
                                 toastCall(`${MENU_LIST_KR[idx]} 페이지로 이동합니다.`, "success")
+                                router.push(`/${menuName.slice(0, 1).toLowerCase() + menuName.slice(1)}`)
                             }}
                             className={classNames(
                                 !sideBarFold ? styles.hidden : styles.view,

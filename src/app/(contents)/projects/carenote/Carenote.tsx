@@ -1,20 +1,36 @@
+"use client"
+
+import { ReactElement } from "react"
 import Image from "next/image"
+import Link from "next/link"
+import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
+import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/projectsContents.module.scss"
 import CarenotePics from "./CarenotePics"
 
-const Carenote = (): JSX.Element => {
+const Carenote = (): ReactElement => {
+    const { darkMode } = useCoreStore()
+
     return (
         <Wrapper>
-            <div className={styles.eachProjectWrapper}>
-                <TextBasic size="xx-large" bold="bold">
+            <div className={styles.list}>
+                <Link href={"/projects"} className={classNames(styles.link, darkMode && styles.dark)}>
+                    <img src={`/kbslBlog/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
+                    <TextBasic size={"medium"} bold={"bold"}>
+                        프로젝트 목록
+                    </TextBasic>
+                </Link>
+            </div>
+            <div className={classNames(styles.eachProjectWrapper, darkMode && styles.dark)}>
+                <TextBasic size="xxx-large" bold="bold">
                     {"또하나의가족, 돌봄노트"}
                 </TextBasic>
                 <br />
                 <div className={styles.rangeLogo}>
-                    <TextBasic size="large" bold="bold">
+                    <TextBasic size="x-large" bold="bold">
                         {"2023.09 ~ 2024.01 | 5개월"}
                     </TextBasic>
                     <div className={styles.logos}>
@@ -191,8 +207,17 @@ const Carenote = (): JSX.Element => {
                 <br />
 
                 <LineBasic />
+                <div className={styles.titleWrapper}>
+                    <TextBasic size="xx-large" bold="bold">
+                        {"프로젝트 이미지"}
+                    </TextBasic>
+                    <div className={styles.imageTitle}>
+                        <span className={styles.red}>*</span>
+                        <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
+                    </div>
 
-                <CarenotePics />
+                    <CarenotePics />
+                </div>
             </div>
         </Wrapper>
     )

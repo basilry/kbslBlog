@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { ToastContainer } from "react-toastify"
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar"
 import { Inter } from "next/font/google"
 import localFont from "next/font/local"
 import classNames from "classnames"
@@ -9,14 +10,12 @@ import Container from "@components/layout/Container"
 import "@styles/global.scss"
 import "@styles/font.scss"
 import "@styles/toast.scss"
-import "@styles/nprogress.scss"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
 import SuspenseWrapper from "@components/layout/SuspenseWrapper"
 import GoogleAnalytics from "@components/ui/GoogleAnalytics"
 import { useCoreStore } from "@lib/stores/store"
-// import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
 const pretendardFont = localFont({
@@ -52,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <SuspenseWrapper>
                     <Container>
                         {children}
+                        <ProgressBar height="0.3rem" color="#b024d6" options={{ showSpinner: true }} shallowRouting />
                         <ToastContainer
                             position="bottom-right"
                             autoClose={1800}

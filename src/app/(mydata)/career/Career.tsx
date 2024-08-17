@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, ReactElement } from "react"
+import { ReactElement } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
@@ -20,39 +20,34 @@ const Career = (): ReactElement => {
             <div className={styles.wholeWrapper}>
                 <div className={styles.careerBlock}>
                     <div className={styles.careerParagraphs}>
-                        <TextBasic size="xx-large" bold="bold">
+                        <TextBasic size="xxx-large" bold="bold">
                             {"Career Now | 경력"}
                         </TextBasic>
                         <br />
                         <br />
                         {careerJson.map((row) => (
-                            <Fragment key={row.title}>
-                                <div className={styles.cbParagraph}>
-                                    <TextBasic size="small" bold="bold">
-                                        {row.title}
-                                    </TextBasic>
-                                    <div>
-                                        <div className={styles.divider} />
-                                        <TextBasic size="small" className={"careerYear"}>
-                                            {formatDate(row.startDate, DateFormat.MONTH_DATE) +
-                                                " ~ " +
-                                                formatDate(row.endDate, DateFormat.MONTH_DATE)}
-                                        </TextBasic>
-                                    </div>
-                                </div>
+                            <div key={row.id} className={classNames(styles.seminarBlock, darkMode && styles.dark)}>
+                                <TextBasic className={styles.wrapper} size="x-large" bold="bold">
+                                    {row.title}
+                                </TextBasic>
                                 <br />
-                            </Fragment>
+                                <TextBasic size="x-small">
+                                    {formatDate(row.startDate, DateFormat.MONTH_DATE) +
+                                        " ~ " +
+                                        formatDate(row.endDate, DateFormat.MONTH_DATE)}
+                                </TextBasic>
+                            </div>
                         ))}
                     </div>
                 </div>
                 <LineBasic />
                 <div className={styles.seminarAndRND}>
-                    <TextBasic size="xx-large" bold="bold">
+                    <TextBasic size="xxx-large" bold="bold">
                         {"Activity | 연구개발 & 교육 & 보고 & 수료"}
                     </TextBasic>
                     <div className={styles.dotWrapper}>
                         <span className={styles.red}>*</span>
-                        <TextBasic size={"x-small"} bold={"normal"}>
+                        <TextBasic size={"small"} bold={"normal"}>
                             {": 외부 링크로 연결됩니다."}
                         </TextBasic>
                     </div>
@@ -75,13 +70,13 @@ const Career = (): ReactElement => {
                                     cursor: seminar.url ? "pointer" : "default",
                                 }}
                             >
-                                <TextBasic className={styles.wrapper} size="medium" bold="bold">
+                                <TextBasic className={styles.wrapper} size="x-large" bold="bold">
                                     {seminar.url && <span className={styles.red}>*</span>}
                                     {seminar.title}
                                 </TextBasic>
                                 {seminar.subTitle && (
                                     <div className={styles.subTitle}>
-                                        <TextBasic className={styles.subTitle} size="x-small" bold="bold">
+                                        <TextBasic className={styles.subTitle} size="small" bold="bold">
                                             {"/ " + seminar.subTitle}
                                         </TextBasic>
                                     </div>

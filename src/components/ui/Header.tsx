@@ -3,6 +3,7 @@
 import { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import classNames from "classnames"
 import DarkModeBasic from "@components/atom/DarkModeBasic"
 import TextBasic from "@components/atom/TextBasic"
@@ -13,6 +14,7 @@ import styles from "@styles/ui/header.module.scss"
 
 function Header(): ReactElement {
     const { darkMode, changeSideBarFold, nowMenuName, changeNowMenuName } = useCoreStore()
+    const router = useRouter()
 
     return (
         <div
@@ -38,7 +40,8 @@ function Header(): ReactElement {
                             href="/"
                             onClick={(): void => {
                                 changeNowMenuName("")
-                                toastCall("메인 페이지로 이동합니다.", "success")
+                                router.push("/")
+                                toastCall("홈으로 이동합니다.", "success")
                             }}
                         >
                             <TextBasic size="xx-large" bold="bold">
@@ -52,7 +55,7 @@ function Header(): ReactElement {
                     <div className={styles.menuLink}>
                         <Link
                             href={`/${nowMenuName.toLowerCase()}`}
-                            onClick={(): void =>
+                            onClick={(): void => {
                                 toastCall(
                                     `${
                                         MENU_LIST_KR[
@@ -61,7 +64,7 @@ function Header(): ReactElement {
                                     } 페이지로 이동합니다.`,
                                     "success",
                                 )
-                            }
+                            }}
                         >
                             <TextBasic size="xx-large" bold="bold">
                                 {nowMenuName}

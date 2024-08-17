@@ -74,6 +74,7 @@ $blue-shadow:0 4px 10px rgba(37,58,106,0.1);
 $bottom-shadow:0 4px 8px rgba(0, 0, 0, 0.04);
 
 // 전역변수 설정
+$breakpoint-miniMobile: 400px;
 $breakpoint-mobile: 600px;
 $breakpoint-tablet: 768px;
 
@@ -84,6 +85,12 @@ $semi: 630;
 $bold: 730;
 
 // 모바일 브레이크포인트
+@mixin S_MOBILE {
+  @media (max-width: #{$breakpoint-miniMobile}) {
+    @content;
+  }
+}
+
 @mixin MOBILE {
   @media (max-width: #{$breakpoint-mobile}) {
     @content;
