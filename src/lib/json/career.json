@@ -31,20 +31,26 @@
   },
   {
     "id": 6,
-    "title": "GC케어 자회사 헥톤프로젝트 웹 개발자 재직 중",
+    "title": "GC케어 자회사 헥톤프로젝트 웹 개발자",
     "startDate": "202109",
-    "endDate": ""
+    "endDate": "202409"
   },
   {
     "id": 7,
-    "title": "한국방송통신대학교 컴퓨터과학과 학사편입 후 재학 중",
+    "title": "한국방송통신대학교 컴퓨터과학과 학사 졸업 예정",
     "startDate": "202209",
-    "endDate": ""
+    "endDate": "202502"
   },
   {
     "id": 8,
     "title": "Google Korea ML Bootcamp 2024 5기생 발탁",
     "startDate": "20240701",
     "endDate": ""
+  },
+  {
+    "id": 9,
+    "title": "CodeIt 풀스택 부트캠프 주강사 합류 예정 / 프리랜서",
+    "startDate": "20240923",
+    "endDate": "20250122"
   }
 ]
