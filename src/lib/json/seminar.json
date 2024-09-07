@@ -149,33 +149,5 @@
         "title": "메뉴 인터페이스 작업 건 공유",
         "subTitle": "헥톤 테크블로그",
         "date": "20240626"
-    },
-    {
-        "id": 21,
-        "title": "Neural Networks and Deep Learning 수료증",
-        "subTitle": "Google ML Bootcamp 2024 | Coursera",
-        "date": "20240709",
-        "url": "https://coursera.org/share/3fb512e87e679bbb8a6e342ca4a043f8"
-    },
-    {
-        "id": 22,
-        "title": "Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization 수료증",
-        "subTitle": "Google ML Bootcamp 2024 | Coursera",
-        "date": "20240718",
-        "url": "https://coursera.org/share/2910e176169879f25b5500943881c254"
-    },
-    {
-        "id": 23,
-        "title": "Structuring Machine Learning Projects 수료증",
-        "subTitle": "Google ML Bootcamp 2024 | Coursera",
-        "date": "20240721",
-        "url": "https://coursera.org/share/dddfaf276e5bfad97177e6e98a481fe0"
-    },
-    {
-        "id": 24,
-        "title": "Convolutional Neural Networks 수료증",
-        "subTitle": "Google ML Bootcamp 2024 | Coursera",
-        "date": "20240810",
-        "url": "https://coursera.org/share/e5e9ebe64a8f37fd2cdcbc0302d4abe6"
     }
 ]

@@ -124,7 +124,7 @@ const ScrollGithubCalendarWrapper = ({ children, delay, className }: IScrollGith
 }
 
 const Landing = (): ReactElement => {
-    const { darkMode } = useCoreStore()
+    const { darkMode, changeNowMenuName } = useCoreStore()
     const sectionRefs = useRef<any[]>([])
 
     const [totalYear, setTotalYear] = useState(0)
@@ -207,6 +207,8 @@ const Landing = (): ReactElement => {
     }
 
     useEffect(() => {
+        changeNowMenuName("")
+
         window.addEventListener("wheel", handleScroll, { passive: false })
 
         return () => {
@@ -297,7 +299,7 @@ const Landing = (): ReactElement => {
                     </VisibleText>
                     <VisibleText className={styles.titleWrapper2} delay={2.5}>
                         <TextBasic size={"xx-large"} bold={"bold"}>
-                            {"2023 헬스테크 박람회 참석"}
+                            {"2023 헬스테크 박람회 / 대한민국 소프트웨어대전 참석"}
                         </TextBasic>
                     </VisibleText>
                     <VisibleText className={styles.titleWrapper2} delay={3}>
