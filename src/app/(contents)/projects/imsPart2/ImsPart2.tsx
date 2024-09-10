@@ -4,7 +4,7 @@ import { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
-import ImsPart2Pics from "@app/(contents)/projects/imsPart2/ImsPart2Pics"
+import PicsTemplate from "@app/(contents)/projects/PicsTemplate"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
@@ -249,7 +249,7 @@ const ImsPart2 = (): ReactElement => {
                         <span className={styles.red}>*</span>
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
-                    <ImsPart2Pics />
+                    <PicsTemplate filePath={"ims2Pics"} domainName={"ims"} fileNums={5} />
                 </div>
             </div>
         </Wrapper>

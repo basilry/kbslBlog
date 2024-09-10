@@ -64,6 +64,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                             pauseOnHover
                             theme="light"
                         />
+                        <div id="modal-root"></div>
                     </Container>
 
                     <GoogleAnalytics />

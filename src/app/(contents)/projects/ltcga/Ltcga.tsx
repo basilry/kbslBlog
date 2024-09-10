@@ -4,7 +4,7 @@ import { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
-import LtcgaPics from "@app/(contents)/projects/ltcga/LtcgaPics"
+import PicsTemplate from "@app/(contents)/projects/PicsTemplate"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
@@ -267,7 +267,7 @@ const Ltcga = (): ReactElement => {
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
 
-                    <LtcgaPics />
+                    <PicsTemplate filePath={"ddogaPics"} domainName={"ddoga"} fileNums={8} />
                 </div>
             </div>
         </Wrapper>
