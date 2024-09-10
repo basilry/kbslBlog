@@ -3,10 +3,10 @@
 import { ReactElement, useEffect } from "react"
 import { createPortal } from "react-dom"
 import Image from "next/image"
+import classNames from "classnames"
+import TextBasic from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/atom/modalBasic.module.scss"
-import TextBasic from "@components/atom/TextBasic";
-import classNames from "classnames";
 
 interface IModalProps {
     isOpen: boolean
@@ -35,9 +35,20 @@ const ModalBasic = ({ isOpen, onClose, title, children }: IModalProps): ReactEle
     return createPortal(
         <div className={styles.overlay} onClick={onClose}>
             <div className={classNames(styles.modal, darkMode && styles.dark)} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.header} >
-                    {title && <TextBasic size={"xx-large"} bold={"bold"}>{title}</TextBasic>}
-                    <Image className={styles.closeButton} src={darkMode ? "/kbslBlog/xmark-solid_white.svg" : "/kbslBlog/xmark-solid.svg"} alt="sidebarCloseBtn" width={30} height={30} onClick={onClose} />
+                <div className={styles.header}>
+                    {title && (
+                        <TextBasic size={"xx-large"} bold={"bold"}>
+                            {title}
+                        </TextBasic>
+                    )}
+                    <Image
+                        className={styles.closeButton}
+                        src={darkMode ? "/kbslBlog/xmark-solid_white.svg" : "/kbslBlog/xmark-solid.svg"}
+                        alt="sidebarCloseBtn"
+                        width={30}
+                        height={30}
+                        onClick={onClose}
+                    />
                 </div>
                 {children}
             </div>
