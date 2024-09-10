@@ -1,10 +1,10 @@
 "use client"
 
+import { ReactElement } from "react"
 import { Navigation, Pagination, Scrollbar } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { ReactElement } from "react"
-import styles from "@styles/pages/projectsPics.module.scss"
 import classNames from "classnames"
+import styles from "@styles/pages/projectsPics.module.scss"
 
 const ImsPart2Pics = (): ReactElement => {
     return (

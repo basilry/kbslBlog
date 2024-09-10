@@ -1,15 +1,15 @@
 "use client"
 
 import { ReactElement } from "react"
-import { useCoreStore } from "@lib/stores/store"
-import Wrapper from "@components/layout/Wrapper"
+import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
-import TextBasic from "@components/atom/TextBasic"
-import LineBasic from "@components/atom/LineBasic"
-import styles from "@styles/pages/projectsContents.module.scss"
 import ImsPart2Pics from "@app/(contents)/projects/imsPart2/ImsPart2Pics"
-import Image from "next/image";
+import LineBasic from "@components/atom/LineBasic"
+import TextBasic from "@components/atom/TextBasic"
+import Wrapper from "@components/layout/Wrapper"
+import { useCoreStore } from "@lib/stores/store"
+import styles from "@styles/pages/projectsContents.module.scss"
 
 const ImsPart2 = (): ReactElement => {
     const { darkMode } = useCoreStore()

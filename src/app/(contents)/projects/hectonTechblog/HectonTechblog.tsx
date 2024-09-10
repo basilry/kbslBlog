@@ -3,12 +3,12 @@
 import { ReactElement } from "react"
 import Link from "next/link"
 import classNames from "classnames"
+import HectonTechBlogPics from "@app/(contents)/projects/hectonTechblog/HectonTechBlogPics"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/projectsContents.module.scss"
-import HectonTechBlogPics from "@app/(contents)/projects/hectonTechblog/HectonTechBlogPics"
 
 const HectonTechblog = (): ReactElement => {
     const { darkMode } = useCoreStore()
@@ -182,7 +182,7 @@ const HectonTechblog = (): ReactElement => {
                                 "- 조사과정 중 자바와 스프링 프레임워크, 그리고 JVM 등에 대한 역사와 장/단점 등에 대한 깊은 조사 및 공유를 통해 기술 스택 도입에 대한 정당성을 확보"
                             }
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"2. 백엔드 프로젝트 아키텍처 설계 및 구현을 위한 디자인 패턴 조사 및 검토 후 발표"}
                         </TextBasic>
@@ -198,24 +198,20 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="small">
                             {"- JPA 도입을 위한 디자인 패턴 조사(Repository Pattern, Data Mapper Pattern)"}
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"3. ERD 스키마 설계를 통한 데이터베이스 테이블 구조 구성 및 검토 후 발표"}
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"4. 백엔드 프로젝트 초기 기반 셋팅 및 빌드를 위한 보안 분야 조사 및 검토 후 발표"}
                         </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Boot를 통한 기반 셋팅"}
-                        </TextBasic>
+                        <TextBasic size="small">{"- Spring Boot를 통한 기반 셋팅"}</TextBasic>
                         <TextBasic size="small">
                             {"- Spring Security와 JWT를 적절히 통합한 보안 파일 구조 설계"}
                         </TextBasic>
-                        <TextBasic size="small">
-                            {"- 기반이 되는 자사 프로젝트 N개 분석 후 발표"}
-                        </TextBasic>
-                        <br/>
+                        <TextBasic size="small">{"- 기반이 되는 자사 프로젝트 N개 분석 후 발표"}</TextBasic>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"5. 프로젝트 전반 와이어프레임(Wireframe) 및 기획문서 구성"}
                         </TextBasic>
@@ -223,7 +219,9 @@ const HectonTechblog = (): ReactElement => {
                             {"- uizard의 AI 구성 보조 툴을 이용하여 프로젝트 전반 페이지에 해당하는 내용 구성"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 해당 내용 중 실제 버튼 클릭 시 해당되는 페이지로 이동하게끔 하는 목업 단계의 디자인 구성"}
+                            {
+                                "- 해당 내용 중 실제 버튼 클릭 시 해당되는 페이지로 이동하게끔 하는 목업 단계의 디자인 구성"
+                            }
                         </TextBasic>
                         <TextBasic size="small">
                             {"- 최종적으로 전체 페이지 구성 후 PPT 스토리북형태로 구성하여 검토 후 발표"}
@@ -231,42 +229,38 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="small">
                             {"- 금문제로 인해 uizard에서 회사 디자인 툴인 figma로 순차 이동 중"}
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"6. 프로젝트 실제 개발을 위한 메뉴 인터페이스 및 WBS 구성"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 기반작업, 프론트엔드, 백엔드를 포함하여 요구사항 명세/디자인시안/기획에 기반한 메뉴 인터페이스 구성"}
+                            {
+                                "- 기반작업, 프론트엔드, 백엔드를 포함하여 요구사항 명세/디자인시안/기획에 기반한 메뉴 인터페이스 구성"
+                            }
                         </TextBasic>
-                        <TextBasic size="small">
-                            {"- 이를 바탕으로한 WBS 공수 구성하여 담당자 할당"}
-                        </TextBasic>
-                        <br/>
+                        <TextBasic size="small">{"- 이를 바탕으로한 WBS 공수 구성하여 담당자 할당"}</TextBasic>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"7. 실제 개발 진행"}
                         </TextBasic>
-                        <TextBasic size="small">
-                            {"1) BackEnd"}
-                        </TextBasic>
+                        <TextBasic size="small">{"1) BackEnd"}</TextBasic>
                         <TextBasic size="small">
                             {"- Spring Security와 JWT를 통합한 보안 구조 설계에 기반한 실제 개발 완료"}
                         </TextBasic>
                         <TextBasic size="small">
                             {"- 로그인 개발 시 토큰을 지속적으로 refresh 할 수 있게끔 기반 작업 처리 완료"}
                         </TextBasic>
+                        <TextBasic size="small">{"2) FrontEnd"}</TextBasic>
+                        <TextBasic size="small">{"- 프로젝트 공통 컴포넌트 13개 개발 진행"}</TextBasic>
                         <TextBasic size="small">
-                            {"2) FrontEnd"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 프로젝트 공통 컴포넌트 13개 개발 진행"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 종류 : Button, Selectbox, Typography, Thubnail, Input, Textarea, Profile, WriteButton, Toggle, DatePicker, Progressbar, Modal, EditorViewer"}
+                            {
+                                "- 종류 : Button, Selectbox, Typography, Thubnail, Input, Textarea, Profile, WriteButton, Toggle, DatePicker, Progressbar, Modal, EditorViewer"
+                            }
                         </TextBasic>
                     </div>
                 </div>
-                <br/>
-                <LineBasic/>
+                <br />
+                <LineBasic />
 
                 <div className={styles.titleWrapper}>
                     <TextBasic size="xx-large" bold="bold">
@@ -277,7 +271,7 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
 
-                    <HectonTechBlogPics/>
+                    <HectonTechBlogPics />
                 </div>
             </div>
         </Wrapper>
