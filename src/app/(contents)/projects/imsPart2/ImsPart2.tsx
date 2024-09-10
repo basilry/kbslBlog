@@ -1,16 +1,17 @@
 "use client"
 
 import { ReactElement } from "react"
+import { useCoreStore } from "@lib/stores/store"
+import Wrapper from "@components/layout/Wrapper"
 import Link from "next/link"
 import classNames from "classnames"
-import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
-import Wrapper from "@components/layout/Wrapper"
-import { useCoreStore } from "@lib/stores/store"
+import LineBasic from "@components/atom/LineBasic"
 import styles from "@styles/pages/projectsContents.module.scss"
-import HectonTechBlogPics from "@app/(contents)/projects/hectonTechblog/HectonTechBlogPics"
+import ImsPart2Pics from "@app/(contents)/projects/imsPart2/ImsPart2Pics"
+import Image from "next/image";
 
-const HectonTechblog = (): ReactElement => {
+const ImsPart2 = (): ReactElement => {
     const { darkMode } = useCoreStore()
 
     return (
@@ -25,15 +26,16 @@ const HectonTechblog = (): ReactElement => {
             </div>
             <div className={classNames(styles.eachProjectWrapper, darkMode && styles.dark)}>
                 <TextBasic size="xxx-large" bold="bold">
-                    {"헥톤프로젝트, 테크 블로그"}
+                    {"또하나의가족, IMS(통합관리시스템) Part 2."}
                 </TextBasic>
                 <br />
                 <div className={styles.rangeLogo}>
                     <TextBasic size="large" bold="bold">
-                        {"2024.02 ~ 2024.09 | 이직으로 인한 중지"}
+                        {"2024.04 ~ 2024.05 | 2개월"}
                     </TextBasic>
                     <div className={styles.logos}>
                         <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
+                        <Image placeholder="blur" src="/kbslBlog/ddoga_logo.svg" alt="logo" width={115} height={30} />
                     </div>
                 </div>
                 <LineBasic />
@@ -43,13 +45,20 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="large" bold="bold">
                             {"설명"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 헥톤프로젝트 테크 블로그 사이드 프로젝트입니다."}</TextBasic>
+                        <TextBasic size="small">
+                            {"- 자사에서 인수한 복지용구 사업소 내부 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- 기존 개발된 파트인 수급자 조회 부분 고도화 및 신규 프로젝트인 관리자 사이트 내 공지사항 목록과 검색기능 개발"
+                            }
+                        </TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
                             {"포지션"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 풀스택 개발자"}</TextBasic>
+                        <TextBasic size="small">{"- 프론트엔드 개발자"}</TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
@@ -67,6 +76,22 @@ const HectonTechblog = (): ReactElement => {
                             <img
                                 className={styles.skillImgs}
                                 src="/kbslBlog/skills/nextjs.svg"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={60}
+                                height={60}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/emotion.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={100}
+                                height={60}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/reactquery.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -148,6 +173,14 @@ const HectonTechblog = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
+                                src="/kbslBlog/skills/mssql.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={160}
+                                height={50}
+                            />
+                            <img
+                                className={styles.skillImgs}
                                 src="/kbslBlog/skills/aws.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
@@ -161,7 +194,8 @@ const HectonTechblog = (): ReactElement => {
                             {"프로젝트 인원"}
                         </TextBasic>
                         <TextBasic size="small">{"- PM: 1명"}</TextBasic>
-                        <TextBasic size="small">{"- FullStack: 6명"}</TextBasic>
+                        <TextBasic size="small">{"- F/E: 3명(PL 1명 포함)"}</TextBasic>
+                        <TextBasic size="small">{"- B/E: 2명(PL 1명 포함)"}</TextBasic>
                         <br />
                         <br />
                     </div>
@@ -170,103 +204,42 @@ const HectonTechblog = (): ReactElement => {
                             {"성과"}
                         </TextBasic>
                         <TextBasic size="medium" bold="bold">
-                            {"1. 기술 스택 도입을 위한 기술 조사 및 검토 후 발표"}
+                            {"1. 통합관리시스템 | 수급자조회 고도화"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 스프링 부트 프레임워크를 사용한 백엔드 서버 구축과 추후 운영에 대한 기술 조사 및 검토 후 발표"
+                                "- 기존 통합관리시스템 내 수급자조회 페이지 내 검색조건 일원화, 수급자 검색이력 BottomUpSheet 모달 공통 컴포넌트화, 고객 상세 페이지 내 구매 가능한 복지용구 물품 목록 검색 기능 추가"
+                            }
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {"- 디자이너와 피그마를 통한 협업으로 시안과 통일성 있는 스타일링 적용"}
+                        </TextBasic>
+                        <br />
+                        <TextBasic size="medium" bold="bold">
+                            {"2. 통합관리시스템 관리자 | 공지사항 신규 개발"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- 통합관리시스템 관리자 프로젝트 신규개발건 중 공지사항 목록과 검색조건, 그리고 개별 로우에서 데이터 수정을 할 수 있게끔 개발"
                             }
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 조사과정 중 자바와 스프링 프레임워크, 그리고 JVM 등에 대한 역사와 장/단점 등에 대한 깊은 조사 및 공유를 통해 기술 스택 도입에 대한 정당성을 확보"
+                                "- React-Query와 React-Hool-Form을 통해 무한스크롤이 아닌 숫자클릭 형태의 페이지네이션 기능 신규개발"
                             }
                         </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"2. 백엔드 프로젝트 아키텍처 설계 및 구현을 위한 디자인 패턴 조사 및 검토 후 발표"}
-                        </TextBasic>
                         <TextBasic size="small">
-                            {"- 아키텍처 설계 레벨에서의 디자인 패턴 조사(Layerd Architecture)"}
+                            {"- 즉, 개별 탭과 검색조건, 페이지네이션을 종합한 검색가능한 목록 조회 페이지 구성"}
                         </TextBasic>
+                        <br />
                         <TextBasic size="small">
-                            {"- 전반적인 폴더/파일 구조 형태 관련 디자인 패턴 조사(MVC)"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 비즈니스 로직 관련 디자인 패턴 조사(Factory Method Pattern)"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- JPA 도입을 위한 디자인 패턴 조사(Repository Pattern, Data Mapper Pattern)"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"3. ERD 스키마 설계를 통한 데이터베이스 테이블 구조 구성 및 검토 후 발표"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"4. 백엔드 프로젝트 초기 기반 셋팅 및 빌드를 위한 보안 분야 조사 및 검토 후 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Boot를 통한 기반 셋팅"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Security와 JWT를 적절히 통합한 보안 파일 구조 설계"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 기반이 되는 자사 프로젝트 N개 분석 후 발표"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"5. 프로젝트 전반 와이어프레임(Wireframe) 및 기획문서 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- uizard의 AI 구성 보조 툴을 이용하여 프로젝트 전반 페이지에 해당하는 내용 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 해당 내용 중 실제 버튼 클릭 시 해당되는 페이지로 이동하게끔 하는 목업 단계의 디자인 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 최종적으로 전체 페이지 구성 후 PPT 스토리북형태로 구성하여 검토 후 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 금문제로 인해 uizard에서 회사 디자인 툴인 figma로 순차 이동 중"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"6. 프로젝트 실제 개발을 위한 메뉴 인터페이스 및 WBS 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 기반작업, 프론트엔드, 백엔드를 포함하여 요구사항 명세/디자인시안/기획에 기반한 메뉴 인터페이스 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 이를 바탕으로한 WBS 공수 구성하여 담당자 할당"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"7. 실제 개발 진행"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"1) BackEnd"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Security와 JWT를 통합한 보안 구조 설계에 기반한 실제 개발 완료"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 로그인 개발 시 토큰을 지속적으로 refresh 할 수 있게끔 기반 작업 처리 완료"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"2) FrontEnd"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 프로젝트 공통 컴포넌트 13개 개발 진행"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 종류 : Button, Selectbox, Typography, Thubnail, Input, Textarea, Profile, WriteButton, Toggle, DatePicker, Progressbar, Modal, EditorViewer"}
+                            <span className={styles.red}>*</span>
+                            {"백엔드를 키워야하는 신규 입사자가 있어 풀스택이 아닌 프론트엔드 파트에 집중"}
                         </TextBasic>
                     </div>
                 </div>
-                <br/>
-                <LineBasic/>
+                <br />
+                <LineBasic />
 
                 <div className={styles.titleWrapper}>
                     <TextBasic size="xx-large" bold="bold">
@@ -276,12 +249,11 @@ const HectonTechblog = (): ReactElement => {
                         <span className={styles.red}>*</span>
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
-
-                    <HectonTechBlogPics/>
+                    <ImsPart2Pics />
                 </div>
             </div>
         </Wrapper>
     )
 }
 
-export default HectonTechblog
+export default ImsPart2

@@ -174,11 +174,8 @@ const Landing = (): ReactElement => {
         const currentIndex = Math.round(window.scrollY / window.innerHeight)
         const nextIndex = currentIndex + scrollDirection
 
-        console.log(scrollDirection, currentIndex, nextIndex, sectionRefs.current.length)
-
         if (nextIndex >= 0 && nextIndex < sectionRefs.current.length) {
             const nextSection = sectionRefs.current[nextIndex]
-            console.log(nextSection, nextSection.offsetTop)
             if (nextSection) {
                 const yOffset = nextSection.getBoundingClientRect().top + window.scrollY - 80
                 window.scrollTo({
