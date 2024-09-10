@@ -34,7 +34,10 @@ const ModalBasic = ({ isOpen, onClose, title, children }: IModalProps): ReactEle
 
     return createPortal(
         <div className={styles.overlay} onClick={onClose}>
-            <div className={classNames(styles.modal, darkMode && styles.dark)} onClick={(e) => e.stopPropagation()}>
+            <div
+                className={classNames(styles.modal, darkMode && styles.dark)}
+                onClick={(e): void => e.stopPropagation()}
+            >
                 <div className={styles.header}>
                     {title && (
                         <TextBasic size={"xx-large"} bold={"bold"}>

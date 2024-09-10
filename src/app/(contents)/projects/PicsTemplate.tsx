@@ -20,7 +20,11 @@ const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): Re
             <div className={styles.picsBlock}>
                 <Swiper pagination={true} modules={[Navigation, Pagination, Scrollbar]} className="mySwiper">
                     {new Array(fileNums).fill(0).map((_, idx) => (
-                        <SwiperSlide className={styles.block} onClick={() => setOpen({ doOpen: true, idx: idx + 1 })}>
+                        <SwiperSlide
+                            key={idx}
+                            className={styles.block}
+                            onClick={(): void => setOpen({ doOpen: true, idx: idx + 1 })}
+                        >
                             <img
                                 className={styles.projectImages}
                                 src={`/kbslBlog/${filePath}/${domainName}${idx + 1}.png`}
@@ -30,7 +34,11 @@ const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): Re
                     ))}
                 </Swiper>
             </div>
-            <ModalBasic isOpen={open.doOpen} onClose={() => setOpen({ doOpen: false, idx: -1 })} title={"상세화면"}>
+            <ModalBasic
+                isOpen={open.doOpen}
+                onClose={(): void => setOpen({ doOpen: false, idx: -1 })}
+                title={"상세화면"}
+            >
                 <img
                     className={styles.modalImages}
                     src={`/kbslBlog/${filePath}/${domainName}${open.idx}.png`}
