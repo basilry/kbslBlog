@@ -64,7 +64,7 @@
     },
     {
         "id": 4,
-        "title": "또하나의가족, IMS(통합관리시스템) Part 1.",
+        "title": "IMS(통합관리시스템) Part 1.",
         "period": "2024.02 ~ 2024.03 | 2개월",
         "logos": [
             {
@@ -72,12 +72,6 @@
                 "alt": "hecton",
                 "width": 30,
                 "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddoga_logo.svg",
-                "alt": "ddoga",
-                "width": 115,
-                "height": 20
             }
         ],
         "description": "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다.",
@@ -95,12 +89,12 @@
                 "height": 18
             }
         ],
-        "description": "헥톤프로젝트 회사 공식블로그 사이드 프로젝트입니다. 24년 8월 14일 현재 프론트/백 모두 실제 개발 진행 중입니다.",
+        "description": "헥톤프로젝트 회사 공식블로그 사이드 프로젝트입니다. 24년 9월 말 이직으로 인해 중단하였습니다.",
         "url": "/projects/hectonTechblog"
     },
     {
         "id": 6,
-        "title": "또하나의가족, IMS(통합관리시스템) Part 2.",
+        "title": "IMS(통합관리시스템) Part 2.",
         "period": "2024.04 ~ 2024.05 | 2개월",
         "logos": [
             {
@@ -108,12 +102,6 @@
                 "alt": "hecton",
                 "width": 30,
                 "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddoga_logo.svg",
-                "alt": "ddoga",
-                "width": 115,
-                "height": 20
             }
         ],
         "description": "기존 IMS 프로젝트 내 수급자 조회와 복지용구 품목 조회에 대한 고도화 및 관리자 페이지 추가 프로젝트입니다.",

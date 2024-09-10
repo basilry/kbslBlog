@@ -4,12 +4,12 @@ import { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
+import PicsTemplate from "@app/(contents)/projects/PicsTemplate"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/projectsContents.module.scss"
-import CarenotePics from "./CarenotePics"
 
 const Carenote = (): ReactElement => {
     const { darkMode } = useCoreStore()
@@ -216,7 +216,7 @@ const Carenote = (): ReactElement => {
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
 
-                    <CarenotePics />
+                    <PicsTemplate filePath={"carenotePics"} domainName={"carenote"} fileNums={6} />
                 </div>
             </div>
         </Wrapper>

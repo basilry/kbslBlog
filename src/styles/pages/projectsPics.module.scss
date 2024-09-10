@@ -14,9 +14,7 @@
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
+    background: $black-500;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +57,7 @@
 
 .block {
   border-radius: 4px;
-  background-color: $black-500;
+  background-color: $black-400;
   height: 500px;
   margin-bottom: 30px;
   opacity: 1;
@@ -69,10 +67,6 @@
   display: flex;
   justify-content: center;
   align-content: center;
-
-  &:active {
-    opacity: 0.7;
-  }
 
   .projectImages {
     max-width: 800px;
@@ -89,5 +83,17 @@
       max-width: 200px;
     }
   }
+
+  &:active {
+    opacity: 0.7;
+  }
 }
 
+.modalImages {
+  width: 100%;
+  max-width: 800px;
+
+  @include TABLET {
+    max-width: 700px;
+  }
+}

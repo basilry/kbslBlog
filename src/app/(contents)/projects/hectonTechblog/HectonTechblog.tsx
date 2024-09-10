@@ -3,7 +3,7 @@
 import { ReactElement } from "react"
 import Link from "next/link"
 import classNames from "classnames"
-import HectonTechBlogPics from "@app/(contents)/projects/hectonTechblog/HectonTechBlogPics"
+import PicsTemplate from "@app/(contents)/projects/PicsTemplate"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
@@ -271,7 +271,7 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
 
-                    <HectonTechBlogPics />
+                    <PicsTemplate filePath={"blogPics"} domainName={"blog"} fileNums={6} />
                 </div>
             </div>
         </Wrapper>
