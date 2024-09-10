@@ -1,5 +1,9 @@
 @import "@styles/variable.scss";
 
+.red {
+    color: $pink-pressed;
+}
+
 .eachProjectWrapper {
     margin-bottom: 50px;
     padding: 20px 30px;
@@ -17,9 +21,6 @@
     .imageTitle {
         display: flex;
         gap: 3px;
-        .red {
-            color: $pink-pressed;
-        }
     }
 
     .titleWrapper {

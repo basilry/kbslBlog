@@ -1,16 +1,17 @@
 "use client"
 
 import { ReactElement } from "react"
+import styles from "@styles/pages/projectsContents.module.scss"
 import Link from "next/link"
 import classNames from "classnames"
-import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
+import LineBasic from "@components/atom/LineBasic"
 import Wrapper from "@components/layout/Wrapper"
 import { useCoreStore } from "@lib/stores/store"
-import styles from "@styles/pages/projectsContents.module.scss"
-import HectonTechBlogPics from "@app/(contents)/projects/hectonTechblog/HectonTechBlogPics"
+import Image from "next/image";
+import LtcgaPics from "@app/(contents)/projects/ltcga/LtcgaPics";
 
-const HectonTechblog = (): ReactElement => {
+const Ltcga = (): ReactElement => {
     const { darkMode } = useCoreStore()
 
     return (
@@ -25,15 +26,16 @@ const HectonTechblog = (): ReactElement => {
             </div>
             <div className={classNames(styles.eachProjectWrapper, darkMode && styles.dark)}>
                 <TextBasic size="xxx-large" bold="bold">
-                    {"헥톤프로젝트, 테크 블로그"}
+                    {"또하나의가족, 플랫폼 고도화 - 장기요양등급신청"}
                 </TextBasic>
                 <br />
                 <div className={styles.rangeLogo}>
                     <TextBasic size="large" bold="bold">
-                        {"2024.02 ~ 2024.09 | 이직으로 인한 중지"}
+                        {"2024.06 ~ 2024.07 | 2개월"}
                     </TextBasic>
                     <div className={styles.logos}>
                         <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
+                        <Image placeholder="blur" src="/kbslBlog/ddoga_logo.svg" alt="logo" width={115} height={30} />
                     </div>
                 </div>
                 <LineBasic />
@@ -43,13 +45,21 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="large" bold="bold">
                             {"설명"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 헥톤프로젝트 테크 블로그 사이드 프로젝트입니다."}</TextBasic>
+                        <TextBasic size="small">
+                            {"- '또하나의가족': 장기요양수급자와 장기요양기관 사이의 공급&수급을 이어주는 플랫폼 서비스. 고도화가 꾸준히 진행되면서 요양기관이 높은 등급을 받기 위한 가이드 컨텐츠와 수급자의 장기요양등급신청 전 등급확인을 위한 테스트 기능도 추가됨"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- '또하나의가족 관리자' : 또하나의가족 서비스 내 컨텐츠, 또하나의가족 파트너스(요양기관 전용) 내부 공지 등에 대해 본사에서 관리하는 어드민 프로젝트"
+                            }
+                        </TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
                             {"포지션"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 풀스택 개발자"}</TextBasic>
+                        <TextBasic size="small">{"- 또하나의가족 관리자 : 풀스택 개발자"}</TextBasic>
+                        <TextBasic size="small">{"- 또하나의가족 : 프론트엔드 개발자"}</TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
@@ -67,6 +77,14 @@ const HectonTechblog = (): ReactElement => {
                             <img
                                 className={styles.skillImgs}
                                 src="/kbslBlog/skills/nextjs.svg"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={60}
+                                height={60}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/reactquery.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -96,19 +114,11 @@ const HectonTechblog = (): ReactElement => {
                                 width={60}
                                 height={60}
                             />
-                            <img
-                                className={styles.skillImgs}
-                                src="/kbslBlog/skills/mui.svg"
-                                alt="myFace"
-                                sizes={"100vw"}
-                                width={60}
-                                height={60}
-                            />
                         </div>
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/java.png"
+                                src="/kbslBlog/skills/nodejs.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -116,7 +126,23 @@ const HectonTechblog = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/springboot.png"
+                                src="/kbslBlog/skills/expressjs.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={80}
+                                height={50}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/mysql.png"
+                                alt="myFace"
+                                sizes={"100vw"}
+                                width={60}
+                                height={50}
+                            />
+                            <img
+                                className={styles.skillImgs}
+                                src="/kbslBlog/skills/kendoui.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={100}
@@ -124,27 +150,11 @@ const HectonTechblog = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/jpa.png"
+                                src="/kbslBlog/skills/angularjs.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
-                                height={60}
-                            />
-                            <img
-                                className={styles.skillImgs}
-                                src="/kbslBlog/skills/hibernate.png"
-                                alt="myFace"
-                                sizes={"100vw"}
-                                width={140}
                                 height={50}
-                            />
-                            <img
-                                className={styles.skillImgs}
-                                src="/kbslBlog/skills/querydsl.png"
-                                alt="myFace"
-                                sizes={"100vw"}
-                                width={60}
-                                height={60}
                             />
                             <img
                                 className={styles.skillImgs}
@@ -155,13 +165,14 @@ const HectonTechblog = (): ReactElement => {
                                 height={60}
                             />
                         </div>
-                        <br />
-                        <br />
+                        <br/>
+                        <br/>
                         <TextBasic size="large" bold="bold">
                             {"프로젝트 인원"}
                         </TextBasic>
                         <TextBasic size="small">{"- PM: 1명"}</TextBasic>
-                        <TextBasic size="small">{"- FullStack: 6명"}</TextBasic>
+                        <TextBasic size="small">{"- FullStack: 2명(PL 1명 포함)"}</TextBasic>
+                        <TextBasic size="small">{"- B/E: 1명"}</TextBasic>
                         <br />
                         <br />
                     </div>
@@ -170,98 +181,73 @@ const HectonTechblog = (): ReactElement => {
                             {"성과"}
                         </TextBasic>
                         <TextBasic size="medium" bold="bold">
-                            {"1. 기술 스택 도입을 위한 기술 조사 및 검토 후 발표"}
+                            {"1. 또하나의가족 관리자 | 대시보드 고도화"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 스프링 부트 프레임워크를 사용한 백엔드 서버 구축과 추후 운영에 대한 기술 조사 및 검토 후 발표"
+                                "- 또하나의가족 관리자(이하 관리자)는 레거시한 스택(angular.js 1.8v, jsp, java가 하나의 프로젝트)으로 구성되어 있기에 별도의 소스분석 기간이 필요"
+                            }
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {"- 대시보드 부분에는 기존 회원가입수, 기관등록수 등이 존재했으며, 장기요양등급테스트와 등급신청에 대한 내용은 금번에 신규로 추가"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {"- 대시보드는 KendoUI 내 그래프를 통해 구성하였으며, 하단부 테이블은 angular 문법의 jsp로 구성"}
+                        </TextBasic>
+                        <br/>
+                        <TextBasic size="medium" bold="bold">
+                            {"2. 또하나의가족 관리자 | 장기요양등급신청 관리 신규 메뉴 개발"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- 장기요양등급신청 관리에 대한 별도 메뉴 페이지 신규개발을 통해 등급신청과 관련된 웹팩스 발송이력 관리 기능 개발"
                             }
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 조사과정 중 자바와 스프링 프레임워크, 그리고 JVM 등에 대한 역사와 장/단점 등에 대한 깊은 조사 및 공유를 통해 기술 스택 도입에 대한 정당성을 확보"
+                                "- 목록 테이블에서는 전반적인 정보와 발송완료 구분을 할 수 있고 재전송 버튼이 존재하며, 개별 로우 클릭시 발생하는 상세 모달에서는 해당 수급자의 상세정보와 등급신청시 실제 신청자가 누군지에 대한 정보 및 해당 수급자의 전체 등급신청 발송이력 확인 가능(재전송 기능 존재)"
+                            }
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {"- 재전송 기능은 Java의 controller를 통해 service파일의 interface, impl 파일을 거쳐 '또하나의가족 Message 서버'를 통해 '바로빌(웹팩스 발송업체)'에게 데이터를 전송하고, 추가적으로 웹팩스 발송 history를 관리하기 위해 MySQL Procedure에 이력을 쌓게끔 호출하여 결과 반환값을 받는 형식으로 구성"}
+                        </TextBasic>
+                        <br/>
+                        <TextBasic size="medium" bold="bold">
+                            {"3. 또하나의가족 | 수급자 조회 기능 신규 페이지 개발"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- 또하나의가족 플랫폼을 통해 메뉴에는 표출하지 않되 외부 불특정 다수 유저들이 접근 가능하게 공개 페이지로 장기요양수급자를 조회할 수 있게 하는 신규 기능 개발"
+                            }
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- 장기요양인정번호와 수급자 명을 통해, 해당 수급자가 어떤 등급과 퍼센티지를 갖고 있고 어떠한 복지용구를 구입/대여가능한지에 대해 조회 가능하게 구성"
+                            }
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {
+                                "- 기존의 통합관리시스템에서 사용하고 있는 장기요양공단 스크래핑 서버의 API를 확장 활용"
                             }
                         </TextBasic>
                         <br/>
                         <TextBasic size="medium" bold="bold">
-                            {"2. 백엔드 프로젝트 아키텍처 설계 및 구현을 위한 디자인 패턴 조사 및 검토 후 발표"}
+                            {"4. 또하나의가족 | 장기요양등급신청 기능 신규 개발"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 아키텍처 설계 레벨에서의 디자인 패턴 조사(Layerd Architecture)"}
+                            {
+                                "- 장기요양등급신청 기능 신규개발을 할 수 있는 단계별 신청 페이지 구성"
+                            }
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 전반적인 폴더/파일 구조 형태 관련 디자인 패턴 조사(MVC)"}
+                            {
+                                "- 기존 장기요양등급테스트와 연계되어 테스트가 끝나면 신청 페이지로 이동할 수 있게끔 가이드"
+                            }
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 비즈니스 로직 관련 디자인 패턴 조사(Factory Method Pattern)"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- JPA 도입을 위한 디자인 패턴 조사(Repository Pattern, Data Mapper Pattern)"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"3. ERD 스키마 설계를 통한 데이터베이스 테이블 구조 구성 및 검토 후 발표"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"4. 백엔드 프로젝트 초기 기반 셋팅 및 빌드를 위한 보안 분야 조사 및 검토 후 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Boot를 통한 기반 셋팅"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Security와 JWT를 적절히 통합한 보안 파일 구조 설계"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 기반이 되는 자사 프로젝트 N개 분석 후 발표"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"5. 프로젝트 전반 와이어프레임(Wireframe) 및 기획문서 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- uizard의 AI 구성 보조 툴을 이용하여 프로젝트 전반 페이지에 해당하는 내용 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 해당 내용 중 실제 버튼 클릭 시 해당되는 페이지로 이동하게끔 하는 목업 단계의 디자인 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 최종적으로 전체 페이지 구성 후 PPT 스토리북형태로 구성하여 검토 후 발표"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 금문제로 인해 uizard에서 회사 디자인 툴인 figma로 순차 이동 중"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"6. 프로젝트 실제 개발을 위한 메뉴 인터페이스 및 WBS 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 기반작업, 프론트엔드, 백엔드를 포함하여 요구사항 명세/디자인시안/기획에 기반한 메뉴 인터페이스 구성"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 이를 바탕으로한 WBS 공수 구성하여 담당자 할당"}
-                        </TextBasic>
-                        <br/>
-                        <TextBasic size="medium" bold="bold">
-                            {"7. 실제 개발 진행"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"1) BackEnd"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- Spring Security와 JWT를 통합한 보안 구조 설계에 기반한 실제 개발 완료"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 로그인 개발 시 토큰을 지속적으로 refresh 할 수 있게끔 기반 작업 처리 완료"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"2) FrontEnd"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 프로젝트 공통 컴포넌트 13개 개발 진행"}
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {"- 종류 : Button, Selectbox, Typography, Thubnail, Input, Textarea, Profile, WriteButton, Toggle, DatePicker, Progressbar, Modal, EditorViewer"}
+                            {
+                                "- 장기요양등급신청에 대해 웹펙스 기능을 추가하여 필요한 서류 업로드 및 정보 입력 시 직접 공단 방문 혹은 팩스를 보내지 않아도 손쉽게 등급신청을 할 수 있게하는 기능 추가"
+                            }
                         </TextBasic>
                     </div>
                 </div>
@@ -277,11 +263,11 @@ const HectonTechblog = (): ReactElement => {
                         <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                     </div>
 
-                    <HectonTechBlogPics/>
+                    <LtcgaPics />
                 </div>
             </div>
         </Wrapper>
     )
 }
 
-export default HectonTechblog
+export default Ltcga
