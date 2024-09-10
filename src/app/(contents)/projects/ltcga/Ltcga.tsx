@@ -1,15 +1,15 @@
 "use client"
 
 import { ReactElement } from "react"
-import styles from "@styles/pages/projectsContents.module.scss"
+import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
-import TextBasic from "@components/atom/TextBasic"
+import LtcgaPics from "@app/(contents)/projects/ltcga/LtcgaPics"
 import LineBasic from "@components/atom/LineBasic"
+import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import { useCoreStore } from "@lib/stores/store"
-import Image from "next/image";
-import LtcgaPics from "@app/(contents)/projects/ltcga/LtcgaPics";
+import styles from "@styles/pages/projectsContents.module.scss"
 
 const Ltcga = (): ReactElement => {
     const { darkMode } = useCoreStore()
@@ -46,7 +46,9 @@ const Ltcga = (): ReactElement => {
                             {"설명"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- '또하나의가족': 장기요양수급자와 장기요양기관 사이의 공급&수급을 이어주는 플랫폼 서비스. 고도화가 꾸준히 진행되면서 요양기관이 높은 등급을 받기 위한 가이드 컨텐츠와 수급자의 장기요양등급신청 전 등급확인을 위한 테스트 기능도 추가됨"}
+                            {
+                                "- '또하나의가족': 장기요양수급자와 장기요양기관 사이의 공급&수급을 이어주는 플랫폼 서비스. 고도화가 꾸준히 진행되면서 요양기관이 높은 등급을 받기 위한 가이드 컨텐츠와 수급자의 장기요양등급신청 전 등급확인을 위한 테스트 기능도 추가됨"
+                            }
                         </TextBasic>
                         <TextBasic size="small">
                             {
@@ -165,8 +167,8 @@ const Ltcga = (): ReactElement => {
                                 height={60}
                             />
                         </div>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <TextBasic size="large" bold="bold">
                             {"프로젝트 인원"}
                         </TextBasic>
@@ -189,12 +191,16 @@ const Ltcga = (): ReactElement => {
                             }
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 대시보드 부분에는 기존 회원가입수, 기관등록수 등이 존재했으며, 장기요양등급테스트와 등급신청에 대한 내용은 금번에 신규로 추가"}
+                            {
+                                "- 대시보드 부분에는 기존 회원가입수, 기관등록수 등이 존재했으며, 장기요양등급테스트와 등급신청에 대한 내용은 금번에 신규로 추가"
+                            }
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 대시보드는 KendoUI 내 그래프를 통해 구성하였으며, 하단부 테이블은 angular 문법의 jsp로 구성"}
+                            {
+                                "- 대시보드는 KendoUI 내 그래프를 통해 구성하였으며, 하단부 테이블은 angular 문법의 jsp로 구성"
+                            }
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"2. 또하나의가족 관리자 | 장기요양등급신청 관리 신규 메뉴 개발"}
                         </TextBasic>
@@ -209,9 +215,11 @@ const Ltcga = (): ReactElement => {
                             }
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 재전송 기능은 Java의 controller를 통해 service파일의 interface, impl 파일을 거쳐 '또하나의가족 Message 서버'를 통해 '바로빌(웹팩스 발송업체)'에게 데이터를 전송하고, 추가적으로 웹팩스 발송 history를 관리하기 위해 MySQL Procedure에 이력을 쌓게끔 호출하여 결과 반환값을 받는 형식으로 구성"}
+                            {
+                                "- 재전송 기능은 Java의 controller를 통해 service파일의 interface, impl 파일을 거쳐 '또하나의가족 Message 서버'를 통해 '바로빌(웹팩스 발송업체)'에게 데이터를 전송하고, 추가적으로 웹팩스 발송 history를 관리하기 위해 MySQL Procedure에 이력을 쌓게끔 호출하여 결과 반환값을 받는 형식으로 구성"
+                            }
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"3. 또하나의가족 | 수급자 조회 기능 신규 페이지 개발"}
                         </TextBasic>
@@ -226,18 +234,14 @@ const Ltcga = (): ReactElement => {
                             }
                         </TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- 기존의 통합관리시스템에서 사용하고 있는 장기요양공단 스크래핑 서버의 API를 확장 활용"
-                            }
+                            {"- 기존의 통합관리시스템에서 사용하고 있는 장기요양공단 스크래핑 서버의 API를 확장 활용"}
                         </TextBasic>
-                        <br/>
+                        <br />
                         <TextBasic size="medium" bold="bold">
                             {"4. 또하나의가족 | 장기요양등급신청 기능 신규 개발"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- 장기요양등급신청 기능 신규개발을 할 수 있는 단계별 신청 페이지 구성"
-                            }
+                            {"- 장기요양등급신청 기능 신규개발을 할 수 있는 단계별 신청 페이지 구성"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
@@ -251,8 +255,8 @@ const Ltcga = (): ReactElement => {
                         </TextBasic>
                     </div>
                 </div>
-                <br/>
-                <LineBasic/>
+                <br />
+                <LineBasic />
 
                 <div className={styles.titleWrapper}>
                     <TextBasic size="xx-large" bold="bold">
