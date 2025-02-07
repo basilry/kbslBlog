@@ -10,10 +10,11 @@
     z-index: 100;
 
     .modal {
-        position: fixed;
+        position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        max-height: 90vh;
         min-width: 300px;
         padding: 30px 25px;
         background-color: white;
@@ -31,8 +32,9 @@
         }
 
         .header {
-            //display: grid;
-            //grid-template-columns: 9fr 1fr;
+            width: 100%;
+            height: 30px;
+
             display: flex;
             justify-content: space-between;
 
@@ -50,6 +52,19 @@
             }
             
 
+        }
+
+        .contents {
+            overflow: auto;
+            height: 600px;
+            max-height: 70vh;
+
+            img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                object-fit: contain; // 혹은 cover, 원하는 방식에 따라 조절
+            }
         }
     }
 }

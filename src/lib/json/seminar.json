@@ -13,29 +13,29 @@
     },
     {
         "id": 2,
-        "title": "AWS 아키텍트 어소시에이트",
-        "subTitle": "Ch 1. 분석 발표 - 개요",
+        "title": "AWS Ch 1. 분석 발표 - 개요",
+        "subTitle": "AWS 아키텍트 어소시에이트",
         "date": "20220513",
         "url": "https://drive.google.com/file/d/1Rk-Cpy7VyqOY-cX9GgjqaMJ5NdUgF18z/view?usp=sharing"
     },
     {
         "id": 3,
-        "title": "AWS 아키텍트 어소시에이트",
-        "subTitle": "Ch 2. 분석 발표 - S3",
+        "title": "AWS Ch 2. 분석 발표 - S3",
+        "subTitle": "AWS 아키텍트 어소시에이트",
         "date": "20220520",
         "url": "https://drive.google.com/file/d/1vDovoOfw7aSzIg7KqIx9904F24a42gYQ/view?usp=sharing"
     },
     {
         "id": 4,
-        "title": "AWS 아키텍트 어소시에이트",
-        "subTitle": "Ch 3. 분석 발표 - VPC",
+        "title": "AWS Ch 3. 분석 발표 - VPC",
+        "subTitle": "AWS 아키텍트 어소시에이트",
         "date": "20220512",
         "url": "https://basilry-kim-frontend.notion.site/AWS-VPC-f4c8f948ae2c47fc947b5fefb218cf8e"
     },
     {
         "id": 5,
-        "title": "AWS 아키텍트 어소시에이트",
-        "subTitle": "Ch 4. 분석 발표 - EC2",
+        "title": "AWS Ch 4. 분석 발표 - EC2",
+        "subTitle": "AWS 아키텍트 어소시에이트",
         "date": "20220708",
         "url": "https://basilry-kim-frontend.notion.site/AWS-EC2-Instance-a9a4ae8805174609a05607ef50402464?pvs=74"
     },
