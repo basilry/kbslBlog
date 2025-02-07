@@ -53,9 +53,7 @@ const ModalBasic = ({ isOpen, onClose, title, children }: IModalProps): ReactEle
                         onClick={onClose}
                     />
                 </div>
-                <div className={styles.contents}>
-                    {children}
-                </div>
+                <div className={styles.contents}>{children}</div>
             </div>
         </div>,
         document.getElementById("modal-root") as HTMLElement,
