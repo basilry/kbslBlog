@@ -286,7 +286,7 @@ const Landing = (): ReactElement => {
                     <br />
                     <VisibleText className={styles.titleWrapper2} delay={1.5}>
                         <TextBasic size={"xx-large"} bold={"bold"}>
-                            {"2024 Google Machine Learning Bootcamp 발탁"}
+                            {"2024 Google Machine Learning Bootcamp 수료"}
                         </TextBasic>
                     </VisibleText>
                     <VisibleText className={styles.titleWrapper2} delay={2}>
@@ -325,7 +325,7 @@ const Landing = (): ReactElement => {
             <ScrollBlockWrapper className={styles.thirdBlock} ref={(el): any => (sectionRefs.current[2] = el!)}>
                 <div className={styles.blockWrapper}>
                     <div>
-                        {[2024, 2023, 2022, 2021].map((row, idx) => (
+                        {[2025, 2024, 2023, 2022, 2021].map((row, idx) => (
                             <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5} className={styles.calendar1}>
                                 <GitHubCalendar
                                     username="basilry"
@@ -360,13 +360,13 @@ const Landing = (): ReactElement => {
                         </VisibleText>
                         <VisibleText className={styles.titleWrapper3} delay={2.5}>
                             <TextBasic size={"xxx-large"} bold={"bold"}>
-                                {"2024년에도 변함없이 달리고 있습니다"}
+                                {"2025년에도 변함없이 달리고 있습니다"}
                             </TextBasic>
                         </VisibleText>
                     </div>
                     <div className={styles.calendarWrapper}>
                         <div className={styles.calendarBlock}>
-                            {[2024, 2023].map((row, idx) => (
+                            {[2025, 2024, 2023].map((row, idx) => (
                                 <ScrollGithubCalendarWrapper key={row} delay={idx * 0.5} className={styles.calendar2}>
                                     <GitHubCalendar
                                         username="basilry"
