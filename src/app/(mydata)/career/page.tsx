@@ -1,6 +1,7 @@
+import { ReactElement } from "react"
 import Career from "./Career"
 
-const page = (): JSX.Element => {
+const page = (): ReactElement => {
     return <Career />
 }
 
