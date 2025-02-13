@@ -1,89 +1,101 @@
 @import "@styles/variable.scss";
 
 .wholeWrapper {
-    .block {
-        margin-bottom: 4rem;
-    }
+  .block {
+    margin-bottom: 4rem;
+  }
 
-    .careerBlock {
-        margin-bottom: 80px;
+  .careerBlock {
+    margin-bottom: 80px;
 
-        .careerParagraphs {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 50px;
+    .careerParagraphs {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 50px;
 
-            .cbParagraph {
-                display: flex;
-                flex-direction: column;
-
-                .divider {
-                    border-left: 1px solid $black-200;
-                }
-
-                &:nth-child(2) {
-                    min-width: 300px;
-                }
-
-                @include TABLET {
-                    flex-direction: column;
-                }
-            }
-        }
-    }
-
-    .seminarAndRND {
-        margin-top: 80px;
-        margin-bottom: 80px;
-
-        .red {
-            color: $pink-pressed;
-        }
-
-        .dotWrapper {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            font-weight: 700;
-        }
-
-
-    }
-
-    .seminarBlock {
+      .cbParagraph {
         display: flex;
         flex-direction: column;
-        padding: 20px;
-        text-align: left;
-        border-radius: 5px;
 
-        .wrapper {
-            display: flex;
-            align-items: center;
+        .divider {
+          border-left: 1px solid $black-200;
         }
 
-        .subTitle {
-            margin: 10px 0;
+        &:nth-child(2) {
+          min-width: 300px;
         }
 
-        .conf {
-            font-size: $small-font;
-            color: $pink-ligthen;
+        @include TABLET {
+          flex-direction: column;
         }
-
-        &.active {
-            &:hover {
-                background: $black-200;
-            }
-        }
-        &.dark {
-            &:hover {
-                background: $black-600;
-            }
-        }
-
-        &:active {
-            opacity: 0.7;
-        }
+      }
     }
+  }
+
+  .seminarAndRND {
+    margin-bottom: 80px;
+
+    .red {
+      color: $pink-pressed;
+    }
+
+    .dotWrapper {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 700;
+    }
+
+
+  }
+
+  .seminarBlock {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: left;
+    border-radius: 5px;
+
+    @include TABLET {
+      padding: 18px;
+    }
+
+    @include MOBILE {
+      padding: 15px;
+    }
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .subTitle {
+      margin: 10px 0;
+    }
+
+    .conf {
+      font-size: $small-font;
+      color: $pink-ligthen;
+    }
+
+    &.active {
+      &:hover {
+        background: $black-200;
+      }
+    }
+
+    &.dark {
+      &:hover {
+        background: $black-600;
+      }
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+
+    &:hover {
+      background: $black-300;
+    }
+  }
 }

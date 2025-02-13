@@ -1,39 +1,43 @@
 @import "@styles/variable.scss";
 
 .Toastify__toast-container {
-	z-index: 99999;
+  z-index: 99999;
 }
 
 .Toastify__toast-container--bottom-right {
-	@include TABLET {
-		bottom: 3.7rem !important;
-	}
+  @include TABLET {
+    bottom: 3.7rem !important;
+  }
 }
 
 .Toastify__toast-container--bottom-center {
-	bottom: 10rem;
+  bottom: 10rem;
 }
 
 .Toastify__toast {
-	box-shadow: 0 0 1.4rem rgba(37, 58, 106, 0.2);
+  box-shadow: 0 0 1.4rem rgba(37, 58, 106, 0.2);
 
-	@include TABLET {
-		width: calc(100% - (var(--padding) * 2) - 1rem);
-		left: calc(var(--padding) + 0.5rem);
-		border-radius: 0.6rem;
-	}
+  @include TABLET {
+    width: calc(100% - (var(--padding) * 2) - 1rem);
+    left: calc(var(--padding) + 0.5rem);
+    border-radius: 0.6rem;
+  }
 }
 
 .Toastify__toast-body {
-	font-size: $small-font !important;
-	padding: 0.5rem 0.7rem;
-	font-weight: $bold;
+  font-size: $small-font !important;
+  padding: 0.5rem 0.7rem;
+  font-weight: $bold;
 
-	div {
-		line-height: 1.6;
-	}
+  div {
+    line-height: 1.6;
+  }
+}
+
+.Toastify__toast-theme--colored {
+  background: $black-400 !important;
 }
 
 .Toastify__toast-theme--colored.Toastify__toast--success {
-	color: $green-default;
+  color: $green-default;
 }
