@@ -33,7 +33,6 @@
   }
 
   .seminarAndRND {
-    //margin-top: 80px;
     margin-bottom: 80px;
 
     .red {
@@ -56,6 +55,14 @@
     padding: 20px;
     text-align: left;
     border-radius: 5px;
+
+    @include TABLET {
+      padding: 18px;
+    }
+
+    @include MOBILE {
+      padding: 15px;
+    }
 
     .wrapper {
       display: flex;

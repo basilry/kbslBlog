@@ -54,7 +54,7 @@ const Certification = (): ReactElement => {
                                 {cert.subTitle && (
                                     <div className={styles.subTitle}>
                                         <TextBasic className={styles.subTitle} size="small" bold="bold">
-                                            {"/ " + cert.subTitle}
+                                            {`/ ${cert.subTitle}`}
                                         </TextBasic>
                                     </div>
                                 )}

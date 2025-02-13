@@ -54,7 +54,7 @@ const Research = (): ReactElement => {
                                 {seminar.subTitle && (
                                     <div className={styles.subTitle}>
                                         <TextBasic className={styles.subTitle} size="small" bold="bold">
-                                            {"/ " + seminar.subTitle}
+                                            {`/ ${seminar.subTitle}`}
                                         </TextBasic>
                                     </div>
                                 )}
