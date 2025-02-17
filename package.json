@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://basilry.github.io/kbslBlog/",
   "scripts": {
-    "dev": "next dev -p 3009",
+    "dev": "next dev",
     "build": "next build",
     "start": "pm2 start ecosystem.config.js",
     "lint": "next lint",
