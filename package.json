@@ -2,7 +2,7 @@
   "name": "kbsl-blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://basilry.github.io/kbslBlog/",
+  "homepage": "https://basilry.github.io/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

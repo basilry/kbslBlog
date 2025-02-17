@@ -1,152 +1,152 @@
 [
-    {
-        "id": 1,
-        "title": "또하나의가족, Solution",
-        "period": "2021.12 ~ 2023.06 | 1년 6개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddogaLogo.svg",
-                "alt": "ddoga",
-                "width": 120,
-                "height": 30
-            }
-        ],
-        "description": "장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다.",
-        "url": "/projects/solutionInit"
-    },
-    {
-        "id": 2,
-        "title": "또하나의가족, Solution 리뉴얼",
-        "period": "2023.07 ~ 2023.09 | 3개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddogaLogo.svg",
-                "alt": "ddoga",
-                "width": 120,
-                "height": 30
-            }
-        ],
-        "description": "공단의 고시변경으로 비즈니스 로직 등 다수 기능 변경 필요로 인해 리뉴얼 작업이 진행되었습니다.",
-        "url": "/projects/solutionRenewal"
-    },
-    {
-        "id": 3,
-        "title": "또하나의가족, 돌봄노트",
-        "period": "2023.09 ~ 2024.01 | 4개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddoga_logo.svg",
-                "alt": "ddoga",
-                "width": 115,
-                "height": 30
-            }
-        ],
-        "description": "타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 앱 프로젝트입니다.",
-        "url": "/projects/carenote"
-    },
-    {
-        "id": 4,
-        "title": "IMS(통합관리시스템) Part 1.",
-        "period": "2024.02 ~ 2024.03 | 2개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            }
-        ],
-        "description": "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다.",
-        "url": "/projects/imsPart1"
-    },
-    {
-        "id": 5,
-        "title": "헥톤프로젝트, 헥톤블로그",
-        "period": "2024.02 ~ 2024.09 | 이직으로 인한 중지",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            }
-        ],
-        "description": "헥톤프로젝트 회사 공식블로그 사이드 프로젝트입니다. 24년 9월 말 이직으로 인해 중단하였습니다.",
-        "url": "/projects/hectonTechblog"
-    },
-    {
-        "id": 6,
-        "title": "IMS(통합관리시스템) Part 2.",
-        "period": "2024.04 ~ 2024.05 | 2개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            }
-        ],
-        "description": "기존 IMS 프로젝트 내 수급자 조회와 복지용구 품목 조회에 대한 고도화 및 관리자 페이지 추가 프로젝트입니다.",
-         "url": "/projects/imsPart2"
-    },
-    {
-        "id": 7,
-        "title": "또하나의가족, 플랫폼 고도화 - 장기요양등급신청",
-        "period": "2024.06 ~ 2024.07 | 2개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddoga_logo.svg",
-                "alt": "ddoga",
-                "width": 115,
-                "height": 20
-            }
-        ],
-        "description": "헥톤프로젝트의 대표 서비스 플랫폼인 또하나의가족에 수급자의 장기요양등급 신청을 편리하게 진행해주는 기능을 추가 개발합니다.",
-        "url": "/projects/ltcga"
-    },
-    {
-        "id": 8,
-        "title": "또하나의가족, 플랫폼 고도화 - 푸시서버 구축",
-        "period": "2024.08 ~ 2024.09 | 2개월",
-        "logos": [
-            {
-                "src": "/kbslBlog/hecton.png",
-                "alt": "hecton",
-                "width": 30,
-                "height": 18
-            },
-            {
-                "src": "/kbslBlog/ddoga_logo.svg",
-                "alt": "ddoga",
-                "width": 115,
-                "height": 20
-            }
-        ],
-        "description": "헥톤프로젝트의 서비스 또하나의가족 플랫폼 전반에 걸쳐 외부 푸시서버를 API 연동하여 공통 모듈 개발 및 기존 API에 로직을 심어 푸시 알림을 보내는 기능을 추가 개발합니다.",
-        "url": ""
-    }
+  {
+    "id": 1,
+    "title": "또하나의가족, Solution",
+    "period": "2021.12 ~ 2023.06 | 1년 6개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      },
+      {
+        "src": "/ddogaLogo.svg",
+        "alt": "ddoga",
+        "width": 120,
+        "height": 30
+      }
+    ],
+    "description": "장기요양기관 내 어르신 대상 장기요양 행위를 기록하고 시설을 관리하는 백오피스 솔루션 웹 프로젝트입니다.",
+    "url": "/projects/solutionInit"
+  },
+  {
+    "id": 2,
+    "title": "또하나의가족, Solution 리뉴얼",
+    "period": "2023.07 ~ 2023.09 | 3개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      },
+      {
+        "src": "/ddogaLogo.svg",
+        "alt": "ddoga",
+        "width": 120,
+        "height": 30
+      }
+    ],
+    "description": "공단의 고시변경으로 비즈니스 로직 등 다수 기능 변경 필요로 인해 리뉴얼 작업이 진행되었습니다.",
+    "url": "/projects/solutionRenewal"
+  },
+  {
+    "id": 3,
+    "title": "또하나의가족, 돌봄노트",
+    "period": "2023.09 ~ 2024.01 | 4개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      },
+      {
+        "src": "/ddoga_logo.svg",
+        "alt": "ddoga",
+        "width": 115,
+        "height": 30
+      }
+    ],
+    "description": "타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 앱 프로젝트입니다.",
+    "url": "/projects/carenote"
+  },
+  {
+    "id": 4,
+    "title": "IMS(통합관리시스템) Part 1.",
+    "period": "2024.02 ~ 2024.03 | 2개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      }
+    ],
+    "description": "자사에서 인수한 복지용구 사업소 내부 물류 관리 및 외부 영업사원 관리 백오피스 모바일 웹 프로젝트입니다.",
+    "url": "/projects/imsPart1"
+  },
+  {
+    "id": 5,
+    "title": "헥톤프로젝트, 헥톤블로그",
+    "period": "2024.02 ~ 2024.09 | 이직으로 인한 중지",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      }
+    ],
+    "description": "헥톤프로젝트 회사 공식블로그 사이드 프로젝트입니다. 24년 9월 말 이직으로 인해 중단하였습니다.",
+    "url": "/projects/hectonTechblog"
+  },
+  {
+    "id": 6,
+    "title": "IMS(통합관리시스템) Part 2.",
+    "period": "2024.04 ~ 2024.05 | 2개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      }
+    ],
+    "description": "기존 IMS 프로젝트 내 수급자 조회와 복지용구 품목 조회에 대한 고도화 및 관리자 페이지 추가 프로젝트입니다.",
+    "url": "/projects/imsPart2"
+  },
+  {
+    "id": 7,
+    "title": "또하나의가족, 플랫폼 고도화 - 장기요양등급신청",
+    "period": "2024.06 ~ 2024.07 | 2개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      },
+      {
+        "src": "/ddoga_logo.svg",
+        "alt": "ddoga",
+        "width": 115,
+        "height": 20
+      }
+    ],
+    "description": "헥톤프로젝트의 대표 서비스 플랫폼인 또하나의가족에 수급자의 장기요양등급 신청을 편리하게 진행해주는 기능을 추가 개발합니다.",
+    "url": "/projects/ltcga"
+  },
+  {
+    "id": 8,
+    "title": "또하나의가족, 플랫폼 고도화 - 푸시서버 구축",
+    "period": "2024.08 ~ 2024.09 | 2개월",
+    "logos": [
+      {
+        "src": "/hecton.png",
+        "alt": "hecton",
+        "width": 30,
+        "height": 18
+      },
+      {
+        "src": "/ddoga_logo.svg",
+        "alt": "ddoga",
+        "width": 115,
+        "height": 20
+      }
+    ],
+    "description": "헥톤프로젝트의 서비스 또하나의가족 플랫폼 전반에 걸쳐 외부 푸시서버를 API 연동하여 공통 모듈 개발 및 기존 API에 로직을 심어 푸시 알림을 보내는 기능을 추가 개발합니다.",
+    "url": ""
+  }
 ]

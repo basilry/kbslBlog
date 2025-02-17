@@ -45,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                 />
                 <title>{"KBSL's Blog"}</title>
-                <link rel="icon" href="/kbslBlog/myFace.png" />
+                <link rel="icon" href="/myFace.png" />
             </head>
             <body id={mode}>
                 <SuspenseWrapper>

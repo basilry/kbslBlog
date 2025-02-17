@@ -46,7 +46,7 @@ const ModalBasic = ({ isOpen, onClose, title, children }: IModalProps): ReactEle
                     )}
                     <Image
                         className={styles.closeButton}
-                        src={darkMode ? "/kbslBlog/xmark-solid_white.svg" : "/kbslBlog/xmark-solid.svg"}
+                        src={darkMode ? "/xmark-solid_white.svg" : "/xmark-solid.svg"}
                         alt="sidebarCloseBtn"
                         width={30}
                         height={30}

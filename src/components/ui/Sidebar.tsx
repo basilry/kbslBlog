@@ -24,7 +24,7 @@ function Sidebar(): ReactElement {
                     onClick={(): void => changeSideBarFold(false)}
                 >
                     <Image
-                        src={darkMode ? "/kbslBlog/xmark-solid_white.svg" : "/kbslBlog/xmark-solid.svg"}
+                        src={darkMode ? "/xmark-solid_white.svg" : "/xmark-solid.svg"}
                         alt="sidebarCloseBtn"
                         width={30}
                         height={30}
@@ -64,7 +64,7 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://github.com/basilry">
                             <Image
-                                src={darkMode ? "/kbslBlog/github_white.svg" : "/kbslBlog/github.svg"}
+                                src={darkMode ? "/github_white.svg" : "/github.svg"}
                                 alt="github"
                                 width={20}
                                 height={20}
@@ -74,7 +74,7 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://www.linkedin.com/in/basilri-kim-4b6611218/">
                             <Image
-                                src={darkMode ? "/kbslBlog/linkedin_white.svg" : "/kbslBlog/linkedin.svg"}
+                                src={darkMode ? "/linkedin_white.svg" : "/linkedin.svg"}
                                 alt="linkedin"
                                 width={20}
                                 height={20}
@@ -84,7 +84,7 @@ function Sidebar(): ReactElement {
                     <div className={styles.socialLogo}>
                         <Link href="https://blog.naver.com/basilry">
                             <Image
-                                src={darkMode ? "/kbslBlog/n-solid_white.svg" : "/kbslBlog/n-solid.svg"}
+                                src={darkMode ? "/n-solid_white.svg" : "/n-solid.svg"}
                                 alt="n-solid"
                                 width={20}
                                 height={20}

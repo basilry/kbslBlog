@@ -24,7 +24,7 @@ function Header(): ReactElement {
             <div className={styles.leftWrapper}>
                 <div className={styles.hamberger}>
                     <Image
-                        src={darkMode ? "/kbslBlog/bars-solid_white.svg" : "/kbslBlog/bars-solid.svg"}
+                        src={darkMode ? "/bars-solid_white.svg" : "/bars-solid.svg"}
                         alt="sidebarBtn"
                         width={20}
                         height={20}
