@@ -2,13 +2,11 @@
   "name": "kbsl-blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://basilry.github.io/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "pm2 start ecosystem.config.js",
-    "lint": "next lint",
-    "serve": "npx http-server out"
+    "start": "pm2 start ecosystem.config.js -p 3000",
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/nprogress": "^0.2.3",
@@ -18,7 +16,6 @@
     "framer-motion": "^11.3.26",
     "lodash": "^4.17.21",
     "next": "13.4.19",
-    "next-export-optimize-images": "^3.2.0",
     "next-nprogress-bar": "^2.3.13",
     "next-translate-plugin": "^2.6.2",
     "nprogress": "^0.2.0",
