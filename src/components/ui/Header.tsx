@@ -1,9 +1,9 @@
 "use client"
 
 import { ReactElement } from "react"
+import { useRouter } from "next-nprogress-bar"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import classNames from "classnames"
 import DarkModeBasic from "@components/atom/DarkModeBasic"
 import TextBasic from "@components/atom/TextBasic"
