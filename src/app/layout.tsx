@@ -51,7 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body id={mode}>
                 <SuspenseWrapper>
                     <Container>
-                        <ProgressBar height="4rem" color="#b024d6" options={{ showSpinner: true }} />
+                        <ProgressBar color="#b024d6" options={{ showSpinner: true }} />
                         {children}
                         <ToastContainer
                             position="bottom-right"

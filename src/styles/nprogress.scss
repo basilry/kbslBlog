@@ -1,10 +1,12 @@
+@import "variable.scss";
+
 .nprogress {
   pointer-events: none;
   z-index: 99999;
 }
 
 .nprogress .bar {
-  background: #9c86a2;
+  background: $pink-progress;
 
   position: fixed;
   z-index: 99999;
@@ -19,10 +21,10 @@
 .nprogress .peg {
   display: block;
   position: absolute;
-  right: 0px;
+  right: 0;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: 0 0 10px $pink-progress, 0 0 5px $pink-progress;
   opacity: 1.0;
 
   transform: rotate(3deg) translate(0px, -4px);
@@ -42,9 +44,9 @@
   height: 50px;
   box-sizing: border-box;
 
-  border: solid 6px transparent;
-  border-top-color: #b024d6;
-  border-left-color: #b024d6;
+  border: solid 7px transparent;
+  border-top-color: $pink-progress;
+  border-left-color: $pink-progress;
   border-radius: 50%;
 
   animation: nprogress-spinner 400ms linear infinite;
