@@ -16,8 +16,6 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
     const { darkMode, changeSideBarFold } = useCoreStore()
     const { scrollYProgress } = useScroll()
 
-    console.log(pathName)
-
     const [mount, setMount] = useState(false)
 
     useEffect(() => {

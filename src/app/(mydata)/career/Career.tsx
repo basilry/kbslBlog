@@ -1,17 +1,42 @@
 "use client"
 
-import { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import careerJson from "@lib/json/career.json"
+import axiosInstance from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { DateFormat, formatDate } from "@lib/utils/common"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/career.module.scss"
+
+interface ICareer {
+    id: number
+    title: string
+    startDate: string
+    endDate: string
+}
 
 const Career = (): ReactElement => {
     const { darkMode } = useCoreStore()
+
+    const [careerList, setCareerList] = useState<ICareer[]>([])
+
+    const getCareer = (): void => {
+        axiosInstance
+            .get("/career")
+            .then((res) => {
+                setCareerList(res.data.data)
+            })
+            .catch(() => {
+                toastCall("경력 정보를 불러오지 못했습니다.", "error")
+            })
+    }
+
+    useEffect(() => {
+        getCareer()
+    }, [])
 
     return (
         <Wrapper>
@@ -24,8 +49,11 @@ const Career = (): ReactElement => {
                         <br />
                         <LineBasic />
                         <br />
-                        {careerJson.map((row) => (
-                            <div key={row.id} className={classNames(styles.seminarBlock, darkMode && styles.dark)}>
+                        {careerList.map((row) => (
+                            <div
+                                key={row.id + "_" + row.startDate + "_" + row.title}
+                                className={classNames(styles.seminarBlock, darkMode && styles.dark)}
+                            >
                                 <TextBasic className={styles.wrapper} size="x-large" bold="bold">
                                     {row.title}
                                 </TextBasic>

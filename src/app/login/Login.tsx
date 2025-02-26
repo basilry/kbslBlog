@@ -18,7 +18,7 @@ const initLoginData: ILoginReqData = {
 
 const Login = (): ReactElement => {
     const router = useRouter()
-    const { loginState, setLoginState, setToken } = useLoginStore()
+    const { loginUser, loginState, setLoginState, setToken } = useLoginStore()
 
     const [loginData, setLoginData] = useState<ILoginReqData>(initLoginData)
 
@@ -38,8 +38,26 @@ const Login = (): ReactElement => {
             })
     }
 
+    const getMyInfo = (): void => {
+        if (loginUser.loginId) return
+
+        axiosInstance
+            .get("/users/me")
+            .then((res) => {
+                if (res.data.code === 200) {
+                    setLoginState(res.data.data)
+                }
+
+                toastCall("나의 정보 불러오기 완료", "success")
+            })
+            .catch(() => {
+                toastCall("나의 정보 불러오기 실패", "error")
+            })
+    }
+
     useEffect(() => {
         if (loginState) {
+            getMyInfo()
             router.replace("/")
         }
     }, [loginState, router])

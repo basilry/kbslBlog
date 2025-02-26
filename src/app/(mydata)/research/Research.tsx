@@ -1,18 +1,44 @@
 "use client"
 
-import { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import seminarJson from "@lib/json/seminar.json"
+import axiosInstance from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { formatDate } from "@lib/utils/common"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/career.module.scss"
+
+interface IResearch {
+    id: number
+    title: string
+    subTitle?: string
+    date: string
+    url?: string
+}
 
 const Research = (): ReactElement => {
     const { darkMode } = useCoreStore()
+
+    const [researchList, setResearchList] = useState<IResearch[]>([])
+
+    const getCareer = (): void => {
+        axiosInstance
+            .get("/research")
+            .then((res) => {
+                setResearchList(res.data.data)
+            })
+            .catch(() => {
+                toastCall("자격/수료 정보를 불러오지 못했습니다.", "error")
+            })
+    }
+
+    useEffect(() => {
+        getCareer()
+    }, [])
 
     return (
         <Wrapper>
@@ -30,9 +56,9 @@ const Research = (): ReactElement => {
                     <br />
                     <LineBasic />
                     <br />
-                    {seminarJson.map((seminar) => (
+                    {researchList.map((seminar) => (
                         <Link
-                            key={seminar.id + seminar.date}
+                            key={seminar.id + "_" + seminar.date + "_" + seminar.title}
                             href={seminar.url ?? "#"}
                             target={seminar.url ? "_blank" : ""}
                             scroll={false}
