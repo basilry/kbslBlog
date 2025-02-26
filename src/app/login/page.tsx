@@ -1,7 +1,8 @@
 import { ReactElement } from "react"
+import Login from "@app/login/Login"
 
 function Page(): ReactElement {
-    return <div>로그인해줭</div>
+    return <Login />
 }
 
 export default Page

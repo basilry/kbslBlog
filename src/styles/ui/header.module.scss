@@ -1,74 +1,114 @@
 @import '@styles/variable.scss';
 
 .headerWrapper {
-    height: 86px;
-    position: fixed;
+  height: 86px;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  background-color: $black-200;
+  width: 100%;
+  padding: 25px 30px 25px 30px;
+  z-index: 10;
+
+  &.darkMode {
+    transition: all 0.2s ease-in;
+    background-color: $black-800;
+  }
+
+  .leftWrapper {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    background-color: $black-200;
-    width: 100%;
-    padding: 25px 30px 25px 30px;
-    z-index: 10;
 
-    &.darkMode {
-        transition: all 0.2s ease-in;
-        background-color: $black-800;
+    .hamberger {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
     }
 
-    .leftWrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .linkBlock {
+      display: flex;
 
-        .hamberger {
-            display: flex;
-            align-items: center;
-            margin-right: 10px;
-            cursor: pointer;
-            &:hover {
-                opacity: 0.5;
-            }
+      .rootLink {
+        margin-right: 10px;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+
+      .menuLink {
+        margin-left: 10px;
+
+        &:hover {
+          color: $black-400;
         }
 
-        .linkBlock {
-            display: flex;
-            .rootLink {
-                margin-right: 10px;
-                &:hover {
-                    opacity: 0.5;
-                }
-            }
-            .menuLink {
-                margin-left: 10px;
-                &:hover {
-                    color: $black-400;
-                }
-                @include TABLET {
-                    display: none;
-                }
-            }
-            
+        @include TABLET {
+          display: none;
         }
+      }
+
+    }
+  }
+
+  .rightWrapper {
+    display: flex;
+    align-items: center;
+
+    .darkToggleWrapper {
+      margin-right: 10px;
     }
 
-    .rightWrapper {
-        display: flex;
-        align-items: center;
-        // margin-bottom: 8px;
-        .darkToggleWrapper {
-            margin-right: 10px;
-        }
-        a {
-            margin-right: 10px;
+    .login {
+      display: flex;
+      justify-content: center;
+      align-content: center;
 
-            &:hover {
-                color: $black-400;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
+      &:hover {
+        opacity: 0.5;
+      }
     }
+
+    .profile {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+
+      border: 1px solid $black-800;
+      border-radius: 20px;
+
+      &:hover {
+        opacity: 0.5;
+      }
+
+      &.darkProfile {
+        border: 1px solid $black-400;
+      }
+    }
+
+    a {
+      margin-right: 10px;
+
+      &:hover {
+        color: $black-400;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .loginBlock {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 
 }

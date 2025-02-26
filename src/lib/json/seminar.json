@@ -124,5 +124,12 @@
     "subTitle": "개인학습",
     "date": "20250213",
     "url": "https://github.com/basilry/codeit-fs03-p4-jest-fe"
+  },
+  {
+    "id": 25,
+    "title": "Spring Security + JWT",
+    "subTitle": "개인학습",
+    "date": "20250225",
+    "url": "https://basilry-kim-frontend.notion.site/Spirng-Security-JWT-1a5e178e475d80709bd5eaf87ba3be7b?pvs=4"
   }
 ]

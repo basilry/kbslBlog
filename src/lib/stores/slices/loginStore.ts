@@ -1,27 +1,34 @@
 import { StateCreator } from "zustand"
-import { ILoginUser, loginUserInitData } from "@interface/IUser"
-import { login } from "@lib/api/service/loginService"
+import { ILoginUser, IToken, loginUserInitData } from "@interface/IUser"
 
-export interface IStoreLogin {
-    loginState: boolean
-    loginUser: ILoginUser
-    doLogin: (param: ILoginUser) => Promise<void>
+export const initialState = {
+    loginState: false,
+    loginUser: { ...loginUserInitData },
+    token: {
+        accessToken: "",
+        refreshToken: "",
+    },
 }
 
 export const loginStore: StateCreator<IStoreLogin> = (set) => ({
     loginState: false,
     loginUser: { ...loginUserInitData },
-    doLogin: async (param: ILoginUser): Promise<void> => {
-        console.log(param)
-
-        const result = await login(param)
-        const { data } = result
-
-        if (data.returnCode === "100") {
-            set({ loginState: true, loginUser: param })
-        } else {
-            set({ loginState: false, loginUser: { ...loginUserInitData } })
-            alert("login failed")
-        }
+    token: {
+        accessToken: "",
+        refreshToken: "",
     },
+    setToken: (token: IToken) => set(() => ({ token })),
+    setLoginState: (loginState: boolean) => set(() => ({ loginState })),
+    setLoginUser: (loginUser: ILoginUser) => set(() => ({ loginUser })),
+    initialize: () => set({ ...initialState }),
 })
+
+export interface IStoreLogin {
+    loginState: boolean
+    loginUser: ILoginUser
+    token: IToken
+    setToken: (token: IToken) => void
+    setLoginState: (state: boolean) => void
+    setLoginUser: (user: ILoginUser) => void
+    initialize: () => void
+}

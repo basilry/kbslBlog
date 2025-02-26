@@ -5,8 +5,10 @@ import GitHubCalendar, { Activity } from "react-github-calendar"
 import { motion } from "framer-motion"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
-import { useCoreStore } from "@lib/stores/store"
+import axiosInstance from "@lib/api/axiosInstance"
+import { useCoreStore, useLoginStore } from "@lib/stores/store"
 import { BACK_YEAR, FRONT_YEAR, FULL_YEAR, TOTAL_YEAR } from "@lib/utils/constants"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/landing.module.scss"
 
 interface IYearMonthBlock {
@@ -125,6 +127,7 @@ const ScrollGithubCalendarWrapper = ({ children, delay, className }: IScrollGith
 
 const Landing = (): ReactElement => {
     const { darkMode, changeNowMenuName } = useCoreStore()
+    const { loginState, loginUser, setLoginState } = useLoginStore()
     const sectionRefs = useRef<any[]>([])
 
     const [totalYear, setTotalYear] = useState(0)
@@ -202,6 +205,27 @@ const Landing = (): ReactElement => {
             )
         })
     }
+
+    const getMyInfo = (): void => {
+        axiosInstance
+            .get("/users/me")
+            .then((res) => {
+                if (res.status === 200) {
+                    setLoginState(res.data.data)
+                }
+
+                toastCall("나의 정보 불러오기 완료", "success")
+            })
+            .catch(() => {
+                toastCall("나의 정보 불러오기 실패", "error")
+            })
+    }
+
+    useEffect(() => {
+        if (loginState) {
+            getMyInfo()
+        }
+    }, [])
 
     useEffect(() => {
         changeNowMenuName("")

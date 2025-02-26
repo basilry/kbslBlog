@@ -42,6 +42,12 @@ axiosInstance.interceptors.request.use(
 )
 
 axiosInstance.interceptors.request.use((config): InternalAxiosRequestConfig => {
+    const accessToken = JSON.parse(localStorage.getItem("login") || "").state.token.accessToken
+
+    if (accessToken) {
+        config.headers["Authorization"] = `Bearer ${accessToken}`
+    }
+
     return config
 })
 
