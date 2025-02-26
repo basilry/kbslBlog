@@ -18,7 +18,7 @@ const initLoginData: ILoginReqData = {
 
 const Login = (): ReactElement => {
     const router = useRouter()
-    const { loginUser, loginState, setLoginState, setToken } = useLoginStore()
+    const { loginUser, loginState, setLoginState, setLoginUser, setToken } = useLoginStore()
 
     const [loginData, setLoginData] = useState<ILoginReqData>(initLoginData)
 
@@ -29,6 +29,8 @@ const Login = (): ReactElement => {
                 if (res.status === 200) {
                     setLoginState(true)
                     setToken(res.data.data)
+
+                    getMyInfo()
                 }
 
                 toastCall("로그인 성공", "success")
@@ -45,7 +47,7 @@ const Login = (): ReactElement => {
             .get("/users/me")
             .then((res) => {
                 if (res.data.code === 200) {
-                    setLoginState(res.data.data)
+                    setLoginUser(res.data.data)
                 }
 
                 toastCall("나의 정보 불러오기 완료", "success")
@@ -57,7 +59,6 @@ const Login = (): ReactElement => {
 
     useEffect(() => {
         if (loginState) {
-            getMyInfo()
             router.replace("/")
         }
     }, [loginState, router])

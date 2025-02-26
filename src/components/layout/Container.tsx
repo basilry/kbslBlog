@@ -24,7 +24,7 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
 
     return mount ? (
         <div className={classNames(styles.container, darkMode && styles.darkMode)}>
-            <motion.div className={styles.progressBar} style={{ scaleX: scrollYProgress || 0 }} />
+            <motion.div className={styles.progressBar} style={{ scaleX: scrollYProgress ? scrollYProgress : 0 }} />
             <Header />
             <Sidebar />
             <div className={styles.body} onClick={(): void => changeSideBarFold(false)}>

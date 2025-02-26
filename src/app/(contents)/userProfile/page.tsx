@@ -1,5 +1,8 @@
-const page = (): JSX.Element => {
-    return <div>유저프로필입니다요</div>
+import { ReactElement } from "react"
+import UserProfile from "@app/(contents)/userProfile/UserProfile"
+
+const page = (): ReactElement => {
+    return <UserProfile />
 }
 
 export default page

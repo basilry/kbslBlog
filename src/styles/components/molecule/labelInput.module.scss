@@ -1,0 +1,11 @@
+@import "@styles/variable.scss";
+
+.labelInputWrapper {
+  display: flex;
+  flex-direction: column;
+
+  .labelInput_input {
+    margin-top: 12px;
+    margin-bottom: 7px;
+  }
+}

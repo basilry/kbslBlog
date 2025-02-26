@@ -5,8 +5,12 @@ export interface ILoginReqData {
 
 export interface ILoginUser {
     loginId: string
-    password: string
-    profileImg?: string
+    email: string
+    name: string
+    phoneNumber: string
+    role: string
+    description: string
+    profileImg: string
 }
 
 export interface IToken {
@@ -16,6 +20,10 @@ export interface IToken {
 
 export const loginUserInitData: ILoginUser = {
     loginId: "",
-    password: "",
+    email: "",
+    name: "",
+    phoneNumber: "",
+    role: "",
+    description: "",
     profileImg: "",
 }
