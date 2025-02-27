@@ -7,6 +7,7 @@ import ImageUploadBasic from "@components/atom/ImageUploadBasic"
 import Wrapper from "@components/layout/Wrapper"
 import LabelInput from "@components/molecule/LabelInput"
 import { ILoginUser } from "@interface/IUser"
+import { axiosInstance } from "@lib/api/axiosInstance"
 import { useLoginStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/userProfile.module.scss"
@@ -14,10 +15,47 @@ import styles from "@styles/pages/userProfile.module.scss"
 const UserProfile = (): ReactElement => {
     const router = useRouter()
 
-    const { loginState, loginUser } = useLoginStore()
+    const { loginState, loginUser, setLoginUser } = useLoginStore()
 
     const [userData, setUserData] = useState<ILoginUser>(loginUser)
     const [isEdit, setIsEdit] = useState(false)
+
+    const getMyInfo = (): void => {
+        axiosInstance
+            .get("/users/me")
+            .then((res) => {
+                if (res.data.code === 200) {
+                    setLoginUser(res.data.data)
+                }
+
+                toastCall("나의 정보 불러오기 완료", "success")
+            })
+            .catch(() => {
+                toastCall("나의 정보 불러오기 실패", "error")
+            })
+    }
+
+    const saveMyInfo = (): void => {
+        axiosInstance
+            .put("/users/me", userData)
+            .then((res) => {
+                if (res.data.code === 200) {
+                    setLoginUser(userData)
+                }
+
+                toastCall("나의 정보 수정 완료", "success")
+                setIsEdit(false)
+
+                getMyInfo()
+            })
+            .catch(() => {
+                toastCall("나의 정보 수정 실패", "error")
+            })
+    }
+
+    useEffect(() => {
+        getMyInfo()
+    }, [])
 
     useEffect(() => {
         if (!loginState || !loginUser.loginId) {
@@ -46,6 +84,16 @@ const UserProfile = (): ReactElement => {
                     errorMsg={"아이디를 확인해주세요"}
                 />
                 <LabelInput required value={userData.role} label={"역할"} disabled />
+                <LabelInput
+                    required
+                    value={userData.name}
+                    onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+                    label={"이름"}
+                    validation={"name"}
+                    maxLength={20}
+                    disabled={!isEdit}
+                    errorMsg={"이름을 확인해주세요"}
+                />
                 <LabelInput
                     required
                     value={userData.email}
@@ -78,7 +126,15 @@ const UserProfile = (): ReactElement => {
                     label={isEdit ? "저장" : "수정"}
                     fontSize={"large"}
                     fontWeight={"bold"}
-                    onClick={() => setIsEdit(!isEdit)}
+                    type={isEdit ? "" : "reset"}
+                    onClick={() => {
+                        if (!isEdit) {
+                            setIsEdit(true)
+                            toastCall("유저 프로필 수정을 시작합니다", "success")
+                        } else {
+                            saveMyInfo()
+                        }
+                    }}
                 />
             </div>
         </Wrapper>

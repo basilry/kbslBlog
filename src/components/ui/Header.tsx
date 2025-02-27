@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement } from "react"
 import { useRouter } from "next-nprogress-bar"
 import Image from "next/image"
 import Link from "next/link"
@@ -17,8 +17,6 @@ function Header(): ReactElement {
     const { loginUser, loginState, initialize } = useLoginStore()
     const router = useRouter()
 
-    const [image, setImage] = useState<string>("")
-
     const doSetImgSrc = (darkMode: boolean, loginState: boolean): string => {
         if (darkMode) {
             return loginState ? "/logout_white.svg" : "/login_white.svg"
@@ -26,18 +24,6 @@ function Header(): ReactElement {
             return loginState ? "/logout.svg" : "/login.svg"
         }
     }
-
-    useEffect(() => {
-        if (loginUser.profileImg) {
-            const reader = new FileReader()
-            reader.onloadend = (): void => {
-                setImage(reader.result as string)
-            }
-            reader.readAsDataURL(loginUser.profileImg as Blob)
-        } else {
-            setImage("")
-        }
-    }, [loginUser.profileImg])
 
     return (
         <div
@@ -103,7 +89,7 @@ function Header(): ReactElement {
                 {loginState && (
                     <Link href="/userProfile">
                         <div className={classNames(styles.profile, darkMode && styles.darkProfile)}>
-                            <Image src={image || "/myFace.png"} alt={"user"} width={25} height={25} />
+                            <Image src={loginUser.profileImg || "/myFace.png"} alt={"user"} width={25} height={25} />
                         </div>
                     </Link>
                 )}

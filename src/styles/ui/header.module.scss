@@ -82,6 +82,7 @@
 
       border: 1px solid $black-800;
       border-radius: 20px;
+      overflow: auto;
 
       &:hover {
         opacity: 0.5;

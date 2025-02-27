@@ -12,11 +12,12 @@ type ILabelInputProps = IInputBasicProps & {
     errorMsg?: string
 }
 
-type TLabelInputValidation = "email" | "password" | "phoneNumber"
+type TLabelInputValidation = "name" | "email" | "password" | "phoneNumber"
 
 const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
 const phoneNumberReg = /^01[0-9]{1}[0-9]{3,4}[0-9]{4}$/
+const nameReg = /^[a-zA-Z0-9가-힣]{1,20}$/
 
 const LabelInput = (props: ILabelInputProps): ReactElement => {
     const { label, required, validation, errorMsg, value, ...rest } = props
@@ -26,6 +27,8 @@ const LabelInput = (props: ILabelInputProps): ReactElement => {
     const handleError = useCallback(
         (type: TLabelInputValidation): boolean => {
             switch (type) {
+                case "name":
+                    return !nameReg.test(value)
                 case "email":
                     return !emailReg.test(value)
                 case "password":

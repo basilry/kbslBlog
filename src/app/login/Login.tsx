@@ -6,7 +6,7 @@ import ButtonBasic from "@components/atom/ButtonBasic"
 import InputBasic from "@components/atom/InputBasic"
 import TextBasic from "@components/atom/TextBasic"
 import { ILoginReqData } from "@interface/IUser"
-import axiosInstance from "@lib/api/axiosInstance"
+import { axiosInstance } from "@lib/api/axiosInstance"
 import { useLoginStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/login.module.scss"
@@ -21,6 +21,7 @@ const Login = (): ReactElement => {
     const { loginUser, loginState, setLoginState, setLoginUser, setToken } = useLoginStore()
 
     const [loginData, setLoginData] = useState<ILoginReqData>(initLoginData)
+    console.log(loginUser, loginData)
 
     const doLogin = (): void => {
         axiosInstance

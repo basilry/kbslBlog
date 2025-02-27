@@ -1,16 +1,17 @@
 "use client"
 
-import { ReactElement, useEffect, useRef, useState } from "react"
+import { ChangeEvent, ReactElement, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import classNames from "classnames"
 import { IFile } from "@interface/IRoot"
 import { useCoreStore } from "@lib/stores/store"
+import { convertFileToBase64 } from "@lib/utils/common"
 import styles from "@styles/components/atom/imageUpload.module.scss"
 
 interface IImageUploadBasicProps {
-    onChange: (e: File) => void
+    onChange: (e: string) => void
     disabled?: boolean
-    file?: IFile
+    file?: IFile | string | null
 }
 
 const ImageUploadBasic = (props: IImageUploadBasicProps): ReactElement => {
@@ -22,13 +23,21 @@ const ImageUploadBasic = (props: IImageUploadBasicProps): ReactElement => {
 
     const [image, setImage] = useState<string>("")
 
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files && e.target.files[0]
+        if (!selectedFile) return
+
+        const base64 = await convertFileToBase64(selectedFile)
+        onChange(base64)
+    }
+
     useEffect(() => {
         if (file) {
-            const reader = new FileReader()
-            reader.onloadend = (): void => {
-                setImage(reader.result as string)
+            if (typeof file === "string") {
+                setImage(file)
+            } else {
+                convertFileToBase64(file as File).then((base64) => setImage(base64))
             }
-            reader.readAsDataURL(file as Blob)
         } else {
             setImage("")
         }
@@ -41,13 +50,7 @@ const ImageUploadBasic = (props: IImageUploadBasicProps): ReactElement => {
         >
             {!image && <Image src={darkMode ? "/user_white.svg" : "/user.svg"} alt={"user"} width={50} height={50} />}
             {image && <Image src={image} alt={"image"} fill style={{ objectFit: "cover" }} />}
-            <input
-                disabled={disabled}
-                ref={ref}
-                className={styles.input}
-                type={"file"}
-                onChange={(e) => e.target.files && onChange(e.target.files[0])}
-            />
+            <input disabled={disabled} ref={ref} className={styles.input} type={"file"} onChange={handleFileChange} />
         </div>
     )
 }

@@ -1,15 +1,6 @@
 import { StateCreator } from "zustand"
 import { ILoginUser, IToken, loginUserInitData } from "@interface/IUser"
 
-export const initialState = {
-    loginState: false,
-    loginUser: { ...loginUserInitData },
-    token: {
-        accessToken: "",
-        refreshToken: "",
-    },
-}
-
 export const loginStore: StateCreator<IStoreLogin> = (set) => ({
     loginState: false,
     loginUser: { ...loginUserInitData },
@@ -31,4 +22,13 @@ export interface IStoreLogin {
     setLoginState: (state: boolean) => void
     setLoginUser: (user: ILoginUser) => void
     initialize: () => void
+}
+
+export const initialState = {
+    loginState: false,
+    loginUser: { ...loginUserInitData },
+    token: {
+        accessToken: "",
+        refreshToken: "",
+    },
 }

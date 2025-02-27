@@ -1,8 +1,16 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios"
 
-const axiosInstance: AxiosInstance = axios.create({
+export const axiosInstance: AxiosInstance = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}`,
     headers: { "Content-Type": "application/json; charset=utf-8" },
+    responseType: "json",
+    withCredentials: true,
+    timeout: 5000,
+})
+
+export const axiosInstanceMultipart: AxiosInstance = axios.create({
+    baseURL: `${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}`,
+    headers: { "Content-Type": "multipart/form-data" },
     responseType: "json",
     withCredentials: true,
     timeout: 5000,
@@ -34,18 +42,25 @@ const responseErrorHandler = (error: any): Promise<any> => {
     })
 }
 
-axiosInstance.interceptors.request.use()
-
 axiosInstance.interceptors.request.use(
     (request: any): Promise<any> => requestSuccessHandler(request),
     (error: any): Promise<any> => requestErrorHandler(error),
 )
 
 axiosInstance.interceptors.request.use((config): InternalAxiosRequestConfig => {
-    const accessToken = JSON.parse(localStorage.getItem("login") || "").state.token.accessToken
-
-    if (accessToken) {
-        config.headers["Authorization"] = `Bearer ${accessToken}`
+    if (typeof window !== "undefined") {
+        const loginData = localStorage.getItem("login")
+        if (loginData) {
+            try {
+                const parsed = JSON.parse(loginData)
+                const accessToken = parsed.state?.token?.accessToken
+                if (accessToken) {
+                    config.headers["Authorization"] = `Bearer ${accessToken}`
+                }
+            } catch (error) {
+                console.error("Failed to parse login data", error)
+            }
+        }
     }
 
     return config
@@ -56,4 +71,31 @@ axiosInstance.interceptors.response.use(
     (error: any): Promise<any> => responseErrorHandler(error),
 )
 
-export default axiosInstance
+axiosInstanceMultipart.interceptors.request.use(
+    (request: any): Promise<any> => requestSuccessHandler(request),
+    (error: any): Promise<any> => requestErrorHandler(error),
+)
+
+axiosInstanceMultipart.interceptors.request.use((config): InternalAxiosRequestConfig => {
+    if (typeof window !== "undefined") {
+        const loginData = localStorage.getItem("login")
+        if (loginData) {
+            try {
+                const parsed = JSON.parse(loginData)
+                const accessToken = parsed.state?.token?.accessToken
+                if (accessToken) {
+                    config.headers["Authorization"] = `Bearer ${accessToken}`
+                }
+            } catch (error) {
+                console.error("Failed to parse login data", error)
+            }
+        }
+    }
+
+    return config
+})
+
+axiosInstanceMultipart.interceptors.response.use(
+    (response: any): Promise<any> => responseSuccessHandler(response),
+    (error: any): Promise<any> => responseErrorHandler(error),
+)

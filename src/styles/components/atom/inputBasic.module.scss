@@ -38,7 +38,8 @@
     }
 
     &.disabled {
-      color: $black-200;
+      color: $black-500;
+      background-color: $black-100;
       border: 1px solid $black-400;
 
       &:hover {

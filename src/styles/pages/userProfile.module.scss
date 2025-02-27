@@ -1,10 +1,12 @@
 @import "@styles/variable.scss";
 
 .userProfileWrapper {
-  min-width: 30vh;
-  margin: 0 120px 120px 120px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
+
+  margin-bottom: 120px;
+  padding: 0 10vw;
 
   .imgWrapper {
     width: 100%;

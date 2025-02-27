@@ -23,6 +23,18 @@
       background-color: $pink-ligthen;
     }
 
+    &.submit {
+      background-color: $green-default;
+    }
+
+    &.reset {
+      background-color: $orangeCinamon;
+    }
+
+    &.cancel {
+      background-color: $red-default;
+    }
+
     // 폰트사이즈
     &.xx-small {
       font-size: $xx-small-font;
