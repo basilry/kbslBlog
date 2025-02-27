@@ -3,8 +3,7 @@ import classNames from "classnames"
 import { TTextBold, TTextSize } from "@components/atom/TextBasic"
 import styles from "@styles/components/atom/buttonBasic.module.scss"
 
-interface IButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, "className"> {
-    className?: string
+interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
     label: string
     onClick: () => void
     fontSize?: TTextSize

@@ -2,5 +2,19 @@
 
 .userProfileWrapper {
   min-width: 30vh;
-  margin: 0 120px;
+  margin: 0 120px 120px 120px;
+  display: flex;
+  flex-direction: column;
+
+  .imgWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .eachButton {
+    margin-top: 100px;
+    width: 100%;
+  }
 }

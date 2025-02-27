@@ -1,3 +1,5 @@
+import { IFile } from "@interface/IRoot"
+
 export interface ILoginReqData {
     loginId: string
     password: string
@@ -10,7 +12,7 @@ export interface ILoginUser {
     phoneNumber: string
     role: string
     description: string
-    profileImg: string
+    profileImg: IFile
 }
 
 export interface IToken {
@@ -25,5 +27,5 @@ export const loginUserInitData: ILoginUser = {
     phoneNumber: "",
     role: "",
     description: "",
-    profileImg: "",
+    profileImg: {},
 }

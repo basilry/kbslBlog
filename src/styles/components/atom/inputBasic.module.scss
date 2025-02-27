@@ -11,35 +11,43 @@
     padding: 7px 8px;
     height: 50px;
 
-    border: 2px solid $pink-ligthen;
+    border: 1px solid $pink-ligthen;
 
     &:focus {
-      border: 2px solid $pink-pressed;
+      border: 1px solid $pink-pressed;
     }
 
     &:hover {
-      border: 2px solid $pink-hover;
+      border: 1px solid $pink-hover;
     }
 
     &.dark {
-      border: 2px solid $pink-ligthen;
+      border: 1px solid $pink-ligthen;
 
       &:focus {
-        border: 2px solid $pink-pressed;
+        border: 1px solid $pink-pressed;
       }
 
       &:hover {
-        border: 2px solid $pink-hover;
+        border: 1px solid $pink-hover;
+      }
+
+      &.disabled {
+        color: $black-500;
       }
     }
 
     &.disabled {
-      background-color: $black-500;
       color: $black-200;
       border: 1px solid $black-400;
 
       &:hover {
+        border: 1px solid $black-400;
         cursor: not-allowed;
+      }
+
+      &:focus {
+        border: 1px solid $black-400;
       }
     }
 

@@ -1,11 +1,26 @@
 @import "@styles/variable.scss";
 
 .labelInputWrapper {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
+
+  .labelWrapper {
+    display: flex;
+    gap: 3px;
+
+    .red {
+      color: $pink-pressed;
+    }
+  }
 
   .labelInput_input {
     margin-top: 12px;
     margin-bottom: 7px;
+  }
+
+  .errMsg {
+    margin-top: 5px;
+    color: $red-default;
   }
 }

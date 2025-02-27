@@ -4,3 +4,12 @@ export interface ILogo {
     width?: number
     height?: number
 }
+
+export interface IFile {
+    lastModified?: number
+    lastModifiedDate?: Date
+    name?: string
+    size?: number
+    type?: string
+    webkitRelativePath?: string
+}
