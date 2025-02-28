@@ -21,7 +21,6 @@ const Login = (): ReactElement => {
     const { loginUser, loginState, setLoginState, setLoginUser, setToken } = useLoginStore()
 
     const [loginData, setLoginData] = useState<ILoginReqData>(initLoginData)
-    console.log(loginUser, loginData)
 
     const doLogin = (): void => {
         axiosInstance

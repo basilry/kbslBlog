@@ -3,11 +3,13 @@
 import { HTMLAttributes, ReactElement } from "react"
 import classNames from "classnames"
 import { TTextBold, TTextSize } from "@components/atom/TextBasic"
+import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/atom/buttonBasic.module.scss"
 
 interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
-    label: string
     onClick: () => void
+    children?: ReactElement
+    label?: string
     fontSize?: TTextSize
     fontWeight?: TTextBold
     buttonWrapperStyle?: string
@@ -15,10 +17,21 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: TButtonType
 }
 
-type TButtonType = "submit" | "reset" | ""
+type TButtonType = "submit" | "reset" | "icon" | ""
 
 const ButtonBasic = (props: IButtonProps): ReactElement => {
-    const { buttonWrapperStyle, buttonStyle, fontSize = "medium", fontWeight = "normal", label, type, ...rest } = props
+    const {
+        buttonWrapperStyle,
+        buttonStyle,
+        fontSize = "medium",
+        fontWeight = "normal",
+        label,
+        type,
+        children,
+        ...rest
+    } = props
+
+    const { darkMode } = useCoreStore()
 
     return (
         <div className={classNames(styles.buttonWrapper, buttonWrapperStyle)}>
@@ -29,10 +42,12 @@ const ButtonBasic = (props: IButtonProps): ReactElement => {
                     styles[fontSize],
                     styles[fontWeight],
                     type && styles[type],
+                    !darkMode && styles.white,
                 )}
                 {...rest}
             >
-                {label}
+                {label && label}
+                {children && children}
             </button>
         </div>
     )

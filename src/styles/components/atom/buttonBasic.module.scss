@@ -12,6 +12,20 @@
     padding: 7px 8px;
     height: 50px;
 
+    @include TABLET {
+      height: 40px;
+    }
+
+    @include MOBILE {
+      height: 30px;
+      padding: 5px 6px;
+    }
+
+    @include S_MOBILE {
+      height: 25px;
+      padding: 4px 5px;
+    }
+
     background-color: $pink-pressed;
     color: white;
 
@@ -20,7 +34,7 @@
     }
 
     &:active {
-      background-color: $pink-ligthen;
+      opacity: 0.6;
     }
 
     &.submit {
@@ -33,6 +47,17 @@
 
     &.cancel {
       background-color: $red-default;
+    }
+
+    &.icon {
+      height: 30px;
+      width: 100%;
+      padding: 2px;
+      background-color: $black-500;
+
+      &.white {
+        background-color: $black-100;
+      }
     }
 
     // 폰트사이즈

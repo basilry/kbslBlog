@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement, useEffect } from "react"
+import { ReactElement } from "react"
 import { useRouter } from "next-nprogress-bar"
 import Image from "next/image"
 import Link from "next/link"
@@ -14,10 +14,12 @@ import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/ui/header.module.scss"
 
 function Header(): ReactElement {
-    const { darkMode, changeSideBarFold, nowMenuName, changeNowMenuName } = useCoreStore()
+    const { darkMode, changeSideBarFold, changeNowMenuName } = useCoreStore()
     const { loginUser, loginState, initialize } = useLoginStore()
     const router = useRouter()
     const pathName = usePathname()
+
+    const nowMenuName = pathName.split("/")[pathName.split("/").length - 1].toUpperCase()
 
     const doSetImgSrc = (darkMode: boolean, loginState: boolean): string => {
         if (darkMode) {
@@ -26,11 +28,6 @@ function Header(): ReactElement {
             return loginState ? "/logout.svg" : "/login.svg"
         }
     }
-
-    useEffect(() => {
-        console.log(pathName)
-        // changeNowMenuName()
-    }, [pathName])
 
     return (
         <div

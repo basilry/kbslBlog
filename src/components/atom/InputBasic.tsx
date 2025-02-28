@@ -4,7 +4,7 @@ import { TTextBold, TTextSize } from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/atom/inputBasic.module.scss"
 
-export interface IInputBasicProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface IInputBasicProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
     value: string
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void
     placeholder?: string
@@ -13,12 +13,15 @@ export interface IInputBasicProps extends InputHTMLAttributes<HTMLInputElement> 
     fontWeight?: TTextBold
     inputWrapperStyle?: string
     inputStyle?: string
+    type?: TInputBasicType
 }
+
+type TInputBasicType = "" | "title"
 
 const InputBasic = (props: IInputBasicProps): ReactElement => {
     const { darkMode } = useCoreStore()
 
-    const { inputWrapperStyle, inputStyle, fontSize = "small", fontWeight = "normal", disabled, ...rest } = props
+    const { inputWrapperStyle, inputStyle, fontSize = "small", fontWeight = "normal", disabled, type, ...rest } = props
 
     return (
         <div className={classNames(styles.inputBasicWrapper, inputWrapperStyle)}>
@@ -30,6 +33,7 @@ const InputBasic = (props: IInputBasicProps): ReactElement => {
                     styles[fontWeight],
                     disabled && styles.disabled,
                     darkMode && styles.dark,
+                    type && styles[type],
                 )}
                 type={"text"}
                 disabled={disabled}

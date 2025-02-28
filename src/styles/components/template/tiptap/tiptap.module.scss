@@ -1,0 +1,41 @@
+@import "@styles/variable.scss";
+
+
+.titleEditor {
+  position: relative;
+  margin-bottom: 10px;
+  border: 1px solid $black-200;
+  border-radius: 8px;
+  background-color: $black-300;
+  min-height: 50px;
+  height: 100%;
+
+  cursor: text;
+
+  &.dark {
+    color: $black-800;
+  }
+}
+
+.contentsEditor {
+  position: relative;
+  margin-top: 10px;
+  border: 1px solid $black-200;
+  border-radius: 8px;
+  background-color: $black-300;
+  //background-color: white;
+  min-height: 800px;
+  height: 100%;
+  margin-bottom: 70px;
+
+  cursor: text;
+
+  &.dark {
+    color: $black-800;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+

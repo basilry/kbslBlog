@@ -20,6 +20,7 @@ interface ICareer {
 
 const Career = (): ReactElement => {
     const { darkMode } = useCoreStore()
+    // const { loginState } = useLoginStore()
 
     const [careerList, setCareerList] = useState<ICareer[]>([])
 
@@ -43,9 +44,19 @@ const Career = (): ReactElement => {
             <div className={styles.wholeWrapper}>
                 <div className={styles.careerBlock}>
                     <div className={styles.careerParagraphs}>
-                        <TextBasic size="xxx-large" bold="bold">
-                            {"Career Now | 경력"}
-                        </TextBasic>
+                        <div className={styles.headerWrapper}>
+                            <TextBasic className={styles.title} size="xxx-large" bold="bold">
+                                {"Career Now | 경력"}
+                            </TextBasic>
+                            {/*{loginState && (*/}
+                            {/*    <ButtonBasic*/}
+                            {/*        label={"경력 등록"}*/}
+                            {/*        onClick={() => console.log("")}*/}
+                            {/*        buttonWrapperStyle={styles.saveBtn}*/}
+                            {/*        type={""}*/}
+                            {/*    />*/}
+                            {/*)}*/}
+                        </div>
                         <br />
                         <LineBasic />
                         <br />
