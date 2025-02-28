@@ -1,9 +1,10 @@
 "use client"
 
-import { ReactElement } from "react"
+import { ReactElement, useEffect } from "react"
 import { useRouter } from "next-nprogress-bar"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import classNames from "classnames"
 import DarkModeBasic from "@components/atom/DarkModeBasic"
 import TextBasic from "@components/atom/TextBasic"
@@ -16,6 +17,7 @@ function Header(): ReactElement {
     const { darkMode, changeSideBarFold, nowMenuName, changeNowMenuName } = useCoreStore()
     const { loginUser, loginState, initialize } = useLoginStore()
     const router = useRouter()
+    const pathName = usePathname()
 
     const doSetImgSrc = (darkMode: boolean, loginState: boolean): string => {
         if (darkMode) {
@@ -24,6 +26,11 @@ function Header(): ReactElement {
             return loginState ? "/logout.svg" : "/login.svg"
         }
     }
+
+    useEffect(() => {
+        console.log(pathName)
+        // changeNowMenuName()
+    }, [pathName])
 
     return (
         <div
@@ -87,7 +94,13 @@ function Header(): ReactElement {
                     <DarkModeBasic />
                 </div>
                 {loginState && (
-                    <Link href="/userProfile">
+                    <Link
+                        href="/userProfile"
+                        onClick={() => {
+                            router.push("/userProfile")
+                            toastCall("프로필 페이지로 이동합니다.", "success")
+                        }}
+                    >
                         <div className={classNames(styles.profile, darkMode && styles.darkProfile)}>
                             <Image src={loginUser.profileImg || "/myFace.png"} alt={"user"} width={25} height={25} />
                         </div>
