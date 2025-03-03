@@ -63,6 +63,7 @@
 body {
   font-family: $Pretendard;
   font-size: $large-font;
+  min-width: $breakpoint-miniMobile;
 }
 
 ul,

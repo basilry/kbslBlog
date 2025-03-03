@@ -1,0 +1,76 @@
+@import "@styles/variable.scss";
+
+.postListWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 15px;
+
+
+  .postListItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 20px;
+    border-bottom: 1px solid $black-400;
+    border-left: none;
+    border-right: none;
+
+    &.first {
+      border-top: 1px solid $black-400;
+    }
+
+
+    .arrow {
+      display: none;
+    }
+
+    &:hover {
+      background: $black-200;
+
+      .arrow {
+        display: block;
+        animation: arrow 0.5s;
+
+        @keyframes arrow {
+          0% {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      }
+    }
+
+    &.dark {
+      &:hover {
+        background: $black-600;
+      }
+    }
+
+    .itemTitle {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+
+    .itemBottom {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .thumbAndLike {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+      }
+    }
+
+
+  }
+}
