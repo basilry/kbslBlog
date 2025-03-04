@@ -8,6 +8,8 @@ import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
+import Pagination from "@components/template/Pagination"
+import { IPagination } from "@interface/IRoot"
 import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
@@ -26,6 +28,7 @@ const Post = (): ReactElement => {
     const { darkMode } = useCoreStore()
 
     const [postList, setPostList] = useState<IPost[]>([])
+    const [pagination, setPagination] = useState<IPagination<IPost>>({} as IPagination<IPost>)
 
     const handleCalDiffTime = (diff: number, createdAt: Date): string => {
         if (diff < 1) {
@@ -39,14 +42,17 @@ const Post = (): ReactElement => {
         }
     }
 
-    const getPosts = (): void => {
+    const getPosts = (page = 0): void => {
         axiosInstance
-            .get("/posts")
+            .get(`/posts?page=${page}`)
             .then((res) => {
-                setPostList(res.data)
+                setPostList(res.data.content)
+                setPagination(res.data)
+
+                toastCall("포스팅 목록을 불러왔습니다.", "success")
             })
             .catch(() => {
-                toastCall("포스팅 정보를 불러오지 못했습니다.", "error")
+                toastCall("포스팅 목록을 불러오지 못했습니다.", "error")
             })
     }
 
@@ -116,7 +122,7 @@ const Post = (): ReactElement => {
                     )
                 })}
             </div>
-            <div>123456789 - 페이지네이션 위치</div>
+            <Pagination {...pagination} onChangePage={(pageNum) => getPosts(pageNum)} />
         </Wrapper>
     )
 }

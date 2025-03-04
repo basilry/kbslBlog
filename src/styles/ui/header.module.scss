@@ -22,6 +22,7 @@
     justify-content: space-between;
 
     .hamberger {
+      transition: all 0.2s ease-in;
       display: flex;
       align-items: center;
       margin-right: 10px;
@@ -36,6 +37,7 @@
       display: flex;
 
       .rootLink {
+        transition: all 0.2s ease-in;
         margin-right: 10px;
 
         &:hover {
@@ -44,6 +46,7 @@
       }
 
       .menuLink {
+        transition: all 0.2s ease-in;
         margin-left: 10px;
 
         &:hover {
@@ -72,6 +75,7 @@
       align-content: center;
 
       &:hover {
+        transition: all 0.2s ease-in;
         opacity: 0.5;
       }
     }
@@ -86,6 +90,7 @@
       overflow: auto;
 
       &:hover {
+        transition: all 0.2s ease-in;
         opacity: 0.5;
       }
 
