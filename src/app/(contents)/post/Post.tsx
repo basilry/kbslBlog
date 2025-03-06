@@ -1,17 +1,19 @@
 "use client"
 
 import { ReactElement, useEffect, useState } from "react"
+import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
 import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
+import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import Pagination from "@components/template/Pagination"
 import { IPagination } from "@interface/IRoot"
 import { axiosInstance } from "@lib/api/axiosInstance"
-import { useCoreStore } from "@lib/stores/store"
+import { useCoreStore, useLoginStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/post.module.scss"
 
@@ -26,6 +28,9 @@ interface IPost {
 
 const Post = (): ReactElement => {
     const { darkMode } = useCoreStore()
+    const { loginUser, loginState } = useLoginStore()
+
+    const router = useRouter()
 
     const [postList, setPostList] = useState<IPost[]>([])
     const [pagination, setPagination] = useState<IPagination<IPost>>({} as IPagination<IPost>)
@@ -62,12 +67,26 @@ const Post = (): ReactElement => {
 
     return (
         <Wrapper>
-            <TextBasic size="xxx-large" bold="bold">
-                {"Post | 포스팅"}
-            </TextBasic>
+            <div className={styles.topWrapper}>
+                <TextBasic className={styles.topTitle} size="xxx-large" bold="bold">
+                    {"Post | 포스팅"}
+                </TextBasic>
+                {loginState && loginUser.loginId && (
+                    <ButtonBasic
+                        buttonWrapperStyle={styles.topButton}
+                        buttonStyle={styles.topButtonEach}
+                        type={"icon"}
+                        fontSize={"x-small"}
+                        onClick={() => router.push("/post/newPost")}
+                    >
+                        <Image src={darkMode ? "/pen_white.svg" : "/pen.svg"} alt={"plus"} width={25} height={25} />
+                    </ButtonBasic>
+                )}
+            </div>
             <br />
             <LineBasic />
             <br />
+            <div></div>
             <div className={styles.postListWrapper}>
                 {postList.map((post, index) => {
                     const diff = dayjs().diff(dayjs(post.createdAt), "hour")
@@ -90,22 +109,22 @@ const Post = (): ReactElement => {
                             >
                                 <div className={styles.itemLeft}>
                                     <div className={styles.itemTitle}>
-                                        {diff < 1 && <Image src={"/hot.svg"} alt={"hot"} width={20} height={25} />}
-                                        <TextBasic size="large" bold="bold">
+                                        {diff < 1 && <Image src={"/hot.svg"} alt={"hot"} width={20} height={20} />}
+                                        <TextBasic className={styles.title} size="medium" bold="bold">
                                             {post.title}
                                         </TextBasic>
                                     </div>
                                     <div className={styles.itemBottom}>
                                         <div className={styles.thumbAndLike}>
-                                            <Image src={"/thumbsUp.svg"} alt={"thumbsUp"} width={20} height={20} />
+                                            <Image src={"/thumbsUp.svg"} alt={"thumbsUp"} width={15} height={15} />
                                             <TextBasic size="small" bold={"normal"}>
                                                 {post.likeCount}
                                             </TextBasic>
                                         </div>
-                                        <TextBasic size="small" bold="normal">
+                                        <TextBasic size="x-small" bold="normal">
                                             {handleCalDiffTime(diff, post.createdAt)}
                                         </TextBasic>
-                                        <TextBasic size="small" bold="normal">
+                                        <TextBasic size="x-small" bold="normal">
                                             {"김바실리"}
                                         </TextBasic>
                                     </div>

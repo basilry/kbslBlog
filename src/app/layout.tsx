@@ -45,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     name="viewport"
                     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                 />
-                <title>{"KBSL's Blog"}</title>
+                <title>{"basilry.kim"}</title>
                 <link rel="icon" href="/myFace.png" />
             </head>
             <body id={mode}>

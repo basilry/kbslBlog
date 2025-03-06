@@ -19,7 +19,7 @@ function Header(): ReactElement {
     const router = useRouter()
     const pathName = usePathname()
 
-    const nowMenuName = pathName.split("/")[pathName.split("/").length - 1].toUpperCase()
+    const nowMenuName = pathName.split("/")[1].toUpperCase()
 
     const doSetImgSrc = (darkMode: boolean, loginState: boolean): string => {
         if (darkMode) {
@@ -58,7 +58,7 @@ function Header(): ReactElement {
                             }}
                         >
                             <TextBasic size="xx-large" bold="bold">
-                                {"KBSL's Blog"}
+                                {"basilry.kim"}
                             </TextBasic>
                         </Link>
                     </div>

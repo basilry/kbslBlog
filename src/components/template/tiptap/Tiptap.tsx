@@ -20,9 +20,6 @@ import html from "highlight.js/lib/languages/xml"
 import { all, createLowlight } from "lowlight"
 import classNames from "classnames"
 import InputBasic from "@components/atom/InputBasic"
-import LineBasic from "@components/atom/LineBasic"
-import TextBasic from "@components/atom/TextBasic"
-import Wrapper from "@components/layout/Wrapper"
 import TipTapToolbar from "@components/template/tiptap/TipTapToolbar"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/template/tiptap/tiptap.module.scss"
@@ -71,13 +68,7 @@ const Tiptap = (): ReactElement => {
     if (!contentsEditor) return <div>Loading...</div>
 
     return (
-        <Wrapper>
-            <TextBasic className={styles.title} size="xxx-large" bold="bold">
-                {"New Post | 새 글 쓰기"}
-            </TextBasic>
-            <br />
-            <LineBasic />
-            <br />
+        <div>
             <div className={classNames(styles.titleEditor, darkMode && styles.dark)}>
                 <InputBasic value={title} onChange={(e) => setTitle(e.target.value)} type={""} />
             </div>
@@ -90,7 +81,7 @@ const Tiptap = (): ReactElement => {
             >
                 <EditorContent editor={contentsEditor} />
             </div>
-        </Wrapper>
+        </div>
     )
 }
 

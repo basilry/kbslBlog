@@ -1,9 +1,29 @@
 @import "@styles/variable.scss";
 
+.topWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .topTitle {
+    width: 100%;
+  }
+
+  .topButton {
+    display: flex;
+    align-items: flex-end;
+    width: 50px;
+  }
+}
+
+
 .postListWrapper {
   display: flex;
   flex-direction: column;
   padding: 12px 15px;
+  margin-top: 25px;
 
 
   .postListItem {
@@ -52,14 +72,27 @@
       }
     }
 
-    .itemTitle {
+    .itemLeft {
+      width: 80%;
       display: flex;
-      flex-direction: row;
-      gap: 5px;
+      flex-direction: column;
+
+      .itemTitle {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 5px;
+
+        .title {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
     }
 
+
     .itemBottom {
-      margin-top: 15px;
+      margin-top: 10px;
       display: flex;
       flex-direction: row;
       gap: 20px;
@@ -67,6 +100,7 @@
       .thumbAndLike {
         display: flex;
         flex-direction: row;
+        align-items: center;
         gap: 5px;
       }
     }

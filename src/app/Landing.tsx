@@ -5,7 +5,7 @@ import GitHubCalendar, { Activity } from "react-github-calendar"
 import { motion } from "framer-motion"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
-import { useCoreStore, useLoginStore } from "@lib/stores/store"
+import { useCoreStore } from "@lib/stores/store"
 import { BACK_YEAR, FRONT_YEAR, FULL_YEAR, TOTAL_YEAR } from "@lib/utils/constants"
 import styles from "@styles/pages/landing.module.scss"
 
@@ -125,7 +125,6 @@ const ScrollGithubCalendarWrapper = ({ children, delay, className }: IScrollGith
 
 const Landing = (): ReactElement => {
     const { darkMode, changeNowMenuName } = useCoreStore()
-    const { loginState, loginUser, setLoginState } = useLoginStore()
     const sectionRefs = useRef<any[]>([])
 
     const [totalYear, setTotalYear] = useState(0)
