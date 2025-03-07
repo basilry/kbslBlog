@@ -27,3 +27,15 @@ export const convertFileToBase64 = (file: File): Promise<string> => {
         reader.onerror = (error): void => reject(error)
     })
 }
+
+export const handleCalDiffTime = (diff: number, createdAt: Date): string => {
+    if (diff < 1) {
+        return `${dayjs().diff(dayjs(createdAt), "minute")}분 전`
+    } else {
+        if (diff < 24) {
+            return `${diff}시간 전`
+        } else {
+            return `${dayjs().diff(dayjs(createdAt), "day")}일 전`
+        }
+    }
+}

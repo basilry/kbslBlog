@@ -1,0 +1,29 @@
+@import "@styles/variable.scss";
+
+.postDetailWrapper {
+  height: 100vh;
+
+  .titleWrapper {
+    display: flex;
+    gap: 5px;
+  }
+
+  .titleBottom {
+    margin-top: 30px;
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+
+
+    .thumbAndLike {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  .content {
+    margin-top: 30px;
+  }
+
+}

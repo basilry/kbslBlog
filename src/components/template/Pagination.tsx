@@ -2,17 +2,19 @@
 
 import { ReactElement, useEffect, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
+import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
 import { IPagination } from "@interface/IRoot"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/template/pagination.module.scss"
 
 interface IPaginationBasicProps<T> extends IPagination<T> {
-    onChangePage: (page: number) => void
+    path: string
 }
 
 function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
-    const { onChangePage, totalPages, pageable } = props
+    const { path, totalPages, pageable } = props
 
     const { darkMode } = useCoreStore()
 
@@ -27,22 +29,6 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
     const startIndex = currentGroup * pagesToShow
     const endIndex = Math.min(startIndex + pagesToShow, totalPages)
     const visiblePageNumbers = pageNumbers.slice(startIndex, endIndex)
-
-    // 이전 그룹 이동: 현재 그룹이 0보다 크면 이전 그룹의 첫 페이지로 이동
-    const handlePrevGroup = (): void => {
-        if (currentGroup > 0) {
-            const newPage = (currentGroup - 1) * pagesToShow
-            onChangePage(newPage)
-        }
-    }
-
-    // 다음 그룹 이동: endIndex가 totalPages보다 작으면 다음 그룹의 첫 페이지로 이동
-    const handleNextGroup = (): void => {
-        if (endIndex < totalPages) {
-            const newPage = currentGroup * pagesToShow + pagesToShow
-            onChangePage(newPage)
-        }
-    }
 
     const updatePagesToShow = (): void => {
         if (window.innerWidth < 768) {
@@ -60,56 +46,65 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
 
     return (
         <div className={styles.paginationWrapper}>
-            <Image
-                className={styles.arrow}
-                src={darkMode ? "/pagination/firstPage_white.svg" : "/pagination/firstPage.svg"}
-                alt={"first"}
-                width={30}
-                height={30}
-                onClick={() => onChangePage(0)}
-            />
-            <Image
-                className={styles.arrow}
-                src={darkMode ? "/pagination/arrowBack_white.svg" : "/pagination/arrowBack.svg"}
-                alt={"first"}
-                width={20}
-                height={20}
-                onClick={handlePrevGroup}
-            />
-            <div className={styles.pageNumWrapper}>
+            <Link
+                href={{
+                    pathname: `/${path}`,
+                    query: { page: 0 },
+                }}
+            >
+                <Image
+                    className={styles.arrow}
+                    src={darkMode ? "/pagination/firstPage_white.svg" : "/pagination/firstPage.svg"}
+                    alt={"first"}
+                    width={30}
+                    height={30}
+                />
+            </Link>
+            <Link href={{ pathname: `/${path}`, query: { page: currentPage - 1 } }}>
+                <Image
+                    className={styles.arrow}
+                    src={darkMode ? "/pagination/arrowBack_white.svg" : "/pagination/arrowBack.svg"}
+                    alt={"first"}
+                    width={20}
+                    height={20}
+                />
+            </Link>
+            <div className={classNames(styles.pageNumWrapper, darkMode && styles.dark)}>
                 {visiblePageNumbers.map((pageIndex) => {
                     const pageNum = pageIndex + 1 // 표시용 (1-based)
                     const isActive = pageIndex === currentPage // 현재 페이지 여부
 
                     return (
-                        <TextBasic
-                            key={pageIndex}
-                            size="medium"
-                            bold="bold"
+                        <Link
+                            href={{ pathname: `/${path}`, query: { page: pageIndex + 1 } }}
+                            key={pageIndex + 1}
                             className={isActive ? styles.active : styles.pageNum}
-                            onClick={() => onChangePage(pageIndex)}
                         >
-                            {pageNum}
-                        </TextBasic>
+                            <TextBasic size="medium" bold="bold">
+                                {pageNum}
+                            </TextBasic>
+                        </Link>
                     )
                 })}
             </div>
-            <Image
-                className={styles.arrow}
-                src={darkMode ? "/pagination/arrowForward_white.svg" : "/pagination/arrowForward.svg"}
-                alt={"first"}
-                width={20}
-                height={20}
-                onClick={handleNextGroup}
-            />
-            <Image
-                className={styles.arrow}
-                src={darkMode ? "/pagination/lastPage_white.svg" : "/pagination/lastPage.svg"}
-                alt={"first"}
-                width={30}
-                height={30}
-                onClick={() => onChangePage(totalPages - 1)}
-            />
+            <Link href={{ pathname: `/${path}`, query: { page: currentPage + 2 } }}>
+                <Image
+                    className={styles.arrow}
+                    src={darkMode ? "/pagination/arrowForward_white.svg" : "/pagination/arrowForward.svg"}
+                    alt={"first"}
+                    width={20}
+                    height={20}
+                />
+            </Link>
+            <Link href={{ pathname: `/${path}`, query: { page: totalPages } }}>
+                <Image
+                    className={styles.arrow}
+                    src={darkMode ? "/pagination/lastPage_white.svg" : "/pagination/lastPage.svg"}
+                    alt={"first"}
+                    width={30}
+                    height={30}
+                />
+            </Link>
         </div>
     )
 }

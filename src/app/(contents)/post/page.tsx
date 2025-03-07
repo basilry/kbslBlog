@@ -1,8 +1,8 @@
 import { ReactElement } from "react"
-import Post from "@app/(contents)/post/Post"
+import PostList from "@app/(contents)/post/PostList"
 
 const page = (): ReactElement => {
-    return <Post />
+    return <PostList />
 }
 
 export default page

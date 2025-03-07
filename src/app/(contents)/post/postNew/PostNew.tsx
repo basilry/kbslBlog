@@ -7,7 +7,7 @@ import Wrapper from "@components/layout/Wrapper"
 import Tiptap from "@components/template/tiptap/Tiptap"
 import styles from "@styles/components/template/tiptap/tiptap.module.scss"
 
-const NewPost = (): ReactElement => {
+const PostNew = (): ReactElement => {
     return (
         <Wrapper>
             <TextBasic className={styles.title} size="xxx-large" bold="bold">
@@ -21,4 +21,4 @@ const NewPost = (): ReactElement => {
     )
 }
 
-export default NewPost
+export default PostNew

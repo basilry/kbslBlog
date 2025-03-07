@@ -5,51 +5,40 @@ import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
 import Image from "next/image"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import Pagination from "@components/template/Pagination"
+import { IPost } from "@interface/IPost"
 import { IPagination } from "@interface/IRoot"
 import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore, useLoginStore } from "@lib/stores/store"
+import { handleCalDiffTime } from "@lib/utils/common"
 import { toastCall } from "@lib/utils/toastCall"
-import styles from "@styles/pages/post.module.scss"
+import styles from "@styles/pages/postList.module.scss"
 
-interface IPost {
-    id: number
-    title: string
-    content: string
-    createdAt: Date
-    updatedAt: Date
-    likeCount: number
-}
-
-const Post = (): ReactElement => {
+const PostList = (): ReactElement => {
     const { darkMode } = useCoreStore()
     const { loginUser, loginState } = useLoginStore()
 
     const router = useRouter()
+    const param = useSearchParams()
+    const page = param.get("page") || 1
 
     const [postList, setPostList] = useState<IPost[]>([])
     const [pagination, setPagination] = useState<IPagination<IPost>>({} as IPagination<IPost>)
 
-    const handleCalDiffTime = (diff: number, createdAt: Date): string => {
-        if (diff < 1) {
-            return `${dayjs().diff(dayjs(createdAt), "minute")}분 전`
-        } else {
-            if (diff < 24) {
-                return `${diff}시간 전`
-            } else {
-                return `${dayjs().diff(dayjs(createdAt), "day")}일 전`
-            }
+    const getPosts = (page = 1): void => {
+        if (page < 1) {
+            router.push("/post")
+            return
         }
-    }
 
-    const getPosts = (page = 0): void => {
         axiosInstance
-            .get(`/posts?page=${page}`)
+            .get(`/posts?page=${page - 1}`)
             .then((res) => {
                 setPostList(res.data.content)
                 setPagination(res.data)
@@ -62,14 +51,14 @@ const Post = (): ReactElement => {
     }
 
     useEffect(() => {
-        getPosts()
-    }, [])
+        getPosts(Number(page))
+    }, [page])
 
     return (
         <Wrapper>
             <div className={styles.topWrapper}>
                 <TextBasic className={styles.topTitle} size="xxx-large" bold="bold">
-                    {"Post | 포스팅"}
+                    {"PostList | 포스팅"}
                 </TextBasic>
                 {loginState && loginUser.loginId && (
                     <ButtonBasic
@@ -77,7 +66,7 @@ const Post = (): ReactElement => {
                         buttonStyle={styles.topButtonEach}
                         type={"icon"}
                         fontSize={"x-small"}
-                        onClick={() => router.push("/post/newPost")}
+                        onClick={() => router.push("/post/postNew")}
                     >
                         <Image src={darkMode ? "/pen_white.svg" : "/pen.svg"} alt={"plus"} width={25} height={25} />
                     </ButtonBasic>
@@ -117,7 +106,7 @@ const Post = (): ReactElement => {
                                     <div className={styles.itemBottom}>
                                         <div className={styles.thumbAndLike}>
                                             <Image src={"/thumbsUp.svg"} alt={"thumbsUp"} width={15} height={15} />
-                                            <TextBasic size="small" bold={"normal"}>
+                                            <TextBasic size="x-small" bold={"normal"}>
                                                 {post.likeCount}
                                             </TextBasic>
                                         </div>
@@ -141,9 +130,9 @@ const Post = (): ReactElement => {
                     )
                 })}
             </div>
-            <Pagination {...pagination} onChangePage={(pageNum) => getPosts(pageNum)} />
+            <Pagination {...pagination} path={"post"} />
         </Wrapper>
     )
 }
 
-export default Post
+export default PostList

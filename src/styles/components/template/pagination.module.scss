@@ -10,10 +10,14 @@
 
   .pageNumWrapper {
     display: flex;
-    background-color: $black-500;
+    background-color: $black-200;
     margin: 10px;
     border-radius: 25px;
     height: 40px;
+
+    &.dark {
+      background-color: $black-500;
+    }
 
     .pageNum {
       display: flex;
