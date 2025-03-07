@@ -17,7 +17,7 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: TButtonType
 }
 
-type TButtonType = "submit" | "reset" | "icon" | ""
+type TButtonType = "submit" | "reset" | "icon" | "thumb" | ""
 
 const ButtonBasic = (props: IButtonProps): ReactElement => {
     const {

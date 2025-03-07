@@ -1,11 +1,14 @@
 @import "@styles/variable.scss";
 
 .postDetailWrapper {
-  height: 100vh;
+  height: 100%;
+  min-height: 800px;
 
   .titleWrapper {
     display: flex;
+    align-items: center;
     gap: 5px;
+    padding: 0 10px;
   }
 
   .titleBottom {
@@ -13,6 +16,7 @@
     display: flex;
     justify-content: right;
     gap: 10px;
+    padding: 0 10px;
 
 
     .thumbAndLike {
@@ -23,7 +27,17 @@
   }
 
   .content {
+    padding: 0 20px;
     margin-top: 30px;
+    margin-bottom: 120px;
+    min-height: 300px;
+  }
+
+  .commentWrapper {
+    height: 100%;
+    //padding-bottom: 300px;
+    //min-height: 500px;
+    margin-bottom: 150px;
   }
 
 }

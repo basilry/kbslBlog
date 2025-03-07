@@ -49,11 +49,12 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
             <Link
                 href={{
                     pathname: `/${path}`,
-                    query: { page: 0 },
+                    query: { page: 1 },
                 }}
             >
                 <Image
                     className={styles.arrow}
+                    style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}
                     src={darkMode ? "/pagination/firstPage_white.svg" : "/pagination/firstPage.svg"}
                     alt={"first"}
                     width={30}
@@ -63,6 +64,7 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
             <Link href={{ pathname: `/${path}`, query: { page: currentPage - 1 } }}>
                 <Image
                     className={styles.arrow}
+                    style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}
                     src={darkMode ? "/pagination/arrowBack_white.svg" : "/pagination/arrowBack.svg"}
                     alt={"first"}
                     width={20}
@@ -90,6 +92,7 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
             <Link href={{ pathname: `/${path}`, query: { page: currentPage + 2 } }}>
                 <Image
                     className={styles.arrow}
+                    style={{ cursor: currentPage === totalPages - 1 ? "not-allowed" : "pointer" }}
                     src={darkMode ? "/pagination/arrowForward_white.svg" : "/pagination/arrowForward.svg"}
                     alt={"first"}
                     width={20}
@@ -99,6 +102,7 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
             <Link href={{ pathname: `/${path}`, query: { page: totalPages } }}>
                 <Image
                     className={styles.arrow}
+                    style={{ cursor: currentPage === totalPages - 1 ? "not-allowed" : "pointer" }}
                     src={darkMode ? "/pagination/lastPage_white.svg" : "/pagination/lastPage.svg"}
                     alt={"first"}
                     width={30}

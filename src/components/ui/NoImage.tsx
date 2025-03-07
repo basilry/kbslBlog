@@ -1,7 +1,8 @@
+import { ReactElement } from "react"
 import TextBasic from "@components/atom/TextBasic"
 import styles from "@styles/ui/noImage.module.scss"
 
-const NoImage = (): JSX.Element => {
+const NoImage = (): ReactElement => {
     return (
         <div className={styles.noImage}>
             <img src="/noimage.png" alt="myFace" sizes={"100vw"} width={300} height={300} />

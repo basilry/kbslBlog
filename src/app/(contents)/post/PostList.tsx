@@ -40,14 +40,26 @@ const PostList = (): ReactElement => {
         axiosInstance
             .get(`/posts?page=${page - 1}`)
             .then((res) => {
-                setPostList(res.data.content)
-                setPagination(res.data)
+                setPostList(res.data.data.content)
+                setPagination(res.data.data)
 
                 toastCall("포스팅 목록을 불러왔습니다.", "success")
             })
             .catch(() => {
                 toastCall("포스팅 목록을 불러오지 못했습니다.", "error")
             })
+    }
+
+    const handlePostThumbnail = (thumbnail: string): string => {
+        if (thumbnail) {
+            return thumbnail
+        }
+
+        if (darkMode) {
+            return "/image_white.svg"
+        } else {
+            return "/image.svg"
+        }
     }
 
     useEffect(() => {
@@ -58,7 +70,7 @@ const PostList = (): ReactElement => {
         <Wrapper>
             <div className={styles.topWrapper}>
                 <TextBasic className={styles.topTitle} size="xxx-large" bold="bold">
-                    {"PostList | 포스팅"}
+                    {"Post | 포스팅"}
                 </TextBasic>
                 {loginState && loginUser.loginId && (
                     <ButtonBasic
@@ -77,7 +89,7 @@ const PostList = (): ReactElement => {
             <br />
             <div></div>
             <div className={styles.postListWrapper}>
-                {postList.map((post, index) => {
+                {postList?.map((post, index) => {
                     const diff = dayjs().diff(dayjs(post.createdAt), "hour")
 
                     return (
@@ -96,6 +108,15 @@ const PostList = (): ReactElement => {
                                     index === 0 && styles.first,
                                 )}
                             >
+                                <div className={styles.thumbnailWrapper}>
+                                    <Image
+                                        className={styles.thumbnail}
+                                        src={handlePostThumbnail(post.thumbnail)}
+                                        alt={"thumbnail"}
+                                        fill
+                                        style={{ objectFit: "cover" }}
+                                    />
+                                </div>
                                 <div className={styles.itemLeft}>
                                     <div className={styles.itemTitle}>
                                         {diff < 1 && <Image src={"/hot.svg"} alt={"hot"} width={20} height={20} />}
