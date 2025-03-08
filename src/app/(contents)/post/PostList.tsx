@@ -89,67 +89,81 @@ const PostList = (): ReactElement => {
             <br />
             <div></div>
             <div className={styles.postListWrapper}>
-                {postList?.map((post, index) => {
-                    const diff = dayjs().diff(dayjs(post.createdAt), "hour")
+                {postList.length > 0 ? (
+                    postList.map((post, index) => {
+                        const diff = dayjs().diff(dayjs(post.createdAt), "hour")
 
-                    return (
-                        <Link
-                            key={post.id + "_" + post.createdAt + "_" + post.title}
-                            href={`/post/${post.id}`}
-                            passHref
-                            onClick={() => {
-                                toastCall("해당 포스팅으로 이동합니다.", "success")
-                            }}
-                        >
-                            <div
-                                className={classNames(
-                                    styles.postListItem,
-                                    darkMode && styles.dark,
-                                    index === 0 && styles.first,
-                                )}
+                        return (
+                            <Link
+                                key={post.id + "_" + post.createdAt + "_" + post.title}
+                                href={`/post/${post.id}`}
+                                passHref
+                                onClick={() => {
+                                    toastCall("해당 포스팅으로 이동합니다.", "success")
+                                }}
                             >
-                                <div className={styles.thumbnailWrapper}>
-                                    <Image
-                                        className={styles.thumbnail}
-                                        src={handlePostThumbnail(post.thumbnail)}
-                                        alt={"thumbnail"}
-                                        fill
-                                        style={{ objectFit: "cover" }}
-                                    />
-                                </div>
-                                <div className={styles.itemLeft}>
-                                    <div className={styles.itemTitle}>
-                                        {diff < 1 && <Image src={"/hot.svg"} alt={"hot"} width={20} height={20} />}
-                                        <TextBasic className={styles.title} size="medium" bold="bold">
-                                            {post.title}
-                                        </TextBasic>
+                                <div
+                                    className={classNames(
+                                        styles.postListItem,
+                                        darkMode && styles.dark,
+                                        index === 0 && styles.first,
+                                    )}
+                                >
+                                    <div className={styles.thumbnailWrapper}>
+                                        <Image
+                                            className={styles.thumbnail}
+                                            src={handlePostThumbnail(post.thumbnail)}
+                                            alt={"thumbnail"}
+                                            fill
+                                            style={{ objectFit: "cover" }}
+                                        />
                                     </div>
-                                    <div className={styles.itemBottom}>
-                                        <div className={styles.thumbAndLike}>
-                                            <Image src={"/thumbsUp.svg"} alt={"thumbsUp"} width={15} height={15} />
-                                            <TextBasic size="x-small" bold={"normal"}>
-                                                {post.likeCount}
+                                    <div className={styles.itemLeft}>
+                                        <div className={styles.itemTitle}>
+                                            {diff < 1 && <Image src={"/hot.svg"} alt={"hot"} width={20} height={20} />}
+                                            <TextBasic className={styles.title} size="medium" bold="bold">
+                                                {post.title}
                                             </TextBasic>
                                         </div>
-                                        <TextBasic size="x-small" bold="normal">
-                                            {handleCalDiffTime(diff, post.createdAt)}
-                                        </TextBasic>
-                                        <TextBasic size="x-small" bold="normal">
-                                            {"김바실리"}
-                                        </TextBasic>
+                                        <div className={styles.itemBottom}>
+                                            <div className={styles.thumbAndLike}>
+                                                <Image src={"/thumbsUp.svg"} alt={"thumbsUp"} width={15} height={15} />
+                                                <TextBasic className={styles.thumbNum} size="x-small" bold={"normal"}>
+                                                    {post.likeCount}
+                                                </TextBasic>
+                                            </div>
+                                            <TextBasic size="x-small" bold="normal">
+                                                {handleCalDiffTime(diff, post.createdAt)}
+                                            </TextBasic>
+                                            <TextBasic size="x-small" bold="normal">
+                                                {"김바실리"}
+                                            </TextBasic>
+                                        </div>
                                     </div>
+                                    <Image
+                                        className={styles.arrow}
+                                        src={darkMode ? "/doubleArrow_white.svg" : "/doubleArrow.svg"}
+                                        alt={"doubleArrow"}
+                                        width={25}
+                                        height={25}
+                                    />
                                 </div>
-                                <Image
-                                    className={styles.arrow}
-                                    src={darkMode ? "/doubleArrow_white.svg" : "/doubleArrow.svg"}
-                                    alt={"doubleArrow"}
-                                    width={25}
-                                    height={25}
-                                />
-                            </div>
-                        </Link>
-                    )
-                })}
+                            </Link>
+                        )
+                    })
+                ) : (
+                    <div className={styles.noData}>
+                        <Image
+                            src={darkMode ? "/image_white.svg" : "/image.svg"}
+                            alt={"basicImage"}
+                            width={100}
+                            height={100}
+                        />
+                        <TextBasic size="medium" bold="bold">
+                            {"포스팅이 없습니다."}
+                        </TextBasic>
+                    </div>
+                )}
             </div>
             <Pagination {...pagination} path={"post"} />
         </Wrapper>

@@ -12,10 +12,6 @@
     padding: 7px 8px;
     height: 50px;
 
-    &.white {
-      color: $black-600;
-    }
-
     @include TABLET {
       height: 40px;
     }
@@ -33,6 +29,10 @@
     background-color: $pink-pressed;
     color: white;
 
+    &.white {
+      color: $black-100;
+    }
+
     &:hover {
       opacity: 0.8;
     }
@@ -46,7 +46,11 @@
     }
 
     &.reset {
-      background-color: $orangeCinamon;
+      background-color: $black-500;
+
+      &.white {
+        color: $black-100;
+      }
     }
 
     &.cancel {

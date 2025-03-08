@@ -1,3 +1,7 @@
+export interface IAny {
+    [key: string]: any
+}
+
 export interface ILogo {
     src?: string
     alt?: string

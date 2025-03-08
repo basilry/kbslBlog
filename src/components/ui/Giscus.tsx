@@ -13,26 +13,6 @@ export default function Giscus({ emotion = true }: IGiscusProps): ReactElement {
 
     const theme = darkMode ? "dark" : "light"
 
-    const handleMessage = (event: MessageEvent): void => {
-        if (event.origin !== "https://giscus.app") return
-        if (!(typeof event.data === "object" && event.data.giscus)) return
-
-        const giscusData = event.data.giscus
-        // Do whatever you want with it, e.g. `console.log(giscusData)`.
-        // You'll need to make sure that `giscusData` contains the message you're
-        // expecting, e.g. by using `if ('discussion' in giscusData)`.
-
-        console.log(giscusData)
-    }
-
-    useEffect(() => {
-        window.addEventListener("message", handleMessage)
-
-        return () => {
-            window.removeEventListener("message", handleMessage)
-        }
-    }, [])
-
     useEffect(() => {
         if (!ref.current || ref.current.hasChildNodes()) return
 
