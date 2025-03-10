@@ -18,7 +18,7 @@ const SolutionInit = (): ReactElement => {
         <Wrapper>
             <div className={styles.list}>
                 <Link href={"/projects"} className={classNames(styles.link, darkMode && styles.dark)}>
-                    <img src={`/kbslBlog/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
+                    <img src={`/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
                     <TextBasic size={"medium"} bold={"bold"}>
                         프로젝트 목록
                     </TextBasic>
@@ -34,8 +34,8 @@ const SolutionInit = (): ReactElement => {
                         {"2021.12 ~ 2023.06 | 1년 6개월"}
                     </TextBasic>
                     <div className={styles.logos}>
-                        <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
-                        <Image placeholder="blur" src="/kbslBlog/ddogaLogo.svg" alt="logo" width={120} height={30} />
+                        <img src="/hecton.png" alt="logo" width={30} height={20} />
+                        <Image placeholder="blur" src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
                     </div>
                 </div>
                 <LineBasic />
@@ -69,7 +69,7 @@ const SolutionInit = (): ReactElement => {
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/typescript.svg"
+                                src="/skills/typescript.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -77,7 +77,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/nextjs.svg"
+                                src="/skills/nextjs.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -85,7 +85,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/sass.svg"
+                                src="/skills/sass.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -93,7 +93,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/redux.svg"
+                                src="/skills/redux.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -101,7 +101,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/prettier.svg"
+                                src="/skills/prettier.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -109,7 +109,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/eslint.svg"
+                                src="/skills/eslint.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -117,7 +117,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/mysql.png"
+                                src="/skills/mysql.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -125,7 +125,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/aws.svg"
+                                src="/skills/aws.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -135,7 +135,7 @@ const SolutionInit = (): ReactElement => {
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/kendoui.png"
+                                src="/skills/kendoui.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={180}
@@ -143,7 +143,7 @@ const SolutionInit = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/oz.png"
+                                src="/skills/oz.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}

@@ -18,7 +18,7 @@ const Ltcga = (): ReactElement => {
         <Wrapper>
             <div className={styles.list}>
                 <Link href={"/projects"} className={classNames(styles.link, darkMode && styles.dark)}>
-                    <img src={`/kbslBlog/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
+                    <img src={`/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
                     <TextBasic size={"medium"} bold={"bold"}>
                         프로젝트 목록
                     </TextBasic>
@@ -34,8 +34,8 @@ const Ltcga = (): ReactElement => {
                         {"2024.06 ~ 2024.07 | 2개월"}
                     </TextBasic>
                     <div className={styles.logos}>
-                        <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
-                        <Image placeholder="blur" src="/kbslBlog/ddoga_logo.svg" alt="logo" width={115} height={30} />
+                        <img src="/hecton.png" alt="logo" width={30} height={20} />
+                        <Image placeholder="blur" src="/ddoga_logo.svg" alt="logo" width={115} height={30} />
                     </div>
                 </div>
                 <LineBasic />
@@ -70,7 +70,7 @@ const Ltcga = (): ReactElement => {
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/typescript.svg"
+                                src="/skills/typescript.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -78,7 +78,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/nextjs.svg"
+                                src="/skills/nextjs.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -86,7 +86,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/reactquery.svg"
+                                src="/skills/reactquery.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -94,7 +94,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/zustand.png"
+                                src="/skills/zustand.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={80}
@@ -102,7 +102,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/prettier.svg"
+                                src="/skills/prettier.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -110,7 +110,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/eslint.svg"
+                                src="/skills/eslint.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -120,7 +120,7 @@ const Ltcga = (): ReactElement => {
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/nodejs.png"
+                                src="/skills/nodejs.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -128,7 +128,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/expressjs.png"
+                                src="/skills/expressjs.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={80}
@@ -136,7 +136,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/mysql.png"
+                                src="/skills/mysql.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -144,7 +144,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/kendoui.png"
+                                src="/skills/kendoui.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={100}
@@ -152,7 +152,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/angularjs.png"
+                                src="/skills/angularjs.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -160,7 +160,7 @@ const Ltcga = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/aws.svg"
+                                src="/skills/aws.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}

@@ -27,7 +27,7 @@ const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): Re
                         >
                             <img
                                 className={styles.projectImages}
-                                src={`/kbslBlog/${filePath}/${domainName}${idx + 1}.png`}
+                                src={`/${filePath}/${domainName}${idx + 1}.png`}
                                 alt="myFace"
                             />
                         </SwiperSlide>
@@ -39,11 +39,7 @@ const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): Re
                 onClose={(): void => setOpen({ doOpen: false, idx: -1 })}
                 title={"상세화면"}
             >
-                <img
-                    className={styles.modalImages}
-                    src={`/kbslBlog/${filePath}/${domainName}${open.idx}.png`}
-                    alt="myFace"
-                />
+                <img className={styles.modalImages} src={`/${filePath}/${domainName}${open.idx}.png`} alt="myFace" />
             </ModalBasic>
         </div>
     )

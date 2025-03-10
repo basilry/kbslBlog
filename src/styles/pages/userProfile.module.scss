@@ -1,0 +1,22 @@
+@import "@styles/variable.scss";
+
+.userProfileWrapper {
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 120px;
+  padding: 0 10vw;
+
+  .imgWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .eachButton {
+    margin-top: 100px;
+    width: 100%;
+  }
+}

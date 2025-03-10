@@ -1,0 +1,40 @@
+@import "@styles/variable.scss";
+
+.loginWrapper {
+  margin: 0 20px;
+  min-height: 70vh;
+
+  .titleWrapper {
+    margin-top: 150px;
+    text-align: center;
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+
+    .eachInput {
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+
+    .eachButton {
+      max-width: 400px;
+      width: 100%;
+    }
+  }
+}

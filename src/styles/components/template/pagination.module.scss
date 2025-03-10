@@ -1,0 +1,71 @@
+@import "@styles/variable";
+
+.paginationWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 70px;
+
+  .pageNumWrapper {
+    display: flex;
+    background-color: $black-200;
+    margin: 10px;
+    border-radius: 25px;
+    height: 40px;
+
+    &.dark {
+      background-color: $black-500;
+    }
+
+    .pageNum {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      border-radius: 25px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $black-400;
+        border-radius: 25px;
+      }
+
+
+      @include TABLET {
+        &:nth-child(n+6) {
+          display: none;
+        }
+      }
+      //
+      //@include MOBILE {
+      //  border-radius: 15px;
+      //}
+      //
+      //@include S_MOBILE {
+      //  border-radius: 10px;
+      //}
+    }
+
+    .active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      color: $pink-ligthen;
+      font-weight: bold;
+      background-color: $black-400;
+      border-radius: 25px;
+    }
+  }
+
+
+  .arrow {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+
+}

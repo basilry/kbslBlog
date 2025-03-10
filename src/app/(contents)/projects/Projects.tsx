@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
+import React, { ReactElement } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import classNames from "classnames"

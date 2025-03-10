@@ -1,0 +1,14 @@
+@import '@styles/variable.scss';
+
+.toolbarWrapper {
+  padding: 0 5px;
+  gap: 7px;
+  border: 1px solid $black-200;
+  border-radius: 10px;
+  height: 40px;
+  background-color: $black-300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: auto;
+}

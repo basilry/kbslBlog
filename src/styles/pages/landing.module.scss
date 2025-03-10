@@ -1,332 +1,334 @@
 @import "@styles/variable.scss";
 
 .landingWrapper {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 
 .title {
-    border-bottom: 5px solid $white;
+  border-bottom: 5px solid $white;
 
-    &.white {
-        border-bottom: 5px solid $black-700;
-    }
+  &.white {
+    border-bottom: 5px solid $black-700;
+  }
 }
 
 .firstBlock {
-    position: relative;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 30px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 50px 30px;
-    overflow: hidden;
+    background-image: url('/myPics3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
+    z-index: 0;
+  }
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-image: url('/kbslBlog/myPics3.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
-        z-index: 0;
-    }
+  .orange {
+    color: $tx-orange;
+  }
 
-    .orange {
-        color: $tx-orange;
-    }
-    .blue {
-        color: $pink-pressed;
-    }
+  .blue {
+    color: $pink-pressed;
+  }
 }
 
 .titleWrapper1 {
+  position: relative;
+  padding-top: 30px;
+  z-index: 2;
+  display: flex;
+  justify-content: right;
+}
+
+.secondBlock {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 30px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('/myPics6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
+    z-index: 0;
+  }
+
+  .titleWrapper2 {
+    position: relative;
+    padding-top: 30px;
+    z-index: 2;
+    display: flex;
+    justify-content: left;
+
+    .break {
+      word-break: break-all;
+    }
+  }
+
+}
+
+.thirdBlock {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 30px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100vh;
+    background-image: url('/myPics9.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
+    z-index: 0;
+
+    @include TABLET {
+      width: 100%;
+    }
+  }
+
+  .blockWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+    }
+
+    .titles {
+      margin-left: 30px;
+      z-index: 2;
+      margin-top: 20px;
+
+      .topTitle {
+        display: flex;
+        justify-content: right;
+      }
+
+      .titleWrapper3 {
+        padding-top: 30px;
+        z-index: 1;
+        display: flex;
+        justify-content: right;
+      }
+    }
+
+    .calendar1 {
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+
+    .calendarWrapper {
+      display: none;
+      justify-content: left;
+
+      @media (max-width: 1200px) {
+        display: flex;
+        flex-direction: row;
+      }
+
+      @include TABLET {
+        flex-direction: column;
+      }
+
+      .calendarBlock {
+        margin-top: 2rem;
+        margin-right: 30px;
+
+        @include TABLET {
+          margin-top: 10px;
+          margin-right: 0;
+        }
+
+        &:nth-child(2) {
+
+          @include MOBILE {
+            display: none;
+          }
+        }
+      }
+
+    }
+
+    .calendar2 {
+      display: none;
+
+      @media (max-width: 1200px) {
+        display: block;
+      }
+    }
+  }
+}
+
+.forthBlock {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 30px;
+  overflow: hidden;
+  margin-bottom: 50px;
+
+  @include S_MOBILE {
+    height: 100%;
+  }
+
+
+  .blockWrapper {
+    .textWrapper {
+      margin-top: 100px;
+      display: block;
+
+      .titleWrapper4 {
+        padding-top: 30px;
+        z-index: 1;
+        display: flex;
+        justify-content: left;
+      }
+    }
+
+    .blockController {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+
+      @include S_MOBILE {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .mainMid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    @include TABLET {
+      flex-direction: column;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .midBlock {
+      color: $black-700;
+      margin: 0 20px;
+      padding: 15px;
+      width: 200px;
+      background-color: $black-300;
+      border-radius: 10px;
+      box-shadow: $shadow;
+      transition: all 0.1s ease-in;
+
+      p {
+        font-size: $large-font;
+      }
+
+      @include TABLET {
+        margin: 10px 10px;
+        padding: 10px;
+        width: 200px;
+      }
+
+      .yearChar {
+        text-align: right;
+      }
+
+      &:hover {
+        cursor: pointer;
+        transform: translate(0px, -10px);
+        transition: all 0.1s ease-in;
+      }
+    }
+
+    &.dark {
+      .midBlock {
+        color: $white;
+        background-color: $black-600;
+      }
+    }
+
+    .yearNumWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .yearNum {
+        text-align: center;
+        color: $pink-ligthen;
+        font-size: 3rem;
+        font-weight: 800;
+        user-select: none;
+      }
+    }
+  }
+}
+
+.fifthBLock {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 30px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/myPics7.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
+    z-index: 0;
+
+    @include TABLET {
+      width: 100%;
+    }
+  }
+
+  .titleWrapper5 {
     position: relative;
     padding-top: 30px;
     z-index: 2;
     display: flex;
     justify-content: right;
-}
-
-.secondBlock {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    padding: 0 30px;
-    overflow: hidden;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-image: url('/kbslBlog/myPics6.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
-        z-index: 0;
-    }
-
-    .titleWrapper2 {
-        position: relative;
-        padding-top: 30px;
-        z-index: 2;
-        display: flex;
-        justify-content: left;
-
-        .break {
-            word-break: break-all;
-        }
-    }
-
-}
-
-.thirdBlock {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    padding: 0 30px;
-    overflow: hidden;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 45%;
-        height: 100vh;
-        background-image: url('/kbslBlog/myPics9.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
-        z-index: 0;
-
-        @include TABLET {
-            width: 100%;
-        }
-    }
-
-    .blockWrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        @media (max-width: 1200px) {
-            flex-direction: column;
-        }
-
-        .titles {
-            margin-left: 30px;
-            z-index: 2;
-            margin-top: 20px;
-
-            .topTitle {
-                display: flex;
-                justify-content: right;
-            }
-
-            .titleWrapper3 {
-                padding-top: 30px;
-                z-index: 1;
-                display: flex;
-                justify-content: right;
-            }
-        }
-
-        .calendar1 {
-            @media (max-width: 1200px) {
-                display: none;
-            }
-        }
-
-        .calendarWrapper {
-            display: none;
-            justify-content: left;
-
-            @media (max-width: 1200px) {
-                display: flex;
-                flex-direction: row;
-            }
-
-            @include TABLET {
-                flex-direction: column;
-            }
-
-            .calendarBlock {
-                margin-top: 2rem;
-                margin-right: 30px;
-
-                @include TABLET {
-                    margin-top: 10px;
-                    margin-right: 0;
-                }
-
-                &:nth-child(2) {
-
-                    @include MOBILE {
-                        display: none;
-                    }
-                }
-            }
-
-        }
-
-        .calendar2 {
-            display: none;
-
-            @media (max-width: 1200px) {
-                display: block;
-            }
-        }
-    }
-}
-
-.forthBlock {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    padding: 0 30px;
-    overflow: hidden;
-    margin-bottom: 50px;
-
-    @include S_MOBILE {
-        height: 100%;
-    }
-
-
-    .blockWrapper {
-        .textWrapper {
-            margin-top: 100px;
-            display: block;
-
-            .titleWrapper4 {
-                padding-top: 30px;
-                z-index: 1;
-                display: flex;
-                justify-content: left;
-            }
-        }
-
-        .blockController {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-
-            @include S_MOBILE {
-                flex-direction: column;
-            }
-        }
-    }
-
-    .mainMid {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-
-        @include TABLET {
-            flex-direction: column;
-        }
-
-        p {
-            font-size: 1rem;
-            font-weight: 500;
-            text-align: left;
-        }
-
-        .midBlock {
-            color: $black-700;
-            margin: 0 20px;
-            padding: 15px;
-            width: 200px;
-            background-color: $black-300;
-            border-radius: 10px;
-            box-shadow: $shadow;
-            transition: all 0.1s ease-in;
-
-            p {
-                font-size: $large-font;
-            }
-
-            @include TABLET {
-                margin: 10px 10px;
-                padding: 10px;
-                width: 200px;
-            }
-
-            .yearChar {
-                text-align: right;
-            }
-
-            &:hover {
-                cursor: pointer;
-                transform: translate(0px, -10px);
-                transition: all 0.1s ease-in;
-            }
-        }
-
-        &.dark {
-            .midBlock {
-                color: $white;
-                background-color: $black-600;
-            }
-        }
-
-        .yearNumWrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .yearNum {
-                text-align: center;
-                color: $pink-ligthen;
-                font-size: 3rem;
-                font-weight: 800;
-                user-select: none;
-            }
-        }
-    }
-}
-
-.fifthBLock{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    padding: 0 30px;
-    overflow: hidden;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100vw;
-        height: 100vh;
-        background-image: url('/kbslBlog/myPics7.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0.5; /* 배경 이미지에만 적용되는 투명도 */
-        z-index: 0;
-
-        @include TABLET {
-            width: 100%;
-        }
-    }
-
-    .titleWrapper5 {
-        position: relative;
-        padding-top: 30px;
-        z-index: 2;
-        display: flex;
-        justify-content: right;
-    }
+  }
 }

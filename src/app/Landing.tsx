@@ -410,7 +410,7 @@ const Landing = (): ReactElement => {
                         <br />
                         <VisibleText className={styles.titleWrapper4} delay={1.5}>
                             <TextBasic size={"xxx-large"} bold={"bold"}>
-                                {"전체 경력은 이제 3년 남짓이지만"}
+                                {"전체 경력은 이제 4년차에 접어들었지만,"}
                             </TextBasic>
                         </VisibleText>
                         <VisibleText className={styles.titleWrapper4} delay={2}>
