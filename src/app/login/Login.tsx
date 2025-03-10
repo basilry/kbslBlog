@@ -59,7 +59,7 @@ const Login = (): ReactElement => {
 
     useEffect(() => {
         if (loginState) {
-            router.replace("/")
+            router.back()
         }
     }, [loginState, router])
 

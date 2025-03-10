@@ -46,31 +46,35 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
 
     return (
         <div className={styles.paginationWrapper}>
-            <Link
-                href={{
-                    pathname: `/${path}`,
-                    query: { page: 1 },
-                }}
-            >
-                <Image
-                    className={styles.arrow}
-                    style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}
-                    src={darkMode ? "/pagination/firstPage_white.svg" : "/pagination/firstPage.svg"}
-                    alt={"first"}
-                    width={30}
-                    height={30}
-                />
-            </Link>
-            <Link href={{ pathname: `/${path}`, query: { page: currentPage - 1 } }}>
-                <Image
-                    className={styles.arrow}
-                    style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}
-                    src={darkMode ? "/pagination/arrowBack_white.svg" : "/pagination/arrowBack.svg"}
-                    alt={"first"}
-                    width={20}
-                    height={20}
-                />
-            </Link>
+            {currentPage > 0 && (
+                <>
+                    <Link
+                        href={{
+                            pathname: `/${path}`,
+                            query: { page: 1 },
+                        }}
+                    >
+                        <Image
+                            className={styles.arrow}
+                            style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}
+                            src={darkMode ? "/pagination/firstPage_white.svg" : "/pagination/firstPage.svg"}
+                            alt={"first"}
+                            width={30}
+                            height={30}
+                        />
+                    </Link>
+                    <Link href={{ pathname: `/${path}`, query: { page: currentPage - 1 } }}>
+                        <Image
+                            className={styles.arrow}
+                            style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}
+                            src={darkMode ? "/pagination/arrowBack_white.svg" : "/pagination/arrowBack.svg"}
+                            alt={"first"}
+                            width={20}
+                            height={20}
+                        />
+                    </Link>
+                </>
+            )}
             <div className={classNames(styles.pageNumWrapper, darkMode && styles.dark)}>
                 {visiblePageNumbers.map((pageIndex) => {
                     const pageNum = pageIndex + 1 // 표시용 (1-based)
@@ -89,7 +93,14 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
                     )
                 })}
             </div>
-            <Link href={{ pathname: `/${path}`, query: { page: currentPage + 2 } }}>
+            <Link
+                href={{
+                    pathname: `/${path}`,
+                    query: {
+                        page: currentPage + 2,
+                    },
+                }}
+            >
                 <Image
                     className={styles.arrow}
                     style={{ cursor: currentPage === totalPages - 1 || currentPage === 0 ? "not-allowed" : "pointer" }}

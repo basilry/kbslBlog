@@ -45,7 +45,7 @@ const Certification = (): ReactElement => {
             <div className={styles.wholeWrapper}>
                 <div className={styles.seminarAndRND}>
                     <TextBasic size="xxx-large" bold="bold">
-                        {"Certificate | 자격증 & 수료증"}
+                        {"Certification | 자격증 & 수료증"}
                     </TextBasic>
                     <div className={styles.dotWrapper}>
                         <span className={styles.red}>*</span>
