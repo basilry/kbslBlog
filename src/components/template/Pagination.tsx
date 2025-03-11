@@ -93,33 +93,41 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
                     )
                 })}
             </div>
-            <Link
-                href={{
-                    pathname: `/${path}`,
-                    query: {
-                        page: currentPage + 2,
-                    },
-                }}
-            >
-                <Image
-                    className={styles.arrow}
-                    style={{ cursor: currentPage === totalPages - 1 || currentPage === 0 ? "not-allowed" : "pointer" }}
-                    src={darkMode ? "/pagination/arrowForward_white.svg" : "/pagination/arrowForward.svg"}
-                    alt={"first"}
-                    width={20}
-                    height={20}
-                />
-            </Link>
-            <Link href={{ pathname: `/${path}`, query: { page: totalPages } }}>
-                <Image
-                    className={styles.arrow}
-                    style={{ cursor: currentPage === totalPages - 1 || currentPage === 0 ? "not-allowed" : "pointer" }}
-                    src={darkMode ? "/pagination/lastPage_white.svg" : "/pagination/lastPage.svg"}
-                    alt={"first"}
-                    width={30}
-                    height={30}
-                />
-            </Link>
+            {totalPages > 0 && currentPage !== totalPages - 1 && (
+                <>
+                    <Link
+                        href={{
+                            pathname: `/${path}`,
+                            query: {
+                                page: currentPage + 2,
+                            },
+                        }}
+                    >
+                        <Image
+                            className={styles.arrow}
+                            style={{
+                                cursor: currentPage === totalPages - 1 ? "not-allowed" : "pointer",
+                            }}
+                            src={darkMode ? "/pagination/arrowForward_white.svg" : "/pagination/arrowForward.svg"}
+                            alt={"first"}
+                            width={20}
+                            height={20}
+                        />
+                    </Link>
+                    <Link href={{ pathname: `/${path}`, query: { page: totalPages } }}>
+                        <Image
+                            className={styles.arrow}
+                            style={{
+                                cursor: currentPage === totalPages - 1 ? "not-allowed" : "pointer",
+                            }}
+                            src={darkMode ? "/pagination/lastPage_white.svg" : "/pagination/lastPage.svg"}
+                            alt={"first"}
+                            width={30}
+                            height={30}
+                        />
+                    </Link>
+                </>
+            )}
         </div>
     )
 }

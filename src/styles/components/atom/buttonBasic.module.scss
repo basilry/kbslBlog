@@ -17,12 +17,11 @@
     }
 
     @include MOBILE {
-      height: 30px;
       padding: 5px 6px;
     }
 
     @include S_MOBILE {
-      height: 25px;
+      height: 30px;
       padding: 4px 5px;
     }
 

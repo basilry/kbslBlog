@@ -7,7 +7,7 @@ import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import Editor from "@components/template/tiptap/Editor"
+import Editor from "@components/template/editor/Editor"
 import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
@@ -15,7 +15,7 @@ import styles from "@styles/pages/postNew.module.scss"
 
 interface IPostData {
     title: string
-    thumbnail?: string
+    thumbnail: string
     content: string
 }
 
@@ -86,8 +86,10 @@ const PostNew = (): ReactElement => {
                     <Editor
                         title={postData.title}
                         contents={postData.content}
+                        thumbnail={postData.thumbnail}
                         onChangeTitle={(title) => setPostData({ ...postData, title })}
                         onChangeContents={(content) => setPostData({ ...postData, content })}
+                        onChangeThumbnail={(thumbnail) => setPostData({ ...postData, thumbnail })}
                     />
                 </div>
             </div>

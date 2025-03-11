@@ -35,7 +35,14 @@
   }
 
   img {
-    width: 100%;
+    width: 50%;
+  }
+
+  code {
+    background-color: $black-100 !important;
+    color: inherit;
+    font-size: 0.8rem;
+    padding: 0;
   }
 }
 
