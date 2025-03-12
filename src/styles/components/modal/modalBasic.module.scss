@@ -57,16 +57,12 @@
             min-width: 400px;
             width: 100%;
 
-            @include TABLET {
+            @include MOBILE {
                 min-width: 300px;
             }
 
-            @include MOBILE {
-                min-width: 200px;
-            }
-
             @include S_MOBILE {
-                min-width: 150px;
+                min-width: 300px;
                 min-height: 100px;
             }
 

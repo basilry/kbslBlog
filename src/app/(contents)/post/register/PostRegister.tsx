@@ -8,31 +8,35 @@ import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
 import Editor from "@components/template/editor/Editor"
+import { IPost } from "@interface/IPost"
 import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/postNew.module.scss"
 
-interface IPostData {
-    title: string
-    thumbnail: string
-    content: string
-}
-
-const initialPostData: IPostData = {
+const initialPostData: IPost = {
+    id: 0,
     title: "",
     thumbnail: "",
     content: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    likeCount: 0,
 }
 
-const PostNew = (): ReactElement => {
+interface IPostRegisterProps {
+    setEdit?: (edit: boolean) => void
+    originPostData?: IPost
+}
+
+const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegisterProps): ReactElement => {
     const { darkMode } = useCoreStore()
 
     const router = useRouter()
 
-    const [postData, setPostData] = useState<IPostData>(initialPostData)
+    const [postData, setPostData] = useState<IPost>(originPostData)
 
-    const savePost = (): void => {
+    const registerPost = (): void => {
         axiosInstance
             .post("/posts", postData)
             .then((res) => {
@@ -43,6 +47,20 @@ const PostNew = (): ReactElement => {
             })
             .catch(() => {
                 toastCall("글 저장에 실패했습니다.", "error")
+            })
+    }
+
+    const updatePost = (): void => {
+        axiosInstance
+            .put(`/posts/${postData.id}`, postData)
+            .then((res) => {
+                if (res.data.code === 200) {
+                    setEdit?.(false)
+                    toastCall("글이 성공적으로 수정되었습니다.", "success")
+                }
+            })
+            .catch(() => {
+                toastCall("글 수정에 실패했습니다.", "error")
             })
     }
 
@@ -74,7 +92,7 @@ const PostNew = (): ReactElement => {
                             buttonWrapperStyle={styles.btnWrapper}
                             type={""}
                             fontSize={"small"}
-                            onClick={() => savePost()}
+                            onClick={() => (setEdit ? updatePost() : registerPost())}
                             label={"저장하기"}
                         />
                     </div>
@@ -97,4 +115,4 @@ const PostNew = (): ReactElement => {
     )
 }
 
-export default PostNew
+export default PostRegister

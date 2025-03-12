@@ -62,7 +62,7 @@ const Editor = (props: IEditorProps): ReactElement => {
                 },
             }),
         ],
-        content: title ? <h1>{title}</h1> : "<h1></h1>",
+        content: title || "<h1></h1>",
         autofocus: "end",
         immediatelyRender: false,
         onUpdate: ({ editor }) => {

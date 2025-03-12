@@ -35,7 +35,7 @@ const Ltcga = (): ReactElement => {
                     </TextBasic>
                     <div className={styles.logos}>
                         <img src="/hecton.png" alt="logo" width={30} height={20} />
-                        <Image placeholder="blur" src="/ddoga_logo.svg" alt="logo" width={115} height={30} />
+                        <Image src="/ddoga_logo.svg" alt="logo" width={115} height={30} />
                     </div>
                 </div>
                 <LineBasic />

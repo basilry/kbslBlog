@@ -6,6 +6,7 @@ import dayjs from "dayjs"
 import parse from "html-react-parser"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import PostRegister from "@app/(contents)/post/register/PostRegister"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
@@ -76,9 +77,11 @@ const PostDetail = (): ReactElement => {
 
     useEffect(() => {
         getPostDetail(Number(id))
-    }, [id])
+    }, [id, doEdit])
 
-    return (
+    return doEdit ? (
+        <PostRegister originPostData={postDetail} setEdit={() => setDoEdit(false)} />
+    ) : (
         <Wrapper>
             <div className={styles.postDetailWrapper}>
                 <div className={styles.titleWrapper} style={{ minHeight: postDetail.thumbnail ? "300px" : "150px" }}>
@@ -119,7 +122,12 @@ const PostDetail = (): ReactElement => {
                                     onClick={() => setOpenModal(true)}
                                     label={"삭제하기"}
                                 />
-                                <ButtonBasic type={""} fontSize={"small"} onClick={() => ""} label={"수정하기"} />
+                                <ButtonBasic
+                                    type={""}
+                                    fontSize={"small"}
+                                    onClick={() => setDoEdit(true)}
+                                    label={"수정하기"}
+                                />
                             </div>
                         )}
 
@@ -143,9 +151,6 @@ const PostDetail = (): ReactElement => {
                         </div>
                         <TextBasic size="small" bold="normal">
                             {handleCalDiffTime(diff, postDetail.createdAt)}
-                        </TextBasic>
-                        <TextBasic size="small" bold="normal">
-                            {"김바실리"}
                         </TextBasic>
                     </div>
                 </div>

@@ -29,13 +29,15 @@ export const convertFileToBase64 = (file: File): Promise<string> => {
 }
 
 export const handleCalDiffTime = (diff: number, createdAt: Date): string => {
+    const result = dayjs(createdAt).format("YYYY.MM.DD HH:mm")
+
     if (diff < 1) {
-        return `${dayjs().diff(dayjs(createdAt), "minute")}분 전`
+        return `${result} (${dayjs().diff(dayjs(createdAt), "minute")}분 전)`
     } else {
         if (diff < 24) {
-            return `${diff}시간 전`
+            return `${result} (${diff}시간 전)`
         } else {
-            return `${dayjs().diff(dayjs(createdAt), "day")}일 전`
+            return `${result} (${dayjs().diff(dayjs(createdAt), "day")}일 전)`
         }
     }
 }

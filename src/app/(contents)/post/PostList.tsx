@@ -11,7 +11,7 @@ import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import Pagination from "@components/template/Pagination"
+import Pagination from "@components/ui/Pagination"
 import { IPost } from "@interface/IPost"
 import { IPagination } from "@interface/IRoot"
 import { axiosInstance } from "@lib/api/axiosInstance"
@@ -78,7 +78,7 @@ const PostList = (): ReactElement => {
                         buttonStyle={styles.topButtonEach}
                         type={"icon"}
                         fontSize={"x-small"}
-                        onClick={() => router.push("/post/postNew")}
+                        onClick={() => router.push("/post/register")}
                     >
                         <Image src={darkMode ? "/pen_white.svg" : "/pen.svg"} alt={"plus"} width={25} height={25} />
                     </ButtonBasic>
@@ -134,9 +134,6 @@ const PostList = (): ReactElement => {
                                             </div>
                                             <TextBasic size="x-small" bold="normal">
                                                 {handleCalDiffTime(diff, post.createdAt)}
-                                            </TextBasic>
-                                            <TextBasic size="x-small" bold="normal">
-                                                {"김바실리"}
                                             </TextBasic>
                                         </div>
                                     </div>

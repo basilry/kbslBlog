@@ -1,14 +1,13 @@
 @import "@styles/variable.scss";
 
 .thumbnailUploaderContainer {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
 .thumbnailUploader {
   border: 2px dashed #d1d5db;
   border-radius: 8px;
-  //padding: 24px;
   display: flex;
   flex-direction: column;
   cursor: pointer;

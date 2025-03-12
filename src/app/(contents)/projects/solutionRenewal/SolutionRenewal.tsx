@@ -34,7 +34,7 @@ const SolutionRenewal = (): ReactElement => {
                     </TextBasic>
                     <div className={styles.logos}>
                         <img src="/hecton.png" alt="logo" width={30} height={20} />
-                        <Image placeholder="blur" src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
+                        <Image src="/ddogaLogo.svg" alt="logo" width={120} height={30} />
                     </div>
                 </div>
                 <LineBasic />
