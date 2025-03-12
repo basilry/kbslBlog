@@ -25,6 +25,7 @@ import { all, createLowlight } from "lowlight"
 import classNames from "classnames"
 import ThumbnailUploader from "@components/template/editor/ThumbnailUploader"
 import TipTapToolbar from "@components/template/editor/TipTapToolbar"
+import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/template/editor/editor.module.scss"
 
@@ -50,26 +51,27 @@ const CustomDocument = Document.extend({
 const Editor = (props: IEditorProps): ReactElement => {
     const { title, contents, thumbnail, onChangeTitle, onChangeContents, onChangeThumbnail } = props
 
+    const uploadToGoogleDrive = (file: File): void => {
+        const formData = new FormData()
+        formData.append("file", file)
+
+        axiosInstance
+            .post("/google-drive", formData)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
+    }
+
     const titleEditor = useEditor({
         extensions: [
             CustomDocument,
-            StarterKit.configure({
-                document: false,
-            }),
-            Placeholder.configure({
-                placeholder: () => {
-                    return "제목"
-                },
-            }),
+            StarterKit.configure({ document: false }),
+            Placeholder.configure({ placeholder: "제목" }),
         ],
         content: title || "<h1></h1>",
         autofocus: "end",
         immediatelyRender: false,
         onUpdate: ({ editor }) => {
-            if (!editor) return
-            const title = editor.getHTML()
-            const clean = DOMPurify.sanitize(title, { FORBID_TAGS: ["h1"] })
-
+            const clean = DOMPurify.sanitize(editor.getHTML(), { FORBID_TAGS: ["h1"] })
             onChangeTitle(clean)
         },
     })

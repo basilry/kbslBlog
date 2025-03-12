@@ -11,6 +11,7 @@ import Editor from "@components/template/editor/Editor"
 import { IPost } from "@interface/IPost"
 import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
+import { extractBase64Images } from "@lib/utils/common"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/postNew.module.scss"
 
@@ -36,9 +37,64 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
 
     const [postData, setPostData] = useState<IPost>(originPostData)
 
-    const registerPost = (): void => {
+    const handleSubmit = async (): Promise<void> => {
+        const base64Images = extractBase64Images(postData.content)
+        let contentHtml = postData.content
+
+        if (base64Images.length > 0) {
+            contentHtml = await uploadMultiFile(contentHtml, base64Images)
+        }
+
+        let thumbnailUrl = postData.thumbnail
+
+        if (thumbnailUrl.startsWith("data:image/")) {
+            const uploadedThumbnailUrl = await uploadSingleImage(thumbnailUrl)
+            if (uploadedThumbnailUrl) {
+                thumbnailUrl = uploadedThumbnailUrl
+            } else {
+                toastCall("썸네일 이미지 업로드에 실패했습니다.", "error")
+                return // 썸네일 업로드 실패 시 중단
+            }
+        }
+
+        const finalPostData = { ...postData, thumbnail: thumbnailUrl, content: contentHtml }
+
+        if (postData.id === 0) {
+            registerPost(finalPostData)
+        } else {
+            updatePost(finalPostData)
+        }
+    }
+
+    const uploadSingleImage = async (base64Image: string): Promise<string | null> => {
+        try {
+            const response = await axiosInstance.post("/google-drive/upload", { base64Image })
+            return response.data.data
+        } catch (error) {
+            toastCall("이미지 업로드 중 오류가 발생했습니다.", "error")
+            return null
+        }
+    }
+
+    const uploadMultiFile = async (contentHtml: string, base64Images: string[]): Promise<string> => {
+        try {
+            const response = await axiosInstance.post("/google-drive/upload-multi", { base64Images })
+            const urls: string[] = response.data.data
+
+            urls.forEach((url, idx) => {
+                contentHtml = contentHtml.replace(base64Images[idx], url)
+            })
+
+            return contentHtml
+        } catch (error) {
+            toastCall("이미지 업로드 중 오류가 발생했습니다.", "error")
+            return contentHtml
+        }
+    }
+
+    const registerPost = (finalPost: IPost): void => {
         axiosInstance
-            .post("/posts", postData)
+            .post("/posts", finalPost)
             .then((res) => {
                 if (res.data.code === 200) {
                     router.replace(`/post/${res.data.data.id}`)
@@ -50,9 +106,9 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
             })
     }
 
-    const updatePost = (): void => {
+    const updatePost = (finalPost: IPost): void => {
         axiosInstance
-            .put(`/posts/${postData.id}`, postData)
+            .put(`/posts/${postData.id}`, finalPost)
             .then((res) => {
                 if (res.data.code === 200) {
                     setEdit?.(false)
@@ -92,7 +148,7 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
                             buttonWrapperStyle={styles.btnWrapper}
                             type={""}
                             fontSize={"small"}
-                            onClick={() => (setEdit ? updatePost() : registerPost())}
+                            onClick={() => handleSubmit()}
                             label={"저장하기"}
                         />
                     </div>

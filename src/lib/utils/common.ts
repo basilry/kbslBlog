@@ -41,3 +41,15 @@ export const handleCalDiffTime = (diff: number, createdAt: Date): string => {
         }
     }
 }
+
+export const extractBase64Images = (html: string): string[] => {
+    const regex = /<img[^>]+src="(data:image\/[^">]+)"/g
+    const images = []
+
+    let match
+    while ((match = regex.exec(html)) !== null) {
+        images.push(match[1])
+    }
+
+    return images
+}
