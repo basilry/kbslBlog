@@ -1,33 +1,29 @@
-import { ChangeEvent, ReactElement, useRef, useState } from "react"
+import { ChangeEvent, ReactElement, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import classNames from "classnames"
 import styles from "@styles/components/template/editor/thumbnail.module.scss"
 
 interface ThumbnailUploaderProps {
-    thumbnail: string
-    onChangeThumbnail: (thumbnail: string) => void
+    onChangeThumbnail: (thumbnail: File | string) => void
 }
 
-const ThumbnailUploader = ({ thumbnail, onChangeThumbnail }: ThumbnailUploaderProps): ReactElement => {
+const ThumbnailUploader = ({ onChangeThumbnail }: ThumbnailUploaderProps): ReactElement => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [isDragging, setIsDragging] = useState<boolean>(false)
+    const [previewUrl, setPreviewUrl] = useState<string>("")
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const file = e.target.files?.[0]
         if (!file) return
 
-        // 이미지 파일 타입 검증
         if (!file.type.match("image.*")) {
             alert("이미지 파일만 업로드 가능합니다.")
             return
         }
 
-        const reader = new FileReader()
-        reader.onload = (e): void => {
-            const result = e.target?.result as string
-            onChangeThumbnail(result)
-        }
-        reader.readAsDataURL(file)
+        const tempUrl = URL.createObjectURL(file)
+        setPreviewUrl(tempUrl)
+        onChangeThumbnail(file)
     }
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
@@ -51,20 +47,30 @@ const ThumbnailUploader = ({ thumbnail, onChangeThumbnail }: ThumbnailUploaderPr
             return
         }
 
-        const reader = new FileReader()
-        reader.onload = (e): void => {
-            const result = e.target?.result as string
-            onChangeThumbnail(result)
-        }
-        reader.readAsDataURL(file)
+        const tempUrl = URL.createObjectURL(file)
+        setPreviewUrl(tempUrl)
+        onChangeThumbnail(file)
     }
 
     const handleRemove = (): void => {
+        if (typeof previewUrl === "string" && previewUrl.startsWith("blob:")) {
+            URL.revokeObjectURL(previewUrl)
+        }
+        setPreviewUrl("")
         onChangeThumbnail("")
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
         }
     }
+
+    // cleanup effect
+    useEffect(() => {
+        return () => {
+            if (typeof previewUrl === "string" && previewUrl.startsWith("blob:")) {
+                URL.revokeObjectURL(previewUrl)
+            }
+        }
+    }, [previewUrl])
 
     return (
         <div className={styles.thumbnailUploaderContainer}>
@@ -75,10 +81,10 @@ const ThumbnailUploader = ({ thumbnail, onChangeThumbnail }: ThumbnailUploaderPr
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
             >
-                {thumbnail ? (
+                {previewUrl ? (
                     <div className={styles.thumbnailPreviewContainer}>
                         <Image
-                            src={thumbnail}
+                            src={previewUrl || ""}
                             alt="썸네일 미리보기"
                             className={styles.thumbnailPreview}
                             fill

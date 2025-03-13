@@ -3,8 +3,8 @@
 import { ReactElement } from "react"
 import { Document } from "@tiptap/extension-document"
 import { Highlight } from "@tiptap/extension-highlight"
-import Image from "@tiptap/extension-image"
-import Link from "@tiptap/extension-link"
+import ImageExtension from "@tiptap/extension-image"
+import LinkExtension from "@tiptap/extension-link"
 import { Mention } from "@tiptap/extension-mention"
 import { Placeholder } from "@tiptap/extension-placeholder"
 import { Superscript } from "@tiptap/extension-superscript"
@@ -25,17 +25,15 @@ import { all, createLowlight } from "lowlight"
 import classNames from "classnames"
 import ThumbnailUploader from "@components/template/editor/ThumbnailUploader"
 import TipTapToolbar from "@components/template/editor/TipTapToolbar"
-import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/template/editor/editor.module.scss"
 
 interface IEditorProps {
     title: string
     contents: string
-    thumbnail: string
     onChangeTitle: (title: string) => void
     onChangeContents: (contents: string) => void
-    onChangeThumbnail: (thumbnail: string) => void
+    onChangeThumbnail: (thumbnail: string | File) => void
 }
 
 const lowlight = createLowlight(all)
@@ -49,17 +47,7 @@ const CustomDocument = Document.extend({
 })
 
 const Editor = (props: IEditorProps): ReactElement => {
-    const { title, contents, thumbnail, onChangeTitle, onChangeContents, onChangeThumbnail } = props
-
-    const uploadToGoogleDrive = (file: File): void => {
-        const formData = new FormData()
-        formData.append("file", file)
-
-        axiosInstance
-            .post("/google-drive", formData)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err))
-    }
+    const { title, contents, onChangeTitle, onChangeContents, onChangeThumbnail } = props
 
     const titleEditor = useEditor({
         extensions: [
@@ -86,7 +74,7 @@ const Editor = (props: IEditorProps): ReactElement => {
             Highlight,
             Underline,
             Superscript,
-            Image.configure({
+            ImageExtension.configure({
                 allowBase64: true,
                 inline: true,
             }),
@@ -104,7 +92,7 @@ const Editor = (props: IEditorProps): ReactElement => {
                     return "내용을 입력하세요."
                 },
             }),
-            Link.configure({
+            LinkExtension.configure({
                 openOnClick: false,
                 autolink: true,
                 defaultProtocol: "https",
@@ -204,7 +192,7 @@ const Editor = (props: IEditorProps): ReactElement => {
             <div className={classNames(styles.titleEditor, darkMode && styles.dark)}>
                 <EditorContent editor={titleEditor} />
             </div>
-            <ThumbnailUploader thumbnail={thumbnail} onChangeThumbnail={onChangeThumbnail} />
+            <ThumbnailUploader onChangeThumbnail={onChangeThumbnail} />
             <TipTapToolbar editor={contentsEditor} />
             <div
                 className={classNames(styles.contentsEditor, darkMode && styles.dark)}
