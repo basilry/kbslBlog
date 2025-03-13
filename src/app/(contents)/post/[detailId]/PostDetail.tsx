@@ -3,7 +3,7 @@
 import { ReactElement, useEffect, useState } from "react"
 import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
-import parse from "html-react-parser"
+import parse, { Element, HTMLReactParserOptions } from "html-react-parser"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import PostRegister from "@app/(contents)/post/register/PostRegister"
@@ -79,6 +79,28 @@ const PostDetail = (): ReactElement => {
         getPostDetail(Number(id))
     }, [id, doEdit])
 
+    // HTML 파싱 및 img 태그 변환 함수
+    const parseHtmlWithNextImage = (htmlContent: string) => {
+        const options: HTMLReactParserOptions = {
+            replace: (domNode) => {
+                if (domNode instanceof Element && domNode.name === "img") {
+                    const { src, alt = "", width, height, style = "" } = domNode.attribs
+
+                    // 구글 드라이브 이미지인 경우
+                    if (src && src.includes("drive.google.com")) {
+                        return (
+                            <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
+                                <Image src={src} alt={alt} fill style={{ objectFit: "contain" }} />
+                            </div>
+                        )
+                    }
+                }
+            },
+        }
+
+        return parse(htmlContent, options)
+    }
+
     return doEdit ? (
         <PostRegister originPostData={postDetail} setEdit={() => setDoEdit(false)} />
     ) : (
@@ -87,7 +109,7 @@ const PostDetail = (): ReactElement => {
                 <div className={styles.titleWrapper} style={{ minHeight: postDetail.thumbnail ? "300px" : "150px" }}>
                     {postDetail.thumbnail && (
                         <Image
-                            src={postDetail.thumbnail}
+                            src={(postDetail?.thumbnail as string) || ""}
                             alt="background"
                             fill
                             style={{
@@ -156,7 +178,9 @@ const PostDetail = (): ReactElement => {
                 </div>
                 <LineBasic />
                 <br />
-                {postDetail.content && <div className={styles.content}>{parse(postDetail.content)}</div>}
+                {postDetail.content && (
+                    <div className={styles.content}>{parseHtmlWithNextImage(postDetail.content)}</div>
+                )}
                 <ButtonBasic type={"thumb"} onClick={() => updateLike(postDetail.id)}>
                     <div>
                         <Image src={"/thumbsUp.svg"} alt={"thumbsUP"} width={25} height={25} />
