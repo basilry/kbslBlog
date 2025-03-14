@@ -1,11 +1,12 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, useRef, useState } from "react"
 import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
 import parse, { Element, HTMLReactParserOptions } from "html-react-parser"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import classNames from "classnames"
 import PostRegister from "@app/(contents)/post/register/PostRegister"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
@@ -33,6 +34,9 @@ const PostDetail = (): ReactElement => {
     const [postDetail, setPostDetail] = useState<IPost>({} as IPost)
     const [doEdit, setDoEdit] = useState(false)
     const [openModal, setOpenModal] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
+
+    const titleRef = useRef<HTMLDivElement>(null)
 
     const getPostDetail = (id: number): void => {
         axiosInstance
@@ -75,22 +79,45 @@ const PostDetail = (): ReactElement => {
 
     const diff = dayjs().diff(dayjs(postDetail.createdAt), "hour")
 
+    // 스크롤 이벤트 핸들러
+    const handleScroll = (): void => {
+        const scrollPosition = window.scrollY
+        // 스크롤 위치가 특정 값(예: 100px) 이상이면 스크롤된 상태로 설정
+        setIsScrolled(scrollPosition > 100)
+    }
+
     useEffect(() => {
         getPostDetail(Number(id))
     }, [id, doEdit])
 
+    // 스크롤 이벤트 리스너 등록 및 해제
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [])
+
     // HTML 파싱 및 img 태그 변환 함수
-    const parseHtmlWithNextImage = (htmlContent: string) => {
+    const parseHtmlWithNextImage = (htmlContent: string): React.ReactNode => {
         const options: HTMLReactParserOptions = {
             replace: (domNode) => {
                 if (domNode instanceof Element && domNode.name === "img") {
-                    const { src, alt = "", width, height, style = "" } = domNode.attribs
+                    const { src, alt = "" } = domNode.attribs
 
                     // 구글 드라이브 이미지인 경우
                     if (src && src.includes("drive.google.com")) {
                         return (
                             <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
-                                <Image src={src} alt={alt} fill style={{ objectFit: "contain" }} />
+                                <Image
+                                    src={src}
+                                    alt={alt}
+                                    fill
+                                    style={{ objectFit: "contain" }}
+                                    loading="lazy"
+                                    placeholder="blur"
+                                    blurDataURL="/image.svg"
+                                />
                             </div>
                         )
                     }
@@ -106,7 +133,16 @@ const PostDetail = (): ReactElement => {
     ) : (
         <Wrapper>
             <div className={styles.postDetailWrapper}>
-                <div className={styles.titleWrapper} style={{ minHeight: postDetail.thumbnail ? "300px" : "150px" }}>
+                <div
+                    ref={titleRef}
+                    className={classNames(styles.titleWrapper, {
+                        [styles.titleScrolled]: isScrolled,
+                        [styles.dark]: darkMode && isScrolled,
+                    })}
+                    style={{
+                        minHeight: postDetail.thumbnail && !isScrolled ? "300px" : "150px",
+                    }}
+                >
                     {postDetail.thumbnail && (
                         <Image
                             src={(postDetail?.thumbnail as string) || ""}
@@ -117,6 +153,7 @@ const PostDetail = (): ReactElement => {
                                 opacity: 0.5,
                                 zIndex: 1,
                                 borderRadius: "10px",
+                                transition: "all 0.3s ease",
                             }}
                         />
                     )}
@@ -131,7 +168,11 @@ const PostDetail = (): ReactElement => {
                                 />
                             </div>
                             {diff < 1 && <Image src={"/hot.svg"} alt={"hot"} width={30} height={30} />}
-                            <TextBasic size="xxx-large" bold="bold">
+                            <TextBasic
+                                size={isScrolled ? "xx-large" : "xxx-large"}
+                                bold="bold"
+                                className={styles.titleText}
+                            >
                                 {parse(postDetail.title || "")}
                             </TextBasic>
                         </div>
@@ -164,6 +205,7 @@ const PostDetail = (): ReactElement => {
                             onCancel={() => setOpenModal(false)}
                         />
                     </div>
+
                     <div className={styles.titleBottom}>
                         <div className={styles.thumbAndLike}>
                             <Image src={"/thumbsUp.svg"} alt={"thumbsUp"} width={15} height={15} />
@@ -176,6 +218,10 @@ const PostDetail = (): ReactElement => {
                         </TextBasic>
                     </div>
                 </div>
+
+                {/* 스크롤 시 타이틀 영역만큼 여백 추가 (타이틀이 fixed 포지션일 때) */}
+                {isScrolled && <div style={{ height: "70px" }} />}
+
                 <LineBasic />
                 <br />
                 {postDetail.content && (

@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { Document } from "@tiptap/extension-document"
 import { Highlight } from "@tiptap/extension-highlight"
 import ImageExtension from "@tiptap/extension-image"
@@ -21,7 +21,9 @@ import css from "highlight.js/lib/languages/css"
 import js from "highlight.js/lib/languages/javascript"
 import ts from "highlight.js/lib/languages/typescript"
 import html from "highlight.js/lib/languages/xml"
+import parse, { Element, HTMLReactParserOptions } from "html-react-parser"
 import { all, createLowlight } from "lowlight"
+import Image from "next/image"
 import classNames from "classnames"
 import ThumbnailUploader from "@components/template/editor/ThumbnailUploader"
 import TipTapToolbar from "@components/template/editor/TipTapToolbar"
@@ -34,6 +36,7 @@ interface IEditorProps {
     onChangeTitle: (title: string) => void
     onChangeContents: (contents: string) => void
     onChangeThumbnail: (thumbnail: string | File) => void
+    thumbnail?: string | File
 }
 
 const lowlight = createLowlight(all)
@@ -46,8 +49,46 @@ const CustomDocument = Document.extend({
     content: "heading block*",
 })
 
+// 구글 드라이브 이미지 URL인지 확인하는 함수
+const isGoogleDriveImage = (url: string): boolean => {
+    return url.includes("drive.google.com") || url.includes("googleusercontent.com")
+}
+
+// HTML 파싱 및 img 태그 변환 함수
+const parseHtmlWithNextImage = (htmlContent: string): React.ReactNode => {
+    const options: HTMLReactParserOptions = {
+        replace: (domNode) => {
+            if (domNode instanceof Element && domNode.name === "img") {
+                const { src, alt = "" } = domNode.attribs
+
+                if (src) {
+                    // 구글 드라이브 이미지인 경우
+                    if (isGoogleDriveImage(src)) {
+                        return (
+                            <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
+                                <Image
+                                    src={src}
+                                    alt={alt || "이미지"}
+                                    fill
+                                    style={{ objectFit: "contain" }}
+                                    loading="lazy"
+                                    placeholder="blur"
+                                    blurDataURL="/image.svg"
+                                />
+                            </div>
+                        )
+                    }
+                }
+            }
+        },
+    }
+
+    return parse(htmlContent, options)
+}
+
 const Editor = (props: IEditorProps): ReactElement => {
-    const { title, contents, onChangeTitle, onChangeContents, onChangeThumbnail } = props
+    const { title, contents, onChangeTitle, onChangeContents, onChangeThumbnail, thumbnail } = props
+    const [parsedContent, setParsedContent] = useState<React.ReactNode | null>(null)
 
     const titleEditor = useEditor({
         extensions: [
@@ -152,7 +193,7 @@ const Editor = (props: IEditorProps): ReactElement => {
                 },
             }),
         ],
-        content: contents || "<p></p>",
+        content: () => parsedContent || "<p></p>",
         immediatelyRender: false,
         onUpdate: ({ editor }) => {
             if (!editor) return
@@ -179,9 +220,30 @@ const Editor = (props: IEditorProps): ReactElement => {
                 ],
             })
 
+            // 구글 드라이브 이미지가 있는지 확인
+            if (clean.includes("drive.google.com") || clean.includes("googleusercontent.com")) {
+                // 이미지 처리를 위해 parseHtmlWithNextImage 함수 사용
+                setParsedContent(parseHtmlWithNextImage(clean))
+            } else {
+                setParsedContent(null)
+            }
+
             onChangeContents(clean)
         },
     })
+
+    // 초기 콘텐츠에 img 태그가 있을 경우 처리
+    useEffect(() => {
+        if (contentsEditor && contents) {
+            // 구글 드라이브 이미지가 있는지 확인
+            if (contents.includes("drive.google.com") || contents.includes("googleusercontent.com")) {
+                setParsedContent(parseHtmlWithNextImage(contents))
+            }
+
+            // 에디터 내용 설정
+            contentsEditor.commands.setContent(contents)
+        }
+    }, [contentsEditor, contents])
 
     const { darkMode } = useCoreStore()
 
@@ -192,7 +254,7 @@ const Editor = (props: IEditorProps): ReactElement => {
             <div className={classNames(styles.titleEditor, darkMode && styles.dark)}>
                 <EditorContent editor={titleEditor} />
             </div>
-            <ThumbnailUploader onChangeThumbnail={onChangeThumbnail} />
+            <ThumbnailUploader thumbnail={thumbnail} onChangeThumbnail={onChangeThumbnail} />
             <TipTapToolbar editor={contentsEditor} />
             <div
                 className={classNames(styles.contentsEditor, darkMode && styles.dark)}
@@ -201,6 +263,18 @@ const Editor = (props: IEditorProps): ReactElement => {
                 }}
             >
                 <EditorContent editor={contentsEditor} />
+                {/* {parsedContent ? (
+                    <div className="editor-content-wrapper">
+                        {parsedContent}
+                        <div
+                            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", opacity: 0 }}
+                        >
+                            <EditorContent editor={contentsEditor} />
+                        </div>
+                    </div>
+                ) : (
+                    <EditorContent editor={contentsEditor} />
+                )} */}
             </div>
         </div>
     )

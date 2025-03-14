@@ -335,6 +335,7 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
                     <Editor
                         title={postData.title}
                         contents={postData.content}
+                        thumbnail={postData.thumbnail}
                         onChangeTitle={(title) => setPostData({ ...postData, title })}
                         onChangeContents={(content) => setPostData({ ...postData, content })}
                         onChangeThumbnail={(thumbnail) => setPostData({ ...postData, thumbnail })}

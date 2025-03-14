@@ -92,3 +92,55 @@
 .fileInput {
     display: none;
 }
+
+.urlInputContainer {
+  width: 100%;
+  padding: 20px;
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.urlInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.urlButtonGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.urlSubmitButton, .urlCancelButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.urlSubmitButton {
+  background-color: #0070f3;
+  color: white;
+}
+
+.urlCancelButton {
+  background-color: #f3f3f3;
+  color: #333;
+}
+
+.urlButton {
+  background: none;
+  border: none;
+  color: #0070f3;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}

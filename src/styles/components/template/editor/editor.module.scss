@@ -46,3 +46,14 @@
   }
 }
 
+// 구글 드라이브 이미지 스타일
+.googleDriveImage {
+  max-width: 100%;
+  height: auto !important;
+  display: block;
+  margin: 20px auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+
