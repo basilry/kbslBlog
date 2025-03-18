@@ -316,7 +316,10 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
                             buttonWrapperStyle={styles.btnWrapper}
                             type={"reset"}
                             fontSize={"small"}
-                            onClick={() => router.back()}
+                            onClick={() => {
+                                router.refresh()
+                                setEdit?.(false)
+                            }}
                             label={"취소하기"}
                         />
                         <ButtonBasic

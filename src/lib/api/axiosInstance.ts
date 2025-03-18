@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios"
 
 export const axiosInstance: AxiosInstance = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}`,
+    baseURL: `${process.env.NEXT_PUBLIC_IP}`,
     headers: { "Content-Type": "application/json; charset=utf-8" },
     responseType: "json",
     withCredentials: true,
@@ -9,7 +9,7 @@ export const axiosInstance: AxiosInstance = axios.create({
 })
 
 export const axiosInstanceMultipart: AxiosInstance = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}`,
+    baseURL: `${process.env.NEXT_PUBLIC_IP}`,
     headers: { "Content-Type": "multipart/form-data" },
     responseType: "json",
     withCredentials: true,

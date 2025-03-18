@@ -1,6 +1,7 @@
 "use client"
 
 import { ReactElement, useEffect, useState } from "react"
+import { CharacterCount } from "@tiptap/extension-character-count"
 import { Document } from "@tiptap/extension-document"
 import { Highlight } from "@tiptap/extension-highlight"
 import ImageExtension from "@tiptap/extension-image"
@@ -15,20 +16,19 @@ import { Underline } from "@tiptap/extension-underline"
 import { Youtube } from "@tiptap/extension-youtube"
 import { EditorContent, useEditor } from "@tiptap/react"
 import { StarterKit } from "@tiptap/starter-kit"
-
 import DOMPurify from "dompurify"
+
 import css from "highlight.js/lib/languages/css"
 import js from "highlight.js/lib/languages/javascript"
 import ts from "highlight.js/lib/languages/typescript"
 import html from "highlight.js/lib/languages/xml"
-import parse, { Element, HTMLReactParserOptions } from "html-react-parser"
-import { all, createLowlight } from "lowlight"
-import Image from "next/image"
+import { common, createLowlight } from "lowlight"
 import classNames from "classnames"
 import ThumbnailUploader from "@components/template/editor/ThumbnailUploader"
 import TipTapToolbar from "@components/template/editor/TipTapToolbar"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/template/editor/editor.module.scss"
+import { GoogleDriveImageExtension } from "./GoogleDriveImageExtension"
 
 interface IEditorProps {
     title: string
@@ -39,62 +39,37 @@ interface IEditorProps {
     thumbnail?: string | File
 }
 
-const lowlight = createLowlight(all)
+const CustomDocument = Document.extend({
+    content: "heading block*",
+})
+
+// lowlight 초기화
+const lowlight = createLowlight(common)
 lowlight.register("html", html)
 lowlight.register("css", css)
 lowlight.register("js", js)
 lowlight.register("ts", ts)
 
-const CustomDocument = Document.extend({
-    content: "heading block*",
-})
-
-// 구글 드라이브 이미지 URL인지 확인하는 함수
-const isGoogleDriveImage = (url: string): boolean => {
-    return url.includes("drive.google.com") || url.includes("googleusercontent.com")
-}
-
-// HTML 파싱 및 img 태그 변환 함수
-const parseHtmlWithNextImage = (htmlContent: string): React.ReactNode => {
-    const options: HTMLReactParserOptions = {
-        replace: (domNode) => {
-            if (domNode instanceof Element && domNode.name === "img") {
-                const { src, alt = "" } = domNode.attribs
-
-                if (src) {
-                    // 구글 드라이브 이미지인 경우
-                    if (isGoogleDriveImage(src)) {
-                        return (
-                            <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
-                                <Image
-                                    src={src}
-                                    alt={alt || "이미지"}
-                                    fill
-                                    style={{ objectFit: "contain" }}
-                                    loading="lazy"
-                                    placeholder="blur"
-                                    blurDataURL="/image.svg"
-                                />
-                            </div>
-                        )
-                    }
-                }
-            }
-        },
+// window 전역 객체 확장
+declare global {
+    interface Window {
+        _testGoogleDriveImage: () => void
     }
-
-    return parse(htmlContent, options)
 }
 
 const Editor = (props: IEditorProps): ReactElement => {
     const { title, contents, onChangeTitle, onChangeContents, onChangeThumbnail, thumbnail } = props
-    const [parsedContent, setParsedContent] = useState<React.ReactNode | null>(null)
+    // 에디터 포커스 상태 추가
+    const [isEditorFocused, setIsEditorFocused] = useState(false)
 
     const titleEditor = useEditor({
         extensions: [
             CustomDocument,
             StarterKit.configure({ document: false }),
             Placeholder.configure({ placeholder: "제목" }),
+            CharacterCount.configure({
+                limit: 50,
+            }),
         ],
         content: title || "<h1></h1>",
         autofocus: "end",
@@ -107,6 +82,9 @@ const Editor = (props: IEditorProps): ReactElement => {
 
     const contentsEditor = useEditor({
         extensions: [
+            // 구글 드라이브 이미지 확장을 먼저 등록
+            GoogleDriveImageExtension,
+            // 기본 StarterKit 사용
             StarterKit,
             // 명시 버튼
             TextAlign.configure({
@@ -115,6 +93,7 @@ const Editor = (props: IEditorProps): ReactElement => {
             Highlight,
             Underline,
             Superscript,
+            // 일반 이미지용 별도 확장 (재정의)
             ImageExtension.configure({
                 allowBase64: true,
                 inline: true,
@@ -193,57 +172,90 @@ const Editor = (props: IEditorProps): ReactElement => {
                 },
             }),
         ],
-        content: () => parsedContent || "<p></p>",
+        content: contents || "<p></p>",
         immediatelyRender: false,
+        onFocus: () => setIsEditorFocused(true),
+        onBlur: () => {
+            // blur 이벤트에서만 콘텐츠 업데이트
+            setIsEditorFocused(false)
+            if (contentsEditor) {
+                const html = contentsEditor.getHTML()
+                onChangeContents(html)
+            }
+        },
         onUpdate: ({ editor }) => {
-            if (!editor) return
-            const contents = editor.getHTML()
-            const clean = DOMPurify.sanitize(contents, {
-                ADD_TAGS: ["iframe"],
-                ADD_ATTR: [
-                    "allowfullscreen",
-                    "frameborder",
-                    "src",
-                    "width",
-                    "height",
-                    "allow",
-                    "autoplay",
-                    "disablekbcontrols",
-                    "enableiframeapi",
-                    "endtime",
-                    "ivloadpolicy",
-                    "loop",
-                    "modestbranding",
-                    "origin",
-                    "playlist",
-                    "start",
-                ],
-            })
-
-            // 구글 드라이브 이미지가 있는지 확인
-            if (clean.includes("drive.google.com") || clean.includes("googleusercontent.com")) {
-                // 이미지 처리를 위해 parseHtmlWithNextImage 함수 사용
-                setParsedContent(parseHtmlWithNextImage(clean))
-            } else {
-                setParsedContent(null)
+            if (isEditorFocused) {
+                // 타이핑 중일 때는 업데이트하지 않음 (성능 향상 및 커서 위치 유지)
+                return
             }
 
-            onChangeContents(clean)
+            // 포커스가 없을 때만 전체 콘텐츠 업데이트
+            const html = editor.getHTML()
+            onChangeContents(html)
+        },
+        onCreate: ({ editor }) => {
+            // 확장 등록 확인을 위한 로그
+            console.log(
+                "에디터 확장 목록:",
+                editor.extensionManager.extensions.map((ext) => ext.name),
+            )
+            console.log(
+                "GoogleDriveImageExtension 등록 확인:",
+                editor.extensionManager.extensions.some((ext) => ext.name === "googleDriveImage"),
+            )
         },
     })
 
     // 초기 콘텐츠에 img 태그가 있을 경우 처리
     useEffect(() => {
         if (contentsEditor && contents) {
-            // 구글 드라이브 이미지가 있는지 확인
-            if (contents.includes("drive.google.com") || contents.includes("googleusercontent.com")) {
-                setParsedContent(parseHtmlWithNextImage(contents))
-            }
-
-            // 에디터 내용 설정
-            contentsEditor.commands.setContent(contents)
+            // 에디터 렌더링 후에 setTimeout으로 지연시켜 flushSync 에러 방지
+            setTimeout(() => {
+                console.log("에디터 초기화 - 콘텐츠 설정")
+                contentsEditor.commands.setContent(contents)
+            }, 0)
         }
     }, [contentsEditor, contents])
+
+    // 툴바의 업로드 이미지 명령에 구글 드라이브 이미지 테스트 추가
+    useEffect(() => {
+        if (contentsEditor) {
+            // 테스트용 버튼을 콘솔로 추가
+            console.log("구글 드라이브 이미지 테스트 버튼 추가")
+
+            // 구글 드라이브 버튼 클릭 함수 정의
+            window._testGoogleDriveImage = (): void => {
+                console.log("구글 드라이브 이미지 테스트 실행")
+                // 구글 드라이브 이미지 추가 시도
+                if (contentsEditor) {
+                    // 구글 드라이브 이미지 확장 존재 여부 확인
+                    const hasExtension = contentsEditor.extensionManager.extensions.some(
+                        (ext) => ext.name === "googleDriveImage",
+                    )
+                    console.log("구글 드라이브 이미지 확장 존재:", hasExtension)
+
+                    // 현재 에디터 상태 확인
+                    console.log("현재 에디터 상태:", contentsEditor.getJSON())
+
+                    // 이미지 삽입 실행 (백엔드 프록시 사용)
+                    console.log("백엔드 프록시를 사용하여 이미지 삽입 시도")
+                    const result = contentsEditor.commands.setGoogleDriveImage({
+                        src: "https://drive.google.com/file/d/1lA4in2HV_-lNAnG4bVhhBE0Z1Fhc9eNL/view",
+                        alt: "수동 테스트 이미지",
+                    })
+                    console.log("이미지 삽입 결과:", result)
+
+                    // 삽입 후 상태 확인
+                    setTimeout(() => {
+                        console.log("삽입 후 에디터 상태:", contentsEditor.getJSON())
+                    }, 100)
+                }
+            }
+
+            // 콘솔 사용 안내
+            console.log("콘솔에서 다음 명령어로 테스트: window._testGoogleDriveImage()")
+        }
+    }, [contentsEditor])
 
     const { darkMode } = useCoreStore()
 
@@ -263,18 +275,6 @@ const Editor = (props: IEditorProps): ReactElement => {
                 }}
             >
                 <EditorContent editor={contentsEditor} />
-                {/* {parsedContent ? (
-                    <div className="editor-content-wrapper">
-                        {parsedContent}
-                        <div
-                            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", opacity: 0 }}
-                        >
-                            <EditorContent editor={contentsEditor} />
-                        </div>
-                    </div>
-                ) : (
-                    <EditorContent editor={contentsEditor} />
-                )} */}
             </div>
         </div>
     )

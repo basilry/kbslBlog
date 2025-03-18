@@ -124,13 +124,18 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        width: 100%;
+        width: 80%;
         gap: 5px;
         margin-bottom: 10px;
 
         .title {
           text-overflow: ellipsis;
-          white-space: nowrap;
+          white-space: normal; // nowrap에서 normal로 변경하여 개행 가능하게 함
+          overflow: hidden; // 넘치는 텍스트 처리
+          display: -webkit-box; // 여러 줄 표시를 위한 설정
+          -webkit-line-clamp: 2; // 최대 2줄까지 표시
+          line-clamp: 2; // 표준 속성
+          -webkit-box-orient: vertical; // 수직 방향으로 텍스트 배치
         }
       }
     }

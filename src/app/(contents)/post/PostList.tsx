@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useCallback, useEffect, useState } from "react"
 import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
 import Image from "next/image"
@@ -31,27 +31,43 @@ const PostList = (): ReactElement => {
     const [postList, setPostList] = useState<IPost[]>([])
     const [pagination, setPagination] = useState<IPagination<IPost>>({} as IPagination<IPost>)
 
-    const getPosts = (page = 1): void => {
-        if (page < 1) {
-            router.push("/post")
-            return
-        }
+    const getPosts = useCallback(
+        (page = 1): void => {
+            if (page < 1) {
+                router.push("/post?page=1")
+                return
+            }
 
-        axiosInstance
-            .get(`/posts?page=${page - 1}`)
-            .then((res) => {
-                setPostList(res.data.data.content)
-                setPagination(res.data.data)
+            axiosInstance
+                .get(`/posts?page=${page - 1}`)
+                .then((res) => {
+                    setPostList(res.data.data.content)
+                    setPagination(res.data.data)
 
-                toastCall("포스팅 목록을 불러왔습니다.", "success")
-            })
-            .catch(() => {
-                toastCall("포스팅 목록을 불러오지 못했습니다.", "error")
-            })
-    }
+                    toastCall("포스팅 목록을 불러왔습니다.", "success")
+                })
+                .catch(() => {
+                    toastCall("포스팅 목록을 불러오지 못했습니다.", "error")
+                })
+        },
+        [router],
+    )
 
-    const handlePostThumbnail = (thumbnail: string): string => {
+    const handlePostThumbnail = (thumbnail: string | File): string => {
         if (thumbnail) {
+            // 파일 타입이면 빈 이미지 반환
+            if (thumbnail instanceof File) {
+                if (darkMode) {
+                    return "/image_white.svg"
+                } else {
+                    return "/image.svg"
+                }
+            }
+
+            // 이미 /proxy로 시작하면 그대로 반환 (새 API 형식)
+            if (thumbnail.startsWith("/proxy")) {
+                return `${process.env.NEXT_PUBLIC_IP}${thumbnail}`
+            }
             return thumbnail
         }
 
@@ -64,7 +80,7 @@ const PostList = (): ReactElement => {
 
     useEffect(() => {
         getPosts(Number(page))
-    }, [page])
+    }, [page, getPosts])
 
     return (
         <Wrapper>
@@ -115,7 +131,30 @@ const PostList = (): ReactElement => {
                                             src={handlePostThumbnail(post.thumbnail)}
                                             alt={"thumbnail"}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             style={{ objectFit: "cover" }}
+                                            loading="eager"
+                                            placeholder="blur"
+                                            blurDataURL={
+                                                darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"
+                                            }
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement
+                                                target.style.display = "none"
+                                                console.error("썸네일 로드 실패:", target.src)
+                                                if (target.src.includes("/proxy/")) {
+                                                    console.log(
+                                                        "프록시 URL 로드 실패, 환경 변수 확인 필요:",
+                                                        target.src,
+                                                    )
+                                                    console.log("환경 변수:", {
+                                                        NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
+                                                    })
+                                                }
+                                                target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:${
+                                                    darkMode ? "#333" : "#f5f5f5"
+                                                };color:${darkMode ? "#ccc" : "#666"};">이미지 없음</div>`
+                                            }}
                                         />
                                     </div>
                                     <div className={styles.itemLeft}>
@@ -132,7 +171,7 @@ const PostList = (): ReactElement => {
                                                     {post.likeCount}
                                                 </TextBasic>
                                             </div>
-                                            <TextBasic size="x-small" bold="normal">
+                                            <TextBasic size="xx-small" bold="normal">
                                                 {handleCalDiffTime(diff, post.createdAt)}
                                             </TextBasic>
                                         </div>

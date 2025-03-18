@@ -3,7 +3,7 @@
 import { ReactElement, useEffect, useRef, useState } from "react"
 import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
-import parse, { Element, HTMLReactParserOptions } from "html-react-parser"
+import parse, { DOMNode, Element, HTMLReactParserOptions } from "html-react-parser"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import classNames from "classnames"
@@ -98,25 +98,122 @@ const PostDetail = (): ReactElement => {
         }
     }, [])
 
+    // 구글 드라이브 이미지 URL 최적화 함수
+    const optimizeGoogleDriveImageUrl = (url: string): string => {
+        if (!url) return url
+
+        // 이미 최적화된 URL인 경우 그대로 반환
+        if (url.includes("/api/image-proxy")) return url
+
+        // 프록시 URL인 경우 환경 변수 추가
+        if (url.includes("/proxy/")) {
+            return `${process.env.NEXT_PUBLIC_IP}${url}`
+        }
+
+        // 구글 드라이브나 googleusercontent 이미지인 경우에만 처리
+        if (url.includes("drive.google.com") || url.includes("googleusercontent.com")) {
+            // 최적화된 URL로 변환
+            let optimizedUrl = url
+
+            // 일반 구글 드라이브 공유 URL을 직접 다운로드 URL로 변환
+            if (url.includes("drive.google.com/file/d/")) {
+                const fileId = url.split("/file/d/")[1].split("/")[0]
+                optimizedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`
+            }
+
+            // 구글 문서 뷰어 URL을 직접 다운로드 URL로 변환
+            if (url.includes("/view?usp=sharing")) {
+                optimizedUrl = url.replace("/view?usp=sharing", "/uc?export=view")
+            }
+
+            // 프록시 API를 통해 이미지 로드
+            return `/api/image-proxy?url=${encodeURIComponent(optimizedUrl)}`
+        }
+
+        return url
+    }
+
     // HTML 파싱 및 img 태그 변환 함수
     const parseHtmlWithNextImage = (htmlContent: string): React.ReactNode => {
         const options: HTMLReactParserOptions = {
-            replace: (domNode) => {
+            replace: (domNode: DOMNode) => {
                 if (domNode instanceof Element && domNode.name === "img") {
                     const { src, alt = "" } = domNode.attribs
 
-                    // 구글 드라이브 이미지인 경우
-                    if (src && src.includes("drive.google.com")) {
+                    if (!src) return null
+
+                    // 이미 프록시 처리된 이미지일 경우
+                    if (src.includes("/proxy/")) {
+                        // 중복 URL 방지
+                        if (src.startsWith("http")) {
+                            return null
+                        }
                         return (
                             <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
                                 <Image
-                                    src={src}
-                                    alt={alt}
+                                    src={`${process.env.NEXT_PUBLIC_IP}${src}`}
+                                    alt={alt || "이미지"}
                                     fill
                                     style={{ objectFit: "contain" }}
-                                    loading="lazy"
+                                    loading="eager"
+                                    priority={true}
                                     placeholder="blur"
-                                    blurDataURL="/image.svg"
+                                    blurDataURL={
+                                        darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"
+                                    }
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                                    onError={(e) => {
+                                        // 이미지 로드 실패 시 처리
+                                        const target = e.target as HTMLImageElement
+                                        target.style.display = "none"
+                                        console.error("이미지 로드 실패:", target.src)
+                                        // 원본 URL 출력
+                                        if (target.src.includes("/proxy/")) {
+                                            console.log("프록시 URL 로드 실패, 환경 변수 확인 필요:", target.src)
+                                            console.log("환경 변수:", {
+                                                NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
+                                            })
+                                        }
+                                        target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:#f5f5f5;color:#666;">이미지를 불러올 수 없습니다</div>`
+                                    }}
+                                />
+                            </div>
+                        )
+                    }
+
+                    // 구글 드라이브 이미지인 경우
+                    if (src && (src.includes("drive.google.com") || src.includes("googleusercontent.com"))) {
+                        // 최적화된 URL 생성
+                        const optimizedSrc = optimizeGoogleDriveImageUrl(src)
+
+                        return (
+                            <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
+                                <Image
+                                    src={optimizedSrc}
+                                    alt={alt || "이미지"}
+                                    fill
+                                    style={{ objectFit: "contain" }}
+                                    loading="eager"
+                                    priority={true}
+                                    placeholder="blur"
+                                    blurDataURL={
+                                        darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"
+                                    }
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                                    onError={(e) => {
+                                        // 이미지 로드 실패 시 처리
+                                        const target = e.target as HTMLImageElement
+                                        target.style.display = "none"
+                                        console.error("이미지 로드 실패:", target.src)
+                                        // 원본 URL 출력
+                                        if (target.src.includes("/proxy/")) {
+                                            console.log("프록시 URL 로드 실패, 환경 변수 확인 필요:", target.src)
+                                            console.log("환경 변수:", {
+                                                NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
+                                            })
+                                        }
+                                        target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:#f5f5f5;color:#666;">이미지를 불러올 수 없습니다</div>`
+                                    }}
                                 />
                             </div>
                         )
@@ -145,7 +242,7 @@ const PostDetail = (): ReactElement => {
                 >
                     {postDetail.thumbnail && (
                         <Image
-                            src={(postDetail?.thumbnail as string) || ""}
+                            src={`${process.env.NEXT_PUBLIC_IP}${postDetail.thumbnail}`}
                             alt="background"
                             fill
                             style={{
