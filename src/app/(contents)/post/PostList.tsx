@@ -1,11 +1,11 @@
 "use client"
 
-import { ReactElement, useCallback, useEffect, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
 import Image from "next/image"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import classNames from "classnames"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
@@ -25,33 +25,30 @@ const PostList = (): ReactElement => {
     const { loginUser, loginState } = useLoginStore()
 
     const router = useRouter()
-    const param = useSearchParams()
-    const page = param.get("page") || 1
+    const pathname = usePathname()
+    const page = pathname.split("/")[2] || 1
 
     const [postList, setPostList] = useState<IPost[]>([])
     const [pagination, setPagination] = useState<IPagination<IPost>>({} as IPagination<IPost>)
 
-    const getPosts = useCallback(
-        (page = 1): void => {
-            if (page < 1) {
-                router.push("/post?page=1")
-                return
-            }
+    const getPosts = (page = 1): void => {
+        if (page < 1) {
+            router.push("/post?page=1")
+            return
+        }
 
-            axiosInstance
-                .get(`/posts?page=${page - 1}`)
-                .then((res) => {
-                    setPostList(res.data.data.content)
-                    setPagination(res.data.data)
+        axiosInstance
+            .get(`/posts?page=${page - 1}`)
+            .then((res) => {
+                setPostList(res.data.data.content)
+                setPagination(res.data.data)
 
-                    toastCall("포스팅 목록을 불러왔습니다.", "success")
-                })
-                .catch(() => {
-                    toastCall("포스팅 목록을 불러오지 못했습니다.", "error")
-                })
-        },
-        [router],
-    )
+                toastCall("포스팅 목록을 불러왔습니다.", "success")
+            })
+            .catch(() => {
+                toastCall("포스팅 목록을 불러오지 못했습니다.", "error")
+            })
+    }
 
     const handlePostThumbnail = (thumbnail: string | File): string => {
         if (thumbnail) {
@@ -80,7 +77,7 @@ const PostList = (): ReactElement => {
 
     useEffect(() => {
         getPosts(Number(page))
-    }, [page, getPosts])
+    }, [pathname])
 
     return (
         <Wrapper>

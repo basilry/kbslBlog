@@ -23,7 +23,7 @@ const ImageUploadBasic = (props: IImageUploadBasicProps): ReactElement => {
 
     const [image, setImage] = useState<string>("")
 
-    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
         const selectedFile = e.target.files && e.target.files[0]
         if (!selectedFile) return
 
