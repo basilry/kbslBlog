@@ -100,6 +100,9 @@ npm install
 
 # 개발 서버 실행
 npm run dev
+
+# 운영 서버 실행
+npm run pm2
 ```
 
 ### 환경 변수 설정
