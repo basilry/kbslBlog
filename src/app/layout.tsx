@@ -13,6 +13,7 @@ import "@styles/toast.scss"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
+import "@styles/nprogress.scss"
 import SuspenseWrapper from "@components/layout/SuspenseWrapper"
 import GoogleAnalytics from "@components/ui/GoogleAnalytics"
 import { useCoreStore } from "@lib/stores/store"
@@ -44,14 +45,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     name="viewport"
                     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                 />
-                <title>{"KBSL's Blog"}</title>
-                <link rel="icon" href="/kbslBlog/myFace.png" />
+                <title>{"basilry.kim"}</title>
+                <link rel="icon" href="/myFace.png" />
             </head>
             <body id={mode}>
                 <SuspenseWrapper>
                     <Container>
+                        <ProgressBar color="#b024d6" options={{ showSpinner: true }} />
                         {children}
-                        <ProgressBar height="0.3rem" color="#b024d6" options={{ showSpinner: true }} shallowRouting />
                         <ToastContainer
                             position="bottom-right"
                             autoClose={1800}

@@ -1,25 +1,51 @@
 "use client"
 
-import { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import certificateJson from "@lib/json/certificate.json"
+import { axiosInstance } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { formatDate } from "@lib/utils/common"
+import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/career.module.scss"
+
+interface ICertification {
+    id: number
+    title: string
+    subTitle?: string
+    date: string
+    url?: string
+}
 
 const Certification = (): ReactElement => {
     const { darkMode } = useCoreStore()
+
+    const [certificationList, setCertificationList] = useState<ICertification[]>([])
+
+    const getCareer = (): void => {
+        axiosInstance
+            .get("/certification")
+            .then((res) => {
+                setCertificationList(res.data.data)
+            })
+            .catch(() => {
+                toastCall("자격/수료 정보를 불러오지 못했습니다.", "error")
+            })
+    }
+
+    useEffect(() => {
+        getCareer()
+    }, [])
 
     return (
         <Wrapper>
             <div className={styles.wholeWrapper}>
                 <div className={styles.seminarAndRND}>
                     <TextBasic size="xxx-large" bold="bold">
-                        {"Certificate | 자격증 & 수료증"}
+                        {"Certification | 자격증 & 수료증"}
                     </TextBasic>
                     <div className={styles.dotWrapper}>
                         <span className={styles.red}>*</span>
@@ -30,9 +56,9 @@ const Certification = (): ReactElement => {
                     <br />
                     <LineBasic />
                     <br />
-                    {certificateJson.map((cert) => (
+                    {certificationList.map((cert) => (
                         <Link
-                            key={cert.id + cert.date}
+                            key={cert.id + "_" + cert.date + "_" + cert.title}
                             href={cert.url ?? "#"}
                             target={cert.url ? "_blank" : ""}
                             scroll={false}

@@ -20,7 +20,7 @@ const RootLoading = (): JSX.Element => {
         }
     }, [isLoading])
 
-    return <div style={{ minHeight: "100vh", height: "100vh" }}></div>
+    return <div id={"hello"} style={{ minHeight: "2px", height: "2px" }}></div>
 }
 
 export default RootLoading

@@ -25,7 +25,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env.*
+.env.local
+.env.development
 
 # vercel
 .vercel
@@ -38,3 +40,6 @@ next-env.d.ts
 /.idea/
 .idea
 .idea/*
+
+# pm2 logs
+/logs

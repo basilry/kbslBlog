@@ -1,0 +1,59 @@
+@import "@styles/variable.scss";
+
+
+.titleEditor {
+  position: relative;
+  margin-bottom: 10px;
+  border: 1px solid $black-200;
+  border-radius: 8px;
+  background-color: $black-300;
+  min-height: 50px;
+  height: 100%;
+
+  cursor: text;
+
+  &.dark {
+    color: $black-800;
+  }
+}
+
+.contentsEditor {
+  position: relative;
+  margin-top: 10px;
+  border: 1px solid $black-200;
+  border-radius: 8px;
+  background-color: $black-300;
+  //background-color: white;
+  min-height: 800px;
+  height: 100%;
+  margin-bottom: 70px;
+
+  cursor: text;
+
+  &.dark {
+    color: $black-800;
+  }
+
+  img {
+    width: 50%;
+  }
+
+  code {
+    background-color: $black-100 !important;
+    color: inherit;
+    font-size: 0.8rem;
+    padding: 0;
+  }
+}
+
+// 구글 드라이브 이미지 스타일
+.googleDriveImage {
+  max-width: 100%;
+  height: auto !important;
+  display: block;
+  margin: 20px auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+

@@ -1,4 +1,4 @@
-@import '@styles/variable.scss';
+@import '@styles/variable';
 
 .overlay {
     position: fixed;
@@ -15,19 +15,15 @@
         left: 50%;
         transform: translate(-50%, -50%);
         max-height: 90vh;
-        min-width: 300px;
+        min-width: 150px;
         padding: 30px 25px;
         background-color: white;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         z-index: 101;
 
-        @include TABLET {
-            width: 100vw;
-        }
-
         &.dark {
-            background-color: $black-500;
+            background-color: $black-600;
             color: white;
         }
 
@@ -56,8 +52,19 @@
 
         .contents {
             overflow: auto;
-            height: 600px;
+            min-height: 100px;
             max-height: 70vh;
+            min-width: 400px;
+            width: 100%;
+
+            @include MOBILE {
+                min-width: 300px;
+            }
+
+            @include S_MOBILE {
+                min-width: 300px;
+                min-height: 100px;
+            }
 
             img {
                 display: block;

@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { ICoreStore, coreStore } from "./slices/coreStore"
-import { IStoreLogin, loginStore } from "./slices/loginStore"
+import { IStoreLogin, loginStore } from "@lib/stores/slices/loginStore"
+import { coreStore, ICoreStore } from "./slices/coreStore"
 
 export const useCoreStore = create<ICoreStore>()(
     persist(

@@ -1,18 +1,18 @@
 "use client"
 
-import { ReactElement, useEffect } from "react"
+import { ReactElement, ReactNode, useEffect } from "react"
 import { createPortal } from "react-dom"
 import Image from "next/image"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
-import styles from "@styles/components/atom/modalBasic.module.scss"
+import styles from "@styles/components/modal/modalBasic.module.scss"
 
-interface IModalProps {
+export interface IModalProps {
     isOpen: boolean
     onClose: () => void
     title?: string
-    children: ReactElement
+    children: ReactNode
 }
 
 const ModalBasic = ({ isOpen, onClose, title, children }: IModalProps): ReactElement => {
@@ -46,7 +46,7 @@ const ModalBasic = ({ isOpen, onClose, title, children }: IModalProps): ReactEle
                     )}
                     <Image
                         className={styles.closeButton}
-                        src={darkMode ? "/kbslBlog/xmark-solid_white.svg" : "/kbslBlog/xmark-solid.svg"}
+                        src={darkMode ? "/xmark-solid_white.svg" : "/xmark-solid.svg"}
                         alt="sidebarCloseBtn"
                         width={30}
                         height={30}

@@ -1,0 +1,164 @@
+@import "@styles/variable.scss";
+
+.topWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .topTitle {
+    width: 100%;
+  }
+
+  .topButton {
+    display: flex;
+    align-items: flex-end;
+    width: 50px;
+  }
+}
+
+
+.postListWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 15px;
+  margin-top: 25px;
+  min-height: 70vh;
+
+  .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+  }
+
+
+  .postListItem {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 20px;
+    border-bottom: 1px solid $black-400;
+    border-left: none;
+    border-right: none;
+    height: 150px;
+
+    &.first {
+      border-top: 1px solid $black-400;
+    }
+
+    .thumbnailWrapper {
+      position: relative;
+      overflow: auto;
+      width: 120px;
+      height: 100%;
+      margin: 12px 40px 12px 5px;
+
+      .thumbnail {
+        border-radius: 20px;
+      }
+
+      @include TABLET {
+        width: 100px;
+        height: 80px;
+        margin: 12px 20px 12px 5px;
+      }
+    }
+
+
+    .arrow {
+      position: absolute;
+      right: 50px;
+      display: none;
+
+      @include TABLET {
+        right: 50px;
+      }
+      //
+      @include MOBILE {
+        right: 40px;
+      }
+      ////
+      @include S_MOBILE {
+        right: 10px;
+      }
+    }
+
+    &:hover {
+      background: $black-200;
+
+      .arrow {
+        display: block;
+        animation: arrow 0.5s;
+
+        @keyframes arrow {
+          0% {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      }
+    }
+
+    &.dark {
+      &:hover {
+        background: $black-600;
+      }
+    }
+
+    .itemLeft {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+
+      .itemTitle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 80%;
+        gap: 5px;
+        margin-bottom: 10px;
+
+        .title {
+          text-overflow: ellipsis;
+          white-space: normal; // nowrap에서 normal로 변경하여 개행 가능하게 함
+          overflow: hidden; // 넘치는 텍스트 처리
+          display: -webkit-box; // 여러 줄 표시를 위한 설정
+          -webkit-line-clamp: 2; // 최대 2줄까지 표시
+          line-clamp: 2; // 표준 속성
+          -webkit-box-orient: vertical; // 수직 방향으로 텍스트 배치
+        }
+      }
+    }
+
+
+    .itemBottom {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .thumbAndLike {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+
+        .thumbNum {
+          color: $pink-pressed;
+        }
+      }
+    }
+
+
+  }
+}

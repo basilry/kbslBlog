@@ -10,7 +10,13 @@ export const FRONT_YEAR = dayjs(TODAY).diff(FIRST_FRONT_YEAR_DATE, "month")
 export const BACK_YEAR = dayjs(TODAY).diff(FIRST_BACK_YEAR_DATE, "month")
 export const FULL_YEAR = dayjs(TODAY).diff(FIRST_FULL_YEAR_DATE, "month")
 
-// const MENU_LIST = ["Main", "Search", "Career", "Notice", "Post", "Projects", "Visitor", "Donate"]
+// const MENU_LIST = ["Main", "Search", "Career", "Notice", "PostList", "Projects", "Visitor", "Donate"]
 // const MENU_LIST_KR = ["메인", "블로그 글 검색", "자기소개", "공지사항", "포스팅", "프로젝트 목록", "방명록", "후원"]
-export const MENU_LIST = ["Introduce", "Career", "Research", "Certification", "Projects", "Visitor"]
-export const MENU_LIST_KR = ["소개", "경력", "연구/학습", "자격/수료", "프로젝트 목록", "방명록"]
+export const MENU_LIST = ["Introduce", "Career", "Research", "Certification", "Projects", "Post", "Visitor"]
+export const MENU_LIST_KR = ["소개", "경력", "연구/학습", "자격/수료", "프로젝트 목록", "포스팅", "방명록"]
+
+export enum ERROR_MESSAGE {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    3006 = "이미 좋아요를 누르셨습니다.",
+}

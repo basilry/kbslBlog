@@ -18,7 +18,7 @@ const ImsPart1 = (): ReactElement => {
         <Wrapper>
             <div className={styles.list}>
                 <Link href={"/projects"} className={classNames(styles.link, darkMode && styles.dark)}>
-                    <img src={`/kbslBlog/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
+                    <img src={`/${darkMode ? "link_white" : "link"}.svg`} alt={"link"} width={15} />
                     <TextBasic size={"medium"} bold={"bold"}>
                         프로젝트 목록
                     </TextBasic>
@@ -34,8 +34,8 @@ const ImsPart1 = (): ReactElement => {
                         {"2024.02 ~ 2024.03(진행 중) | 2개월"}
                     </TextBasic>
                     <div className={styles.logos}>
-                        <img src="/kbslBlog/hecton.png" alt="logo" width={30} height={20} />
-                        <Image placeholder="blur" src="/kbslBlog/ddoga_logo.svg" alt="logo" width={115} height={30} />
+                        <img src="/hecton.png" alt="logo" width={30} height={20} />
+                        <Image src="/ddoga_logo.svg" alt="logo" width={115} height={30} />
                     </div>
                 </div>
                 <LineBasic />
@@ -64,7 +64,7 @@ const ImsPart1 = (): ReactElement => {
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/typescript.svg"
+                                src="/skills/typescript.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -72,7 +72,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/nextjs.svg"
+                                src="/skills/nextjs.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -80,7 +80,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/emotion.png"
+                                src="/skills/emotion.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={100}
@@ -88,7 +88,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/reactquery.svg"
+                                src="/skills/reactquery.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -96,7 +96,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/zustand.png"
+                                src="/skills/zustand.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={80}
@@ -104,7 +104,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/prettier.svg"
+                                src="/skills/prettier.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -112,7 +112,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/eslint.svg"
+                                src="/skills/eslint.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -120,7 +120,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/mui.svg"
+                                src="/skills/mui.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -130,7 +130,7 @@ const ImsPart1 = (): ReactElement => {
                         <div>
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/java.png"
+                                src="/skills/java.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -138,7 +138,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/springboot.png"
+                                src="/skills/springboot.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={100}
@@ -146,7 +146,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/jpa.png"
+                                src="/skills/jpa.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -154,7 +154,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/hibernate.png"
+                                src="/skills/hibernate.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={140}
@@ -162,7 +162,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/querydsl.png"
+                                src="/skills/querydsl.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}
@@ -170,7 +170,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/mssql.png"
+                                src="/skills/mssql.png"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={160}
@@ -178,7 +178,7 @@ const ImsPart1 = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
-                                src="/kbslBlog/skills/aws.svg"
+                                src="/skills/aws.svg"
                                 alt="myFace"
                                 sizes={"100vw"}
                                 width={60}

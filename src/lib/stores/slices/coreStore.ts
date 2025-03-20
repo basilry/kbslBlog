@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand"
 
 export const coreStore: StateCreator<ICoreStore> = (set) => ({
-    darkMode: false,
+    darkMode: true,
     sideBarFold: false,
     nowMenuName: "",
     changeDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),

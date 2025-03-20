@@ -2,6 +2,7 @@
 
 import React, { ReactElement, useEffect, useState } from "react"
 import { motion, useScroll } from "framer-motion"
+import { usePathname } from "next/navigation"
 import classNames from "classnames"
 import Footer from "@components/ui/Footer"
 import Header from "@components/ui/Header"
@@ -11,6 +12,7 @@ import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/layout/container.module.scss"
 
 function Container({ children }: { children: React.ReactNode }): ReactElement {
+    const pathName = usePathname()
     const { darkMode, changeSideBarFold } = useCoreStore()
     const { scrollYProgress } = useScroll()
 
@@ -22,14 +24,14 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
 
     return mount ? (
         <div className={classNames(styles.container, darkMode && styles.darkMode)}>
-            <motion.div className={styles.progressBar} style={{ scaleX: scrollYProgress || 0 }} />
+            <motion.div className={styles.progressBar} style={{ scaleX: scrollYProgress ? scrollYProgress : 0 }} />
             <Header />
             <Sidebar />
             <div className={styles.body} onClick={(): void => changeSideBarFold(false)}>
                 {children}
             </div>
             <TopMoveButton />
-            <Footer />
+            {!pathName.includes("login") && <Footer />}
         </div>
     ) : (
         <></>

@@ -89,14 +89,7 @@ const Introduce = (): ReactElement => {
                     </div>
                 </div>
                 <div className={styles.myPics}>
-                    <img
-                        src="/kbslBlog/myPics.jpg"
-                        alt="myFace"
-                        sizes={"100vw"}
-                        width={0}
-                        height={0}
-                        className={styles.pics}
-                    />
+                    <img src="/myPics.jpg" alt="myFace" sizes={"100vw"} width={0} height={0} className={styles.pics} />
                 </div>
             </div>
         </Wrapper>

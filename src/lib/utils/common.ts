@@ -18,3 +18,38 @@ export const formatDate = (time: string | number | undefined, formatter = DateFo
 
     return date(time).format(formatter)
 }
+
+export const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = (): void => resolve(reader.result as string)
+        reader.onerror = (error): void => reject(error)
+    })
+}
+
+export const handleCalDiffTime = (diff: number, createdAt: Date): string => {
+    const result = dayjs(createdAt).format("YYYY.MM.DD HH:mm")
+
+    if (diff < 1) {
+        return `${result} (${dayjs().diff(dayjs(createdAt), "minute")}분 전)`
+    } else {
+        if (diff < 24) {
+            return `${result} (${diff}시간 전)`
+        } else {
+            return `${result} (${dayjs().diff(dayjs(createdAt), "day")}일 전)`
+        }
+    }
+}
+
+export const extractBase64Images = (html: string): string[] => {
+    const regex = /<img[^>]+src="(data:image\/[^">]+)"/g
+    const images = []
+
+    let match
+    while ((match = regex.exec(html)) !== null) {
+        images.push(match[1])
+    }
+
+    return images
+}
