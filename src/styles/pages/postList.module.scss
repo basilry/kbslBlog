@@ -23,8 +23,16 @@
   display: flex;
   flex-direction: column;
   padding: 12px 15px;
-  margin-top: 25px;
+  // margin-top: 25px;
   min-height: 70vh;
+
+  @include TABLET {
+    padding: 10px 15px;
+  }
+
+  @include MOBILE {
+    padding: 7px 8px;
+  }
 
   .noData {
     display: flex;
@@ -51,6 +59,17 @@
       border-top: 1px solid $black-400;
     }
 
+    // 사이즈 조절 필요
+    @include TABLET {
+      height: 120px;
+      padding: 10px 15px;
+    }
+
+    @include MOBILE {
+      height: 100px;
+      padding: 7px 8px;
+    }
+    
     .thumbnailWrapper {
       position: relative;
       overflow: auto;

@@ -5,7 +5,7 @@ import { useRouter } from "next-nprogress-bar"
 import dayjs from "dayjs"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
@@ -25,11 +25,12 @@ const PostList = (): ReactElement => {
     const { loginUser, loginState } = useLoginStore()
 
     const router = useRouter()
-    const pathname = usePathname()
-    const page = pathname.split("/")[2] || 1
+    const searchParams = useSearchParams()
+    const page = searchParams.get("page") || 1
 
     const [postList, setPostList] = useState<IPost[]>([])
     const [pagination, setPagination] = useState<IPagination<IPost>>({} as IPagination<IPost>)
+    const [failedImages, setFailedImages] = useState<Record<string, boolean>>({})
 
     const getPosts = (page = 1): void => {
         if (page < 1) {
@@ -75,9 +76,18 @@ const PostList = (): ReactElement => {
         }
     }
 
+    const handleImageError = (postId: number): void => {
+        setFailedImages((prev) => ({
+            ...prev,
+            [postId]: true,
+        }))
+
+        console.error("썸네일 로드 실패:", postId)
+    }
+
     useEffect(() => {
         getPosts(Number(page))
-    }, [pathname])
+    }, [page])
 
     return (
         <Wrapper>
@@ -105,6 +115,7 @@ const PostList = (): ReactElement => {
                 {postList.length > 0 ? (
                     postList.map((post, index) => {
                         const diff = dayjs().diff(dayjs(post.createdAt), "hour")
+                        const imageLoadFailed = failedImages[post.id]
 
                         return (
                             <Link
@@ -123,36 +134,38 @@ const PostList = (): ReactElement => {
                                     )}
                                 >
                                     <div className={styles.thumbnailWrapper}>
-                                        <Image
-                                            className={styles.thumbnail}
-                                            src={handlePostThumbnail(post.thumbnail)}
-                                            alt={"thumbnail"}
-                                            fill
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            style={{ objectFit: "cover" }}
-                                            loading="eager"
-                                            placeholder="blur"
-                                            blurDataURL={
-                                                darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"
-                                            }
-                                            onError={(e) => {
-                                                const target = e.target as HTMLImageElement
-                                                target.style.display = "none"
-                                                console.error("썸네일 로드 실패:", target.src)
-                                                if (target.src.includes("/proxy/")) {
-                                                    console.log(
-                                                        "프록시 URL 로드 실패, 환경 변수 확인 필요:",
-                                                        target.src,
-                                                    )
-                                                    console.log("환경 변수:", {
-                                                        NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
-                                                    })
+                                        {!imageLoadFailed ? (
+                                            <Image
+                                                className={styles.thumbnail}
+                                                src={handlePostThumbnail(post.thumbnail)}
+                                                alt={"thumbnail"}
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                style={{ objectFit: "cover" }}
+                                                loading="eager"
+                                                placeholder="blur"
+                                                blurDataURL={
+                                                    darkMode
+                                                        ? "/loading-placeholder-dark.svg"
+                                                        : "/loading-placeholder.svg"
                                                 }
-                                                target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:${
-                                                    darkMode ? "#333" : "#f5f5f5"
-                                                };color:${darkMode ? "#ccc" : "#666"};">이미지 없음</div>`
-                                            }}
-                                        />
+                                                onError={() => handleImageError(post.id)}
+                                            />
+                                        ) : (
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    width: "100%",
+                                                    height: "100%",
+                                                    backgroundColor: darkMode ? "#333" : "#f5f5f5",
+                                                    color: darkMode ? "#ccc" : "#666",
+                                                }}
+                                            >
+                                                이미지 없음
+                                            </div>
+                                        )}
                                     </div>
                                     <div className={styles.itemLeft}>
                                         <div className={styles.itemTitle}>
