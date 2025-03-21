@@ -33,7 +33,6 @@ const PostList = (): ReactElement => {
     const [failedImages, setFailedImages] = useState<Record<string, boolean>>({})
 
     const getPosts = (page = 1): void => {
-        console.log("page", page)
         if (page < 1) {
             router.push("/post?page=1")
             return
@@ -87,7 +86,6 @@ const PostList = (): ReactElement => {
     }
 
     useEffect(() => {
-        console.log("page", page)
         getPosts(Number(page))
     }, [page])
 
