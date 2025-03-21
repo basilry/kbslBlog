@@ -235,10 +235,8 @@ const PostDetail = (): ReactElement => {
                     className={classNames(styles.titleWrapper, {
                         [styles.titleScrolled]: isScrolled,
                         [styles.dark]: darkMode && isScrolled,
+                        [styles.hasThumbnail]: postDetail.thumbnail,
                     })}
-                    style={{
-                        minHeight: postDetail.thumbnail && !isScrolled ? "300px" : "150px",
-                    }}
                 >
                     {postDetail.thumbnail && (
                         <Image
@@ -268,7 +266,9 @@ const PostDetail = (): ReactElement => {
                             <TextBasic
                                 size={isScrolled ? "xx-large" : "xxx-large"}
                                 bold="bold"
-                                className={styles.titleText}
+                                className={classNames(styles.titleText, {
+                                    [styles["long-text"]]: postDetail.title && postDetail.title.length > 50,
+                                })}
                             >
                                 {parse(postDetail.title || "")}
                             </TextBasic>
@@ -317,7 +317,7 @@ const PostDetail = (): ReactElement => {
                 </div>
 
                 {/* 스크롤 시 타이틀 영역만큼 여백 추가 (타이틀이 fixed 포지션일 때) */}
-                {isScrolled && <div style={{ height: "70px" }} />}
+                {isScrolled && <div style={{ height: "110px" }} />}
 
                 <LineBasic />
                 <br />
