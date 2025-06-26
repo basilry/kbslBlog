@@ -15,8 +15,9 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 import "@styles/nprogress.scss"
 import SuspenseWrapper from "@components/layout/SuspenseWrapper"
-import GoogleAnalytics from "@components/ui/GoogleAnalytics"
 import { useCoreStore } from "@lib/stores/store"
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 const inter = Inter({ subsets: ["latin"] })
 const pretendardFont = localFont({
@@ -68,7 +69,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                         <div id="modal-root"></div>
                     </Container>
 
-                    <GoogleAnalytics />
+                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
                 </SuspenseWrapper>
             </body>
         </html>
