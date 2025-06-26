@@ -68,7 +68,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                         <div id="modal-root"></div>
                     </Container>
 
-                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
+                    {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
                 </SuspenseWrapper>
             </body>
         </html>
