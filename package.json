@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^15.3.4",
     "@tiptap/core": "^2.0.3",
     "@tiptap/extension-blockquote": "^2.11.5",
     "@tiptap/extension-bold": "^2.11.5",
@@ -53,7 +54,7 @@
     "html-react-parser": "^4.0.0",
     "lodash": "^4.17.21",
     "lowlight": "^3.3.0",
-    "next": "^13.5.2",
+    "next": "^15.3.4",
     "next-nprogress-bar": "^2.1.2",
     "next-translate-plugin": "^2.6.2",
     "nprogress": "^0.2.0",
