@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { ToastContainer } from "react-toastify"
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import { Inter } from "next/font/google"
 import localFont from "next/font/local"
 import classNames from "classnames"
@@ -16,8 +17,6 @@ import "swiper/css/navigation"
 import "@styles/nprogress.scss"
 import SuspenseWrapper from "@components/layout/SuspenseWrapper"
 import { useCoreStore } from "@lib/stores/store"
-import { GoogleAnalytics } from '@next/third-parties/google'
-
 
 const inter = Inter({ subsets: ["latin"] })
 const pretendardFont = localFont({
@@ -69,7 +68,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                         <div id="modal-root"></div>
                     </Container>
 
-                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
                 </SuspenseWrapper>
             </body>
         </html>
