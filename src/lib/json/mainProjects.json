@@ -56,7 +56,7 @@
         "src": "/ddoga_logo.svg",
         "alt": "ddoga",
         "width": 115,
-        "height": 30
+        "height": 20
       }
     ],
     "description": "타사 솔루션과 연동되는 요양기관 가정통신문 및 어르신 요양기록을 확인하는 모바일 웹 앱 프로젝트입니다.",
@@ -147,6 +147,21 @@
       }
     ],
     "description": "헥톤프로젝트의 서비스 또하나의가족 플랫폼 전반에 걸쳐 외부 푸시서버를 API 연동하여 공통 모듈 개발 및 기존 API에 로직을 심어 푸시 알림을 보내는 기능을 추가 개발합니다.",
-    "url": ""
+    "url": "/projects/pushServer"
+  },
+  {
+    "id": 9,
+    "title": "Haru Weather",
+    "period": "2025.08 ~ 2025.09 | 2개월",
+    "logos": [
+      {
+        "src": "/myFace.png",
+        "alt": "myFace",
+        "width": 30,
+        "height": 30
+      }
+    ],
+    "description": "개인 사이드 프로젝트를 통해 Vue3를 이용해 OpenWeatherMap API를 통해 날씨 정보를 조회하는 사이드 프로젝트입니다.",
+    "url": "/projects/haruWeather"
   }
 ]

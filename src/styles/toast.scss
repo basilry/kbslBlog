@@ -1,5 +1,9 @@
 @import "@styles/variable.scss";
 
+.Toastify {
+  font-size: $small-font;
+}
+
 .Toastify__toast-container {
   z-index: 99999;
 }

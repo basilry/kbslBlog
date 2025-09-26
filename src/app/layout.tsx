@@ -55,7 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                         {children}
                         <ToastContainer
                             position="bottom-right"
-                            autoClose={1800}
+                            autoClose={9999}
                             hideProgressBar={false}
                             newestOnTop={false}
                             closeOnClick
