@@ -1,7 +1,7 @@
 "use client"
 
 import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react"
-import GitHubCalendar, { Activity } from "react-github-calendar"
+import { GitHubCalendar, Activity } from "react-github-calendar"
 import { motion } from "framer-motion"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
