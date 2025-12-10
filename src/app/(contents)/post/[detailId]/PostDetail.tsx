@@ -29,6 +29,27 @@ const PostDetail = (): ReactElement => {
     const router = useRouter()
     const pathName = usePathname()
 
+    // 썸네일 URL 처리 함수
+    const handleThumbnailUrl = (thumbnail: string | File): string => {
+        if (!thumbnail || typeof thumbnail !== "string") {
+            return darkMode ? "/image_white.svg" : "/image.svg"
+        }
+
+        // 이미 완전한 URL인 경우 (http/https로 시작)
+        if (thumbnail.startsWith("http")) {
+            return thumbnail
+        }
+
+        // 상대 경로인 경우 환경 변수와 결합
+        if (process.env.NEXT_PUBLIC_IP) {
+            return `${process.env.NEXT_PUBLIC_IP}${thumbnail}`
+        }
+
+        // 환경 변수가 없는 경우 기본 이미지 반환
+        console.warn("NEXT_PUBLIC_IP 환경 변수가 설정되지 않았습니다.")
+        return darkMode ? "/image_white.svg" : "/image.svg"
+    }
+
     const id = pathName.split("/")[2]
 
     const [postDetail, setPostDetail] = useState<IPost>({} as IPost)
@@ -144,14 +165,13 @@ const PostDetail = (): ReactElement => {
 
                     // 이미 프록시 처리된 이미지일 경우
                     if (src.includes("/proxy/")) {
-                        // 중복 URL 방지
-                        if (src.startsWith("http")) {
-                            return null
-                        }
+                        // 절대 URL인 경우 그대로 사용, 상대 경로인 경우 환경 변수 추가
+                        const imageSrc = src.startsWith("http") ? src : `${process.env.NEXT_PUBLIC_IP}${src}`
+
                         return (
                             <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_IP}${src}`}
+                                    src={imageSrc}
                                     alt={alt || "이미지"}
                                     fill
                                     style={{ objectFit: "contain" }}
@@ -163,23 +183,52 @@ const PostDetail = (): ReactElement => {
                                     }
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
                                     onError={(e) => {
-                                        // 이미지 로드 실패 시 처리
                                         const target = e.target as HTMLImageElement
                                         target.style.display = "none"
                                         console.error("이미지 로드 실패:", target.src)
-                                        // 원본 URL 출력
-                                        if (target.src.includes("/proxy/")) {
-                                            console.log("프록시 URL 로드 실패, 환경 변수 확인 필요:", target.src)
-                                            console.log("환경 변수:", {
-                                                NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
-                                            })
-                                        }
                                         target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:#f5f5f5;color:#666;">이미지를 불러올 수 없습니다</div>`
                                     }}
                                 />
                             </div>
                         )
                     }
+                    // if (src.includes("/proxy/")) {
+                    //     // 중복 URL 방지
+                    //     if (src.startsWith("http")) {
+                    //         return null
+                    //     }
+                    //     return (
+                    //         <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
+                    //             <Image
+                    //                 src={`${process.env.NEXT_PUBLIC_IP}${src}`}
+                    //                 alt={alt || "이미지"}
+                    //                 fill
+                    //                 style={{ objectFit: "contain" }}
+                    //                 loading="eager"
+                    //                 priority={true}
+                    //                 placeholder="blur"
+                    //                 blurDataURL={
+                    //                     darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"
+                    //                 }
+                    //                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                    //                 onError={(e) => {
+                    //                     // 이미지 로드 실패 시 처리
+                    //                     const target = e.target as HTMLImageElement
+                    //                     target.style.display = "none"
+                    //                     console.error("이미지 로드 실패:", target.src)
+                    //                     // 원본 URL 출력
+                    //                     if (target.src.includes("/proxy/")) {
+                    //                         console.log("프록시 URL 로드 실패, 환경 변수 확인 필요:", target.src)
+                    //                         console.log("환경 변수:", {
+                    //                             NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
+                    //                         })
+                    //                     }
+                    //                     target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:#f5f5f5;color:#666;">이미지를 불러올 수 없습니다</div>`
+                    //                 }}
+                    //             />
+                    //         </div>
+                    //     )
+                    // }
 
                     // 구글 드라이브 이미지인 경우
                     if (src && (src.includes("drive.google.com") || src.includes("googleusercontent.com"))) {
@@ -240,6 +289,27 @@ const PostDetail = (): ReactElement => {
                 >
                     {postDetail.thumbnail && (
                         <Image
+                            src={handleThumbnailUrl(postDetail.thumbnail)}
+                            alt="background"
+                            fill
+                            style={{
+                                objectFit: "cover",
+                                opacity: 0.5,
+                                zIndex: 1,
+                                borderRadius: "10px",
+                                transition: "all 0.3s ease",
+                            }}
+                            onError={(e) => {
+                                console.error("썸네일 이미지 로드 실패:", postDetail.thumbnail)
+                                const target = e.target as HTMLImageElement
+                                target.src = darkMode ? "/image_white.svg" : "/image.svg"
+                            }}
+                            placeholder="blur"
+                            blurDataURL={darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"}
+                        />
+                    )}
+                    {/* {postDetail.thumbnail && (
+                        <Image
                             src={`${process.env.NEXT_PUBLIC_IP}${postDetail.thumbnail}`}
                             alt="background"
                             fill
@@ -251,7 +321,7 @@ const PostDetail = (): ReactElement => {
                                 transition: "all 0.3s ease",
                             }}
                         />
-                    )}
+                    )} */}
                     <div className={styles.titleTopWrapper}>
                         <div className={styles.titleLeftWrapper}>
                             <div className={styles.backBtn} onClick={() => router.back()}>

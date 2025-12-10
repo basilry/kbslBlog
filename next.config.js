@@ -9,6 +9,7 @@ const nextConfig = {
             "lh5.googleusercontent.com",
             "lh6.googleusercontent.com",
             "localhost",
+            "api.basilry.kim",
         ],
         remotePatterns: [
             {
