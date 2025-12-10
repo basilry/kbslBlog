@@ -29,6 +29,27 @@ const PostDetail = (): ReactElement => {
     const router = useRouter()
     const pathName = usePathname()
 
+    // 썸네일 URL 처리 함수
+    const handleThumbnailUrl = (thumbnail: string | File): string => {
+        if (!thumbnail || typeof thumbnail !== "string") {
+            return darkMode ? "/image_white.svg" : "/image.svg"
+        }
+
+        // 이미 완전한 URL인 경우 (http/https로 시작)
+        if (thumbnail.startsWith("http")) {
+            return thumbnail
+        }
+
+        // 상대 경로인 경우 환경 변수와 결합
+        if (process.env.NEXT_PUBLIC_IP) {
+            return `${process.env.NEXT_PUBLIC_IP}${thumbnail}`
+        }
+
+        // 환경 변수가 없는 경우 기본 이미지 반환
+        console.warn("NEXT_PUBLIC_IP 환경 변수가 설정되지 않았습니다.")
+        return darkMode ? "/image_white.svg" : "/image.svg"
+    }
+
     const id = pathName.split("/")[2]
 
     const [postDetail, setPostDetail] = useState<IPost>({} as IPost)
@@ -268,11 +289,7 @@ const PostDetail = (): ReactElement => {
                 >
                     {postDetail.thumbnail && (
                         <Image
-                            src={
-                                (postDetail.thumbnail as string).startsWith("http")
-                                    ? postDetail.thumbnail
-                                    : `${process.env.NEXT_PUBLIC_IP}${postDetail.thumbnail}`
-                            }
+                            src={handleThumbnailUrl(postDetail.thumbnail)}
                             alt="background"
                             fill
                             style={{
@@ -282,6 +299,13 @@ const PostDetail = (): ReactElement => {
                                 borderRadius: "10px",
                                 transition: "all 0.3s ease",
                             }}
+                            onError={(e) => {
+                                console.error("썸네일 이미지 로드 실패:", postDetail.thumbnail)
+                                const target = e.target as HTMLImageElement
+                                target.src = darkMode ? "/image_white.svg" : "/image.svg"
+                            }}
+                            placeholder="blur"
+                            blurDataURL={darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"}
                         />
                     )}
                     {/* {postDetail.thumbnail && (
