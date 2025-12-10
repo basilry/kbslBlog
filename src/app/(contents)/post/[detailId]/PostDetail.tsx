@@ -144,14 +144,13 @@ const PostDetail = (): ReactElement => {
 
                     // 이미 프록시 처리된 이미지일 경우
                     if (src.includes("/proxy/")) {
-                        // 중복 URL 방지
-                        if (src.startsWith("http")) {
-                            return null
-                        }
+                        // 절대 URL인 경우 그대로 사용, 상대 경로인 경우 환경 변수 추가
+                        const imageSrc = src.startsWith("http") ? src : `${process.env.NEXT_PUBLIC_IP}${src}`
+
                         return (
                             <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_IP}${src}`}
+                                    src={imageSrc}
                                     alt={alt || "이미지"}
                                     fill
                                     style={{ objectFit: "contain" }}
@@ -163,23 +162,52 @@ const PostDetail = (): ReactElement => {
                                     }
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
                                     onError={(e) => {
-                                        // 이미지 로드 실패 시 처리
                                         const target = e.target as HTMLImageElement
                                         target.style.display = "none"
                                         console.error("이미지 로드 실패:", target.src)
-                                        // 원본 URL 출력
-                                        if (target.src.includes("/proxy/")) {
-                                            console.log("프록시 URL 로드 실패, 환경 변수 확인 필요:", target.src)
-                                            console.log("환경 변수:", {
-                                                NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
-                                            })
-                                        }
                                         target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:#f5f5f5;color:#666;">이미지를 불러올 수 없습니다</div>`
                                     }}
                                 />
                             </div>
                         )
                     }
+                    // if (src.includes("/proxy/")) {
+                    //     // 중복 URL 방지
+                    //     if (src.startsWith("http")) {
+                    //         return null
+                    //     }
+                    //     return (
+                    //         <div style={{ position: "relative", width: "100%", height: "400px", margin: "20px 0" }}>
+                    //             <Image
+                    //                 src={`${process.env.NEXT_PUBLIC_IP}${src}`}
+                    //                 alt={alt || "이미지"}
+                    //                 fill
+                    //                 style={{ objectFit: "contain" }}
+                    //                 loading="eager"
+                    //                 priority={true}
+                    //                 placeholder="blur"
+                    //                 blurDataURL={
+                    //                     darkMode ? "/loading-placeholder-dark.svg" : "/loading-placeholder.svg"
+                    //                 }
+                    //                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                    //                 onError={(e) => {
+                    //                     // 이미지 로드 실패 시 처리
+                    //                     const target = e.target as HTMLImageElement
+                    //                     target.style.display = "none"
+                    //                     console.error("이미지 로드 실패:", target.src)
+                    //                     // 원본 URL 출력
+                    //                     if (target.src.includes("/proxy/")) {
+                    //                         console.log("프록시 URL 로드 실패, 환경 변수 확인 필요:", target.src)
+                    //                         console.log("환경 변수:", {
+                    //                             NEXT_PUBLIC_IP: process.env.NEXT_PUBLIC_IP,
+                    //                         })
+                    //                     }
+                    //                     target.parentElement!.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background-color:#f5f5f5;color:#666;">이미지를 불러올 수 없습니다</div>`
+                    //                 }}
+                    //             />
+                    //         </div>
+                    //     )
+                    // }
 
                     // 구글 드라이브 이미지인 경우
                     if (src && (src.includes("drive.google.com") || src.includes("googleusercontent.com"))) {
@@ -240,7 +268,11 @@ const PostDetail = (): ReactElement => {
                 >
                     {postDetail.thumbnail && (
                         <Image
-                            src={`${process.env.NEXT_PUBLIC_IP}${postDetail.thumbnail}`}
+                            src={
+                                (postDetail.thumbnail as string).startsWith("http")
+                                    ? postDetail.thumbnail
+                                    : `${process.env.NEXT_PUBLIC_IP}${postDetail.thumbnail}`
+                            }
                             alt="background"
                             fill
                             style={{
@@ -252,6 +284,20 @@ const PostDetail = (): ReactElement => {
                             }}
                         />
                     )}
+                    {/* {postDetail.thumbnail && (
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_IP}${postDetail.thumbnail}`}
+                            alt="background"
+                            fill
+                            style={{
+                                objectFit: "cover",
+                                opacity: 0.5,
+                                zIndex: 1,
+                                borderRadius: "10px",
+                                transition: "all 0.3s ease",
+                            }}
+                        />
+                    )} */}
                     <div className={styles.titleTopWrapper}>
                         <div className={styles.titleLeftWrapper}>
                             <div className={styles.backBtn} onClick={() => router.back()}>
