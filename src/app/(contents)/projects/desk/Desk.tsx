@@ -9,7 +9,7 @@ import Wrapper from "@components/layout/Wrapper"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/pages/projectsContents.module.scss"
 
-const HaruWeather = (): ReactElement => {
+const Desk = (): ReactElement => {
     const { darkMode } = useCoreStore()
 
     return (
@@ -24,12 +24,12 @@ const HaruWeather = (): ReactElement => {
             </div>
             <div className={classNames(styles.eachProjectWrapper, darkMode && styles.dark)}>
                 <TextBasic size="xxx-large" bold="bold">
-                    {"Haru Weather"}
+                    {"Desk (6esk.com)"}
                 </TextBasic>
                 <br />
                 <div className={styles.rangeLogo}>
                     <TextBasic size="x-large" bold="bold">
-                        {"2025.08 ~ 2025.09 | 2개월"}
+                        {"2025.03 ~ 현재 | 진행 중"}
                     </TextBasic>
                     <div className={styles.logos}>
                         <img src="/myFace.png" alt="logo" width={30} height={30} />
@@ -44,17 +44,17 @@ const HaruWeather = (): ReactElement => {
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- OpenWeatherMap API를 활용해 사용자 위치 기반의 실시간 날씨 및 5일 예보를 제공하는 웹 서비스 사이드 프로젝트입니다."
+                                "- AI 기반 글로벌 금융 뉴스 인텔리전스 플랫폼으로, 현대 투자자를 위한 실시간 뉴스 분석 서비스입니다."
                             }
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- Vercel을 통한 프론트엔드 단독 배포와 환경 변수 기반 API 키 관리로 개인 서비스도 안정적으로 운영 가능한 구조를 구현했습니다."
+                                "- Euronews, Financial Times, Reuters 등 주요 글로벌 금융 매체에서 30분 단위로 뉴스를 자동 수집하고, AI 파이프라인을 통해 관련성 분석, 핵심 인사이트 추출, 한국어 번역을 수행합니다."
                             }
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 사용자 경험을 중시해 다크 모드, 반응형 디자인, 로컬 스토리지 기반 즐겨찾기 기능 등을 지원합니다."
+                                "- 현재 무료 베타로 운영 중이며, Bukhae(북해)의 첫 번째 핵심 서비스입니다."
                             }
                         </TextBasic>
                         <br />
@@ -62,14 +62,15 @@ const HaruWeather = (): ReactElement => {
                         <TextBasic size="large" bold="bold">
                             {"포지션"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 프로젝트 전반: 기획, 서비스 설계, UI/UX 디자인 및 개발"}</TextBasic>
+                        <TextBasic size="small">{"- 서비스 기획 및 프로덕트 오너"}</TextBasic>
                         <TextBasic size="small">
-                            {
-                                "- 프론트엔드 개발: 날씨 API 연동, 페이지 및 컴포넌트 구현, 데이터 가공 및 캐싱 로직 설계"
-                            }
+                            {"- 프론트엔드 개발: Next.js 기반 UI/UX 설계 및 구현"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 인프라: Vercel을 통한 빌드·배포, 환경 변수 설정 및 CDN 캐싱 전략 수립"}
+                            {"- AI 파이프라인: 뉴스 수집·분석·번역 파이프라인 설계 및 구축"}
+                        </TextBasic>
+                        <TextBasic size="small">
+                            {"- 인프라: 서버 구축 및 자동화 배포 관리"}
                         </TextBasic>
                         <br />
                         <br />
@@ -77,15 +78,6 @@ const HaruWeather = (): ReactElement => {
                             {"사용스택"}
                         </TextBasic>
                         <div>
-                            <img src="/skills/vite.png" alt="vite" sizes={"100vw"} width={60} height={60} />
-                            <img
-                                className={styles.skillImgs}
-                                src="/skills/vue.png"
-                                alt="vue"
-                                sizes={"100vw"}
-                                width={60}
-                                height={60}
-                            />
                             <img
                                 className={styles.skillImgs}
                                 src="/skills/typescript.svg"
@@ -96,24 +88,16 @@ const HaruWeather = (): ReactElement => {
                             />
                             <img
                                 className={styles.skillImgs}
+                                src="/skills/nextjs.svg"
+                                alt="nextjs"
+                                sizes={"100vw"}
+                                width={60}
+                                height={60}
+                            />
+                            <img
+                                className={styles.skillImgs}
                                 src="/skills/sass.svg"
                                 alt="sass"
-                                sizes={"100vw"}
-                                width={60}
-                                height={60}
-                            />
-                            <img
-                                className={styles.skillImgs}
-                                src="/skills/prettier.svg"
-                                alt="prettier"
-                                sizes={"100vw"}
-                                width={60}
-                                height={60}
-                            />
-                            <img
-                                className={styles.skillImgs}
-                                src="/skills/eslint.svg"
-                                alt="eslint"
                                 sizes={"100vw"}
                                 width={60}
                                 height={60}
@@ -132,15 +116,15 @@ const HaruWeather = (): ReactElement => {
                         <TextBasic size="large" bold="bold">
                             {"프로젝트 인원"}
                         </TextBasic>
-                        <TextBasic size="small">{"- 1인 개발 (기획, 디자인, 개발, 배포)"}</TextBasic>
+                        <TextBasic size="small">{"- AI 전문가, 개발자, 디자이너 포함 팀 구성"}</TextBasic>
                         <br />
                         <br />
                         <TextBasic size="large" bold="bold">
-                            {"배포 주소"}
+                            {"서비스 주소"}
                         </TextBasic>
                         <TextBasic size="small">
-                            <a href="https://haru-weather-ej93.vercel.app/" target="_blank" rel="noopener noreferrer">
-                                {"https://haru-weather-ej93.vercel.app/"}
+                            <a href="https://6esk.com" target="_blank" rel="noopener noreferrer">
+                                {"https://6esk.com"}
                             </a>
                         </TextBasic>
                         <br />
@@ -148,58 +132,51 @@ const HaruWeather = (): ReactElement => {
                     </div>
                     <div className={styles.paragraphs}>
                         <TextBasic size="large" bold="bold">
-                            {"성과"}
+                            {"주요 기능"}
                         </TextBasic>
                         <TextBasic size="medium" bold="bold">
-                            {"1. Vue3 Composition API 학습 및 적용"}
+                            {"1. 실시간 브리핑"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- React 중심의 개발 경험에서 벗어나 Vue3의 Composition API, ref/reactive, computed, watch 등 핵심 기능을 실전에 적용"
-                            }
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {
-                                "- Vue 생태계의 SFC(Single File Component) 패턴과 Vite 기반 빠른 HMR 환경을 경험하며 프레임워크 간 차이점을 체득"
+                                "- 30분 단위로 큐레이션된 글로벌 금융 뉴스를 제공하며, 노이즈를 제거하고 핵심 시장 시그널에 집중합니다."
                             }
                         </TextBasic>
                         <br />
                         <TextBasic size="medium" bold="bold">
-                            {"2. 외부 API 연동 및 데이터 가공"}
+                            {"2. 3관점 AI 분석"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- OpenWeatherMap API의 Current Weather / 5-Day Forecast 엔드포인트를 연동하여 실시간 기상 데이터 조회 구현"
-                            }
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {
-                                "- Geolocation API를 활용한 사용자 위치 기반 자동 날씨 조회 및 도시명 검색 기능 구현"
+                                "- 주요 뉴스에 대해 낙관적(긍정적 시장 잠재력), 비관적(리스크 요인), 현실적(균형 잡힌 평가) 세 가지 분석 관점을 자동 생성합니다."
                             }
                         </TextBasic>
                         <br />
                         <TextBasic size="medium" bold="bold">
-                            {"3. 사용자 경험 중심의 UI/UX 설계"}
+                            {"3. 스마트 필터링 및 검색"}
                         </TextBasic>
                         <TextBasic size="small">
                             {
-                                "- 다크 모드 / 라이트 모드 전환, 반응형 레이아웃, 로딩 상태 처리 등 사용자 편의 기능 구현"
-                            }
-                        </TextBasic>
-                        <TextBasic size="small">
-                            {
-                                "- 로컬 스토리지 기반 즐겨찾기 도시 저장 기능으로 재방문 시 빠른 접근 지원"
+                                "- 카테고리(경제, 정치, 기술), 출처, 시간대, 날짜 범위, 키워드 기반의 맞춤형 필터링으로 원하는 정보를 빠르게 탐색합니다."
                             }
                         </TextBasic>
                         <br />
                         <TextBasic size="medium" bold="bold">
-                            {"4. 배포 및 운영 환경 구축"}
+                            {"4. 컨텍스트 이벤트 맵핑"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- Vercel을 통한 CI/CD 자동 배포 파이프라인 구성 및 환경 변수 기반 API 키 보안 관리"}
+                            {
+                                "- 뉴스 이벤트 간 인과관계를 시각적 그래프로 표현하여, 개별 헤드라인이 아닌 전체 시장 내러티브를 파악할 수 있도록 지원합니다."
+                            }
+                        </TextBasic>
+                        <br />
+                        <TextBasic size="medium" bold="bold">
+                            {"5. 딥리서치 리포트"}
                         </TextBasic>
                         <TextBasic size="small">
-                            {"- 프로덕션 환경에서의 성능 최적화 및 CDN 캐싱 전략 적용"}
+                            {
+                                "- 선택한 주제에 대해 수십 개의 소스를 분석하여 6단계 종합 분석 리포트를 수 분 내에 자동 생성합니다."
+                            }
                         </TextBasic>
                     </div>
                 </div>
@@ -208,4 +185,4 @@ const HaruWeather = (): ReactElement => {
     )
 }
 
-export default HaruWeather
+export default Desk

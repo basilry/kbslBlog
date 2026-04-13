@@ -1,14 +1,13 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement } from "react"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import { axiosInstance } from "@lib/api/axiosInstance"
+import careerData from "@lib/json/career.json"
 import { useCoreStore } from "@lib/stores/store"
 import { DateFormat, formatDate } from "@lib/utils/common"
-import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/career.module.scss"
 
 interface ICareer {
@@ -20,24 +19,8 @@ interface ICareer {
 
 const Career = (): ReactElement => {
     const { darkMode } = useCoreStore()
-    // const { loginState } = useLoginStore()
 
-    const [careerList, setCareerList] = useState<ICareer[]>([])
-
-    const getCareer = (): void => {
-        axiosInstance
-            .get("/career")
-            .then((res) => {
-                setCareerList(res.data.data)
-            })
-            .catch(() => {
-                toastCall("경력 정보를 불러오지 못했습니다.", "error")
-            })
-    }
-
-    useEffect(() => {
-        getCareer()
-    }, [])
+    const careerList: ICareer[] = careerData
 
     return (
         <Wrapper>

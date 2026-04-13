@@ -1,14 +1,15 @@
+@import "@styles/variable.scss";
+
 .wrapper {
-  min-height: 100vh;
-  margin-top: 60px;
-  padding: 0 30px;
+    min-height: 100vh;
+    margin-top: $space-11;
+    padding: 0 $space-7;
 
-  max-width: 1300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-  margin-left: auto;
-  margin-right: auto;
-
+    margin-left: auto;
+    margin-right: auto;
 }

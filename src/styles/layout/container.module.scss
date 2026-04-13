@@ -6,9 +6,9 @@
     width: 100%;
 
     &.darkMode {
-        transition: all 0s ease-in;
-        background-color: $black-700;
+        background-color: $dark-surface-primary;
         color: $white;
+        transition: background-color $duration-slow $ease-out-quart, color $duration-slow $ease-out-quart;
     }
 
     .progressBar {
@@ -16,25 +16,21 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 2.5px;
-        background: $pink-pressed;
+        height: 3px;
+        background: linear-gradient(90deg, $pink-pressed, $pink-default, $pink-ligthen);
         transform-origin: 0%;
         z-index: 30;
     }
 
     .body {
-        padding-top: 86px;
-        //padding: 86px 30px 100px 30px;
-        // display: grid;
+        padding-top: 64px;
         height: 100%;
         width: 100%;
 
         @include TABLET {
-            // width: 768px;
         }
 
         @include MOBILE {
-            // width: 600px;
         }
     }
 }

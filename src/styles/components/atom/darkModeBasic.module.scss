@@ -1,19 +1,25 @@
 @import "@styles/variable.scss";
 
 .darkModeBasic {
-    border: 1px solid $black-500;
-    border-radius: 10px;
-    width: 45px;
-    background-color: white;
-    transition: all 0.2s ease-in;
+    border: none;
+    border-radius: 14px;
+    width: 48px;
+    height: 28px;
+    background-color: $separator-light;
+    transition: background-color $duration-normal $ease-out-quart;
     cursor: pointer;
+    position: relative;
 
     &:hover {
-      opacity: 0.7;
+        background-color: rgba(0, 0, 0, 0.2);
     }
 
     &.darkBack {
-        background-color: $black-500;
+        background-color: $pink-pressed;
+
+        &:hover {
+            background-color: $pink-ligthen;
+        }
     }
 
     .modeToggleBtn {
@@ -22,36 +28,40 @@
         justify-content: right;
 
         &.left {
-          justify-content: left;
+            justify-content: left;
         }
 
-        height: 20px;
+        height: 28px;
+        padding: 0 2px;
 
         .toggleRound {
-            margin: 1px;
-            width: 18px;
-            height: 18px;
-            border-radius: 2rem;
+            width: 24px;
+            height: 24px;
+            border-radius: $radius-full;
             background-color: white;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: transform $duration-normal cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
             .toggleInnerColor {
-              width: 12px;
-              height: 12px;
-              background-color: $yellow;
-              border-radius: 2rem;
-              margin: 3px 3px;
+                width: 14px;
+                height: 14px;
+                background-color: $yellow;
+                border-radius: $radius-full;
+                transition: background-color $duration-normal $ease-out-quart;
 
-              &.dark {
-                background-color: $black-500;
-              }
+                &.dark {
+                    background-color: $text-tertiary;
+                }
 
-              .moon {
-                width: 6px;
-                height: 7px;
-                border-radius: 2rem;
-                background-color: white;
-              }
+                .moon {
+                    width: 6px;
+                    height: 7px;
+                    border-radius: $radius-full;
+                    background-color: white;
+                }
             }
         }
     }

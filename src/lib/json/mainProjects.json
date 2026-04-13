@@ -161,7 +161,37 @@
         "height": 30
       }
     ],
-    "description": "개인 사이드 프로젝트를 통해 Vue3를 이용해 OpenWeatherMap API를 통해 날씨 정보를 조회하는 사이드 프로젝트입니다.",
+    "description": "Vue3와 OpenWeatherMap API를 활용한 위치 기반 실시간 날씨 및 5일 예보 웹 서비스 사이드 프로젝트입니다.",
     "url": "/projects/haruWeather"
+  },
+  {
+    "id": 10,
+    "title": "Bukhae (북해)",
+    "period": "2025.01 ~ 현재 | 진행 중",
+    "logos": [
+      {
+        "src": "/myFace.png",
+        "alt": "myFace",
+        "width": 30,
+        "height": 30
+      }
+    ],
+    "description": "AI와 블록체인 기술을 결합하여 투명하고 안전한 금융 생태계를 구축하는 핀테크 스타트업 프로젝트입니다.",
+    "url": "/projects/bukhae"
+  },
+  {
+    "id": 11,
+    "title": "Desk (AI 뉴스 인텔리전스)",
+    "period": "2025.03 ~ 현재 | 진행 중",
+    "logos": [
+      {
+        "src": "/myFace.png",
+        "alt": "myFace",
+        "width": 30,
+        "height": 30
+      }
+    ],
+    "description": "AI 기반 글로벌 금융 뉴스를 30분 단위로 자동 수집·분석하고, 3관점 AI 분석과 딥리서치 리포트를 제공하는 인텔리전스 플랫폼입니다.",
+    "url": "/projects/desk"
   }
 ]

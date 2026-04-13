@@ -1,116 +1,116 @@
 @import "@styles/variable.scss";
 
 .wholeWrapper {
-  .block {
-    margin-bottom: 4rem;
-  }
+    .block {
+        margin-bottom: 4rem;
+    }
 
-  .careerBlock {
-    margin-bottom: 80px;
+    .careerBlock {
+        margin-bottom: $space-12;
 
-    .careerParagraphs {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 50px;
+        .careerParagraphs {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: $space-9;
 
-      .headerWrapper {
-        width: 100%;
-        display: flex;
-        
-        .title {
-          width: 100%;
+            .headerWrapper {
+                width: 100%;
+                display: flex;
+
+                .title {
+                    width: 100%;
+                }
+
+                .saveBtn {
+                    width: 50%;
+                    display: flex;
+                    align-items: flex-end;
+                }
+            }
+
+            .cbParagraph {
+                display: flex;
+                flex-direction: column;
+
+                .divider {
+                    border-left: 1px solid $separator-light;
+                }
+
+                &:nth-child(2) {
+                    min-width: 300px;
+                }
+
+                @include TABLET {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+    .seminarAndRND {
+        margin-bottom: $space-12;
+
+        .red {
+            color: $pink-pressed;
         }
 
-        .saveBtn {
-          width: 50%;
-          display: flex;
-          align-items: flex-end;
+        .dotWrapper {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-weight: 700;
         }
-      }
+    }
 
-      .cbParagraph {
+    .seminarBlock {
         display: flex;
         flex-direction: column;
-
-        .divider {
-          border-left: 1px solid $black-200;
-        }
-
-        &:nth-child(2) {
-          min-width: 300px;
-        }
+        padding: $space-5;
+        text-align: left;
+        border-radius: $radius-md;
+        transition: background-color $duration-fast $ease-out-quart, transform $duration-normal $ease-out-quart;
 
         @include TABLET {
-          flex-direction: column;
+            padding: $space-4;
         }
-      }
+
+        @include MOBILE {
+            padding: $space-4;
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .subTitle {
+            margin: $space-3 0;
+        }
+
+        .conf {
+            font-size: $small-font;
+            color: $pink-ligthen;
+        }
+
+        &.active {
+            &:hover {
+                background: $surface-secondary;
+                transform: scale(1.01);
+            }
+        }
+
+        &.dark {
+            &:hover {
+                background: $dark-surface-tertiary;
+            }
+        }
+
+        &:active {
+            transform: scale(0.99);
+        }
+
+        &:hover {
+            background: $surface-tertiary;
+        }
     }
-  }
-
-  .seminarAndRND {
-    margin-bottom: 80px;
-
-    .red {
-      color: $pink-pressed;
-    }
-
-    .dotWrapper {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      font-weight: 700;
-    }
-
-
-  }
-
-  .seminarBlock {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    text-align: left;
-    border-radius: 5px;
-
-    @include TABLET {
-      padding: 18px;
-    }
-
-    @include MOBILE {
-      padding: 15px;
-    }
-
-    .wrapper {
-      display: flex;
-      align-items: center;
-    }
-
-    .subTitle {
-      margin: 10px 0;
-    }
-
-    .conf {
-      font-size: $small-font;
-      color: $pink-ligthen;
-    }
-
-    &.active {
-      &:hover {
-        background: $black-200;
-      }
-    }
-
-    &.dark {
-      &:hover {
-        background: $black-600;
-      }
-    }
-
-    &:active {
-      opacity: 0.7;
-    }
-
-    &:hover {
-      background: $black-300;
-    }
-  }
 }
