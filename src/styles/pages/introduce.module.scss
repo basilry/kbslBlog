@@ -1,128 +1,128 @@
 @import "@styles/variable.scss";
 
 .box {
-  background-color: $black-600;
-  border-radius: 5px;
-  padding: 30px 20px;
+    background-color: $black-600;
+    border-radius: $radius-md;
+    padding: $space-7 $space-5;
 
-  &.dark {
-    background-color: $black-200;
-  }
+    &.dark {
+        background-color: $black-200;
+    }
 }
 
 .block {
-  margin-bottom: 4rem;
+    margin-bottom: 4rem;
 }
 
-
 .introduceBlock {
-  margin-bottom: 80px;
-  display: flex;
-  justify-content: space-between;
-  @include TABLET {
-    flex-direction: column;
-  }
-
-  .pargraphs {
-    width: 60%;
-    @include TABLET {
-      width: 100%;
-    }
-  }
-
-  .firstBlock {
+    margin-bottom: $space-12;
     display: flex;
-    justify-content: space-around;
-  }
-
-  .myPics {
-    text-align: right;
-    padding-top: 20px;
+    justify-content: space-between;
     @include TABLET {
-      text-align: center;
+        flex-direction: column;
     }
 
-    .pics {
-      width: 60%;
-      height: auto;
-
-      @include TABLET {
-        width: 100%;
-      }
+    .pargraphs {
+        width: 60%;
+        @include TABLET {
+            width: 100%;
+        }
     }
-  }
+
+    .firstBlock {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .myPics {
+        text-align: right;
+        padding-top: $space-5;
+        @include TABLET {
+            text-align: center;
+        }
+
+        .pics {
+            width: 60%;
+            height: auto;
+
+            @include TABLET {
+                width: 100%;
+            }
+        }
+    }
 }
 
 .topBox {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  margin-bottom: 50px;
-
-  @include TABLET {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .textWrapper {
-    padding: 30px;
-  }
-
-  .pics {
-    margin-top: 30px;
-    border-radius: 5px;
     width: 100%;
-    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-bottom: $space-9;
 
     @include TABLET {
-      width: 100%;
+        display: flex;
+        flex-direction: column;
     }
-  }
+
+    .textWrapper {
+        padding: $space-7;
+    }
+
+    .pics {
+        margin-top: $space-7;
+        border-radius: $radius-md;
+        width: 100%;
+        height: auto;
+
+        @include TABLET {
+            width: 100%;
+        }
+    }
 }
 
 .secondBox {
-  margin-top: 50px;
-  margin-bottom: 50px;
+    margin-top: $space-9;
+    margin-bottom: $space-9;
 
-  .osakaWrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .pics {
-    margin-top: 30px;
-    border-radius: 5px;
-    width: 40%;
-    height: auto;
-
-    @include TABLET {
-      width: 60%;
+    .osakaWrapper {
+        display: flex;
+        justify-content: center;
     }
-  }
+
+    .pics {
+        margin-top: $space-7;
+        border-radius: $radius-md;
+        width: 40%;
+        height: auto;
+
+        @include TABLET {
+            width: 60%;
+        }
+    }
 }
 
 .thirdBox {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  .titleWrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+    margin-top: $space-9;
+    margin-bottom: $space-9;
 
-  .kyotoWrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .pics {
-    margin-top: 30px;
-    border-radius: 5px;
-    width: 40%;
-    height: auto;
-
-    @include TABLET {
-      width: 60%;
+    .titleWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
     }
-  }
+
+    .kyotoWrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pics {
+        margin-top: $space-7;
+        border-radius: $radius-md;
+        width: 40%;
+        height: auto;
+
+        @include TABLET {
+            width: 60%;
+        }
+    }
 }

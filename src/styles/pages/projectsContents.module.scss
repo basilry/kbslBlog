@@ -5,17 +5,19 @@
 }
 
 .eachProjectWrapper {
-    margin-bottom: 50px;
-    padding: 20px 30px;
+    margin-bottom: $space-9;
+    padding: $space-7 $space-7;
     min-height: 800px;
-    border-radius: 10px;
-
-    color: $black-700;
-    background-color: $black-300;
+    border-radius: $radius-lg;
+    border: 1px solid $separator-light;
+    color: $text-primary;
+    background-color: $surface-primary;
+    box-shadow: $shadow-md;
 
     &.dark {
         color: $white;
-        background-color: $black-600;
+        background-color: $dark-surface-secondary;
+        border-color: $separator-dark;
     }
 
     .imageTitle {
@@ -24,7 +26,7 @@
     }
 
     .titleWrapper {
-        margin-top: 30px;
+        margin-top: $space-7;
     }
 }
 
@@ -33,13 +35,13 @@
     flex-direction: column;
 
     .logos {
-        margin-top: 5px;
+        margin-top: $space-1;
         display: flex;
         align-items: center;
 
         img {
             &:nth-child(2) {
-                margin-left: 5px;
+                margin-left: $space-1;
             }
         }
     }
@@ -53,16 +55,17 @@
     @include TABLET {
         flex-direction: column;
     }
+
     .paragraphs {
         min-width: 50%;
 
         &:nth-child(1) {
-            margin-right: 20px;
+            margin-right: $space-5;
         }
 
         .skillImgs {
             &:nth-child(n) {
-                margin-right: 7px;
+                margin-right: $space-2;
             }
         }
 
@@ -71,10 +74,10 @@
             align-items: center;
 
             .peopleWrapper {
-                margin: 10px;
+                margin: $space-3;
 
                 img {
-                    margin: 0 5px;
+                    margin: 0 $space-1;
                 }
             }
         }
@@ -88,30 +91,35 @@
 .list {
     display: flex;
     justify-content: right;
-    margin-bottom: 12px;
+    margin-bottom: $space-3;
 
     .link {
-        opacity: 0.9;
         display: flex;
         flex-direction: row;
         gap: 3px;
-        padding: 7px 12px;
-        border-radius: 10px;
-        color: $black-700;
-        background-color: $black-300;
+        padding: $space-2 $space-3;
+        border-radius: $radius-sm;
+        color: $text-primary;
+        background-color: $surface-secondary;
+        border: 1px solid $separator-light;
+        transition: transform $duration-fast $ease-out-quart, box-shadow $duration-fast $ease-out-quart,
+            background-color $duration-fast $ease-out-quart;
 
         &.dark {
             color: $white;
-            background-color: $black-600;
+            background-color: $dark-surface-tertiary;
+            border-color: $separator-dark;
         }
 
         &:hover {
             cursor: pointer;
-            opacity: 1;
+            transform: translateY(-1px);
+            box-shadow: $shadow-sm;
+            background-color: $surface-tertiary;
         }
 
         &:active {
-            opacity: 0.7;
+            transform: scale(0.98);
         }
     }
 }

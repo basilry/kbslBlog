@@ -1,6 +1,10 @@
 @import "@styles/variable.scss";
 
 .lineBasic {
-  border-top: 1px solid $black-400;
-  margin: 10px 0;
+    border-top: 1px solid $separator-light;
+    margin: $space-3 0;
+
+    &.dark {
+        border-top: 1px solid $separator-dark;
+    }
 }

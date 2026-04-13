@@ -3,27 +3,32 @@
 .sidebarWrapper {
     position: fixed;
     height: 100%;
-    z-index: 10;
+    z-index: 20;
     width: 300px;
     display: none;
     background-color: transparent;
-    transform: translate(-50px, 0px);
+    transform: translateX(-50px);
     overflow: auto;
 
     &.open {
         display: block;
-        transform: translate(0px, 0px);
-        transition: all 0.3s ease-in;
+        transform: translateX(0);
+        transition: transform $duration-normal $ease-out-quart, background-color $duration-normal $ease-out-quart;
         width: 300px;
-        background-color: $black-400;
+        @include glass-effect;
+        border-right: 1px solid $separator-light;
+        box-shadow: $shadow-lg;
     }
 
     &.dark {
-        background-color: $black-900;
+        &.open {
+            @include glass-effect-dark;
+            border-right: 1px solid $separator-dark;
+        }
 
         li {
             &:hover {
-                background-color: $black-700;
+                background-color: $dark-surface-tertiary;
             }
         }
     }
@@ -33,65 +38,63 @@
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        padding: 28px 25px 28px 25px;
+        padding: $space-6 $space-5;
         opacity: 1;
         visibility: inherit;
-        transform: translate(0px, 0px);
-        transition: all 0.3s ease-in;
+        transform: translateX(0);
+        transition: all $duration-normal $ease-out-quart;
 
         &:hover {
-            transition: all 0s ease-in;
-            opacity: 0.5;
-            background-color: $black-100;
+            background-color: rgba(0, 0, 0, 0.04);
             color: $pink-default;
         }
 
         &.hidden {
             opacity: 0;
             visibility: hidden;
-            transform: translate(-50px, 0px);
-            transition: all 0.3s ease-in;
+            transform: translateX(-50px);
         }
 
         &.nowPath {
             color: $pink-pressed;
-            // background-color: $black-100;
+            background-color: rgba(176, 36, 214, 0.06);
         }
 
         &.dark {
             &:hover {
                 color: $pink-ligthen;
-                opacity: 0.7;
+                background-color: $dark-surface-tertiary;
             }
         }
     }
 
     .sideBarFooter {
-        padding-top: 10px;
-        padding-left: 20px;
+        padding-top: $space-3;
+        padding-left: $space-5;
         display: flex;
         flex-direction: column;
         text-align: left;
         opacity: 1;
         visibility: inherit;
-        transform: translate(0px, 0px);
-        transition: all 0.3s ease-in;
+        transform: translateX(0);
+        transition: all $duration-normal $ease-out-quart;
 
         &.hidden {
             opacity: 0;
             visibility: hidden;
-            transform: translate(-50px, 0px);
-            transition: all 0s ease-in;
+            transform: translateX(-50px);
         }
 
         .socialLogoWrppaer {
             display: flex;
             flex-direction: row;
+
             .socialLogo {
-                margin: 10px 30px 0 0;
+                margin: $space-3 $space-7 0 0;
+                transition: transform $duration-fast $ease-out-quart;
 
                 &:hover {
-                    opacity: 0.5;
+                    transform: scale(1.15);
                 }
             }
         }

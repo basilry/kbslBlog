@@ -1,71 +1,63 @@
 @import "@styles/variable";
 
 .paginationWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 70px;
-
-  .pageNumWrapper {
     display: flex;
-    background-color: $black-200;
-    margin: 10px;
-    border-radius: 25px;
-    height: 40px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: $space-5;
+    margin-bottom: $space-12;
 
-    &.dark {
-      background-color: $black-500;
-    }
+    .pageNumWrapper {
+        display: flex;
+        background-color: $surface-secondary;
+        margin: $space-3;
+        border-radius: $radius-full;
+        height: 40px;
 
-    .pageNum {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      border-radius: 25px;
-
-      &:hover {
-        cursor: pointer;
-        background-color: $black-400;
-        border-radius: 25px;
-      }
-
-
-      @include TABLET {
-        &:nth-child(n+6) {
-          display: none;
+        &.dark {
+            background-color: $dark-surface-tertiary;
         }
-      }
-      //
-      //@include MOBILE {
-      //  border-radius: 15px;
-      //}
-      //
-      //@include S_MOBILE {
-      //  border-radius: 10px;
-      //}
+
+        .pageNum {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            border-radius: $radius-full;
+            transition: background-color $duration-fast $ease-out-quart;
+
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.06);
+            }
+
+            @include TABLET {
+                &:nth-child(n + 6) {
+                    display: none;
+                }
+            }
+        }
+
+        .active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            color: $pink-pressed;
+            font-weight: bold;
+            background-color: $surface-primary;
+            border-radius: $radius-full;
+            box-shadow: $shadow-sm;
+        }
     }
 
-    .active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      color: $pink-ligthen;
-      font-weight: bold;
-      background-color: $black-400;
-      border-radius: 25px;
+    .arrow {
+        transition: background-color $duration-fast $ease-out-quart;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+        }
     }
-  }
-
-
-  .arrow {
-    &:hover {
-      cursor: pointer;
-      opacity: 0.7;
-    }
-  }
-
 }

@@ -1,9 +1,10 @@
 @import "@styles/variable.scss";
+
 .mainBot {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 50px;
+    gap: $space-5;
+    margin-bottom: $space-9;
 
     @media (max-width: 1000px) {
         grid-template-columns: repeat(2, 1fr);
@@ -14,7 +15,6 @@
     }
 
     .botBlock {
-
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -25,18 +25,32 @@
         }
 
         .workContents {
-            margin-top: 20px;
+            margin-top: $space-5;
             min-height: 210px;
             height: 300px;
-
             width: 100%;
-            color: $black-700;
-            background-color: $black-300;
-            border-radius: 10px;
-            padding: 12px 15px;
-            opacity: 0.8;
-            box-shadow: $shadow;
-            transition: all 0.1s ease-in;
+            color: $text-primary;
+            background-color: $surface-primary;
+            border: 1px solid $separator-light;
+            border-radius: $radius-lg;
+            padding: $space-5 $space-5 $space-4;
+            box-shadow: $shadow-sm;
+            transition: transform $duration-normal $ease-out-quart, box-shadow $duration-normal $ease-out-quart,
+                border-color $duration-normal $ease-out-quart;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, $pink-pressed, $pink-default);
+                opacity: 0;
+                transition: opacity $duration-normal $ease-out-quart;
+            }
 
             @include TABLET {
                 height: 100%;
@@ -44,21 +58,29 @@
             }
 
             .contents {
-                margin-top: 6px;
+                margin-top: $space-3;
+                color: $text-secondary;
+                line-height: 1.6;
             }
 
             &:hover {
                 cursor: pointer;
-                transform: translate(0px, -10px);
-                transition: all 0.1s ease-in;
-                opacity: 1;
+                transform: translateY(-6px);
+                box-shadow: $shadow-lg;
+                border-color: transparent;
+
+                &::before {
+                    opacity: 1;
+                }
             }
         }
 
         .ciLogo {
             display: flex;
             align-items: center;
-            margin-bottom: 7px;
+            margin-bottom: $space-2;
+            padding-bottom: $space-3;
+            border-bottom: 1px solid $separator-light;
         }
     }
 
@@ -66,7 +88,20 @@
         .botBlock {
             .workContents {
                 color: $white;
-                background-color: $black-600;
+                background-color: $dark-surface-secondary;
+                border-color: $separator-dark;
+
+                .contents {
+                    color: $text-quaternary;
+                }
+
+                &:hover {
+                    border-color: transparent;
+                }
+            }
+
+            .ciLogo {
+                border-bottom-color: $separator-dark;
             }
         }
     }

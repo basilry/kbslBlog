@@ -1,15 +1,14 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement } from "react"
 import Link from "next/link"
 import classNames from "classnames"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
 import Wrapper from "@components/layout/Wrapper"
-import { axiosInstance } from "@lib/api/axiosInstance"
+import certificateData from "@lib/json/certificate.json"
 import { useCoreStore } from "@lib/stores/store"
 import { formatDate } from "@lib/utils/common"
-import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/career.module.scss"
 
 interface ICertification {
@@ -23,22 +22,7 @@ interface ICertification {
 const Certification = (): ReactElement => {
     const { darkMode } = useCoreStore()
 
-    const [certificationList, setCertificationList] = useState<ICertification[]>([])
-
-    const getCareer = (): void => {
-        axiosInstance
-            .get("/certification")
-            .then((res) => {
-                setCertificationList(res.data.data)
-            })
-            .catch(() => {
-                toastCall("자격/수료 정보를 불러오지 못했습니다.", "error")
-            })
-    }
-
-    useEffect(() => {
-        getCareer()
-    }, [])
+    const certificationList: ICertification[] = certificateData
 
     return (
         <Wrapper>
