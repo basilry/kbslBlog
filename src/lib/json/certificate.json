@@ -59,5 +59,23 @@
     "subTitle": "Google ML Bootcamp 2024 | Coursera",
     "date": "20240823",
     "url": "https://coursera.org/share/f6aa40c9e73d4f61159ba94d1681b9b7"
+  },
+  {
+    "id": 27,
+    "title": "DACON | 고객 및 자동차정보 기반 보험 청구 예측",
+    "subTitle": "scikit-learn 기반 머신러닝 대회 참가",
+    "date": "20251001"
+  },
+  {
+    "id": 28,
+    "title": "TOEIC Speaking IM3",
+    "subTitle": "ETS",
+    "date": "20241101"
+  },
+  {
+    "id": 29,
+    "title": "운전면허 2종 보통",
+    "subTitle": "경찰청",
+    "date": ""
   }
 ]
