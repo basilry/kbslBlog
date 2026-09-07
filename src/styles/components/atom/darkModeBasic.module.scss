@@ -1,68 +1,79 @@
 @import "@styles/variable.scss";
 
 .darkModeBasic {
-    border: none;
-    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
     width: 48px;
-    height: 28px;
-    background-color: $separator-light;
-    transition: background-color $duration-normal $ease-out-quart;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-sm;
+    background: transparent;
     cursor: pointer;
-    position: relative;
 
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.2);
+    .track {
+        display: block;
+        position: relative;
+        width: 48px;
+        height: 28px;
+        border-radius: 14px;
+        background-color: $separator-light;
+        transition: background-color $duration-normal $ease-out-quart;
     }
 
-    &.darkBack {
-        background-color: $pink-pressed;
-
-        &:hover {
-            background-color: $pink-ligthen;
-        }
-    }
-
-    .modeToggleBtn {
+    .thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
         display: flex;
         align-items: center;
-        justify-content: right;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        transform: translateX(20px);
+        transition: transform $duration-normal $ease-out-quart;
+    }
 
-        &.left {
-            justify-content: left;
-        }
+    .symbol {
+        display: block;
+        position: relative;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: $yellow;
+        transition: background-color $duration-normal $ease-out-quart;
 
-        height: 28px;
-        padding: 0 2px;
-
-        .toggleRound {
-            width: 24px;
-            height: 24px;
-            border-radius: $radius-full;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            transition: transform $duration-normal cubic-bezier(0.68, -0.55, 0.27, 1.55);
-
-            .toggleInnerColor {
-                width: 14px;
-                height: 14px;
-                background-color: $yellow;
-                border-radius: $radius-full;
-                transition: background-color $duration-normal $ease-out-quart;
-
-                &.dark {
-                    background-color: $text-tertiary;
-                }
-
-                .moon {
-                    width: 6px;
-                    height: 7px;
-                    border-radius: $radius-full;
-                    background-color: white;
-                }
-            }
+        &::after {
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0;
+            transition: opacity $duration-normal $ease-out-quart;
         }
     }
+
+    &:hover .track { background-color: rgba(0, 0, 0, 0.2); }
+
+    &.dark {
+        .track { background-color: $pink-pressed; }
+        .thumb { transform: translateX(0); }
+        .symbol { background-color: $text-tertiary; }
+        .symbol::after { opacity: 1; }
+        &:hover .track { background-color: $pink-ligthen; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .darkModeBasic .track, .darkModeBasic .thumb, .darkModeBasic .symbol,
+    .darkModeBasic .symbol::after { transition: none; }
 }

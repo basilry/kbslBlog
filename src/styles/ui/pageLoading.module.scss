@@ -1,0 +1,31 @@
+@import "@styles/variable.scss";
+
+.loadingScreen {
+    flex: 1;
+    min-height: 220px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-5;
+    padding: $space-7 $space-5;
+    text-align: center;
+    p { font-size: 15px; opacity: 0.75; }
+}
+
+.spinner {
+    display: block;
+    width: 42px;
+    height: 42px;
+    border: 3px solid rgba(176, 36, 214, 0.18);
+    border-top-color: $pink-progress;
+    border-radius: 50%;
+    animation: page-loading-spin 800ms linear infinite;
+}
+
+@keyframes page-loading-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner { animation: none; }
+}

@@ -40,9 +40,10 @@ interface IProjectDetailData {
     description: string
     role: string[]
     techStack: string[]
-    teamSize: string
+    teamSize?: string
     url?: string
     achievements: IAchievement[]
+    achievementsTitle?: string
     extraSections?: IExtraSection[]
     images?: {
         filePath: string
@@ -129,10 +130,10 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         </div>
                         <br />
                         <br />
-                        <TextBasic size="large" bold="bold">
-                            {"프로젝트 인원"}
-                        </TextBasic>
-                        <TextBasic size="small">{`- ${data.teamSize}`}</TextBasic>
+                        {data.teamSize && <>
+                            <TextBasic size="large" bold="bold">프로젝트 인원</TextBasic>
+                            <TextBasic size="small">{`- ${data.teamSize}`}</TextBasic>
+                        </>}
                         {data.url && (
                             <>
                                 <br />
@@ -152,7 +153,7 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                     </div>
                     <div className={styles.paragraphs}>
                         <TextBasic size="large" bold="bold">
-                            {"성과"}
+                            {data.achievementsTitle ?? "성과"}
                         </TextBasic>
                         {data.achievements.map((achievement, idx) => (
                             <div key={achievement.title}>

@@ -5,10 +5,11 @@ import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/atom/darkModeBasic.module.scss"
 
 export default function DarkModeBasic() {
-    const { changeDarkMode, darkMode } = useCoreStore()
-    return <button type="button" aria-label={darkMode ? "밝은 테마로 변경" : "어두운 테마로 변경"} aria-pressed={darkMode} className={classNames(styles.darkModeBasic, "iconButton", darkMode && styles.darkBack)} onClick={changeDarkMode}>
-        <span className={classNames(styles.modeToggleBtn, darkMode && styles.left)}>
-            <span className={styles.toggleRound}><span className={classNames(styles.toggleInnerColor, darkMode && styles.dark)}>{darkMode && <span className={styles.moon} />}</span></span>
+    const darkMode = useCoreStore((state) => state.darkMode)
+    const changeDarkMode = useCoreStore((state) => state.changeDarkMode)
+    return <button type="button" aria-label="다크 모드" title={darkMode ? "밝은 테마로 변경" : "어두운 테마로 변경"} aria-pressed={darkMode} className={classNames(styles.darkModeBasic, darkMode && styles.dark)} onClick={changeDarkMode}>
+        <span className={styles.track} aria-hidden="true">
+            <span className={styles.thumb}><span className={styles.symbol} /></span>
         </span>
     </button>
 }

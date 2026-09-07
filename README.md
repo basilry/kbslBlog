@@ -56,9 +56,18 @@ npm run check
 npm start
 ```
 
-기존 EC2에서 PM2를 사용한다면 검증된 빌드 후 기존 설정으로 `pm2 startOrReload ecosystem.config.js --update-env`를 실행합니다. PM2는 운영 환경에 별도 설치되어 있어야 합니다. 기존 프로세스와 환경변수·프록시 설정을 확인하고 이전 릴리스로 돌아갈 수 있게 배포합니다. 운영 환경에서는 개발 서버를 사용하지 않습니다.
+별도 EC2 환경에서 PM2를 사용한다면 검증된 빌드 후 기존 설정으로 `pm2 startOrReload ecosystem.config.js --update-env`를 실행합니다. PM2는 운영 환경에 별도 설치되어 있어야 합니다. 기존 프로세스와 환경변수·프록시 설정을 확인하고 이전 릴리스로 돌아갈 수 있게 배포합니다. 운영 환경에서는 개발 서버를 사용하지 않습니다.
 
-GitHub Actions는 push/PR 시 설치·lint·타입·테스트·빌드를 검사합니다. EC2 배포 자격 증명이나 자동 배포 연결은 이 저장소에 추가하지 않았습니다. **GitHub push와 실제 운영 서버 배포는 별도입니다.**
+현재 `www.basilry.kim` 운영 환경은 **Vercel**이며, GitHub `master` 브랜치에 연결된 배포를 사용합니다. GitHub Actions는 push/PR 시 설치·lint·타입·테스트·빌드를 검사합니다. Vercel 배포와 Actions 검사는 별도로 진행되므로, 푸시 후 두 결과를 모두 확인해야 합니다.
+
+운영 배포 절차:
+
+1. 로컬 검사와 변경 검토를 완료하고 `master`에 커밋·푸시합니다.
+2. 해당 커밋의 GitHub Actions `Blog checks`와 `Vercel` 상태가 성공인지 확인합니다.
+3. `https://www.basilry.kim`에서 변경된 경로와 실제 UI 동작을 확인합니다.
+4. 문제가 있으면 이전 정상 Vercel 배포로 복구하거나 수정 커밋을 배포합니다.
+
+배포 자격 증명은 저장소에 포함하지 않습니다. Vercel 환경변수는 프로젝트 설정에서 관리합니다.
 
 `/feed.xml`과 `/sitemap.xml`은 공개 콘텐츠를 제공하고, `/robots.txt`는 기존 AI 크롤러 차단 의도를 유지합니다.
 

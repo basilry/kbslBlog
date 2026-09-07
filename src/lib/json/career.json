@@ -73,8 +73,14 @@
   },
   {
     "id": 13,
-    "title": "SI 프리랜서 - CLIMS(임상시험 검체관리시스템) 프로젝트",
-    "startDate": "20260101",
+    "title": "안셈 SI 프리랜서 — 법원도서관 미래통합시스템(CLIMS) 개발",
+    "startDate": "202601",
+    "endDate": "202605"
+  },
+  {
+    "id": 14,
+    "title": "두노소프트 — 티머니 Dooray SaaS 연동 사업 (SSO·EDMS 담당)",
+    "startDate": "202608",
     "endDate": ""
   }
 ]

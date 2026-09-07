@@ -9,7 +9,7 @@
     @include glass-effect;
     border-bottom: 1px solid $separator-light;
     width: 100%;
-    min-width: $breakpoint-miniMobile;
+    min-width: 0;
     padding: 0 $space-7;
     z-index: 10;
     transition: background-color $duration-normal $ease-out-quart;
@@ -17,6 +17,7 @@
     &.darkMode {
         @include glass-effect-dark;
         border-bottom: 1px solid $separator-dark;
+        .rightWrapper .authButton:hover { background-color: rgba(255, 255, 255, 0.08); }
     }
 
     .leftWrapper {
@@ -74,51 +75,28 @@
         align-items: center;
         gap: $space-3;
 
-        .darkToggleWrapper {
-        }
+        flex-shrink: 0;
 
-        .login {
-            display: flex;
+        .authButton {
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            align-content: center;
-            padding: $space-1;
+            height: 44px;
+            padding: 0 $space-3;
+            border: 0;
             border-radius: $radius-sm;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
             transition: background-color $duration-fast $ease-out-quart;
 
-            &:hover {
-                background-color: rgba(0, 0, 0, 0.06);
-            }
-        }
-
-        .profile {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            border: 1.5px solid $separator-light;
-            border-radius: $radius-full;
-            overflow: hidden;
-            transition: transform $duration-normal $ease-out-quart, box-shadow $duration-normal $ease-out-quart;
-
-            &:hover {
-                transform: scale(1.08);
-                box-shadow: $shadow-md;
-            }
-
-            &.darkProfile {
-                border: 1.5px solid $separator-dark;
-            }
-        }
-
-        a {
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-
-        .loginBlock {
-            &:hover {
-                cursor: pointer;
-            }
+            &:hover { background-color: rgba(0, 0, 0, 0.06); }
         }
     }
 }
