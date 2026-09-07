@@ -1,4 +1,4 @@
-import { counterDay, parsePayload } from "./lib"
+import { counterDay, parsePayload, parseViewPaths } from "./lib"
 
 const ALLOWED_ORIGIN = "https://www.basilry.kim"
 const SEO_HEADERS = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex", "X-Content-Type-Options": "nosniff" }
@@ -68,16 +68,37 @@ async function count(request: Request, env: Env, origin: string): Promise<Respon
     return json({ available: true, date: day, timeZone: "Asia/Seoul", updatedAt: now.toISOString(), todayVisitors, totalVisitors, postViews }, 200, origin)
 }
 
+async function views(request: Request, env: Env, origin: string): Promise<Response> {
+    const length = Number(request.headers.get("Content-Length"))
+    if (!Number.isInteger(length) || length < 2 || length > 4_096) return json({ available: false }, 400, origin)
+    const paths = parseViewPaths(await request.json<unknown>())
+    if (!paths) return json({ available: false }, 400, origin)
+
+    const placeholders = paths.map(() => "?").join(", ")
+    const result = await env.DB.prepare(`SELECT path, views FROM post_totals WHERE path IN (${placeholders})`).bind(...paths).all<Record<string, unknown>>()
+    if (!result.success) throw new Error("D1 view lookup failed")
+
+    const postViews = Object.fromEntries(paths.map((path) => [path, 0]))
+    for (const row of result.results) {
+        const path = row.path
+        const count = row.views
+        if (typeof path !== "string" || !(path in postViews)) continue
+        if (typeof count !== "number" || !Number.isSafeInteger(count) || count < 0) throw new Error("Invalid D1 view aggregate")
+        postViews[path] = count
+    }
+    return json({ available: true, updatedAt: new Date().toISOString(), postViews }, 200, origin)
+}
+
 export default {
     async fetch(request, env): Promise<Response> {
         const url = new URL(request.url)
         if (request.method === "GET" && url.pathname === "/health") return json({ ok: true }, 200)
         const origin = request.headers.get("Origin") || ""
-        if (url.pathname !== "/count" || origin !== ALLOWED_ORIGIN) return json({ available: false }, 403)
+        if ((url.pathname !== "/count" && url.pathname !== "/views") || origin !== ALLOWED_ORIGIN) return json({ available: false }, 403)
         if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: responseHeaders(origin) })
         if (request.method !== "POST") return json({ available: false }, 405, origin)
         try {
-            return await count(request, env, origin)
+            return url.pathname === "/count" ? await count(request, env, origin) : await views(request, env, origin)
         } catch (error) {
             console.error(JSON.stringify({ message: "counter_request_failed", error: error instanceof Error ? error.message : "unknown" }))
             return json({ available: false }, 503, origin)

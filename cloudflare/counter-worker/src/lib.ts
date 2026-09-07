@@ -6,6 +6,8 @@ export interface CountPayload {
     path: string | null
 }
 
+const MAX_VIEW_PATHS = 20
+
 export function counterDay(date: Date): string {
     return new Intl.DateTimeFormat("en-CA", {
         timeZone: "Asia/Seoul",
@@ -21,4 +23,12 @@ export function parsePayload(value: unknown): CountPayload | null {
     if (typeof body.visitorId !== "string" || !UUID.test(body.visitorId)) return null
     if (body.path !== null && (typeof body.path !== "string" || body.path.length > 160 || !POST_PATH.test(body.path))) return null
     return { visitorId: body.visitorId, path: body.path }
+}
+
+export function parseViewPaths(value: unknown): string[] | null {
+    if (!value || typeof value !== "object") return null
+    const paths = (value as { paths?: unknown }).paths
+    if (!Array.isArray(paths) || paths.length === 0 || paths.length > MAX_VIEW_PATHS) return null
+    if (paths.some((path) => typeof path !== "string" || path.length > 160 || !POST_PATH.test(path))) return null
+    return [...new Set(paths)]
 }

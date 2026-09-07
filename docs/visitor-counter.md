@@ -1,6 +1,6 @@
 # Cloudflare 방문 통계
 
-블로그 하단의 오늘 방문자 수와 전체 누적 방문자 수, 글 상단의 누적 조회 수는 무료 Cloudflare Worker와 D1에 저장한다. Google Analytics는 유입 분석용으로 유지하지만 공개 카운터의 데이터 원본으로 사용하지 않는다.
+블로그 하단의 오늘 방문자 수와 전체 누적 방문자 수, 글 상단과 포스팅 목록의 누적 조회 수는 무료 Cloudflare Worker와 D1에 저장한다. Google Analytics는 유입 분석용으로 유지하지만 공개 카운터의 데이터 원본으로 사용하지 않는다.
 
 ## 집계 기준
 
@@ -20,6 +20,7 @@
 - Worker: `kbsl-blog-counter`
 - D1: `kbsl-blog-counters`
 - 공개 엔드포인트: `https://kbsl-blog-counter.basbot.workers.dev/count`
+- 목록 조회 엔드포인트: `https://kbsl-blog-counter.basbot.workers.dev/views` (조회수 증가 없이 최대 20개 글을 일괄 조회)
 - 상태 확인: `https://kbsl-blog-counter.basbot.workers.dev/health`
 
 Worker의 D1 바인딩은 `DB`, HMAC 비밀 바인딩은 `HASH_SECRET`이다. 비밀값은 Cloudflare 암호화 바인딩으로만 저장하고 소스 및 Wrangler 설정에 넣지 않는다.

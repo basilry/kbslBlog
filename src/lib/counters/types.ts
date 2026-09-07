@@ -10,6 +10,14 @@ export interface CounterSnapshot {
 
 export type CounterResponse = CounterSnapshot | { available: false }
 
+export interface PostViewsSnapshot {
+    available: true
+    updatedAt: string
+    postViews: Record<string, number>
+}
+
+export type PostViewsResponse = PostViewsSnapshot | { available: false }
+
 export function counterDay(date: Date, timeZone: string): string {
     return new Intl.DateTimeFormat("en-CA", {
         timeZone,

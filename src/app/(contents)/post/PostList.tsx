@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { ReactElement } from "react"
 import Wrapper from "@components/layout/Wrapper"
+import { PostViewCount, PostViewCountsProvider } from "@components/ui/PostViewCounters"
 import type { PublicPostPage } from "@lib/content"
 import styles from "@styles/pages/postList.module.scss"
 
@@ -25,8 +26,6 @@ function pageHref(page: number): string {
 }
 
 export default function PostList({ posts }: PostListProps): ReactElement {
-    const hasServiceNotice = posts.legacyUnavailable || posts.legacyTruncated
-
     return (
         <Wrapper>
             <div className={styles.page}>
@@ -37,11 +36,9 @@ export default function PostList({ posts }: PostListProps): ReactElement {
                     <p className={styles.orderNote}>새 발행 글을 먼저 보여 드리고, 이전 글 보관함을 이어서 표시합니다.</p>
                 </header>
 
-                {hasServiceNotice && (
+                {posts.legacyTruncated && (
                     <aside className={styles.notice} role="status">
-                        {posts.legacyUnavailable
-                            ? "기존 글 저장소에 잠시 연결할 수 없어 확인 가능한 글만 표시합니다."
-                            : "기존 글이 많아 최근 글 일부만 표시합니다."}
+                        기존 글이 많아 최근 글 일부만 표시합니다.
                     </aside>
                 )}
 
@@ -55,27 +52,30 @@ export default function PostList({ posts }: PostListProps): ReactElement {
                         </p>
                     </section>
                 ) : (
-                    <section aria-label="글 목록" className={styles.list}>
-                        {posts.items.map((post) => (
-                            <article key={`${post.source}-${post.id}`} className={styles.item}>
-                                <Link href={post.href} className={styles.itemLink}>
-                                    <div className={styles.itemMeta}>
-                                        <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                                        {post.source === "local" && <span>Markdown</span>}
-                                    </div>
-                                    <h2>{post.title}</h2>
-                                    <p>{post.description}</p>
-                                    {post.tags.length > 0 && (
-                                        <ul className={styles.tags} aria-label="태그">
-                                            {post.tags.map((tag) => (
-                                                <li key={tag}>{tag}</li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </Link>
-                            </article>
-                        ))}
-                    </section>
+                    <PostViewCountsProvider paths={posts.items.map((post) => post.href)}>
+                        <section aria-label="글 목록" className={styles.list}>
+                            {posts.items.map((post) => (
+                                <article key={`${post.source}-${post.id}`} className={styles.item}>
+                                    <Link href={post.href} className={styles.itemLink}>
+                                        <div className={styles.itemMeta}>
+                                            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+                                            <PostViewCount postPath={post.href} />
+                                            {post.source === "local" && <span>Markdown</span>}
+                                        </div>
+                                        <h2>{post.title}</h2>
+                                        <p>{post.description}</p>
+                                        {post.tags.length > 0 && (
+                                            <ul className={styles.tags} aria-label="태그">
+                                                {post.tags.map((tag) => (
+                                                    <li key={tag}>{tag}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </Link>
+                                </article>
+                            ))}
+                        </section>
+                    </PostViewCountsProvider>
                 )}
 
                 {posts.totalPages > 1 && (

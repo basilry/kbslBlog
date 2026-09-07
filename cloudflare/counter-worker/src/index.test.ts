@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { counterDay, parsePayload } from "./lib"
+import { counterDay, parsePayload, parseViewPaths } from "./lib"
 
 describe("counter request validation", () => {
     it("uses the Korean calendar day around midnight", () => {
@@ -14,5 +14,12 @@ describe("counter request validation", () => {
         expect(parsePayload({ visitorId: "visitor", path: null })).toBeNull()
         expect(parsePayload({ visitorId, path: "/login" })).toBeNull()
         expect(parsePayload({ visitorId, path: "/post/example?admin=true" })).toBeNull()
+    })
+
+    it("accepts a bounded, unique list of canonical post paths", () => {
+        expect(parseViewPaths({ paths: ["/post/one", "/post/two", "/post/one"] })).toEqual(["/post/one", "/post/two"])
+        expect(parseViewPaths({ paths: [] })).toBeNull()
+        expect(parseViewPaths({ paths: ["/projects"] })).toBeNull()
+        expect(parseViewPaths({ paths: Array.from({ length: 21 }, (_, index) => `/post/${index}`) })).toBeNull()
     })
 })
