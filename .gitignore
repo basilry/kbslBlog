@@ -30,6 +30,10 @@ yarn-error.log*
 .env.*
 .env.local
 .env.development
+/cloudflare/counter-worker/.dev.vars*
+/cloudflare/counter-worker/.wrangler/
+/cloudflare/counter-worker/dist/
+/cloudflare/counter-worker/node_modules/
 
 # vercel
 .vercel

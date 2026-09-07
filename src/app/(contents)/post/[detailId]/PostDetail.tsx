@@ -1,7 +1,7 @@
 import Link from "next/link"
 import type { ReactElement } from "react"
 import Wrapper from "@components/layout/Wrapper"
-import AnalyticsCounter from "@components/ui/AnalyticsCounter"
+import VisitorCounter from "@components/ui/VisitorCounter"
 import Giscus from "@components/ui/Giscus"
 import type { PublicPost } from "@lib/content"
 import { blogPosting, serializeJsonLd } from "@lib/seo"
@@ -38,7 +38,7 @@ export default function PostDetail({ post }: PostDetailProps): ReactElement {
                             <div className={styles.meta}>
                                 <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
                                 <Link href="/introduce" rel="author">김바실리</Link>
-                                <AnalyticsCounter postPath={post.href} />
+                                <VisitorCounter postPath={post.href} />
                             </div>
                             <h1>{post.title}</h1>
                             <p>{post.description}</p>

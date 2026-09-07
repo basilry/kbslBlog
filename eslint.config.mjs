@@ -14,5 +14,5 @@ export default defineConfig([
             "@next/next/no-img-element": "warn",
         },
     },
-    globalIgnores([".next/**", ".validation/**", ".content-preview/**", ".content-drafts/**", "out/**", "coverage/**", "next-env.d.ts", "logs/**"]),
+    globalIgnores([".next/**", ".validation/**", ".content-preview/**", ".content-drafts/**", "cloudflare/counter-worker/**", "out/**", "coverage/**", "next-env.d.ts", "logs/**"]),
 ])

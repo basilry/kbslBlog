@@ -22,6 +22,8 @@ NEXT_PUBLIC_IP=https://api.basilry.kim
 CONTENT_API_URL=https://api.basilry.kim
 # 선택: 기존 Google Analytics 측정 ID를 교체할 때만 설정
 NEXT_PUBLIC_GA_ID=G-GZDS0N484J
+# 선택: 자체 Cloudflare 카운터 엔드포인트를 교체할 때만 설정
+NEXT_PUBLIC_COUNTER_API_URL=https://kbsl-blog-counter.basbot.workers.dev/count
 ```
 
 API 주소에는 실제 배포의 경로 접두사가 있다면 함께 지정해야 합니다. 관리자 비밀번호나 토큰을 `NEXT_PUBLIC_*` 변수에 넣지 않습니다. 백엔드 미설정·일시 장애는 글 없음과 구분해 표시하며, 로컬 공개 Markdown과 프로젝트 페이지는 사용할 수 있습니다.
@@ -90,4 +92,4 @@ npm start
 
 ## 공개 방문 통계
 
-Google Analytics Data API로 오늘 방문자 수와 글 누적 조회 수를 표시합니다. 서버 자격 증명이 없으면 카운터를 숨깁니다. 집계 기준과 Vercel 설정은 [GA 통계 연결 가이드](docs/analytics.md)를 참고하세요.
+무료 Cloudflare Worker와 D1으로 오늘 방문자 수, 전체 누적 방문자 수, 글 누적 조회 수를 표시합니다. Google Analytics는 유입 분석용으로 계속 사용합니다. 집계 기준과 리소스는 [Cloudflare 방문 통계 가이드](docs/visitor-counter.md)를 참고하세요.

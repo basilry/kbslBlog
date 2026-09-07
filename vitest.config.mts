@@ -11,5 +11,5 @@ export default defineConfig({
             "@styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
         },
     },
-    test: { environment: "node", exclude: ["node_modules/**", ".next/**", "tests/e2e/**"] },
+    test: { environment: "node", exclude: ["**/node_modules/**", ".next/**", "cloudflare/counter-worker/**", "tests/e2e/**"] },
 })

@@ -1,0 +1,17 @@
+{
+  "name": "kbsl-blog-counter-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cf-typegen": "wrangler types && node scripts/normalize-generated-types.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run cf-typegen && npm run typecheck && npm test && wrangler deploy --dry-run --outdir dist"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vitest": "4.1.11",
+    "wrangler": "4.129.0"
+  }
+}

@@ -23,10 +23,17 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            cloudflare/counter-worker/package-lock.json
       - run: npm ci
+      - run: npm ci
+        working-directory: cloudflare/counter-worker
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run check
+        working-directory: cloudflare/counter-worker
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: "1"
