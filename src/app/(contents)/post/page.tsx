@@ -1,28 +1,40 @@
 import type { Metadata } from "next"
+import { cache, type ReactElement } from "react"
 import { notFound, redirect } from "next/navigation"
-import type { ReactElement } from "react"
 import PostList from "./PostList"
-import { getPublicPosts, SITE_URL } from "@lib/content"
-
-export const metadata: Metadata = {
-    title: "글",
-    description: "개발과 제품을 만들며 배운 내용을 기록합니다.",
-    alternates: { canonical: `${SITE_URL}/post` },
-}
+import { getPublicPosts } from "@lib/content"
+import { postListMetadata } from "@lib/seo"
 
 interface PostIndexPageProps {
     searchParams: Promise<{ page?: string | string[] }>
 }
 
-export default async function PostIndexPage({ searchParams }: PostIndexPageProps): Promise<ReactElement> {
-    const requestedPage = (await searchParams).page
-    if (Array.isArray(requestedPage)) redirect("/post?page=1")
+function pageNumber(requested: string | string[] | undefined): number {
+    if (requested === undefined) return 1
+    if (Array.isArray(requested)) redirect("/post")
+    const page = Number(requested)
+    if (!Number.isSafeInteger(page) || page < 1) redirect("/post")
+    if (page === 1) redirect("/post")
+    if (requested !== String(page)) redirect(`/post?page=${page}`)
+    return page
+}
 
-    const page = requestedPage === undefined ? 1 : Number(requestedPage)
-    if (!Number.isSafeInteger(page) || page < 1) redirect("/post?page=1")
-
+const loadPosts = cache(async (page: number) => {
     const posts = await getPublicPosts({ page, pageSize: 10 })
-    if (!posts.legacyUnavailable && posts.totalItems > 0 && page > posts.totalPages) notFound()
+    if (!posts.legacyUnavailable && page > posts.totalPages) notFound()
+    return posts
+})
 
-    return <PostList posts={posts} />
+export async function generateMetadata({ searchParams }: PostIndexPageProps): Promise<Metadata> {
+    const page = pageNumber((await searchParams).page)
+    const posts = await loadPosts(page)
+    return {
+        ...postListMetadata(page),
+        ...(posts.items.length === 0 && posts.legacyUnavailable ? { robots: { index: false, follow: true } } : {}),
+    }
+}
+
+export default async function PostIndexPage({ searchParams }: PostIndexPageProps): Promise<ReactElement> {
+    const page = pageNumber((await searchParams).page)
+    return <PostList posts={await loadPosts(page)} />
 }

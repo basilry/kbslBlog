@@ -7,12 +7,13 @@ import ModalBasic from "@components/modal/ModalBasic"
 import styles from "@styles/pages/projectsPics.module.scss"
 
 interface IPicsTemplate {
+    projectTitle: string
     filePath: string
     domainName: string
     fileNums: number
 }
 
-const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): ReactElement => {
+const PicsTemplate = ({ projectTitle, filePath, domainName, fileNums = 6 }: IPicsTemplate): ReactElement => {
     const [open, setOpen] = useState({ doOpen: false, idx: -1 })
 
     return (
@@ -28,7 +29,9 @@ const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): Re
                             <img
                                 className={styles.projectImages}
                                 src={`/${filePath}/${domainName}${idx + 1}.png`}
-                                alt="myFace"
+                                alt={`${projectTitle} 화면 ${idx + 1}`}
+                                loading="lazy"
+                                decoding="async"
                             />
                         </SwiperSlide>
                     ))}
@@ -39,7 +42,7 @@ const PicsTemplate = ({ filePath, domainName, fileNums = 6 }: IPicsTemplate): Re
                 onClose={(): void => setOpen({ doOpen: false, idx: -1 })}
                 title={"상세화면"}
             >
-                <img className={styles.modalImages} src={`/${filePath}/${domainName}${open.idx}.png`} alt="myFace" />
+                <img className={styles.modalImages} src={`/${filePath}/${domainName}${open.idx}.png`} alt={`${projectTitle} 화면 ${open.idx}`} />
             </ModalBasic>
         </div>
     )

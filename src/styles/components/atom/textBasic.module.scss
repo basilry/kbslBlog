@@ -1,6 +1,7 @@
 @import "@styles/variable.scss";
 
 .text {
+    margin: 0;
     word-break: break-all;
     overflow: hidden;
     text-overflow: ellipsis;

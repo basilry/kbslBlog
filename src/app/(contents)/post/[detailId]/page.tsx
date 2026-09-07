@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import type { ReactElement } from "react"
+import { cache, type ReactElement } from "react"
 import PostDetail from "./PostDetail"
 import { getPublicPost, LegacyPostUnavailableError, SITE_URL } from "@lib/content"
+
+const loadPost = cache(getPublicPost)
 
 interface PostPageProps {
     params: Promise<{ detailId: string }>
@@ -11,16 +13,18 @@ interface PostPageProps {
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
     const { detailId } = await params
     try {
-        const post = await getPublicPost(detailId)
-        if (!post) return { title: "글을 찾을 수 없습니다" }
+        const post = await loadPost(detailId)
+        if (!post) notFound()
 
         const canonical = `${SITE_URL}${post.href}`
         return {
             title: post.title,
             description: post.description,
-            alternates: { canonical },
+            alternates: { canonical, types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
             openGraph: {
                 type: "article",
+                siteName: "basilry.kim",
+                locale: "ko_KR",
                 url: canonical,
                 title: post.title,
                 description: post.description,
@@ -37,14 +41,14 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
             },
         }
     } catch (error) {
-        if (error instanceof LegacyPostUnavailableError) return { title: "글을 불러오는 중입니다" }
+        if (error instanceof LegacyPostUnavailableError) return { title: "글을 불러오는 중입니다", robots: { index: false, follow: true } }
         throw error
     }
 }
 
 export default async function PostPage({ params }: PostPageProps): Promise<ReactElement> {
     const { detailId } = await params
-    const post = await getPublicPost(detailId)
+    const post = await loadPost(detailId)
     if (!post) notFound()
     return <PostDetail post={post} />
 }

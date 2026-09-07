@@ -28,7 +28,7 @@ const Research = (): ReactElement => {
         <Wrapper>
             <div className={styles.wholeWrapper}>
                 <div className={styles.seminarAndRND}>
-                    <TextBasic size="xxx-large" bold="bold">
+                    <TextBasic as="h1" size="xxx-large" bold="bold">
                         {"Research | 연구개발 & 교육 & 보고"}
                     </TextBasic>
                     <div className={styles.dotWrapper}>
@@ -57,7 +57,7 @@ const Research = (): ReactElement => {
                                     cursor: seminar.url ? "pointer" : "default",
                                 }}
                             >
-                                <TextBasic className={styles.wrapper} size="x-large" bold="bold">
+                                <TextBasic as="h2" className={styles.wrapper} size="x-large" bold="bold">
                                     {seminar.url && <span className={styles.red}>*</span>}
                                     {seminar.title}
                                 </TextBasic>

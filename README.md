@@ -16,7 +16,7 @@ npm run dev
 루트에 `.env.local`을 만들고 필요한 값만 지정합니다. 이 파일은 커밋하지 않습니다.
 
 ```dotenv
-# 기존 브라우저 로그인·편집 API의 기본 주소 (브라우저에 공개되는 값)
+# 기존 공개 글 조회·좋아요 API 주소 (브라우저에 공개되는 값)
 NEXT_PUBLIC_IP=https://api.basilry.kim
 # 서버의 공개 글 조회 주소. 없으면 NEXT_PUBLIC_IP 사용
 CONTENT_API_URL=https://api.basilry.kim
@@ -28,7 +28,7 @@ API 주소에는 실제 배포의 경로 접두사가 있다면 함께 지정해
 
 ## 글 발행
 
-- 기존 API 글의 ID와 URL은 유지됩니다. 웹 에디터도 과도기 동안 유지합니다.
+- 기존 API 글의 ID와 URL은 유지됩니다. 웹 로그인·프로필·글쓰기 경로와 수정·삭제 UI는 비활성화했습니다.
 - 새로운 글은 `content/posts`의 Markdown을 원본으로 관리합니다.
 - 초안은 공개 목록·상세·RSS·사이트맵에서 제외됩니다.
 - 선택한 한 문서와 필요한 첨부만 가져오고, 미리보기 이후 발행을 명시적으로 확정합니다.
@@ -69,17 +69,21 @@ npm start
 
 배포 자격 증명은 저장소에 포함하지 않습니다. Vercel 환경변수는 프로젝트 설정에서 관리합니다.
 
-`/feed.xml`과 `/sitemap.xml`은 공개 콘텐츠를 제공하고, `/robots.txt`는 기존 AI 크롤러 차단 의도를 유지합니다.
+`/feed.xml`과 `/sitemap.xml`은 공개 콘텐츠를 제공하고, `/robots.txt`는 검색 크롤러의 공개 페이지 접근을 허용합니다.
 
 ## 구성
 
-- `src/app`: 홈, 기존 프로젝트, 공개 글, 관리 페이지, 이미지 API
+- `src/app`: 홈, 기존 프로젝트, 공개 글, 비활성 관리 경로, 이미지 API
 - `src/lib/content`: Markdown·기존 API 글 조회와 안전한 본문 렌더링
-- `src/components/template/editor`: 과도기 웹 에디터
+- `src/components/template/editor`: 비활성 웹 에디터 원본
 - `content/posts`: Markdown 글 원본
 - `public/content`: 발행 글의 첨부 자산
 - `src/lib/json`: 기존 소개·프로젝트 데이터
 
 ## 데이터와 운영 경계
 
-별도 백엔드의 `/authenticate`, `/users/me`, `/posts`, `/file/*`, `/proxy/*` 계약을 유지합니다. 프런트엔드의 로그인 표시로 서버 권한이 보장되지는 않으므로, 기존 백엔드에서 관리자 쓰기·삭제 권한을 검증해야 합니다. 저장 중 오류가 나면 초안을 보존하고 중복 제출을 막습니다. localStorage 초안은 현재 브라우저에만 보관되며 서버 백업을 대신하지 않습니다.
+소개·경력·프로젝트는 `src/lib/json`, 새 글은 `content/posts`에서 관리합니다. `/login`, `/userProfile`은 홈으로, `/post/register`는 글 목록으로 영구 리디렉션합니다. 기존 페이지 구현도 `notFound()`로 비활성화했고 로그인 상태를 복원하지 않습니다. 기존 로그인·에디터 구현은 복구 참고용으로 남겨두지만 공개 페이지에서 불러오지 않습니다. 별도 백엔드의 기존 공개 글 조회와 좋아요는 유지합니다. 프런트엔드 경로 폐쇄가 백엔드 쓰기 API를 폐쇄하는 것은 아닙니다.
+
+## 검색 메타데이터
+
+`src/lib/seo.ts`에서 공개 페이지의 제목·설명·대표 URL·공유 메타데이터를 관리합니다. 프로젝트 메타데이터와 사이트맵은 프로젝트 JSON을 사용합니다. 글 목록은 각 페이지에 자기 대표 URL을 지정하고, 공개 글은 BlogPosting 구조화 데이터를 출력합니다. 비활성 관리 경로는 308 영구 리디렉션, 미완성·댓글 전용 페이지는 noindex 처리합니다. 검토 결과와 검증 범위는 `docs/seo-review.md`에 기록합니다.

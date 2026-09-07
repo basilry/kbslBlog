@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async redirects() {
+        return [
+            { source: "/login", destination: "/", permanent: true },
+            { source: "/userProfile", destination: "/", permanent: true },
+            { source: "/post/register", destination: "/post", permanent: true },
+        ]
+    },
     images: {
         remotePatterns: [
             { protocol: "https", hostname: "drive.google.com" },

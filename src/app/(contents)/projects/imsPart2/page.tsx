@@ -1,3 +1,7 @@
+import { projectMetadata } from "@lib/seo"
+
+export const metadata = projectMetadata("imsPart2")
+
 import { ReactElement } from "react"
 import ImsPart2 from "@app/(contents)/projects/imsPart2/ImsPart2"
 

@@ -3,6 +3,7 @@ import type { ReactElement } from "react"
 import Wrapper from "@components/layout/Wrapper"
 import Giscus from "@components/ui/Giscus"
 import type { PublicPost } from "@lib/content"
+import { blogPosting, serializeJsonLd } from "@lib/seo"
 import PostReaderShell from "./PostReaderShell"
 import styles from "@styles/pages/postDetail.module.scss"
 
@@ -27,6 +28,7 @@ export default function PostDetail({ post }: PostDetailProps): ReactElement {
         <PostReaderShell legacyPost={post.legacyEditorPost}>
             <Wrapper>
                 <div className={styles.page}>
+                    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPosting(post)) }} />
                     <article className={styles.article}>
                         <Link href="/post" className={styles.backLink}>
                             글 목록
@@ -34,7 +36,7 @@ export default function PostDetail({ post }: PostDetailProps): ReactElement {
                         <header className={styles.header}>
                             <div className={styles.meta}>
                                 <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                                {post.source === "local" && <span>Markdown</span>}
+                                <Link href="/introduce" rel="author">김바실리</Link>
                             </div>
                             <h1>{post.title}</h1>
                             <p>{post.description}</p>

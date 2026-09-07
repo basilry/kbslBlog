@@ -28,7 +28,7 @@ const Certification = (): ReactElement => {
         <Wrapper>
             <div className={styles.wholeWrapper}>
                 <div className={styles.seminarAndRND}>
-                    <TextBasic size="xxx-large" bold="bold">
+                    <TextBasic as="h1" size="xxx-large" bold="bold">
                         {"Certification | 자격증 & 수료증"}
                     </TextBasic>
                     <div className={styles.dotWrapper}>
@@ -57,7 +57,7 @@ const Certification = (): ReactElement => {
                                     cursor: cert.url ? "pointer" : "default",
                                 }}
                             >
-                                <TextBasic className={styles.wrapper} size="x-large" bold="bold">
+                                <TextBasic as="h2" className={styles.wrapper} size="x-large" bold="bold">
                                     {cert.url && <span className={styles.red}>*</span>}
                                     {cert.title}
                                 </TextBasic>

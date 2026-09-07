@@ -1,5 +1,5 @@
 import Link from "next/link"
-import type { Metadata } from "next"
+import { staticPageMetadata } from "@lib/seo"
 import projects from "@lib/json/mainProjects.json"
 import { getRecentPublicPosts } from "@lib/content/posts"
 import TrackedLink from "@components/ui/TrackedLink"
@@ -7,7 +7,7 @@ import styles from "@styles/pages/home.module.scss"
 
 export const dynamic = "force-dynamic"
 
-export const metadata: Metadata = { alternates: { canonical: "/" } }
+export const metadata = staticPageMetadata("/")
 export default async function Home() {
     const posts = await getRecentPublicPosts(3)
     const featured = ["/projects/desk", "/projects/deskDefense", "/projects/haruWeather"]

@@ -1,8 +1,6 @@
-import { ReactElement } from "react"
-import PostRegister from "@app/(contents)/post/register/PostRegister"
+import { notFound } from "next/navigation"
 
-const Page = (): ReactElement => {
-    return <PostRegister />
+// Management now happens in JSON/Markdown files. Keep legacy components dormant.
+export default function Page() {
+    notFound()
 }
-
-export default Page

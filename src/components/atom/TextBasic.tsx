@@ -1,10 +1,10 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react"
+import { HTMLAttributes } from "react"
 import classNames from "classnames"
 import styles from "@styles/components/atom/textBasic.module.scss"
 
-const TextBasic = ({ children, bold, className, size, ...rest }: ITextBasicProps): React.JSX.Element => {
+const TextBasic = ({ as: Tag = "div", children, bold, className, size, ...rest }: ITextBasicProps): React.JSX.Element => {
     return (
-        <div
+        <Tag
             className={classNames(
                 styles.text,
                 className && styles[className],
@@ -15,7 +15,7 @@ const TextBasic = ({ children, bold, className, size, ...rest }: ITextBasicProps
             {...rest}
         >
             {children}
-        </div>
+        </Tag>
     )
 }
 
@@ -32,7 +32,8 @@ export type TTextSize =
 
 export type TTextBold = "normal" | "bold"
 
-export interface ITextBasicProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface ITextBasicProps extends HTMLAttributes<HTMLElement> {
+    as?: "div" | "h1" | "h2" | "h3" | "p"
     className?: string
     children: React.ReactNode
     size?: TTextSize

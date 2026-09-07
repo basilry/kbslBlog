@@ -1,8 +1,6 @@
-import { ReactElement } from "react"
-import UserProfile from "@app/(contents)/userProfile/UserProfile"
+import { notFound } from "next/navigation"
 
-const page = (): ReactElement => {
-    return <UserProfile />
+// Management now happens in JSON/Markdown files. Keep legacy components dormant.
+export default function Page() {
+    notFound()
 }
-
-export default page

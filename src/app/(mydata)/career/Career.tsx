@@ -28,17 +28,9 @@ const Career = (): ReactElement => {
                 <div className={styles.careerBlock}>
                     <div className={styles.careerParagraphs}>
                         <div className={styles.headerWrapper}>
-                            <TextBasic className={styles.title} size="xxx-large" bold="bold">
+                            <TextBasic as="h1" className={styles.title} size="xxx-large" bold="bold">
                                 {"Career Now | 경력"}
                             </TextBasic>
-                            {/*{loginState && (*/}
-                            {/*    <ButtonBasic*/}
-                            {/*        label={"경력 등록"}*/}
-                            {/*        onClick={() => console.log("")}*/}
-                            {/*        buttonWrapperStyle={styles.saveBtn}*/}
-                            {/*        type={""}*/}
-                            {/*    />*/}
-                            {/*)}*/}
                         </div>
                         <br />
                         <LineBasic />
@@ -48,7 +40,7 @@ const Career = (): ReactElement => {
                                 key={row.id + "_" + row.startDate + "_" + row.title}
                                 className={classNames(styles.seminarBlock, darkMode && styles.dark)}
                             >
-                                <TextBasic className={styles.wrapper} size="x-large" bold="bold">
+                                <TextBasic as="h2" className={styles.wrapper} size="x-large" bold="bold">
                                     {row.title}
                                 </TextBasic>
                                 <br />

@@ -71,7 +71,7 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                 </Link>
             </div>
             <div className={classNames(styles.eachProjectWrapper, darkMode && styles.dark)}>
-                <TextBasic size="xxx-large" bold="bold">
+                <TextBasic as="h1" size="xxx-large" bold="bold">
                     {data.title}
                 </TextBasic>
                 <br />
@@ -95,13 +95,13 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                 <br />
                 <div className={styles.contentsWrapper}>
                     <div className={styles.paragraphs}>
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic as="h2" size="large" bold="bold">
                             {"설명"}
                         </TextBasic>
                         <TextBasic size="small">{data.description}</TextBasic>
                         <br />
                         <br />
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic as="h2" size="large" bold="bold">
                             {"포지션"}
                         </TextBasic>
                         {data.role.map((r) => (
@@ -109,7 +109,7 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         ))}
                         <br />
                         <br />
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic as="h2" size="large" bold="bold">
                             {"사용스택"}
                         </TextBasic>
                         <div>
@@ -131,14 +131,14 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         <br />
                         <br />
                         {data.teamSize && <>
-                            <TextBasic size="large" bold="bold">프로젝트 인원</TextBasic>
+                            <TextBasic as="h2" size="large" bold="bold">프로젝트 인원</TextBasic>
                             <TextBasic size="small">{`- ${data.teamSize}`}</TextBasic>
                         </>}
                         {data.url && (
                             <>
                                 <br />
                                 <br />
-                                <TextBasic size="large" bold="bold">
+                                <TextBasic as="h2" size="large" bold="bold">
                                     {"서비스 주소"}
                                 </TextBasic>
                                 <TextBasic size="small">
@@ -152,12 +152,12 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         <br />
                     </div>
                     <div className={styles.paragraphs}>
-                        <TextBasic size="large" bold="bold">
+                        <TextBasic as="h2" size="large" bold="bold">
                             {data.achievementsTitle ?? "성과"}
                         </TextBasic>
                         {data.achievements.map((achievement, idx) => (
                             <div key={achievement.title}>
-                                <TextBasic size="medium" bold="bold">
+                                <TextBasic as="h3" size="medium" bold="bold">
                                     {`${idx + 1}. ${achievement.title}`}
                                 </TextBasic>
                                 {achievement.details.map((detail) => (
@@ -169,13 +169,13 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         {data.extraSections?.map((section) => (
                             <div key={section.title}>
                                 <br />
-                                <TextBasic size="large" bold="bold">
+                                <TextBasic as="h2" size="large" bold="bold">
                                     {section.title}
                                 </TextBasic>
                                 {section.items.map((item, idx) => (
                                     <div key={item.subtitle ?? idx}>
                                         {item.subtitle && (
-                                            <TextBasic size="medium" bold="bold">
+                                            <TextBasic as="h3" size="medium" bold="bold">
                                                 {`${idx + 1}. ${item.subtitle}`}
                                             </TextBasic>
                                         )}
@@ -195,7 +195,7 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         <br />
                         <LineBasic />
                         <div className={styles.titleWrapper}>
-                            <TextBasic size="xx-large" bold="bold">
+                            <TextBasic as="h2" size="xx-large" bold="bold">
                                 {"프로젝트 이미지"}
                             </TextBasic>
                             <div className={styles.imageTitle}>
@@ -203,6 +203,7 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                                 <TextBasic size="small">{"좌우로 드래그 해보세요!"}</TextBasic>
                             </div>
                             <PicsTemplate
+                                projectTitle={data.title}
                                 filePath={data.images.filePath}
                                 domainName={data.images.domainName}
                                 fileNums={data.images.fileNums}
@@ -216,7 +217,7 @@ const ProjectDetail = ({ data }: IProjectDetailProps): ReactElement => {
                         <br />
                         <LineBasic />
                         <div className={styles.titleWrapper}>
-                            <TextBasic size="xx-large" bold="bold">
+                            <TextBasic as="h2" size="xx-large" bold="bold">
                                 {"프로젝트 이미지"}
                             </TextBasic>
                             <br />

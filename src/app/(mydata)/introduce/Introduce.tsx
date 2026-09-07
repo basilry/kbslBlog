@@ -19,7 +19,7 @@ const Introduce = (): ReactElement => {
             <div className={styles.introduceBlock}>
                 <div className={styles.pargraphs}>
                     <div className={styles.block}>
-                        <TextBasic size="xxx-large" bold="bold">
+                        <TextBasic as="h1" size="xxx-large" bold="bold">
                             {introduceData.title}
                         </TextBasic>
                         <br />
@@ -27,7 +27,7 @@ const Introduce = (): ReactElement => {
                     </div>
                     {introduceData.sections.map((section) => (
                         <div key={section.key} className={styles.block}>
-                            <TextBasic size="x-large" bold="bold">
+                            <TextBasic as="h2" size="x-large" bold="bold">
                                 {SECTION_TITLES[section.key] ?? section.key}
                             </TextBasic>
                             <br />
@@ -38,10 +38,10 @@ const Introduce = (): ReactElement => {
                 <div className={styles.myPics}>
                     <img
                         src={introduceData.profileImage}
-                        alt="myFace"
+                        alt="개발자 김바실리"
                         sizes={"100vw"}
-                        width={0}
-                        height={0}
+                        width={810}
+                        height={1440}
                         className={styles.pics}
                     />
                 </div>

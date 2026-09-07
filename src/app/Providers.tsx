@@ -3,13 +3,12 @@
 import { useEffect, type ReactNode } from "react"
 import { ToastContainer } from "react-toastify"
 import Container from "@components/layout/Container"
-import { useCoreStore, useLoginStore } from "@lib/stores/store"
+import { useCoreStore } from "@lib/stores/store"
 
 export default function Providers({ children }: { children: ReactNode }) {
     const darkMode = useCoreStore((state) => state.darkMode)
     useEffect(() => {
         void useCoreStore.persist.rehydrate()
-        void useLoginStore.persist.rehydrate()
     }, [])
     useEffect(() => { document.body.id = darkMode ? "darkMode" : "lightMode" }, [darkMode])
     return <Container>

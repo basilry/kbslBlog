@@ -3,7 +3,6 @@ import type { ReactElement } from "react"
 import Wrapper from "@components/layout/Wrapper"
 import type { PublicPostPage } from "@lib/content"
 import styles from "@styles/pages/postList.module.scss"
-import PostListAdminAction from "./PostListAdminAction"
 
 interface PostListProps {
     posts: PublicPostPage
@@ -32,7 +31,6 @@ export default function PostList({ posts }: PostListProps): ReactElement {
         <Wrapper>
             <div className={styles.page}>
                 <header className={styles.header}>
-                    <PostListAdminAction />
                     <p className={styles.eyebrow}>Writing</p>
                     <h1>포스팅</h1>
                     <p>개발과 제품을 만들며 배운 내용을 기록합니다.</p>

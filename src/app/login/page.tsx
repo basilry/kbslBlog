@@ -1,8 +1,6 @@
-import { ReactElement } from "react"
-import Login from "@app/login/Login"
+import { notFound } from "next/navigation"
 
-function Page(): ReactElement {
-    return <Login />
+// Management now happens in JSON/Markdown files. Keep legacy components dormant.
+export default function Page() {
+    notFound()
 }
-
-export default Page
