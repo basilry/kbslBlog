@@ -1,6 +1,6 @@
 import Projects from "./Projects"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <Projects />
 }
 

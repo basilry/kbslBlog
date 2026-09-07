@@ -21,7 +21,8 @@ const ImageUploadBasic = (props: IImageUploadBasicProps): ReactElement => {
 
     const ref = useRef<HTMLInputElement>(null)
 
-    const [image, setImage] = useState<string>("")
+    const [converted, setConverted] = useState<{ file: IFile; url: string } | null>(null)
+    const image = typeof file === "string" ? file : file && converted?.file === file ? converted.url : ""
 
     const handleFileChange = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
         const selectedFile = e.target.files && e.target.files[0]
@@ -32,15 +33,13 @@ const ImageUploadBasic = (props: IImageUploadBasicProps): ReactElement => {
     }
 
     useEffect(() => {
-        if (file) {
-            if (typeof file === "string") {
-                setImage(file)
-            } else {
-                convertFileToBase64(file as File).then((base64) => setImage(base64))
-            }
-        } else {
-            setImage("")
+        let cancelled = false
+        if (file && typeof file !== "string") {
+            convertFileToBase64(file as File).then((url) => {
+                if (!cancelled) setConverted({ file, url })
+            }).catch(() => { if (!cancelled) setConverted(null) })
         }
+        return () => { cancelled = true }
     }, [file])
 
     return (

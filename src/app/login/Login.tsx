@@ -1,7 +1,7 @@
 "use client"
 
 import { ReactElement, useEffect, useState } from "react"
-import { useRouter } from "next-nprogress-bar"
+import { useRouter } from "next/navigation"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import InputBasic from "@components/atom/InputBasic"
 import TextBasic from "@components/atom/TextBasic"

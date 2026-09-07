@@ -1,6 +1,6 @@
 import SolutionRenewal from "./SolutionRenewal"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <SolutionRenewal />
 }
 

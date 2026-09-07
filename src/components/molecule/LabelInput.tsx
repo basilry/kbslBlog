@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement, useCallback, useEffect, useState } from "react"
+import { ReactElement, useCallback } from "react"
 import InputBasic, { IInputBasicProps } from "@components/atom/InputBasic"
 import TextBasic from "@components/atom/TextBasic"
 import styles from "@styles/components/molecule/labelInput.module.scss"
@@ -22,7 +22,7 @@ const nameReg = /^[a-zA-Z0-9가-힣]{1,20}$/
 const LabelInput = (props: ILabelInputProps): ReactElement => {
     const { label, required, validation, errorMsg, value, ...rest } = props
 
-    const [isError, setIsError] = useState(false)
+
 
     const handleError = useCallback(
         (type: TLabelInputValidation): boolean => {
@@ -42,11 +42,7 @@ const LabelInput = (props: ILabelInputProps): ReactElement => {
         [value],
     )
 
-    useEffect(() => {
-        if (validation) {
-            setIsError(handleError(validation))
-        }
-    }, [handleError, validation, value])
+    const isError = validation ? handleError(validation) : false
 
     return (
         <div className={styles.labelInputWrapper}>

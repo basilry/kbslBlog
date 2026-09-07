@@ -1,6 +1,6 @@
 import TextBasic from "@components/atom/TextBasic"
 
-const MenuItem = ({ menuName, krName }: IMenuItemProps): JSX.Element => {
+const MenuItem = ({ menuName, krName }: IMenuItemProps): React.JSX.Element => {
     return (
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <TextBasic bold="bold" size="xx-large">

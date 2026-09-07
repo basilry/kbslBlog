@@ -1,6 +1,7 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, useRef } from "react"
+import { JSONContent } from "@tiptap/core"
 import { CharacterCount } from "@tiptap/extension-character-count"
 import { Document } from "@tiptap/extension-document"
 import { Highlight } from "@tiptap/extension-highlight"
@@ -16,8 +17,6 @@ import { Underline } from "@tiptap/extension-underline"
 import { Youtube } from "@tiptap/extension-youtube"
 import { EditorContent, useEditor } from "@tiptap/react"
 import { StarterKit } from "@tiptap/starter-kit"
-import DOMPurify from "dompurify"
-
 import css from "highlight.js/lib/languages/css"
 import js from "highlight.js/lib/languages/javascript"
 import ts from "highlight.js/lib/languages/typescript"
@@ -50,17 +49,29 @@ lowlight.register("css", css)
 lowlight.register("js", js)
 lowlight.register("ts", ts)
 
-// window 전역 객체 확장
-declare global {
-    interface Window {
-        _testGoogleDriveImage: () => void
-    }
-}
+const createTitleDocument = (title: string): JSONContent => ({
+    type: "doc",
+    content: [
+        {
+            type: "heading",
+            attrs: { level: 1 },
+            content: title ? [{ type: "text", text: title }] : [],
+        },
+    ],
+})
 
 const Editor = (props: IEditorProps): ReactElement => {
     const { title, contents, onChangeTitle, onChangeContents, onChangeThumbnail, thumbnail } = props
-    // 에디터 포커스 상태 추가
-    const [isEditorFocused, setIsEditorFocused] = useState(false)
+    const onChangeTitleRef = useRef(onChangeTitle)
+    const onChangeContentsRef = useRef(onChangeContents)
+
+    useEffect(() => {
+        onChangeTitleRef.current = onChangeTitle
+    }, [onChangeTitle])
+
+    useEffect(() => {
+        onChangeContentsRef.current = onChangeContents
+    }, [onChangeContents])
 
     const titleEditor = useEditor({
         extensions: [
@@ -71,12 +82,11 @@ const Editor = (props: IEditorProps): ReactElement => {
                 limit: 50,
             }),
         ],
-        content: title || "<h1></h1>",
+        content: createTitleDocument(title),
         autofocus: "end",
         immediatelyRender: false,
         onUpdate: ({ editor }) => {
-            const clean = DOMPurify.sanitize(editor.getHTML(), { FORBID_TAGS: ["h1"] })
-            onChangeTitle(clean)
+            onChangeTitleRef.current(editor.getText())
         },
     })
 
@@ -174,88 +184,23 @@ const Editor = (props: IEditorProps): ReactElement => {
         ],
         content: contents || "<p></p>",
         immediatelyRender: false,
-        onFocus: () => setIsEditorFocused(true),
-        onBlur: () => {
-            // blur 이벤트에서만 콘텐츠 업데이트
-            setIsEditorFocused(false)
-            if (contentsEditor) {
-                const html = contentsEditor.getHTML()
-                onChangeContents(html)
-            }
-        },
         onUpdate: ({ editor }) => {
-            if (isEditorFocused) {
-                // 타이핑 중일 때는 업데이트하지 않음 (성능 향상 및 커서 위치 유지)
-                return
-            }
-
-            // 포커스가 없을 때만 전체 콘텐츠 업데이트
-            const html = editor.getHTML()
-            onChangeContents(html)
-        },
-        onCreate: ({ editor }) => {
-            // 확장 등록 확인을 위한 로그
-            console.log(
-                "에디터 확장 목록:",
-                editor.extensionManager.extensions.map((ext) => ext.name),
-            )
-            console.log(
-                "GoogleDriveImageExtension 등록 확인:",
-                editor.extensionManager.extensions.some((ext) => ext.name === "googleDriveImage"),
-            )
+            onChangeContentsRef.current(editor.getHTML())
         },
     })
 
-    // 초기 콘텐츠에 img 태그가 있을 경우 처리
     useEffect(() => {
-        if (contentsEditor && contents) {
-            // 에디터 렌더링 후에 setTimeout으로 지연시켜 flushSync 에러 방지
-            setTimeout(() => {
-                console.log("에디터 초기화 - 콘텐츠 설정")
-                contentsEditor.commands.setContent(contents)
-            }, 0)
+        if (!titleEditor || titleEditor.getText() === title) return
+        titleEditor.commands.setContent(createTitleDocument(title), false)
+    }, [title, titleEditor])
+
+    useEffect(() => {
+        if (!contentsEditor) return
+        const nextContents = contents || "<p></p>"
+        if (contentsEditor.getHTML() !== nextContents) {
+            contentsEditor.commands.setContent(nextContents, false)
         }
     }, [contentsEditor, contents])
-
-    // 툴바의 업로드 이미지 명령에 구글 드라이브 이미지 테스트 추가
-    useEffect(() => {
-        if (contentsEditor) {
-            // 테스트용 버튼을 콘솔로 추가
-            console.log("구글 드라이브 이미지 테스트 버튼 추가")
-
-            // 구글 드라이브 버튼 클릭 함수 정의
-            window._testGoogleDriveImage = (): void => {
-                console.log("구글 드라이브 이미지 테스트 실행")
-                // 구글 드라이브 이미지 추가 시도
-                if (contentsEditor) {
-                    // 구글 드라이브 이미지 확장 존재 여부 확인
-                    const hasExtension = contentsEditor.extensionManager.extensions.some(
-                        (ext) => ext.name === "googleDriveImage",
-                    )
-                    console.log("구글 드라이브 이미지 확장 존재:", hasExtension)
-
-                    // 현재 에디터 상태 확인
-                    console.log("현재 에디터 상태:", contentsEditor.getJSON())
-
-                    // 이미지 삽입 실행 (백엔드 프록시 사용)
-                    console.log("백엔드 프록시를 사용하여 이미지 삽입 시도")
-                    const result = contentsEditor.commands.setGoogleDriveImage({
-                        src: "https://drive.google.com/file/d/1lA4in2HV_-lNAnG4bVhhBE0Z1Fhc9eNL/view",
-                        alt: "수동 테스트 이미지",
-                    })
-                    console.log("이미지 삽입 결과:", result)
-
-                    // 삽입 후 상태 확인
-                    setTimeout(() => {
-                        console.log("삽입 후 에디터 상태:", contentsEditor.getJSON())
-                    }, 100)
-                }
-            }
-
-            // 콘솔 사용 안내
-            console.log("콘솔에서 다음 명령어로 테스트: window._testGoogleDriveImage()")
-        }
-    }, [contentsEditor])
 
     const { darkMode } = useCoreStore()
 

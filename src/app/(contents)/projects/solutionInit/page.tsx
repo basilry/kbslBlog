@@ -1,6 +1,6 @@
 import SolutionInit from "./SolutionInit"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <SolutionInit />
 }
 

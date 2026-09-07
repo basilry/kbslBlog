@@ -19,7 +19,7 @@ const PROJECTS_NAME = [
     { idx: 4, id: "hectonTechblog", name: "헥톤 테크블로그" },
 ]
 
-const ProjectsNavigator = (): JSX.Element => {
+const ProjectsNavigator = (): React.JSX.Element => {
     const { darkMode } = useCoreStore()
     const pathname = usePathname().split("/")[2]
     const nowMenu = PROJECTS_NAME.filter((row) => row.id === pathname)[0]

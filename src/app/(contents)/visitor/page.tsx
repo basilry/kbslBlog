@@ -1,6 +1,6 @@
 import Visitor from "./Visitor"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <Visitor />
 }
 

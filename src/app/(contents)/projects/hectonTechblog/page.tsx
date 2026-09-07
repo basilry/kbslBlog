@@ -1,6 +1,6 @@
 import HectonTechblog from "./HectonTechblog"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <HectonTechblog />
 }
 

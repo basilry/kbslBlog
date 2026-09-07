@@ -2,7 +2,7 @@ import { DetailedHTMLProps, HTMLAttributes } from "react"
 import classNames from "classnames"
 import styles from "@styles/components/atom/textBasic.module.scss"
 
-const TextBasic = ({ children, bold, className, size, ...rest }: ITextBasicProps): JSX.Element => {
+const TextBasic = ({ children, bold, className, size, ...rest }: ITextBasicProps): React.JSX.Element => {
     return (
         <div
             className={classNames(

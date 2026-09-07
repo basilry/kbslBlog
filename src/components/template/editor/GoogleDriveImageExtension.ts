@@ -1,6 +1,6 @@
 import { Node, mergeAttributes } from "@tiptap/core"
 import { ReactNodeViewRenderer } from "@tiptap/react"
-import { optimizeGoogleDriveImageUrl } from "@lib/utils/imageUtils"
+import { isGoogleDriveImage, isManagedImageUrl, optimizeGoogleDriveImageUrl } from "@lib/utils/imageUtils"
 import GoogleDriveImageView from "./GoogleDriveImageView"
 
 export interface GoogleDriveImageOptions {
@@ -73,11 +73,7 @@ export const GoogleDriveImageExtension = Node.create<GoogleDriveImageOptions>({
                     if (!src) return false
 
                     // 구글 드라이브 이미지인지 확인
-                    if (
-                        src.includes("drive.google.com") ||
-                        src.includes("googleusercontent.com") ||
-                        src.includes("/proxy/")
-                    ) {
+                    if (isGoogleDriveImage(src) || isManagedImageUrl(src)) {
                         return {
                             src,
                             alt: dom.getAttribute("alt"),
@@ -93,22 +89,9 @@ export const GoogleDriveImageExtension = Node.create<GoogleDriveImageOptions>({
 
     // HTML 렌더링 방식 - 백엔드 프록시 사용
     renderHTML({ HTMLAttributes }) {
-        // URL 최적화
         const optimizedAttributes = { ...HTMLAttributes }
         if (optimizedAttributes.src) {
-            try {
-                // 프록시 URL 처리
-                if (optimizedAttributes.src.includes("/proxy/")) {
-                    // 이미 전체 URL을 포함하고 있는지 확인
-                    if (!optimizedAttributes.src.startsWith("http")) {
-                        optimizedAttributes.src = `${process.env.NEXT_PUBLIC_IP}${optimizedAttributes.src}`
-                    }
-                } else {
-                    optimizedAttributes.src = optimizeGoogleDriveImageUrl(optimizedAttributes.src)
-                }
-            } catch (error) {
-                console.error("URL 최적화 오류:", error)
-            }
+            optimizedAttributes.src = optimizeGoogleDriveImageUrl(optimizedAttributes.src)
         }
 
         // 일반 img 태그로 렌더링
@@ -126,18 +109,11 @@ export const GoogleDriveImageExtension = Node.create<GoogleDriveImageOptions>({
             setGoogleDriveImage:
                 (options) =>
                 ({ chain }): boolean => {
-                    try {
-                        // 백엔드 프록시 URL로 변환
-                        const proxyUrl = optimizeGoogleDriveImageUrl(options.src)
-                        console.log("구글 드라이브 이미지 삽입, 프록시 URL:", proxyUrl)
-
-                        // HTML 삽입 (백엔드 프록시 URL 포함)
-                        const imgHTML = `<img src="${proxyUrl}" alt="${options.alt || ""}" class="google-drive-image" />`
-                        return chain().focus().insertContent(imgHTML).run()
-                    } catch (error) {
-                        console.error("구글 드라이브 이미지 삽입 오류:", error)
-                        return false
-                    }
+                    const proxyUrl = optimizeGoogleDriveImageUrl(options.src)
+                    return chain()
+                        .focus()
+                        .insertContent({ type: this.name, attrs: { ...options, src: proxyUrl } })
+                        .run()
                 },
         }
     },

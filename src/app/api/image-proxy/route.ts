@@ -1,70 +1,76 @@
 import { NextRequest, NextResponse } from "next/server"
-import sharp from "sharp"
+import { normalizeGoogleDriveImageUrl } from "@lib/utils/imageUtils"
+import { ImageProxyError, PROXY_TIMEOUT_MS, readResponseWithLimit } from "./imageProxyPolicy"
+import { fetchRemoteImage, optimizeImage } from "./imageProxyService"
 
 export const dynamic = "force-dynamic"
+export const runtime = "nodejs"
+
+const ALLOWED_CONTENT_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"])
+
+const errorResponse = (message: string, status: number): NextResponse =>
+    NextResponse.json(
+        { error: message },
+        {
+            status,
+            headers: {
+                "Cache-Control": "no-store",
+                "X-Content-Type-Options": "nosniff",
+            },
+        },
+    )
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
+    const imageUrl = request.nextUrl.searchParams.get("url")
+    const widthValue = request.nextUrl.searchParams.get("width") || "800"
+
+    if (!imageUrl) return errorResponse("URL 파라미터가 필요합니다", 400)
+    if (!/^\d+$/.test(widthValue)) return errorResponse("width는 양의 정수여야 합니다", 400)
+
+    const requestedWidth = Number(widthValue)
+    if (!Number.isSafeInteger(requestedWidth) || requestedWidth < 1) {
+        return errorResponse("width는 양의 정수여야 합니다", 400)
+    }
+    const width = Math.min(requestedWidth, 1_200)
+
+    let normalizedUrl: URL
     try {
-        // URL 파라미터에서 이미지 URL 추출
-        const { searchParams } = new URL(request.url)
-        const imageUrl = searchParams.get("url")
-        const width = parseInt(searchParams.get("width") || "800", 10)
+        normalizedUrl = new URL(normalizeGoogleDriveImageUrl(imageUrl))
+    } catch {
+        return errorResponse("유효한 이미지 URL이 필요합니다", 400)
+    }
 
-        // width가 너무 크면 제한
-        const maxWidth = Math.min(width, 1200)
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), PROXY_TIMEOUT_MS)
 
-        if (!imageUrl) {
-            return NextResponse.json({ error: "URL 파라미터가 필요합니다" }, { status: 400 })
+    try {
+        const response = await fetchRemoteImage(normalizedUrl, controller.signal)
+        if (!response.ok) throw new ImageProxyError(502, "원본 이미지를 가져오지 못했습니다")
+
+        const contentType = response.headers.get("content-type")?.split(";", 1)[0].trim().toLowerCase()
+        if (!contentType || !ALLOWED_CONTENT_TYPES.has(contentType)) {
+            throw new ImageProxyError(415, "지원하는 이미지 형식이 아닙니다")
         }
 
-        // 원본 이미지 가져오기
-        const response = await fetch(imageUrl, {
+        const imageBuffer = await readResponseWithLimit(response)
+        const optimizedImageBuffer = await optimizeImage(imageBuffer, width)
+
+        return new NextResponse(new Uint8Array(optimizedImageBuffer), {
+            status: 200,
             headers: {
-                // 리퍼러 헤더 설정으로 구글 드라이브에서 차단 방지
-                Referer: "https://drive.google.com/",
-                "User-Agent":
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                "Content-Type": "image/webp",
+                "Content-Length": String(optimizedImageBuffer.byteLength),
+                "Cache-Control": "no-store, must-revalidate",
+                "X-Content-Type-Options": "nosniff",
             },
         })
-
-        if (!response.ok) {
-            return NextResponse.json({ error: "원본 이미지를 가져오는데 실패했습니다" }, { status: response.status })
-        }
-
-        // 이미지 데이터 및 헤더 추출
-        const imageBuffer = Buffer.from(await response.arrayBuffer())
-        const contentType = response.headers.get("content-type") || "image/jpeg"
-
-        try {
-            // 이미지 최적화 및 크기 조정
-            const optimizedImageBuffer = await sharp(imageBuffer)
-                .resize({ width: maxWidth, withoutEnlargement: true }) // 원본보다 크게 확대하지 않음
-                .toBuffer()
-
-            // 응답 생성 (캐싱 없음)
-            return new NextResponse(optimizedImageBuffer, {
-                status: 200,
-                headers: {
-                    "Content-Type": contentType,
-                    // 캐싱 방지
-                    "Cache-Control": "no-store, must-revalidate",
-                    Pragma: "no-cache",
-                    Expires: "0",
-                },
-            })
-        } catch (sharpError) {
-            console.error("이미지 처리 오류:", sharpError)
-            // 원본 이미지 반환
-            return new NextResponse(imageBuffer, {
-                status: 200,
-                headers: {
-                    "Content-Type": contentType,
-                    "Cache-Control": "no-store",
-                },
-            })
-        }
     } catch (error) {
-        console.error("이미지 프록시 에러:", error)
-        return NextResponse.json({ error: "이미지 프록시 처리 중 오류가 발생했습니다" }, { status: 500 })
+        if (error instanceof ImageProxyError) return errorResponse(error.message, error.status)
+        if (controller.signal.aborted) return errorResponse("원본 이미지 요청 시간이 초과되었습니다", 504)
+
+        console.error("이미지 프록시 처리 오류:", error)
+        return errorResponse("이미지 프록시 처리 중 오류가 발생했습니다", 500)
+    } finally {
+        clearTimeout(timeout)
     }
 }

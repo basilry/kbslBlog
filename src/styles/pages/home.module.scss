@@ -1,0 +1,25 @@
+.home { max-width: 1120px; margin: auto; padding: 72px 28px 80px; }
+.intro { padding: 32px 0 64px; max-width: 760px; }
+.eyebrow { color: #c875e4; font-size: 14px; font-weight: 700; letter-spacing: .08em; margin-bottom: 20px; }
+.intro h1 { font-size: clamp(36px, 5vw, 62px); line-height: 1.18; letter-spacing: -.04em; margin-bottom: 28px; }
+.description { opacity: .75; font-size: 19px; line-height: 1.8; max-width: 570px; }
+.links { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 30px; font-weight: 600; }
+.links a:first-child { color: #c875e4; }
+.section { border-top: 1px solid #8884; padding: 40px 0; }
+.sectionHeading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.sectionHeading h2 { font-size: 26px; letter-spacing: -.03em; }
+.sectionHeading a { font-size: 14px; opacity: .75; }
+.posts { display: grid; gap: 28px; }
+.post time { opacity: .65; font-size: 13px; }
+.post h3 { font-size: 22px; margin: 8px 0; }
+.post p, .project p:not(.eyebrow) { opacity: .75; font-size: 16px; line-height: 1.75; }
+.projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.project { display: flex; flex-direction: column; padding: 26px; border: 1px solid #8884; border-radius: 14px; background: #8881; }
+.project h3 { font-size: 21px; line-height: 1.4; margin-bottom: 16px; }
+.projectLink { font-size: 14px; margin-top: auto; padding-top: 24px; color: #c875e4; }
+.empty { padding: 24px 0; font-size: 16px; opacity: .7; }
+.archive { display: flex; flex-wrap: wrap; gap: 20px; padding-top: 32px; border-top: 1px solid #8884; font-size: 14px; }
+.archive p { opacity: .65; margin-right: auto; }
+.home a:hover { text-decoration: underline; text-underline-offset: 5px; }
+:global(#lightMode) .home .eyebrow, :global(#lightMode) .home .projectLink, :global(#lightMode) .home .links a:first-child { color: #8529a8; }
+@media (max-width: 760px) { .home { padding: 32px 22px 48px; } .intro { padding-top: 24px; } .projects { grid-template-columns: 1fr; } .sectionHeading h2 { font-size: 23px; } .sectionHeading { gap: 12px; } }

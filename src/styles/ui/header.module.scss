@@ -122,3 +122,4 @@
         }
     }
 }
+.quickLinks { display: flex; gap: 20px; font-size: 15px; margin-left: 24px; } .quickLinks a[aria-current="page"] { color: #b45bd1; } .rootLink { font-size: 22px; font-weight: 750; } @media (max-width: 550px) { .headerWrapper { padding: 0 14px; } .quickLinks { display: none; } }

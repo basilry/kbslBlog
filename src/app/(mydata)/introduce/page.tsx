@@ -1,6 +1,6 @@
 import Introduce from "@app/(mydata)/introduce/Introduce"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <Introduce />
 }
 

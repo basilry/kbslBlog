@@ -360,7 +360,7 @@ const Landing = (): ReactElement => {
                         </VisibleText>
                         <VisibleText className={styles.titleWrapper3} delay={2.5}>
                             <TextBasic size={"xxx-large"} bold={"bold"}>
-                                {"2025년에도 변함없이 달리고 있습니다"}
+                                {"배운 내용을 코드와 기록으로 남깁니다"}
                             </TextBasic>
                         </VisibleText>
                     </div>
@@ -410,7 +410,7 @@ const Landing = (): ReactElement => {
                         <br />
                         <VisibleText className={styles.titleWrapper4} delay={1.5}>
                             <TextBasic size={"xxx-large"} bold={"bold"}>
-                                {"전체 경력은 이제 4년차에 접어들었지만,"}
+                                {"2021년부터 개발 경험을 쌓아오며,"}
                             </TextBasic>
                         </VisibleText>
                         <VisibleText className={styles.titleWrapper4} delay={2}>

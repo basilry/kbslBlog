@@ -1,6 +1,6 @@
 "use client"
 
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement } from "react"
 import { motion, useScroll } from "framer-motion"
 import { usePathname } from "next/navigation"
 import classNames from "classnames"
@@ -16,25 +16,17 @@ function Container({ children }: { children: React.ReactNode }): ReactElement {
     const { darkMode, changeSideBarFold } = useCoreStore()
     const { scrollYProgress } = useScroll()
 
-    const [mount, setMount] = useState(false)
-
-    useEffect(() => {
-        setMount(true)
-    }, [darkMode])
-
-    return mount ? (
+    return (
         <div className={classNames(styles.container, darkMode && styles.darkMode)}>
             <motion.div className={styles.progressBar} style={{ scaleX: scrollYProgress ? scrollYProgress : 0 }} />
             <Header />
             <Sidebar />
-            <div className={styles.body} onClick={(): void => changeSideBarFold(false)}>
+            <main id="main-content" className={styles.body} onClick={(): void => changeSideBarFold(false)}>
                 {children}
-            </div>
+            </main>
             <TopMoveButton />
             {!pathName.includes("login") && <Footer />}
         </div>
-    ) : (
-        <></>
     )
 }
 

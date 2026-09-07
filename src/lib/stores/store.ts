@@ -10,6 +10,8 @@ export const useCoreStore = create<ICoreStore>()(
         }),
         {
             name: "core",
+            skipHydration: true,
+            partialize: (state) => ({ darkMode: state.darkMode }),
         },
     ),
 )
@@ -21,6 +23,7 @@ export const useLoginStore = create<IStoreLogin>()(
         }),
         {
             name: "login",
+            skipHydration: true,
         },
     ),
 )

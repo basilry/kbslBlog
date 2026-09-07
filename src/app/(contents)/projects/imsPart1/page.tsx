@@ -1,6 +1,6 @@
 import ImsPart1 from "./ImsPart1"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <ImsPart1 />
 }
 

@@ -1,7 +1,13 @@
 "use client"
 
-import { ReactElement, useEffect, useRef } from "react"
+import { ReactElement, useEffect, useRef, useSyncExternalStore } from "react"
 import { useCoreStore } from "@lib/stores/store"
+
+function subscribeHydration(notify: () => void) {
+    const start = useCoreStore.persist.onHydrate(notify)
+    const finish = useCoreStore.persist.onFinishHydration(notify)
+    return () => { start(); finish() }
+}
 
 interface IGiscusProps {
     emotion?: boolean
@@ -11,10 +17,11 @@ export default function Giscus({ emotion = true }: IGiscusProps): ReactElement {
     const ref = useRef<HTMLDivElement>(null)
     const { darkMode } = useCoreStore()
 
+    const hydrated = useSyncExternalStore(subscribeHydration, () => useCoreStore.persist.hasHydrated(), () => false)
     const theme = darkMode ? "dark" : "light"
 
     useEffect(() => {
-        if (!ref.current || ref.current.hasChildNodes()) return
+        if (!hydrated || !ref.current || ref.current.hasChildNodes()) return
 
         const scriptElem = document.createElement("script")
         scriptElem.src = "https://giscus.app/client.js"
@@ -35,7 +42,7 @@ export default function Giscus({ emotion = true }: IGiscusProps): ReactElement {
         scriptElem.setAttribute("data-loading", "lazy")
 
         ref.current.appendChild(scriptElem)
-    }, [])
+    }, [hydrated, emotion, theme])
 
     useEffect(() => {
         const iframe = document.querySelector<HTMLIFrameElement>("iframe.giscus-frame")

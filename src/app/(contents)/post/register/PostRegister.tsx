@@ -1,8 +1,8 @@
 "use client"
 
-import { ReactElement, useState } from "react"
-import { useRouter } from "next-nprogress-bar"
+import { ReactElement, useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import LineBasic from "@components/atom/LineBasic"
 import TextBasic from "@components/atom/TextBasic"
@@ -13,6 +13,8 @@ import { axiosInstance, axiosInstanceMultipart } from "@lib/api/axiosInstance"
 import { useCoreStore } from "@lib/stores/store"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/postNew.module.scss"
+import { clearPostDraft, readPostDraft, toRecoverablePostDraft, writePostDraft } from "./postDraft"
+import { ImageUploadCache, PostImageUploadError, preparePostContent } from "./postPublishing"
 
 const initialPostData: IPost = {
     id: 0,
@@ -29,270 +31,172 @@ interface IPostRegisterProps {
     originPostData?: IPost
 }
 
-interface ExtractedImages {
-    files: File[]
-    tempUrls: string[]
-}
-
 const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegisterProps): ReactElement => {
     const { darkMode } = useCoreStore()
-
     const router = useRouter()
-
     const [postData, setPostData] = useState<IPost>(originPostData)
-    console.log(postData)
+    const [draftReady, setDraftReady] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const postDataRef = useRef(postData)
+    const latestContentRef = useRef(postData.content)
+    const isSubmittingRef = useRef(false)
+    const imageUploadCacheRef = useRef<ImageUploadCache>(new Map())
+    const thumbnailUploadCacheRef = useRef<WeakMap<File, string>>(new WeakMap())
 
-    // Editor에서 생성된 임시 URL과 File 객체를 저장하는 Map
-    const imageFileMap = new Map<string, File>()
+    const updatePostData = useCallback((update: (current: IPost) => IPost): void => {
+        const next = update(postDataRef.current)
+        postDataRef.current = next
+        setPostData(next)
+    }, [])
 
-    const extractImagesFromContent = (content: string): ExtractedImages => {
-        const tempUrls: string[] = []
-        const files: File[] = []
+    const persistDraft = useCallback((): void => {
+        if (typeof window === "undefined") return
 
-        // blob: 로 시작하는 임시 URL을 찾기 위한 정규식
-        const blobUrlRegex = /blob:http[s]?:\/\/[^\s"']+/g
-        const matches = content.match(blobUrlRegex) || []
-
-        matches.forEach((tempUrl) => {
-            const file = imageFileMap.get(tempUrl)
-            if (file) {
-                tempUrls.push(tempUrl)
-                files.push(file)
-            }
-        })
-
-        return { files, tempUrls }
-    }
-
-    // base64 이미지를 추출하는 함수 추가
-    const extractBase64ImagesFromContent = (
-        content: string,
-    ): { base64Images: string[]; contentWithPlaceholders: string } => {
-        const base64Images: string[] = []
-        let contentWithPlaceholders = content
-
-        // base64 이미지를 찾기 위한 정규식
-        const base64Regex = /src="data:image\/(jpeg|jpg|png|gif|webp);base64,([^"]+)"/g
-        let match
-        let index = 0
-
-        while ((match = base64Regex.exec(content)) !== null) {
-            const fullMatch = match[0]
-            const base64Data = match[2]
-            const mimeType = match[1]
-            const base64Image = `data:image/${mimeType};base64,${base64Data}`
-
-            // 고유 플레이스홀더 생성
-            const placeholder = `__IMAGE_PLACEHOLDER_${index}__`
-
-            // 이미지 데이터 저장
-            base64Images.push(base64Image)
-
-            // 원본 콘텐츠에서 base64 이미지를 플레이스홀더로 대체
-            contentWithPlaceholders = contentWithPlaceholders.replace(fullMatch, `src="${placeholder}"`)
-
-            index++
-        }
-
-        return { base64Images, contentWithPlaceholders }
-    }
-
-    // 외부 이미지 URL을 추출하는 함수 추가
-    const extractExternalImagesFromContent = (
-        content: string,
-    ): { externalUrls: string[]; contentWithPlaceholders: string } => {
-        const externalUrls: string[] = []
-        let contentWithPlaceholders = content
-
-        // 외부 이미지 URL을 찾기 위한 정규식 (data:image와 blob: 제외)
-        const externalUrlRegex = /<img[^>]+src="((?!data:image)(?!blob:)[^"]+)"[^>]*>/g
-        let match
-        let index = 0
-
-        while ((match = externalUrlRegex.exec(content)) !== null) {
-            const fullMatch = match[0]
-            const imageUrl = match[1]
-
-            // 이미 구글 드라이브 URL인 경우 건너뛰기
-            if (imageUrl.includes("drive.google.com")) {
-                continue
-            }
-
-            // 고유 플레이스홀더 생성
-            const placeholder = `__EXTERNAL_IMAGE_PLACEHOLDER_${index}__`
-
-            // 이미지 URL 저장
-            externalUrls.push(imageUrl)
-
-            // 원본 콘텐츠에서 외부 이미지 URL을 플레이스홀더로 대체
-            contentWithPlaceholders = contentWithPlaceholders.replace(
-                fullMatch,
-                fullMatch.replace(imageUrl, placeholder),
-            )
-
-            index++
-        }
-
-        return { externalUrls, contentWithPlaceholders }
-    }
-
-    const uploadSingleFile = async (file: File | string): Promise<string | null> => {
         try {
-            const formData = new FormData()
-            formData.append("file", file)
-
-            const response = await axiosInstanceMultipart.post("/file/single", formData)
-            return response.data.data.fileUrl
+            const originThumbnail = typeof originPostData.thumbnail === "string" ? originPostData.thumbnail : ""
+            writePostDraft(window.localStorage, toRecoverablePostDraft(postDataRef.current, originThumbnail))
         } catch (error) {
-            toastCall("이미지 업로드 중 오류가 발생했습니다.", "error")
-            return null
+            console.error("임시 저장에 실패했습니다:", error)
         }
+    }, [originPostData.thumbnail])
+
+    useEffect(() => {
+        const draft = readPostDraft(window.localStorage, originPostData.id)
+        const originUpdatedAt = new Date(originPostData.updatedAt).getTime()
+        const draftSavedAt = draft ? new Date(draft.savedAt).getTime() : 0
+        const shouldRestore =
+            draft &&
+            (originPostData.id === 0 || !Number.isFinite(originUpdatedAt) || draftSavedAt > originUpdatedAt) &&
+            (draft.title !== originPostData.title ||
+                draft.content !== originPostData.content ||
+                draft.thumbnail !== originPostData.thumbnail)
+
+        if (shouldRestore) {
+            const restoredPost = {
+                ...originPostData,
+                title: draft.title,
+                content: draft.content,
+                thumbnail: draft.thumbnail,
+            }
+            postDataRef.current = restoredPost
+            latestContentRef.current = restoredPost.content
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- Restore the external localStorage draft after client hydration.
+            setPostData(restoredPost)
+            toastCall("임시 저장된 글을 복구했습니다.", "success")
+        }
+
+        setDraftReady(true)
+    }, [originPostData])
+
+    useEffect(() => {
+        if (!draftReady) return
+        const timeout = window.setTimeout(persistDraft, 500)
+        return () => window.clearTimeout(timeout)
+    }, [draftReady, persistDraft, postData])
+
+    useEffect(() => {
+        if (!draftReady) return
+        window.addEventListener("beforeunload", persistDraft)
+        return () => window.removeEventListener("beforeunload", persistDraft)
+    }, [draftReady, persistDraft])
+
+    const uploadSingleFile = async (file: File): Promise<string> => {
+        const cachedUrl = thumbnailUploadCacheRef.current.get(file)
+        if (cachedUrl) return cachedUrl
+
+        const formData = new FormData()
+        formData.append("file", file)
+        const response = await axiosInstanceMultipart.post("/file/single", formData)
+        const uploadedUrl = response.data?.data?.fileUrl
+
+        if (typeof uploadedUrl !== "string" || uploadedUrl.length === 0) {
+            throw new PostImageUploadError("썸네일 이미지 업로드 결과가 올바르지 않습니다.")
+        }
+
+        thumbnailUploadCacheRef.current.set(file, uploadedUrl)
+        return uploadedUrl
     }
 
-    const uploadMultiFile = async (contentHtml: string, files: File[]): Promise<string> => {
-        try {
-            // 파일들을 base64로 변환
-            const base64Images: string[] = []
-            const tempUrls: string[] = []
+    const savePost = async (finalPost: IPost): Promise<void> => {
+        const clearSavedDraft = (): void => {
+            try {
+                clearPostDraft(window.localStorage, finalPost.id)
+            } catch (error) {
+                console.error("저장 완료 후 임시 글을 정리하지 못했습니다:", error)
+            }
+        }
 
-            // 각 파일의 임시 URL 생성 및 base64 변환
-            for (const file of files) {
-                const tempUrl = URL.createObjectURL(file)
-                tempUrls.push(tempUrl)
-
-                // 파일을 base64로 변환
-                const base64 = await new Promise<string>((resolve, reject) => {
-                    const reader = new FileReader()
-                    reader.onload = (): void => resolve(reader.result as string)
-                    reader.onerror = (): void => reject(new Error("파일 읽기 실패"))
-                    reader.readAsDataURL(file)
-                })
-
-                base64Images.push(base64)
+        if (finalPost.id === 0) {
+            const response = await axiosInstance.post("/posts", finalPost)
+            if (response.data?.code !== 200 || response.data?.data?.id == null) {
+                throw new Error("Unexpected post response")
             }
 
-            // 서버로 base64 이미지 배열 전송
-            const response = await axiosInstance.post("/file/base64-multi", {
-                images: base64Images,
-            })
-
-            const urls: string[] = response.data.data
-
-            // 임시 URL을 실제 업로드된 URL로 교체
-            tempUrls.forEach((tempUrl, idx) => {
-                if (urls[idx]) {
-                    contentHtml = contentHtml.replace(tempUrl, urls[idx])
-                }
-            })
-
-            return contentHtml
-        } catch (error) {
-            toastCall("이미지 업로드 중 오류가 발생했습니다.", "error")
-            return contentHtml
+            clearSavedDraft()
+            toastCall("글이 성공적으로 저장되었습니다.", "success")
+            router.replace(`/post/${response.data.data.id}`)
+            return
         }
+
+        const response = await axiosInstance.put(`/posts/${finalPost.id}`, finalPost)
+        if (response.data?.code !== 200) throw new Error("Unexpected post response")
+
+        clearSavedDraft()
+        toastCall("글이 성공적으로 수정되었습니다.", "success")
+        setEdit?.(false)
     }
 
     const handleSubmit = async (): Promise<void> => {
-        // 기존 blob URL 이미지 처리
-        const { files } = extractImagesFromContent(postData.content)
-        let contentHtml = postData.content
+        if (isSubmittingRef.current) return
+        isSubmittingRef.current = true
+        setIsSubmitting(true)
 
-        if (files.length > 0) {
-            contentHtml = await uploadMultiFile(contentHtml, files)
-        }
+        try {
+            const currentPost = postDataRef.current
+            const currentContent = latestContentRef.current
+            const preparedContent = await preparePostContent(
+                currentContent,
+                {
+                    uploadBase64Images: async (images) => {
+                        const response = await axiosInstance.post("/file/base64-multi", { images })
+                        return response.data?.data
+                    },
+                    uploadExternalImages: async (urls) => {
+                        const response = await axiosInstance.post("/file/external-urls", { urls })
+                        return response.data?.data
+                    },
+                },
+                imageUploadCacheRef.current,
+                process.env.NEXT_PUBLIC_IP || "",
+            )
 
-        // base64 이미지 처리
-        const { base64Images, contentWithPlaceholders } = extractBase64ImagesFromContent(contentHtml)
-        let updatedContent = contentWithPlaceholders
-
-        if (base64Images.length > 0) {
-            try {
-                // base64 문자열을 직접 서버로 전송
-                const response = await axiosInstance.post("/file/base64-multi", {
-                    images: base64Images,
-                })
-                const urls: string[] = response.data.data
-
-                // 플레이스홀더를 실제 URL로 대체
-                urls.forEach((url, index) => {
-                    updatedContent = updatedContent.replace(`__IMAGE_PLACEHOLDER_${index}__`, url)
-                })
-            } catch (error) {
-                toastCall("이미지 업로드 중 오류가 발생했습니다.", "error")
+            let thumbnailUrl = typeof currentPost.thumbnail === "string" ? currentPost.thumbnail : ""
+            if (typeof File !== "undefined" && currentPost.thumbnail instanceof File) {
+                thumbnailUrl = await uploadSingleFile(currentPost.thumbnail)
             }
-        }
 
-        // 외부 이미지 URL 처리
-        const { externalUrls, contentWithPlaceholders: externalContentWithPlaceholders } =
-            extractExternalImagesFromContent(updatedContent)
-        updatedContent = externalContentWithPlaceholders
-
-        if (externalUrls.length > 0) {
-            try {
-                // 외부 URL을 직접 서버로 전송
-                const response = await axiosInstance.post("/file/external-urls", {
-                    urls: externalUrls,
-                })
-                const urls: string[] = response.data.data
-
-                // 플레이스홀더를 실제 URL로 대체
-                urls.forEach((url, index) => {
-                    updatedContent = updatedContent.replace(`__EXTERNAL_IMAGE_PLACEHOLDER_${index}__`, url)
-                })
-            } catch (error) {
-                toastCall("외부 이미지 업로드 중 오류가 발생했습니다.", "error")
-            }
-        }
-
-        // 썸네일 처리 (uploadSingleFile 사용)
-        const thumbnailFile = postData.thumbnail
-        let thumbnailUrl = typeof thumbnailFile === "string" ? thumbnailFile : ""
-
-        if (thumbnailFile && typeof thumbnailFile !== "string") {
-            const uploadedUrl = await uploadSingleFile(thumbnailFile)
-            if (uploadedUrl) {
-                thumbnailUrl = uploadedUrl
+            await savePost({ ...currentPost, thumbnail: thumbnailUrl, content: preparedContent })
+        } catch (error) {
+            persistDraft()
+            if (error instanceof PostImageUploadError) {
+                toastCall(error.message, "error")
             } else {
-                toastCall("썸네일 이미지 업로드에 실패했습니다.", "error")
-                return
+                toastCall(postDataRef.current.id === 0 ? "글 저장에 실패했습니다." : "글 수정에 실패했습니다.", "error")
             }
-        }
-
-        const finalPostData = { ...postData, thumbnail: thumbnailUrl, content: updatedContent }
-
-        if (postData.id === 0) {
-            registerPost(finalPostData)
-        } else {
-            updatePost(finalPostData)
+        } finally {
+            isSubmittingRef.current = false
+            setIsSubmitting(false)
         }
     }
 
-    const registerPost = (finalPost: IPost): void => {
-        axiosInstance
-            .post("/posts", finalPost)
-            .then((res) => {
-                if (res.data.code === 200) {
-                    router.replace(`/post/${res.data.data.id}`)
-                    toastCall("글이 성공적으로 저장되었습니다.", "success")
-                }
-            })
-            .catch(() => {
-                toastCall("글 저장에 실패했습니다.", "error")
-            })
-    }
-
-    const updatePost = (finalPost: IPost): void => {
-        axiosInstance
-            .put(`/posts/${postData.id}`, finalPost)
-            .then((res) => {
-                if (res.data.code === 200) {
-                    setEdit?.(false)
-                    toastCall("글이 성공적으로 수정되었습니다.", "success")
-                }
-            })
-            .catch(() => {
-                toastCall("글 수정에 실패했습니다.", "error")
-            })
+    const handleCancel = (): void => {
+        if (isSubmittingRef.current) return
+        persistDraft()
+        if (setEdit) {
+            setEdit(false)
+            return
+        }
+        router.back()
     }
 
     return (
@@ -302,32 +206,32 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
                     <div className={styles.backBtn}>
                         <Image
                             src={darkMode ? "/pagination/arrowBack_white.svg" : "/pagination/arrowBack.svg"}
-                            alt={"arrowback"}
+                            alt="뒤로 가기"
                             width={25}
                             height={25}
-                            onClick={() => router.back()}
+                            onClick={handleCancel}
                         />
                     </div>
                     <TextBasic className={styles.title} size="xx-large" bold="bold">
-                        {"새 글 쓰기"}
+                        {postData.id === 0 ? "새 글 쓰기" : "글 수정하기"}
                     </TextBasic>
                     <div className={styles.btnGroupWrapper}>
                         <ButtonBasic
                             buttonWrapperStyle={styles.btnWrapper}
-                            type={"reset"}
-                            fontSize={"small"}
-                            onClick={() => {
-                                router.refresh()
-                                setEdit?.(false)
-                            }}
-                            label={"취소하기"}
+                            type="reset"
+                            fontSize="small"
+                            onClick={handleCancel}
+                            aria-disabled={isSubmitting}
+                            label="취소하기"
                         />
                         <ButtonBasic
                             buttonWrapperStyle={styles.btnWrapper}
-                            type={""}
-                            fontSize={"small"}
-                            onClick={() => handleSubmit()}
-                            label={"저장하기"}
+                            type=""
+                            fontSize="small"
+                            onClick={handleSubmit}
+                            aria-busy={isSubmitting}
+                            aria-disabled={isSubmitting}
+                            label={isSubmitting ? "저장 중..." : "저장하기"}
                         />
                     </div>
                 </div>
@@ -339,9 +243,12 @@ const PostRegister = ({ setEdit, originPostData = initialPostData }: IPostRegist
                         title={postData.title}
                         contents={postData.content}
                         thumbnail={postData.thumbnail}
-                        onChangeTitle={(title) => setPostData({ ...postData, title })}
-                        onChangeContents={(content) => setPostData({ ...postData, content })}
-                        onChangeThumbnail={(thumbnail) => setPostData({ ...postData, thumbnail })}
+                        onChangeTitle={(title) => updatePostData((current) => ({ ...current, title }))}
+                        onChangeContents={(content) => {
+                            latestContentRef.current = content
+                            updatePostData((current) => ({ ...current, content }))
+                        }}
+                        onChangeThumbnail={(thumbnail) => updatePostData((current) => ({ ...current, thumbnail }))}
                     />
                 </div>
             </div>

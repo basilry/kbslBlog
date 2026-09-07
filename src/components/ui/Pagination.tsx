@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useSyncExternalStore } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import classNames from "classnames"
@@ -13,13 +13,19 @@ interface IPaginationBasicProps<T> extends IPagination<T> {
     path: string
 }
 
+function subscribeViewport(onChange: () => void) {
+    window.addEventListener("resize", onChange)
+    return () => window.removeEventListener("resize", onChange)
+}
+function getPageCount() { return window.innerWidth < 768 ? 5 : 10 }
+
 function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
     const { path, totalPages, pageable } = props
 
     const { darkMode } = useCoreStore()
 
     const currentPage = pageable?.pageNumber
-    const [pagesToShow, setPagesToShow] = useState(10)
+    const pagesToShow = useSyncExternalStore(subscribeViewport, getPageCount, () => 10)
 
     // 전체 페이지 배열 생성: [0, 1, 2, ..., totalPages - 1]
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i)
@@ -30,19 +36,6 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
     const endIndex = Math.min(startIndex + pagesToShow, totalPages)
     const visiblePageNumbers = pageNumbers.slice(startIndex, endIndex)
 
-    const updatePagesToShow = (): void => {
-        if (window.innerWidth < 768) {
-            setPagesToShow(5)
-        } else {
-            setPagesToShow(10)
-        }
-    }
-
-    useEffect(() => {
-        updatePagesToShow()
-        window.addEventListener("resize", updatePagesToShow)
-        return () => window.removeEventListener("resize", updatePagesToShow)
-    }, [])
 
     return (
         <div className={styles.paginationWrapper}>
@@ -63,7 +56,7 @@ function Pagination<T>(props: IPaginationBasicProps<T>): ReactElement {
                             height={30}
                         />
                     </Link>
-                    <Link href={{ pathname: `/${path}`, query: { page: currentPage - 1 } }}>
+                    <Link href={{ pathname: `/${path}`, query: { page: currentPage } }}>
                         <Image
                             className={styles.arrow}
                             style={{ cursor: currentPage === 0 ? "not-allowed" : "pointer" }}

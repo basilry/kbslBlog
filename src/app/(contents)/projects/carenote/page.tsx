@@ -1,6 +1,6 @@
 import Carenote from "./Carenote"
 
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <Carenote />
 }
 

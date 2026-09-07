@@ -1,27 +1,13 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
     images: {
-        domains: [
-            "drive.google.com",
-            "lh3.googleusercontent.com",
-            "lh4.googleusercontent.com",
-            "lh5.googleusercontent.com",
-            "lh6.googleusercontent.com",
-            "localhost",
-            "api.basilry.kim",
-        ],
         remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "**.googleusercontent.com",
-            },
-            {
-                protocol: "https",
-                hostname: "drive.google.com",
-            },
+            { protocol: "https", hostname: "drive.google.com" },
+            { protocol: "https", hostname: "googleusercontent.com" },
+            { protocol: "https", hostname: "**.googleusercontent.com" },
+            { protocol: "https", hostname: "api.basilry.kim" },
+            ...(process.env.NODE_ENV === "development" ? [{ protocol: "http", hostname: "localhost" }] : []),
         ],
     },
 }
-
 module.exports = nextConfig

@@ -1,4 +1,4 @@
-const page = (): JSX.Element => {
+const page = (): React.JSX.Element => {
     return <div>공지사항</div>
 }
 

@@ -3,16 +3,12 @@ import Cropper from "react-easy-crop"
 import Image from "next/image"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
+import { isGoogleDriveImage, optimizeGoogleDriveImageUrl } from "@lib/utils/imageUtils"
 import styles from "@styles/components/template/editor/thumbnail.module.scss"
 
 interface ThumbnailUploaderProps {
     thumbnail?: string | File
     onChangeThumbnail: (thumbnail: File | string) => void
-}
-
-// 구글 드라이브 이미지 URL인지 확인하는 함수
-const isGoogleDriveImage = (url: string): boolean => {
-    return url.includes("drive.google.com") || url.includes("googleusercontent.com")
 }
 
 // 이미지 크롭 결과를 File 객체로 변환하는 함수
@@ -78,23 +74,24 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
     const [imageToEdit, setImageToEdit] = useState<string>("")
 
     const [previewUrl, setPreviewUrl] = useState<string>(() => {
-        if (thumbnail && typeof thumbnail === "string") {
-            return thumbnail
-        }
-        if (thumbnail && thumbnail instanceof File) {
-            return URL.createObjectURL(thumbnail)
-        }
-        return ""
+        return typeof thumbnail === "string" ? thumbnail : ""
     })
 
-    // 썸네일이 변경될 때 previewUrl 업데이트
     useEffect(() => {
-        if (thumbnail && typeof thumbnail === "string" && thumbnail !== previewUrl) {
-            setPreviewUrl(thumbnail)
-        } else if (thumbnail && thumbnail instanceof File && previewUrl === "") {
-            setPreviewUrl(URL.createObjectURL(thumbnail))
+        const nextPreviewUrl =
+            typeof thumbnail === "string"
+                ? thumbnail
+                : typeof File !== "undefined" && thumbnail instanceof File
+                  ? URL.createObjectURL(thumbnail)
+                  : ""
+
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Sync the controlled thumbnail and its browser-only object URL resource.
+        setPreviewUrl(nextPreviewUrl)
+
+        return () => {
+            if (nextPreviewUrl.startsWith("blob:")) URL.revokeObjectURL(nextPreviewUrl)
         }
-    }, [thumbnail, previewUrl])
+    }, [thumbnail])
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const file = e.target.files?.[0]
@@ -137,10 +134,6 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
     }
 
     const handleRemove = (): void => {
-        if (typeof previewUrl === "string" && previewUrl.startsWith("blob:")) {
-            URL.revokeObjectURL(previewUrl)
-        }
-        setPreviewUrl("")
         onChangeThumbnail("")
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
@@ -172,11 +165,11 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
 
         // URL 유효성 검사
         try {
-            new URL(urlValue)
-            setPreviewUrl(urlValue)
+            const parsedUrl = new URL(urlValue)
+            if (parsedUrl.protocol !== "https:" && parsedUrl.protocol !== "http:") throw new Error("Invalid protocol")
             onChangeThumbnail(urlValue)
             setShowUrlInput(false)
-        } catch (error) {
+        } catch {
             alert("유효한 URL을 입력해주세요.")
         }
     }
@@ -198,13 +191,6 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
                 URL.revokeObjectURL(imageToEdit)
             }
 
-            // 이전 프리뷰 URL도 해제
-            if (previewUrl && previewUrl.startsWith("blob:")) {
-                URL.revokeObjectURL(previewUrl)
-            }
-
-            const croppedImageUrl = URL.createObjectURL(croppedImage)
-            setPreviewUrl(croppedImageUrl)
             onChangeThumbnail(croppedImage)
             setCropMode(false)
         } catch (e) {
@@ -222,20 +208,22 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
         setCropMode(false)
     }
 
-    // cleanup effect
     useEffect(() => {
         return () => {
-            if (typeof previewUrl === "string" && previewUrl.startsWith("blob:")) {
-                URL.revokeObjectURL(previewUrl)
-            }
             if (imageToEdit && imageToEdit.startsWith("blob:")) {
                 URL.revokeObjectURL(imageToEdit)
             }
         }
-    }, [previewUrl, imageToEdit])
+    }, [imageToEdit])
 
     // 구글 드라이브 이미지인지 확인
     const isGoogleDrive = typeof previewUrl === "string" && isGoogleDriveImage(previewUrl)
+
+    const displayPreviewUrl = isGoogleDrive
+        ? optimizeGoogleDriveImageUrl(previewUrl)
+        : previewUrl.startsWith("http") || !process.env.NEXT_PUBLIC_IP
+          ? previewUrl
+          : `${process.env.NEXT_PUBLIC_IP}${previewUrl}`
 
     // URL이 blob인지 확인
     const isBlobUrl = typeof previewUrl === "string" && previewUrl.startsWith("blob:")
@@ -300,11 +288,7 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
                             ) : isGoogleDrive ? (
                                 // 구글 드라이브 이미지인 경우 프록시 URL 사용
                                 <Image
-                                    src={
-                                        previewUrl.startsWith("http")
-                                            ? previewUrl
-                                            : `${process.env.NEXT_PUBLIC_IP}${previewUrl}`
-                                    }
+                                    src={displayPreviewUrl}
                                     alt="썸네일 미리보기"
                                     className={styles.thumbnailPreview}
                                     fill
@@ -315,11 +299,7 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
                             ) : (
                                 // 일반 이미지인 경우
                                 <Image
-                                    src={
-                                        previewUrl.startsWith("http")
-                                            ? previewUrl
-                                            : `${process.env.NEXT_PUBLIC_IP}${previewUrl}`
-                                    }
+                                    src={displayPreviewUrl}
                                     alt="썸네일 미리보기"
                                     className={styles.thumbnailPreview}
                                     fill
@@ -342,11 +322,7 @@ const ThumbnailUploader = ({ thumbnail = "", onChangeThumbnail }: ThumbnailUploa
                                             }
 
                                             // 이미지를 새로 로드하여 편집
-                                            const imageUrl = previewUrl.startsWith("http")
-                                                ? previewUrl
-                                                : `${process.env.NEXT_PUBLIC_IP}${previewUrl}`
-
-                                            fetch(imageUrl)
+                                            fetch(displayPreviewUrl)
                                                 .then((response) => {
                                                     if (!response.ok) {
                                                         throw new Error(`HTTP 오류: ${response.status}`)

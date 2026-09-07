@@ -1,12 +1,12 @@
 "use client"
 
-import { HTMLAttributes, ReactElement } from "react"
+import { ButtonHTMLAttributes, ReactElement } from "react"
 import classNames from "classnames"
 import { TTextBold, TTextSize } from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/components/atom/buttonBasic.module.scss"
 
-interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
     onClick: () => void
     children?: ReactElement
     label?: string

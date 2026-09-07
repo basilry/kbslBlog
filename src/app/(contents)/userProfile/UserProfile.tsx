@@ -1,7 +1,7 @@
 "use client"
 
 import { ReactElement, useEffect, useState } from "react"
-import { useRouter } from "next-nprogress-bar"
+import { useRouter } from "next/navigation"
 import ButtonBasic from "@components/atom/ButtonBasic"
 import ImageUploadBasic from "@components/atom/ImageUploadBasic"
 import Wrapper from "@components/layout/Wrapper"
@@ -9,6 +9,7 @@ import LabelInput from "@components/molecule/LabelInput"
 import { ILoginUser } from "@interface/IUser"
 import { axiosInstance } from "@lib/api/axiosInstance"
 import { useLoginStore } from "@lib/stores/store"
+import { useLoginHydrated } from "@lib/hooks/useLoginHydrated"
 import { toastCall } from "@lib/utils/toastCall"
 import styles from "@styles/pages/userProfile.module.scss"
 
@@ -16,6 +17,7 @@ const UserProfile = (): ReactElement => {
     const router = useRouter()
 
     const { loginState, loginUser, setLoginUser } = useLoginStore()
+    const hydrated = useLoginHydrated()
 
     const [userData, setUserData] = useState<ILoginUser>(loginUser)
     const [isEdit, setIsEdit] = useState(false)
@@ -26,6 +28,7 @@ const UserProfile = (): ReactElement => {
             .then((res) => {
                 if (res.data.code === 200) {
                     setLoginUser(res.data.data)
+                    setUserData(res.data.data)
                 }
 
                 toastCall("나의 정보 불러오기 완료", "success")
@@ -54,15 +57,15 @@ const UserProfile = (): ReactElement => {
     }
 
     useEffect(() => {
-        getMyInfo()
-    }, [])
+        if (hydrated && loginState) getMyInfo()
+    }, [hydrated, loginState])
 
     useEffect(() => {
-        if (!loginState || !loginUser.loginId) {
+        if (hydrated && (!loginState || !loginUser.loginId)) {
             router.push("/login")
             toastCall("로그인이 필요합니다", "error")
         }
-    }, [loginState])
+    }, [hydrated, loginState, loginUser.loginId, router])
 
     if (!loginState || !loginUser.loginId) return <></>
 

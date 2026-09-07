@@ -1,76 +1,32 @@
-"use client"
-
-import React, { useEffect, useState } from "react"
-import { ToastContainer } from "react-toastify"
-import { AppProgressBar as ProgressBar } from "next-nprogress-bar"
-import { GoogleAnalytics } from "@next/third-parties/google"
-import { Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import type { ReactNode } from "react"
 import localFont from "next/font/local"
-import classNames from "classnames"
-import Container from "@components/layout/Container"
+import { GoogleAnalytics } from "@next/third-parties/google"
+import Providers from "./Providers"
 import "@styles/global.scss"
 import "@styles/font.scss"
 import "@styles/toast.scss"
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
-import "@styles/nprogress.scss"
-import SuspenseWrapper from "@components/layout/SuspenseWrapper"
-import { useCoreStore } from "@lib/stores/store"
 
-const inter = Inter({ subsets: ["latin"] })
-const pretendardFont = localFont({
-    src: "../../public/font/PretendardVariable.woff2",
-})
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>): React.JSX.Element {
-    const { darkMode } = useCoreStore()
-
-    const [mode, setMode] = useState<"lightMode" | "darkMode">("darkMode")
-    useEffect(() => {
-        if (darkMode) {
-            setMode("darkMode")
-        } else {
-            setMode("lightMode")
-        }
-    }, [darkMode])
-
-    return (
-        <html lang="ko" className={classNames(pretendardFont.className, inter.className)}>
-            <head>
-                <meta charSet="utf-8" />
-                <meta name="author" content="Kim Basilri(Zannavi)" />
-                <meta name="application-name" content="KBSL's BLog" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-                />
-                <title>{"basilry.kim"}</title>
-                <link rel="icon" href="/myFace.png" />
-            </head>
-            <body id={mode}>
-                <SuspenseWrapper>
-                    <Container>
-                        <ProgressBar color="#b024d6" options={{ showSpinner: true }} />
-                        {children}
-                        <ToastContainer
-                            position="bottom-right"
-                            autoClose={9999}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme="light"
-                        />
-                        <div id="modal-root"></div>
-                    </Container>
-
-                    <GoogleAnalytics gaId="G-GZDS0N484J" />
-                </SuspenseWrapper>
-            </body>
-        </html>
-    )
+const pretendard = localFont({ src: "../../public/font/PretendardVariable.woff2", display: "swap" })
+export const metadata: Metadata = {
+    metadataBase: new URL("https://www.basilry.kim"),
+    title: { default: "김바실리 — 개발 기록과 프로젝트", template: "%s | basilry.kim" },
+    description: "웹 개발부터 AI까지, 직접 만들고 운영하며 배운 내용을 기록합니다.",
+    authors: [{ name: "김바실리" }],
+    icons: { icon: "/myFace.png" },
+    openGraph: { type: "website", locale: "ko_KR", siteName: "basilry.kim", images: [{ url: "/myFace.png", alt: "김바실리" }] },
+    alternates: { types: { "application/rss+xml": "/feed.xml" } },
+}
+export const viewport: Viewport = { width: "device-width", initialScale: 1 }
+export default function RootLayout({ children }: { children: ReactNode }) {
+    return <html lang="ko" className={pretendard.className}>
+        <body id="darkMode">
+            <a className="skipLink" href="#main-content">본문으로 바로가기</a>
+            <Providers>{children}</Providers>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-GZDS0N484J"} />
+        </body>
+    </html>
 }
