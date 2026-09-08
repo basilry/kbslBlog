@@ -33,7 +33,9 @@ export default function PostList({ posts }: PostListProps): ReactElement {
                     <p className={styles.eyebrow}>Writing</p>
                     <h1>포스팅</h1>
                     <p>개발과 제품을 만들며 배운 내용을 기록합니다.</p>
-                    <p className={styles.orderNote}>새 발행 글을 먼저 보여 드리고, 이전 글 보관함을 이어서 표시합니다.</p>
+                    {posts.items.some((post) => post.source === "legacy") && (
+                        <p className={styles.orderNote}>새 발행 글을 먼저 보여 드리고, 이전 글 보관함을 이어서 표시합니다.</p>
+                    )}
                 </header>
 
                 {posts.legacyTruncated && (
@@ -60,7 +62,6 @@ export default function PostList({ posts }: PostListProps): ReactElement {
                                         <div className={styles.itemMeta}>
                                             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
                                             <PostViewCount postPath={post.href} />
-                                            {post.source === "local" && <span>Markdown</span>}
                                         </div>
                                         <h2>{post.title}</h2>
                                         <p>{post.description}</p>
