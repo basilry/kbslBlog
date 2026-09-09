@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { usePathname } from "next/navigation"
 import { counterDay, type CounterResponse, type CounterSnapshot } from "@lib/counters/types"
+import { counterEndpoint } from "@lib/counters/endpoint"
 
 type CounterState =
     | { status: "loading"; snapshot: null }
@@ -11,56 +12,50 @@ type CounterState =
 
 const LOADING: CounterState = { status: "loading", snapshot: null }
 const CounterContext = createContext<CounterState>(LOADING)
-const VISITOR_KEY = "kbsl-blog:visitor-id:v1"
-const DEFAULT_COUNTER_URL = "https://kbsl-blog-counter.basbot.workers.dev/count"
-const VISITOR_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const POST_PATH = /^\/post\/[a-z0-9]+(?:-[a-z0-9]+)*$/
-
-function visitorId(): string {
-    try {
-        const saved = window.localStorage.getItem(VISITOR_KEY)
-        if (saved && VISITOR_ID.test(saved)) return saved
-        const created = window.crypto.randomUUID()
-        window.localStorage.setItem(VISITOR_KEY, created)
-        return created
-    } catch {
-        return window.crypto.randomUUID()
-    }
-}
 
 export function VisitorCounterProvider({ children }: { children: ReactNode }) {
     const pathname = usePathname()
-    const identity = useRef<string | null>(null)
-    const postPath = POST_PATH.test(pathname) ? pathname : null
+    const activeView = useRef<{ pathname: string; eventId: string } | null>(null)
+    const postPath = POST_PATH.test(pathname) && pathname !== "/post/register" ? pathname : null
     const [result, setResult] = useState<{ path: string | null; state: CounterState } | null>(null)
 
     useEffect(() => {
         let disposed = false
         let inFlight = false
         let controller: AbortController | null = null
-        const endpoint = process.env.NEXT_PUBLIC_COUNTER_API_URL || DEFAULT_COUNTER_URL
-        identity.current ||= visitorId()
+        // This ID belongs only to this opening. Retain it through Strict Mode's
+        // effect replay, but generate a new one for every navigation/reload.
+        if (activeView.current?.pathname !== pathname) {
+            activeView.current = { pathname, eventId: window.crypto.randomUUID() }
+        }
+        const view = activeView.current
+        let recordPending = true
+        try { window.localStorage.removeItem("kbsl-blog:visitor-id:v1") } catch { /* Storage may be disabled. */ }
 
         const refresh = async () => {
             if (inFlight || document.visibilityState === "hidden") return
             inFlight = true
-            controller = new AbortController()
-            const timeout = window.setTimeout(() => controller?.abort(), 12_000)
+            const recordView = recordPending
+            recordPending = false
+            const requestController = new AbortController()
+            controller = requestController
+            const timeout = window.setTimeout(() => requestController.abort(), 12_000)
             try {
-                const response = await fetch(endpoint, {
+                const response = await fetch(counterEndpoint(recordView ? "visit" : "stats"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ visitorId: identity.current, path: postPath }),
-                    signal: controller.signal,
+                    body: JSON.stringify({ path: postPath, ...(recordView ? { eventId: view.eventId } : {}) }),
+                    signal: requestController.signal,
                     cache: "no-store",
                 })
                 const result: CounterResponse = response.ok ? await response.json() : { available: false }
                 if (!disposed) setResult({
-                    path: postPath,
+                    path: pathname,
                     state: result.available ? { status: "ready", snapshot: result } : { status: "unavailable", snapshot: null },
                 })
             } catch {
-                if (!disposed) setResult({ path: postPath, state: { status: "unavailable", snapshot: null } })
+                if (!disposed) setResult({ path: pathname, state: { status: "unavailable", snapshot: null } })
             } finally {
                 window.clearTimeout(timeout)
                 inFlight = false
@@ -74,24 +69,33 @@ export function VisitorCounterProvider({ children }: { children: ReactNode }) {
             const today = counterDay(new Date(), "Asia/Seoul")
             const nextMidnight = Date.parse(`${today}T00:00:00+09:00`) + 24 * 60 * 60_000
             midnightTimer = window.setTimeout(() => {
-                setResult({ path: postPath, state: LOADING })
+                setResult({ path: pathname, state: LOADING })
                 void refresh()
                 scheduleMidnight()
             }, Math.max(1_000, nextMidnight - Date.now() + 100))
         }
         scheduleMidnight()
         const onVisible = () => { if (document.visibilityState === "visible") void refresh() }
+        const onPageShow = (event: PageTransitionEvent) => {
+            if (event.persisted) {
+                view.eventId = window.crypto.randomUUID()
+                recordPending = true
+                void refresh()
+            }
+        }
         document.addEventListener("visibilitychange", onVisible)
+        window.addEventListener("pageshow", onPageShow)
         return () => {
             disposed = true
             controller?.abort()
             window.clearInterval(timer)
             window.clearTimeout(midnightTimer)
             document.removeEventListener("visibilitychange", onVisible)
+            window.removeEventListener("pageshow", onPageShow)
         }
-    }, [postPath])
+    }, [pathname, postPath])
 
-    const state = result?.path === postPath ? result.state : LOADING
+    const state = result?.path === pathname ? result.state : LOADING
     return <CounterContext.Provider value={state}>{children}</CounterContext.Provider>
 }
 
@@ -111,8 +115,8 @@ export default function VisitorCounter({ postPath }: { postPath?: string }) {
     if (postPath) {
         const count = snapshot.postViews[postPath]
         if (!Number.isSafeInteger(count) || count < 0) return <span title="조회수를 잠시 불러올 수 없습니다">조회수 —</span>
-        return <span aria-live="polite" title="Cloudflare 기준 누적 조회 수 · 브라우저별 하루 한 번 집계">조회수 {count.toLocaleString("ko-KR")}</span>
+        return <span aria-live="polite" title="누적 열람 횟수 · 재방문과 새로고침 포함">조회수 {count.toLocaleString("ko-KR")}</span>
     }
-    if (!Number.isSafeInteger(snapshot.todayVisitors) || !Number.isSafeInteger(snapshot.totalVisitors) || snapshot.todayVisitors < 0 || snapshot.totalVisitors < 0) return null
-    return <span title="Cloudflare 기준 오늘 및 전체 누적 방문자 수 · 브라우저 식별 기준">오늘 방문자 {snapshot.todayVisitors.toLocaleString("ko-KR")}명 · 누적 {snapshot.totalVisitors.toLocaleString("ko-KR")}명</span>
+    if (!Number.isSafeInteger(snapshot.todayViews) || !Number.isSafeInteger(snapshot.totalViews) || snapshot.todayViews < 0 || snapshot.totalViews < 0) return null
+    return <span title="페이지 접속 횟수 · 재방문과 새로고침 포함 · 한국 시간 기준">오늘 조회 {snapshot.todayViews.toLocaleString("ko-KR")}회 · 누적 조회 {snapshot.totalViews.toLocaleString("ko-KR")}회</span>
 }

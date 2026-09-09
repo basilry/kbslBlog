@@ -3,8 +3,8 @@ export interface CounterSnapshot {
     date: string
     timeZone: "Asia/Seoul"
     updatedAt: string
-    todayVisitors: number
-    totalVisitors: number
+    todayViews: number
+    totalViews: number
     postViews: Record<string, number>
 }
 

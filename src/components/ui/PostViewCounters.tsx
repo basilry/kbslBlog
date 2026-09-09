@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import type { PostViewsResponse } from "@lib/counters/types"
+import { counterEndpoint } from "@lib/counters/endpoint"
 
 type ViewState =
     | { status: "loading"; postViews: null }
@@ -10,12 +11,6 @@ type ViewState =
 
 const LOADING: ViewState = { status: "loading", postViews: null }
 const ViewContext = createContext<ViewState>(LOADING)
-const DEFAULT_COUNTER_URL = "https://kbsl-blog-counter.basbot.workers.dev/count"
-
-function viewsEndpoint(): string {
-    const countEndpoint = process.env.NEXT_PUBLIC_COUNTER_API_URL || DEFAULT_COUNTER_URL
-    return `${countEndpoint.replace(/\/count\/?$/, "")}/views`
-}
 
 export function PostViewCountsProvider({ paths, children }: { paths: string[]; children: ReactNode }) {
     const pathKey = paths.join("\n")
@@ -31,7 +26,7 @@ export function PostViewCountsProvider({ paths, children }: { paths: string[]; c
             controller = new AbortController()
             const timeout = window.setTimeout(() => controller?.abort(), 12_000)
             try {
-                const response = await fetch(viewsEndpoint(), {
+                const response = await fetch(counterEndpoint("views"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ paths: requestPaths }),
@@ -80,5 +75,5 @@ export function PostViewCount({ postPath }: { postPath: string }) {
     }
     const count = state.postViews[postPath]
     if (!Number.isSafeInteger(count) || count < 0) return <span title="조회수를 잠시 불러올 수 없습니다">조회수 —</span>
-    return <span title="Cloudflare 기준 누적 조회 수">조회수 {count.toLocaleString("ko-KR")}</span>
+    return <span title="누적 열람 횟수 · 재방문과 새로고침 포함">조회수 {count.toLocaleString("ko-KR")}</span>
 }

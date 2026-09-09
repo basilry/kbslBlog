@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { counterDay, parsePayload, parseViewPaths } from "./lib"
+import { counterDay, parsePayload, parseStatsPayload, parseViewPaths } from "./lib"
 
 describe("counter request validation", () => {
     it("uses the Korean calendar day around midnight", () => {
@@ -7,13 +7,23 @@ describe("counter request validation", () => {
         expect(counterDay(new Date("2026-09-06T15:00:00Z"))).toBe("2026-09-07")
     })
 
-    it("accepts only random UUIDs and canonical post paths", () => {
-        const visitorId = "ef31a8c0-334a-4f33-8b46-3778282a2f06"
-        expect(parsePayload({ visitorId, path: "/post/ai-progress-and-my-next-income" })).toEqual({ visitorId, path: "/post/ai-progress-and-my-next-income" })
-        expect(parsePayload({ visitorId, path: null })).toEqual({ visitorId, path: null })
-        expect(parsePayload({ visitorId: "visitor", path: null })).toBeNull()
-        expect(parsePayload({ visitorId, path: "/login" })).toBeNull()
-        expect(parsePayload({ visitorId, path: "/post/example?admin=true" })).toBeNull()
+    it("requires a per-opening request ID, without a visitor identity", () => {
+        const eventId = "ef31a8c0-334a-4f33-8b46-3778282a2f06"
+        expect(parsePayload({ eventId, path: "/post/ai-progress-and-my-next-income" })).toEqual({ eventId, path: "/post/ai-progress-and-my-next-income" })
+        expect(parsePayload({ eventId, path: null })).toEqual({ eventId, path: null })
+        expect(parsePayload({ visitorId: eventId, path: null })).toBeNull()
+        expect(parsePayload({ eventId: "visitor", path: null })).toBeNull()
+        expect(parsePayload({ eventId, path: "/login" })).toBeNull()
+        expect(parsePayload({ eventId, path: "/post/register" })).toBeNull()
+        expect(parsePayload({ eventId, path: "/post/example?admin=true" })).toBeNull()
+        expect(parsePayload({ eventId: eventId.toUpperCase(), path: null })?.eventId).toBe(eventId)
+    })
+
+    it("allows read-only statistics without any ID", () => {
+        expect(parseStatsPayload({ path: null })).toEqual({ path: null })
+        expect(parseStatsPayload({ path: "/post/one" })).toEqual({ path: "/post/one" })
+        expect(parseStatsPayload({})).toBeNull()
+        expect(parseStatsPayload({ path: "/post/register" })).toBeNull()
     })
 
     it("accepts a bounded, unique list of canonical post paths", () => {
