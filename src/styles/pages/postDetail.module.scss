@@ -162,6 +162,23 @@
         box-shadow: $shadow-md;
     }
 
+    figure {
+        margin: $space-8 0;
+
+        img {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    figcaption {
+        margin-top: $space-3;
+        font-size: $x-small-font;
+        line-height: 1.6;
+        text-align: center;
+        opacity: 0.75;
+    }
+
     iframe {
         display: block;
         width: 100%;
