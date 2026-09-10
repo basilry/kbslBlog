@@ -7,8 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: "*",
                 allow: "/",
-                // Retired routes must remain crawlable so their permanent redirects can be seen.
-                disallow: ["/api/"],
             },
         ],
         sitemap: `${SITE_URL}/sitemap.xml`,
