@@ -14,5 +14,14 @@ export default function TopMoveButton() {
         update()
         return () => window.removeEventListener("scroll", update)
     }, [])
-    return <button type="button" aria-label="페이지 맨 위로" className={classNames(styles.wrapper, darkMode && styles.darkMode)} style={{ display: visible ? "block" : "none" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Top</button>
+    return (
+        <button type="button" aria-label="페이지 맨 위로" title="맨 위로"
+            className={classNames(styles.wrapper, darkMode && styles.darkMode)} hidden={!visible}
+            onClick={() => window.scrollTo({
+                top: 0,
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+            })}>
+            <span className={styles.arrow} aria-hidden="true" />
+        </button>
+    )
 }

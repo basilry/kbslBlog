@@ -1,37 +1,52 @@
 @import "@styles/variable.scss";
 
 .wrapper {
-    opacity: 0.8;
-    transition: opacity $duration-normal $ease-out-quart, transform $duration-normal $ease-out-quart,
-        box-shadow $duration-normal $ease-out-quart;
-    display: none;
     position: fixed;
-    bottom: $space-5;
-    right: $space-5;
-    color: white;
-    background-color: $text-primary;
+    z-index: 9;
+    right: max(24px, env(safe-area-inset-right));
+    bottom: max(24px, env(safe-area-inset-bottom));
+    display: grid;
+    place-items: center;
     width: 48px;
     height: 48px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 10px;
-    border-radius: $radius-full;
-    box-shadow: $shadow-lg;
+    padding: 0;
+    border: 1px solid #e5e5eb;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #9b1dc2;
+    box-shadow: 0 4px 14px rgba(29, 29, 31, 0.10), 0 1px 3px rgba(29, 29, 31, 0.04);
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 
-    &:hover {
-        cursor: pointer;
-        opacity: 1;
-        transform: translateY(-2px);
-        box-shadow: $shadow-xl;
-    }
+    &[hidden] { display: none; }
+    &:hover { background: #faf6fc; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(29, 29, 31, 0.14); }
+    &:active { transform: translateY(0); }
+    &:focus-visible { outline: 3px solid #b45bd1; outline-offset: 4px; }
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+    background: currentColor;
+    mask: url("/icons/navigation/arrow-up.svg") center / contain no-repeat;
 }
 
 .darkMode {
-    color: $text-primary;
-    background-color: $white;
+    color: #db8ff1;
+    background: #2c2c2e;
+    border-color: #49494f;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+    &:hover { background: #37323c; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); }
+}
 
-    &:hover {
-        opacity: 1;
-    }
+@media (max-width: 600px) {
+    .wrapper { right: max(16px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .wrapper { transition: none; }
+    .wrapper:hover { transform: none; }
+}
+@media (forced-colors: active) {
+    .wrapper { border-color: ButtonText; color: ButtonText; background: ButtonFace; }
+    .arrow { forced-color-adjust: none; background: ButtonText; }
 }

@@ -32,7 +32,7 @@ export default function PostDetail({ post }: PostDetailProps): ReactElement {
     return (
         <PostReaderShell legacyPost={post.legacyEditorPost}>
             <Wrapper>
-                <div className={styles.page}>
+                <div className={styles.page} data-post-page="detail">
                     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPosting(post)) }} />
                     <article className={`${styles.article} ${outline.headings.length ? styles.withOutline : ""}`}>
                         <Link href="/post" className={styles.backLink}>

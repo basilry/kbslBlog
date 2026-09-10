@@ -27,7 +27,7 @@ export default function PostList({ posts }: PostListProps): ReactElement {
     const categories = [{ id: "all" as const, label: "전체 글" }, ...POST_CATEGORIES]
     return (
         <Wrapper>
-            <div className={styles.page}>
+            <div className={styles.page} data-post-page="list">
                 <aside className={styles.sidebar}>
                     <div className={styles.sidebarHeading}>
                         <span className={styles.categorySymbol} aria-hidden="true">≡</span>

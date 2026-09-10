@@ -245,3 +245,48 @@ p {
     }
 }
 .iconButton { border: 0; color: inherit; font: inherit; display: inline-flex; align-items: center; justify-content: center; } header .iconButton:not([aria-pressed]), nav .iconButton { background: transparent; }
+
+// Give post lists and articles a visible, draggable viewport scrollbar.
+:root:has([data-post-page]) {
+    --post-scrollbar-track: #f3f2f6;
+    --post-scrollbar-thumb: #8b8295;
+    --post-scrollbar-hover: #a923cc;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scrollbar-width: auto;
+    scrollbar-color: var(--post-scrollbar-thumb) var(--post-scrollbar-track);
+}
+
+:root:has(#darkMode [data-post-page]) {
+    --post-scrollbar-track: #232126;
+    --post-scrollbar-thumb: #a49caf;
+    --post-scrollbar-hover: #ca6ce5;
+}
+
+@supports selector(::-webkit-scrollbar) {
+    // Let Chromium/Safari use the wider styled scrollbar below.
+    :root:has([data-post-page]) { scrollbar-color: auto; }
+    :root:has([data-post-page])::-webkit-scrollbar { width: 12px; }
+    :root:has([data-post-page])::-webkit-scrollbar-track {
+        background-color: var(--post-scrollbar-track) !important;
+    }
+    :root:has([data-post-page])::-webkit-scrollbar-thumb {
+        min-height: 48px;
+        border: 3px solid transparent;
+        border-radius: 12px;
+        background-color: var(--post-scrollbar-thumb);
+        background-clip: padding-box;
+    }
+    :root:has([data-post-page])::-webkit-scrollbar-thumb:hover {
+        background-color: var(--post-scrollbar-hover);
+    }
+}
+
+@media (forced-colors: active) {
+    :root:has([data-post-page]) {
+        --post-scrollbar-track: Canvas;
+        --post-scrollbar-thumb: ButtonText;
+        --post-scrollbar-hover: Highlight;
+        scrollbar-color: auto;
+    }
+}
