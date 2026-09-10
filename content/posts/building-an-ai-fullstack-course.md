@@ -1,4 +1,5 @@
 ---
+category: development
 title: 'AI로 코드를 만드는 시대에, 나는 출시하는 법을 가르치려 한다'
 slug: building-an-ai-fullstack-course
 description: >-

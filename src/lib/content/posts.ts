@@ -2,6 +2,7 @@ import { promises as fs } from "node:fs"
 import path from "node:path"
 import { parseMarkdownSource, plainTextFromHtml, sanitizePostHtml } from "./markdown"
 import { PublicPost, PublicPostPage, PublicPostSummary } from "./types"
+import { isPostCategory, type PostCategoryCounts, type PostCategoryFilter } from "./categories"
 
 const CONTENT_DIRECTORY = path.join(process.cwd(), "content", "posts")
 const LEGACY_PAGE_SIZE = 20
@@ -162,6 +163,7 @@ function legacySummary(post: LegacyPostPayload): PublicPostSummary {
         updatedAt: post.updatedAt,
         thumbnail: post.thumbnail || undefined,
         tags: [],
+        category: "other",
         likeCount: post.likeCount,
         href: `/post/${post.id}`,
     }
@@ -196,6 +198,7 @@ export async function getPublishedLocalPosts(directory = CONTENT_DIRECTORY): Pro
                     updatedAt: metadata.updatedAt,
                     thumbnail: metadata.thumbnail,
                     tags: metadata.tags,
+                    category: metadata.category,
                     likeCount: 0,
                     href: `/post/${metadata.slug}`,
                     html: document.html,
@@ -300,30 +303,39 @@ export async function getRecentPublicPosts(
 }
 
 export async function getPublicPosts(
-    options: { page?: number; pageSize?: number; contentDirectory?: string } = {},
+    options: { page?: number; pageSize?: number; contentDirectory?: string; category?: PostCategoryFilter } = {},
 ): Promise<PublicPostPage> {
     const page = Number.isSafeInteger(options.page) && Number(options.page) > 0 ? Number(options.page) : 1
     const pageSize =
         Number.isSafeInteger(options.pageSize) && Number(options.pageSize) > 0
             ? Math.min(Number(options.pageSize), LEGACY_PAGE_SIZE)
             : 10
-    const localPosts = await getPublishedLocalPosts(options.contentDirectory)
+    const allLocalPosts = await getPublishedLocalPosts(options.contentDirectory)
+    const category = isPostCategory(options.category) ? options.category : "all"
+    const localPosts = category === "all" ? allLocalPosts : allLocalPosts.filter((post) => post.category === category)
     const start = (page - 1) * pageSize
     const localItems = localPosts.slice(start, start + pageSize)
     const legacyOffset = Math.max(0, start - localPosts.length)
-    const legacyLimit = pageSize - localItems.length
-    const legacy = await getLegacySlice(legacyOffset, legacyLimit)
-    const totalItems = localPosts.length + legacy.totalElements
+    // The old API has no categories. Keep its complete pagination under Other.
+    const includeLegacy = category === "all" || category === "other"
+    const legacyLimit = includeLegacy ? pageSize - localItems.length : 0
+    const legacy = await getLegacySlice(includeLegacy ? legacyOffset : 0, legacyLimit)
+    const totalItems = localPosts.length + (includeLegacy ? legacy.totalElements : 0)
+    const categoryCounts: PostCategoryCounts = { all: allLocalPosts.length + legacy.totalElements, "ai-agents": 0, development: 0, "work-life": 0, other: legacy.totalElements }
+    for (const post of allLocalPosts) categoryCounts[post.category ?? "other"]++
+    const legacyUnavailable = includeLegacy && legacy.unavailable
     const calculatedTotalPages = Math.max(1, Math.ceil(totalItems / pageSize))
-    const totalPages = legacy.unavailable ? Math.max(page, calculatedTotalPages) : calculatedTotalPages
+    const totalPages = legacyUnavailable ? Math.max(page, calculatedTotalPages) : calculatedTotalPages
 
     return {
+        category,
+        categoryCounts,
         items: [...localItems, ...legacy.items.map(legacySummary)],
         page,
         pageSize,
         totalItems,
         totalPages,
-        legacyUnavailable: legacy.unavailable,
+        legacyUnavailable,
         legacyTruncated: false,
     }
 }

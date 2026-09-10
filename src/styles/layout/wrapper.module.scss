@@ -1,6 +1,8 @@
 @import "@styles/variable.scss";
 
 .wrapper {
+    width: 100%;
+    min-width: 0;
     min-height: 100vh;
     margin-top: $space-11;
     padding: 0 $space-7;

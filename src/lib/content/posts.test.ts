@@ -2,7 +2,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { sanitizePostHtml } from "./markdown"
+import { parseMarkdownSource, sanitizePostHtml } from "./markdown"
 import {
     getAllPublicPostSummaries,
     getPublicPost,
@@ -13,6 +13,56 @@ import {
 } from "./posts"
 
 const temporaryDirectories: string[] = []
+
+describe("post categories", () => {
+    async function categorizedFixtures() {
+        const directory = await fixtureDirectory()
+        await Promise.all(["ai-agents", "development", "ai-agents", "work-life", undefined, "ai-agents"].map((category, index) =>
+            writeFile(path.join(directory, `post-${index}.md`), `---\ntitle: Post ${index}\nslug: post-${index}\ndescription: Public post\npublishedAt: "2026-09-0${index + 1}"\n${category ? `category: ${category}\n` : ""}tags: []\ndraft: ${index === 5}\n---\n\nBody`),
+        ))
+        return directory
+    }
+
+    it("filters before pagination, counts all published categories, and excludes drafts", async () => {
+        const directory = await categorizedFixtures()
+        const first = await getPublicPosts({ contentDirectory: directory, category: "ai-agents", pageSize: 1 })
+        const second = await getPublicPosts({ contentDirectory: directory, category: "ai-agents", pageSize: 1, page: 2 })
+        expect(first.items.map((post) => post.id)).toEqual(["post-2"])
+        expect(second.items.map((post) => post.id)).toEqual(["post-0"])
+        expect(first.totalItems).toBe(2)
+        expect(first.totalPages).toBe(2)
+        expect(first.categoryCounts).toEqual({ all: 5, "ai-agents": 2, development: 1, "work-life": 1, other: 1 })
+        expect(second.categoryCounts).toEqual(first.categoryCounts)
+        expect(first.legacyUnavailable).toBe(false)
+        expect((await getPublicPosts({ contentDirectory: directory, category: "other" })).items.map((post) => post.id)).toEqual(["post-4"])
+    })
+
+    it("keeps the full legacy archive in Other without leaking it into named categories", async () => {
+        const directory = await categorizedFixtures()
+        process.env.CONTENT_API_URL = "https://api.example.test/"
+        const fetchMock = vi.fn<typeof fetch>(async (input) => {
+            const page = Number(new URL(String(input)).searchParams.get("page"))
+            return Response.json({ data: { data: { totalElements: 125, totalPages: 7, content: Array.from({ length: page === 6 ? 5 : 20 }, (_, index) => ({
+                id: page * 20 + index + 1, title: "Legacy", content: "<p>Body</p>", createdAt: "2026-01-01", likeCount: 0,
+            })) } } })
+        })
+        vi.stubGlobal("fetch", fetchMock)
+        const category = await getPublicPosts({ contentDirectory: directory, category: "development" })
+        expect(category.items.map((post) => post.id)).toEqual(["post-1"])
+        expect(category.categoryCounts.all).toBe(130)
+        expect(category.categoryCounts.other).toBe(126)
+        expect(fetchMock).toHaveBeenCalledTimes(1)
+        const last = await getPublicPosts({ contentDirectory: directory, category: "other", page: 13 })
+        expect(last.totalPages).toBe(13)
+        expect(last.items.map((post) => post.id)).toEqual(["120", "121", "122", "123", "124", "125"])
+        expect(last.items.every((post) => post.category === "other")).toBe(true)
+        expect(last.legacyTruncated).toBe(false)
+    })
+
+    it("rejects unknown category values instead of silently misclassifying posts", () => {
+        expect(() => parseMarkdownSource('---\ntitle: Test\nslug: test\ndescription: Test\npublishedAt: "2026-09-01"\ncategory: typo\ndraft: false\n---\nBody')).toThrow(/category/)
+    })
+})
 
 async function fixtureDirectory(): Promise<string> {
     const directory = await mkdtemp(path.join(os.tmpdir(), "kbsl-content-"))

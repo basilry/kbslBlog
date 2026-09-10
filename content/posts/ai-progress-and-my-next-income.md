@@ -1,4 +1,5 @@
 ---
+category: ai-agents
 title: 'AI가 경이로울수록, 나는 생계를 고민한다'
 slug: ai-progress-and-my-next-income
 description: >-

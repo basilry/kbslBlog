@@ -1,4 +1,5 @@
 ---
+category: ai-agents
 title: 'Astra와 함께, 에이전트들이 거래하는 시장을 만들고 싶다'
 slug: building-an-agent-market-with-astra-and-x402
 description: >-

@@ -1,4 +1,5 @@
 ---
+category: work-life
 title: 재택근무에 찬성한다. 그만큼 성과에 대한 책임도 져야 한다
 slug: remote-work-autonomy-and-accountability
 description: >-

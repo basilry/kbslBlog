@@ -1,9 +1,55 @@
 @import "@styles/variable.scss";
 
 .page {
-    width: min(860px, 100%);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 216px minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
     margin: 0 auto;
     padding: $space-10 0 $space-12;
+}
+
+.main { min-width: 0; }
+.sidebar {
+    position: sticky;
+    top: 104px;
+    align-self: start;
+    padding-top: $space-2;
+}
+.sidebarHeading {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    h2 { font-size: $small-font; font-weight: $semi; }
+}
+.categorySymbol { color: $pink-pressed; font-size: 26px; line-height: 1; }
+.sidebarNote { margin: $space-3 0 $space-5; color: $text-secondary; font-size: $x-small-font; }
+.categoryList { display: grid; gap: $space-2; }
+.categoryLink {
+    display: grid;
+    grid-template-columns: 6px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 14px;
+    border-radius: $radius-md;
+    color: $text-secondary;
+    font-size: 14px;
+    transition: background-color 160ms, color 160ms;
+    &:hover { color: $text-primary; background: $surface-secondary; }
+    &[aria-current="page"] { background: rgba(176, 36, 214, 0.08); color: $pink-pressed; font-weight: $semi; }
+}
+.categoryDot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.45; }
+.categoryLink[aria-current="page"] .categoryDot { opacity: 1; box-shadow: 0 0 0 4px rgba(176, 36, 214, 0.08); }
+.categoryCount { font-size: 12px; font-variant-numeric: tabular-nums; opacity: 0.8; }
+.listHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $space-7;
+    padding-bottom: $space-3;
+    h2 { display: flex; gap: $space-2; align-items: center; font-size: $small-font; }
+    h2 span { color: $pink-pressed; font-size: $x-small-font; font-weight: $regular; }
+    > span { color: $text-tertiary; font-size: 12px; }
 }
 
 .header {
@@ -92,6 +138,7 @@
 
 .itemMeta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: $space-3;
     color: $text-tertiary;
@@ -102,6 +149,13 @@
         color: $pink-pressed;
         border: 1px solid currentColor;
         border-radius: $radius-full;
+    }
+
+    .itemCategory {
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        font-weight: $semi;
     }
 }
 
@@ -136,6 +190,7 @@
         color: $text-secondary;
         font-size: $small-font;
     }
+    a { margin-top: $space-5; color: $pink-pressed; font-size: $small-font; }
 }
 
 .pagination {
@@ -166,6 +221,10 @@
 }
 
 :global(#darkMode) {
+    .sidebarNote, .categoryLink { color: $black-400; }
+    .categoryLink:hover { background: $dark-surface-secondary; color: $white; }
+    .categoryLink[aria-current="page"] { background: rgba(185, 105, 209, 0.14); color: #d99aee; }
+    .categorySymbol, .listHeading h2 span, .itemMeta .itemCategory { color: #d99aee; }
     .header,
     .item {
         border-color: $separator-dark;
@@ -193,6 +252,17 @@
     .writeLink {
         border-color: $separator-dark;
     }
+}
+
+@media (max-width: 900px) {
+    .page { display: block; }
+    .sidebar { position: static; padding: 0 0 $space-7; }
+    .sidebarNote { display: none; }
+    .categoryList { display: flex; gap: $space-2; overflow-x: auto; padding: $space-3 3px; margin: 0 -3px; }
+    .categoryLink { flex: 0 0 auto; display: flex; gap: $space-2; padding: 10px 14px; border: 1px solid $separator-light; border-radius: $radius-full; }
+    .categoryDot { display: none; }
+    :global(#darkMode) .categoryLink { border-color: $separator-dark; }
+    .listHeading > span { display: none; }
 }
 
 @include MOBILE {

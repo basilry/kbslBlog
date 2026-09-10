@@ -1,0 +1,60 @@
+@import "@styles/variable.scss";
+
+.toc { grid-area: toc; position: sticky; top: 104px; align-self: start; padding-top: $space-3; min-width: 0; }
+.label { margin: 0 0 $space-4 16px; font-size: 12px; font-weight: $semi; color: $text-tertiary; letter-spacing: 0.02em; }
+.list {
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    ol { margin: 0; padding: 0; }
+    li { list-style: none; }
+    a {
+        display: block;
+        border-left: 2px solid $separator-light;
+        padding: 8px 4px 8px 14px;
+        color: $text-secondary;
+        font-size: 13px;
+        line-height: 1.65;
+        overflow-wrap: anywhere;
+        transition: color 160ms, border-color 160ms, background-color 160ms;
+        &:hover { color: $pink-pressed; }
+        &[aria-current="location"] { border-left-color: $pink-pressed; color: $pink-pressed; background: linear-gradient(90deg, rgba(176,36,214,0.055), transparent); font-weight: $semi; }
+    }
+}
+.mobile { display: none; }
+:global(#darkMode) {
+    .list a { color: $black-400; border-color: $separator-dark; }
+    .list a:hover, .list a[aria-current="location"] { color: #d99aee; }
+    .list a[aria-current="location"] { border-left-color: #d99aee; background: linear-gradient(90deg, rgba(185,105,209,0.10), transparent); }
+}
+@media (max-width: 1100px) {
+    .toc { position: static; padding-top: 0; margin: $space-6 0 0; }
+    .desktop { display: none; }
+    .mobile {
+        display: block;
+        border: 1px solid $separator-light;
+        border-radius: $radius-md;
+        background: $surface-secondary;
+        summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: $space-3;
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: $semi;
+            cursor: pointer;
+            list-style: none;
+            &::-webkit-details-marker { display: none; }
+            > span { font-size: 12px; font-weight: $regular; color: $text-secondary; }
+            > span > span { margin-left: $space-2; display: inline-block; }
+        }
+        &[open] summary > span > span { transform: rotate(180deg); }
+        .list { max-height: 45vh; margin: 0 18px 16px; }
+    }
+    :global(#darkMode) {
+        .mobile { border-color: $separator-dark; background: $dark-surface-secondary; }
+        .mobile summary > span { color: $black-400; }
+    }
+}

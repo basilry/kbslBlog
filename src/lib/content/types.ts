@@ -1,3 +1,5 @@
+import type { PostCategoryCounts, PostCategoryFilter, PostCategoryId } from "./categories"
+
 export const SITE_URL = "https://www.basilry.kim"
 
 export type PublicPostSource = "local" | "legacy"
@@ -12,6 +14,7 @@ export interface PublicPostSummary {
     updatedAt?: string
     thumbnail?: string
     tags: string[]
+    category?: PostCategoryId
     likeCount: number
     href: string
 }
@@ -32,6 +35,8 @@ export interface PublicPost extends PublicPostSummary {
 }
 
 export interface PublicPostPage {
+    category: PostCategoryFilter
+    categoryCounts: PostCategoryCounts
     items: PublicPostSummary[]
     page: number
     pageSize: number
@@ -42,6 +47,7 @@ export interface PublicPostPage {
 }
 
 export interface LocalPostFrontmatter {
+    category: PostCategoryId
     title: string
     slug: string
     description: string

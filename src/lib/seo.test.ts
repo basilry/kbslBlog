@@ -22,4 +22,9 @@ describe("search metadata boundaries", () => {
         expect(decoded).not.toHaveProperty("image")
         expect(decoded).not.toHaveProperty("dateModified")
     })
+
+    it("preserves category and page in canonical links", () => {
+        expect(postListMetadata(1, "ai-agents").alternates?.canonical).toBe("https://www.basilry.kim/post?category=ai-agents")
+        expect(postListMetadata(2, "development").alternates?.canonical).toBe("https://www.basilry.kim/post?category=development&page=2")
+    })
 })

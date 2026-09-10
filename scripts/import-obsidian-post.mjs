@@ -95,6 +95,9 @@ function validateMetadata(data, slugOverride, publish) {
         throw new Error("tags must be an array of non-empty strings")
     }
     if ((data.tags || []).length > 20) throw new Error("tags must contain at most 20 entries")
+    if (data.category !== undefined && !["ai-agents", "development", "work-life", "other"].includes(data.category)) {
+        throw new Error("category must be ai-agents, development, work-life, or other")
+    }
 
     const metadata = {
         title: stringField(data.title, "title", 160),
@@ -102,6 +105,7 @@ function validateMetadata(data, slugOverride, publish) {
         description: stringField(data.description, "description", 320),
         publishedAt,
         tags: [...new Set((data.tags || []).map((tag) => tag.trim()).filter(Boolean))],
+        category: data.category ?? "other",
         draft: !publish,
     }
     if (data.updatedAt !== undefined) metadata.updatedAt = isoDate(data.updatedAt, "updatedAt")

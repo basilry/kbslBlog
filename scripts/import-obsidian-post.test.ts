@@ -23,6 +23,20 @@ afterEach(async () => {
 })
 
 describe("Obsidian importer", () => {
+    it("preserves categories on import and rejects unknown values", async () => {
+        const fixture = await mkdtemp(path.join(os.tmpdir(), "kbsl-import-"))
+        temporaryDirectories.push(fixture)
+        const note = path.join(fixture, "note.md")
+        const source = '---\ntitle: Categorized\nslug: categorized\ndescription: Category test\npublishedAt: "2026-09-07"\ncategory: ai-agents\ntags: []\ndraft: true\n---\nBody'
+        await writeFile(note, source)
+        const args = [path.resolve("scripts/import-obsidian-post.mjs"), "--source", note, "--output-root", fixture]
+        await execFileAsync(process.execPath, [...args, "--publish"])
+        const imported = await readFile(path.join(fixture, "content", "posts", "categorized.md"), "utf8")
+        expect(parseMarkdownSource(imported).metadata.category).toBe("ai-agents")
+        await writeFile(note, source.replace("category: ai-agents", "category: unknown"))
+        await expect(execFileAsync(process.execPath, args)).rejects.toThrow(/category must be/)
+    })
+
     it("keeps draft attachments outside the public directory", async () => {
         const fixture = await mkdtemp(path.join(os.tmpdir(), "kbsl-import-"))
         temporaryDirectories.push(fixture)

@@ -3,6 +3,7 @@ import { marked } from "marked"
 import sanitizeHtml from "sanitize-html"
 import { isGoogleDriveImage, normalizeGoogleDriveImageUrl } from "@lib/utils/imageUtils"
 import { LocalPostDocument, LocalPostFrontmatter } from "./types"
+import { isPostCategory } from "./categories"
 
 const LOCAL_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const RESERVED_SLUGS = new Set(["register", "rss.xml"])
@@ -94,7 +95,11 @@ export function validateLocalPostFrontmatter(data: Record<string, unknown>): Loc
     }
 
     const updatedAt = data.updatedAt === undefined ? undefined : isoDate(data.updatedAt, "updatedAt")
+    if (data.category !== undefined && !isPostCategory(data.category)) {
+        throw new InvalidPostError("category must be ai-agents, development, work-life, or other")
+    }
     return {
+        category: data.category ?? "other",
         title: requiredString(data.title, "title", MAX_TITLE_LENGTH),
         slug,
         description: requiredString(data.description, "description", MAX_DESCRIPTION_LENGTH),

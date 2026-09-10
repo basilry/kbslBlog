@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { SITE_URL, type PublicPostSummary } from "./content/types"
 import projectDetails from "./json/projectDetails.json"
+import { postCategoryLabel, postListHref, type PostCategoryFilter } from "./content/categories"
 
 export const publicPages = {
     "/": { title: "김바실리 — 개발 기록과 프로젝트", description: "웹 개발부터 AI까지, 직접 만들고 운영하며 배운 내용을 기록합니다." },
@@ -35,9 +36,10 @@ export function projectMetadata(slug: string): Metadata {
     return pageMetadata(`/projects/${slug}`, project.title, project.description)
 }
 
-export function postListMetadata(page: number): Metadata {
-    const { title, description } = publicPages["/post"]
-    return pageMetadata(page === 1 ? "/post" : `/post?page=${page}`, page === 1 ? title : `${title} · ${page}페이지`, description)
+export function postListMetadata(page: number, category: PostCategoryFilter = "all"): Metadata {
+    const { description } = publicPages["/post"]
+    const title = category === "all" ? "글" : `${postCategoryLabel(category)} 글`
+    return pageMetadata(postListHref(page, category), page === 1 ? title : `${title} · ${page}페이지`, description)
 }
 
 export function blogPosting(post: PublicPostSummary) {
@@ -54,6 +56,7 @@ export function blogPosting(post: PublicPostSummary) {
         author: { "@type": "Person", name: "김바실리", url: `${SITE_URL}/introduce` },
         inLanguage: "ko-KR",
         keywords: post.tags.join(", "),
+        ...(post.category ? { articleSection: postCategoryLabel(post.category) } : {}),
     }
 }
 
