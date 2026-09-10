@@ -4,76 +4,75 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex: 0 0 48px;
-    width: 48px;
+    flex: 0 0 64px;
+    width: 64px;
     height: 44px;
     padding: 0;
     border: 0;
-    border-radius: $radius-sm;
+    border-radius: 22px;
     background: transparent;
     cursor: pointer;
 
     .track {
         display: block;
         position: relative;
-        width: 48px;
-        height: 28px;
-        border-radius: 14px;
-        background-color: $separator-light;
+        width: 64px;
+        height: 34px;
+        border-radius: 17px;
+        background: #e8e8ed;
         transition: background-color $duration-normal $ease-out-quart;
     }
-
     .thumb {
         position: absolute;
-        top: 2px;
-        left: 2px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
+        top: 3px;
+        left: 3px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background: white;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        transform: translateX(20px);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+        transform: translateX(30px);
         transition: transform $duration-normal $ease-out-quart;
     }
-
     .symbol {
         display: block;
-        position: relative;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: $yellow;
-        transition: background-color $duration-normal $ease-out-quart;
-
-        &::after {
-            content: "";
-            position: absolute;
-            top: -1px;
-            right: -1px;
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: white;
-            opacity: 0;
-            transition: opacity $duration-normal $ease-out-quart;
-        }
+        position: absolute;
+        top: 8px;
+        width: 18px;
+        height: 18px;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        transition: opacity $duration-normal $ease-out-quart;
     }
-
-    &:hover .track { background-color: rgba(0, 0, 0, 0.2); }
-
+    .sun { left: 8px; background: #f5b800; mask-image: url("/icons/theme/sun-fill.svg"); }
+    .moon { right: 8px; background: #f3d9fc; mask-image: url("/icons/theme/moon-fill.svg"); opacity: 0; }
+    &:hover .track { background-color: #dedee5; }
+    &:active .thumb { box-shadow: 0 0 0 2px rgba(176, 36, 214, 0.12); }
     &.dark {
-        .track { background-color: $pink-pressed; }
+        .track { background-color: #a923cc; }
         .thumb { transform: translateX(0); }
-        .symbol { background-color: $text-tertiary; }
-        .symbol::after { opacity: 1; }
-        &:hover .track { background-color: $pink-ligthen; }
+        .sun { opacity: 0; }
+        .moon { opacity: 1; }
+        &:hover .track { background-color: #b934da; }
     }
 }
-
+@media (max-width: 600px) {
+    .darkModeBasic {
+        flex-basis: 52px;
+        width: 52px;
+        .track { width: 52px; height: 30px; border-radius: 15px; }
+        .thumb { width: 24px; height: 24px; transform: translateX(22px); }
+        .symbol { top: 8px; width: 14px; height: 14px; }
+        .sun { left: 7px; }
+        .moon { right: 7px; }
+    }
+}
 @media (prefers-reduced-motion: reduce) {
-    .darkModeBasic .track, .darkModeBasic .thumb, .darkModeBasic .symbol,
-    .darkModeBasic .symbol::after { transition: none; }
+    .darkModeBasic .track, .darkModeBasic .thumb, .darkModeBasic .symbol { transition: none; }
+}
+@media (forced-colors: active) {
+    .darkModeBasic .track { border: 1px solid ButtonText; }
+    .darkModeBasic .thumb { background: ButtonText; }
+    .darkModeBasic .symbol { background: ButtonText; }
 }

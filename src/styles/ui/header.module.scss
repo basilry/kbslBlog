@@ -23,6 +23,7 @@
         display: flex;
         align-items: center;
         gap: $space-2;
+        min-width: 0;
 
         .hamberger {
             display: flex;
@@ -78,4 +79,29 @@
 
     }
 }
-.quickLinks { display: flex; gap: 20px; font-size: 15px; margin-left: 24px; } .quickLinks a[aria-current="page"] { color: #b45bd1; } .rootLink { font-size: 22px; font-weight: 750; } @media (max-width: 550px) { .headerWrapper { padding: 0 14px; } .quickLinks { display: none; } }
+.quickLinks { display: flex; gap: 20px; font-size: 15px; margin-left: 24px; }
+.quickLinks a[aria-current="page"] { color: #b45bd1; }
+.rootLink { font-size: 22px; font-weight: 750; white-space: nowrap; }
+
+@media (max-width: 760px) {
+    .headerWrapper { padding: 0 16px; }
+    .quickLinks { display: none; }
+}
+@media (max-width: 600px) {
+    .headerWrapper {
+        padding: 0 12px;
+        gap: 8px;
+        .leftWrapper { gap: 2px; }
+        .leftWrapper .linkBlock .rootLink { padding: 4px 2px; font-size: 18px; }
+        .rightWrapper { gap: 8px; }
+    }
+}
+@media (max-width: 360px) {
+    .headerWrapper {
+        padding: 0 8px;
+        gap: 4px;
+        .leftWrapper .hamberger { padding: 6px; }
+        .leftWrapper .linkBlock .rootLink { font-size: 15px; padding-inline: 0; }
+        .rightWrapper { gap: 6px; }
+    }
+}

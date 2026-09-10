@@ -15,6 +15,10 @@ const LOADING: CounterState = { status: "loading", snapshot: null }
 const CounterContext = createContext<CounterState>(LOADING)
 const POST_PATH = /^\/post\/[a-z0-9]+(?:-[a-z0-9]+)*$/
 
+export function useVisitorCounterState() {
+    return useContext(CounterContext)
+}
+
 export function VisitorCounterProvider({ children }: { children: ReactNode }) {
     const pathname = usePathname()
     const activeView = useRef<{ pathname: string; eventId: string } | null>(null)

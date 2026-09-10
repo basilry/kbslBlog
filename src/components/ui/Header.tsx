@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import classNames from "classnames"
 import { useNavigationStore } from "@lib/stores/navigationStore"
 import DarkModeBasic from "@components/atom/DarkModeBasic"
+import HeaderVisitorCounter from "@components/ui/HeaderVisitorCounter"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/ui/header.module.scss"
 
@@ -26,6 +27,7 @@ export default function Header() {
             </nav>
         </div>
         <div className={styles.rightWrapper}>
+            <HeaderVisitorCounter />
             <DarkModeBasic />
         </div>
     </header>

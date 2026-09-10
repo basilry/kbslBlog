@@ -2,7 +2,6 @@
 
 import { ReactElement } from "react"
 import classNames from "classnames"
-import VisitorCounter from "@components/ui/VisitorCounter"
 import TextBasic from "@components/atom/TextBasic"
 import { useCoreStore } from "@lib/stores/store"
 import styles from "@styles/ui/footer.module.scss"
@@ -18,7 +17,6 @@ function Footer(): ReactElement {
                         <TextBasic size="x-small" bold="bold">
                             Copyright ⓒ 2023 by Basilri Kim all rights reserved.
                         </TextBasic>
-                        <TextBasic size="x-small"><VisitorCounter /></TextBasic>
                     </div>
                     <div className={styles.rightWrapper}>
                         <TextBasic size="x-small" bold="bold">
