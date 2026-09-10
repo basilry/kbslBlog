@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import { usePathname } from "next/navigation"
 import { counterDay, type CounterResponse, type CounterSnapshot } from "@lib/counters/types"
 import { counterEndpoint } from "@lib/counters/endpoint"
+import { dailyVisitorId } from "@lib/counters/visitor"
 
 type CounterState =
     | { status: "loading"; snapshot: null }
@@ -31,25 +32,26 @@ export function VisitorCounterProvider({ children }: { children: ReactNode }) {
         }
         const view = activeView.current
         let recordPending = true
-        try { window.localStorage.removeItem("kbsl-blog:visitor-id:v1") } catch { /* Storage may be disabled. */ }
 
         const refresh = async () => {
             if (inFlight || document.visibilityState === "hidden") return
             inFlight = true
             const recordView = recordPending
-            recordPending = false
             const requestController = new AbortController()
             controller = requestController
             const timeout = window.setTimeout(() => requestController.abort(), 12_000)
             try {
+                const visitorId = recordView ? await dailyVisitorId() : undefined
+                if (disposed) return
                 const response = await fetch(counterEndpoint(recordView ? "visit" : "stats"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ path: postPath, ...(recordView ? { eventId: view.eventId } : {}) }),
+                    body: JSON.stringify({ path: postPath, ...(recordView ? { eventId: view.eventId, visitorId } : {}) }),
                     signal: requestController.signal,
                     cache: "no-store",
                 })
                 const result: CounterResponse = response.ok ? await response.json() : { available: false }
+                if (recordView && result.available) recordPending = false
                 if (!disposed) setResult({
                     path: pathname,
                     state: result.available ? { status: "ready", snapshot: result } : { status: "unavailable", snapshot: null },
@@ -118,5 +120,5 @@ export default function VisitorCounter({ postPath }: { postPath?: string }) {
         return <span aria-live="polite" title="누적 열람 횟수 · 재방문과 새로고침 포함">조회수 {count.toLocaleString("ko-KR")}</span>
     }
     if (!Number.isSafeInteger(snapshot.todayViews) || !Number.isSafeInteger(snapshot.totalViews) || snapshot.todayViews < 0 || snapshot.totalViews < 0) return null
-    return <span title="페이지 접속 횟수 · 재방문과 새로고침 포함 · 한국 시간 기준">오늘 조회 {snapshot.todayViews.toLocaleString("ko-KR")}회 · 누적 조회 {snapshot.totalViews.toLocaleString("ko-KR")}회</span>
+    return <span title="같은 브라우저는 한국 시간 기준 하루 1회 · 누적값에는 집계 기준 변경 전 기록 포함">오늘 방문 {snapshot.todayViews.toLocaleString("ko-KR")} · 누적 방문 {snapshot.totalViews.toLocaleString("ko-KR")}</span>
 }

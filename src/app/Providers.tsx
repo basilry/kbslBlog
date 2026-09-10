@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, type ReactNode } from "react"
-import { ToastContainer } from "react-toastify"
 import { VisitorCounterProvider } from "@components/ui/VisitorCounter"
+import LazyToastNotifications from "@components/ui/LazyToastNotifications"
 import Container from "@components/layout/Container"
 import { useCoreStore } from "@lib/stores/store"
 
@@ -14,7 +14,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     useEffect(() => { document.body.id = darkMode ? "darkMode" : "lightMode" }, [darkMode])
     return <VisitorCounterProvider><Container>
         {children}
-        <ToastContainer position="bottom-right" autoClose={4000} theme={darkMode ? "dark" : "light"} />
+        <LazyToastNotifications />
         <div id="modal-root" />
     </Container></VisitorCounterProvider>
 }

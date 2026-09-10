@@ -3,6 +3,7 @@ const POST_PATH = /^\/post\/[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 export interface CountPayload {
     eventId: string
+    visitorId?: string
     path: string | null
 }
 
@@ -19,10 +20,13 @@ export function counterDay(date: Date): string {
 
 export function parsePayload(value: unknown): CountPayload | null {
     if (!value || typeof value !== "object") return null
-    const body = value as { eventId?: unknown; path?: unknown }
+    const body = value as { eventId?: unknown; visitorId?: unknown; path?: unknown }
     if (typeof body.eventId !== "string" || !UUID.test(body.eventId)) return null
+    if (body.visitorId !== undefined && (typeof body.visitorId !== "string" || !UUID.test(body.visitorId))) return null
     const stats = parseStatsPayload(body)
-    return stats ? { eventId: body.eventId.toLowerCase(), path: stats.path } : null
+    return stats ? { eventId: body.eventId.toLowerCase(), path: stats.path,
+        ...(typeof body.visitorId === "string" ? { visitorId: body.visitorId.toLowerCase() } : {}),
+    } : null
 }
 
 export function parseStatsPayload(value: unknown): { path: string | null } | null {

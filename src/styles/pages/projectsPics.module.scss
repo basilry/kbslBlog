@@ -2,6 +2,14 @@
 
 .picsWrapper {
     margin-top: 2rem;
+
+    :global(.swiper-pagination-bullet-active) {
+        background-color: $orangeCinamon !important;
+    }
+
+    :global(.swiper-pagination) {
+        bottom: 5px !important;
+    }
 }
 
 .picsBlock {

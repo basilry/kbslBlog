@@ -3,7 +3,14 @@ import os from "node:os"
 import path from "node:path"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { sanitizePostHtml } from "./markdown"
-import { getPublicPosts, getPublishedLocalPosts } from "./posts"
+import {
+    getAllPublicPostSummaries,
+    getPublicPost,
+    getPublicPosts,
+    getPublishedLocalPosts,
+    getRecentPublicPosts,
+    LegacyPostUnavailableError,
+} from "./posts"
 
 const temporaryDirectories: string[] = []
 
@@ -18,6 +25,93 @@ afterEach(async () => {
     delete process.env.CONTENT_API_URL
     delete process.env.NEXT_PUBLIC_IP
     await Promise.all(temporaryDirectories.splice(0).map((directory) => rm(directory, { recursive: true, force: true })))
+})
+
+describe("recent public post cache policy", () => {
+    const legacyPost = {
+        id: 123,
+        title: "Recent legacy post",
+        content: "<p>Public summary</p>",
+        createdAt: "2026-09-10T09:00:00Z",
+        updatedAt: "2026-09-10T09:00:00Z",
+        likeCount: 0,
+    }
+
+    function legacyPageResponse() {
+        return Response.json({ data: { data: { content: [legacyPost], totalElements: 1, totalPages: 1 } } })
+    }
+
+    it("opts the homepage summary into timed caching without changing other content reads", async () => {
+        const directory = await fixtureDirectory()
+        process.env.CONTENT_API_URL = "https://api.example.test/"
+        const fetchMock = vi.fn<typeof fetch>(async () => legacyPageResponse())
+        vi.stubGlobal("fetch", fetchMock)
+
+        const recent = await getRecentPublicPosts(3, { legacyRevalidate: 300, contentDirectory: directory })
+        expect(recent.items.map((post) => post.href)).toEqual(["/post/123"])
+        expect(recent.legacyUnavailable).toBe(false)
+        expect(fetchMock.mock.calls[0]?.[1]).toEqual(expect.objectContaining({ next: { revalidate: 300 } }))
+        expect(fetchMock.mock.calls[0]?.[1]).not.toHaveProperty("cache")
+
+        await getRecentPublicPosts(3, { contentDirectory: directory })
+        await getPublicPosts({ contentDirectory: directory })
+        await getAllPublicPostSummaries()
+        for (const [, init] of fetchMock.mock.calls.slice(1)) {
+            expect(init).toEqual(expect.objectContaining({ cache: "no-store" }))
+            expect(init).not.toHaveProperty("next")
+        }
+        expect(fetchMock).toHaveBeenCalledTimes(4)
+    })
+
+    it("keeps local posts available during a legacy outage and retries on the next render", async () => {
+        const directory = await fixtureDirectory()
+        await writeFile(
+            path.join(directory, "local.md"),
+            `---\ntitle: Local\nslug: local-post\ndescription: Public post\npublishedAt: "2026-09-09"\ntags: []\ndraft: false\n---\n\nBody`,
+        )
+        process.env.CONTENT_API_URL = "https://api.example.test/"
+        const fetchMock = vi.fn<typeof fetch>()
+            .mockRejectedValueOnce(new TypeError("Connection unavailable"))
+            .mockResolvedValueOnce(legacyPageResponse())
+        vi.stubGlobal("fetch", fetchMock)
+        const options = { legacyRevalidate: 300, contentDirectory: directory }
+
+        const unavailable = await getRecentPublicPosts(3, options)
+        expect(unavailable.items.map((post) => post.href)).toEqual(["/post/local-post"])
+        expect(unavailable.legacyUnavailable).toBe(true)
+
+        const recovered = await getRecentPublicPosts(3, options)
+        expect(recovered.items.map((post) => post.href)).toEqual(["/post/123", "/post/local-post"])
+        expect(recovered.legacyUnavailable).toBe(false)
+        expect(fetchMock).toHaveBeenCalledTimes(2)
+    })
+
+    it("does not require a legacy API configuration for a static homepage", async () => {
+        const directory = await fixtureDirectory()
+        delete process.env.CONTENT_API_URL
+        delete process.env.NEXT_PUBLIC_IP
+        const fetchMock = vi.fn()
+        vi.stubGlobal("fetch", fetchMock)
+
+        expect(await getRecentPublicPosts(3, { legacyRevalidate: 300, contentDirectory: directory }))
+            .toEqual({ items: [], legacyUnavailable: true })
+        expect(fetchMock).not.toHaveBeenCalled()
+    })
+
+    it("retains fresh detail requests and distinguishes missing posts from service errors", async () => {
+        process.env.CONTENT_API_URL = "https://api.example.test/"
+        const fetchMock = vi.fn<typeof fetch>()
+            .mockResolvedValueOnce(new Response(null, { status: 404 }))
+            .mockResolvedValueOnce(new Response(null, { status: 503 }))
+        vi.stubGlobal("fetch", fetchMock)
+
+        expect(await getPublicPost("123")).toBeNull()
+        await expect(getPublicPost("123")).rejects.toBeInstanceOf(LegacyPostUnavailableError)
+        for (const [, init] of fetchMock.mock.calls) {
+            expect(init).toEqual(expect.objectContaining({ cache: "no-store" }))
+            expect(init).not.toHaveProperty("next")
+        }
+    })
 })
 
 describe("getPublishedLocalPosts", () => {

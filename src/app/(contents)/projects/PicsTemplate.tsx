@@ -1,10 +1,12 @@
 "use client"
 
 import { ReactElement, useState } from "react"
-import { Navigation, Pagination, Scrollbar } from "swiper/modules"
+import { Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import ModalBasic from "@components/modal/ModalBasic"
 import styles from "@styles/pages/projectsPics.module.scss"
+import "swiper/css"
+import "swiper/css/pagination"
 
 interface IPicsTemplate {
     projectTitle: string
@@ -19,7 +21,7 @@ const PicsTemplate = ({ projectTitle, filePath, domainName, fileNums = 6 }: IPic
     return (
         <div className={styles.picsWrapper}>
             <div className={styles.picsBlock}>
-                <Swiper pagination={true} modules={[Navigation, Pagination, Scrollbar]} className="mySwiper">
+                <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
                     {new Array(fileNums).fill(0).map((_, idx) => (
                         <SwiperSlide
                             key={idx}

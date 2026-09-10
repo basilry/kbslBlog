@@ -62,7 +62,7 @@ function apiBaseUrl(): URL | null {
     }
 }
 
-async function readBoundedJson(url: URL): Promise<{ status: number; data?: unknown }> {
+async function readBoundedJson(url: URL, revalidate?: number): Promise<{ status: number; data?: unknown }> {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
 
@@ -70,7 +70,10 @@ async function readBoundedJson(url: URL): Promise<{ status: number; data?: unkno
         const response = await fetch(url, {
             headers: { Accept: "application/json" },
             signal: controller.signal,
-            cache: "no-store",
+            // Cache only explicitly opted-in public summaries. Lists and details stay fresh.
+            ...(Number.isSafeInteger(revalidate) && Number(revalidate) > 0
+                ? { next: { revalidate } }
+                : { cache: "no-store" as const }),
         })
         if (!response.ok) return { status: response.status }
 
@@ -205,13 +208,13 @@ export async function getPublishedLocalPosts(directory = CONTENT_DIRECTORY): Pro
         .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
 }
 
-async function fetchLegacyPage(page: number): Promise<LegacyPagePayload> {
+async function fetchLegacyPage(page: number, revalidate?: number): Promise<LegacyPagePayload> {
     const base = apiBaseUrl()
     if (!base) throw new LegacyPostUnavailableError("Legacy post API URL is not configured")
     const url = new URL("posts", base)
     url.searchParams.set("page", String(page))
     url.searchParams.set("size", String(LEGACY_PAGE_SIZE))
-    const response = await readBoundedJson(url)
+    const response = await readBoundedJson(url, revalidate)
     const parsed = parseLegacyPage(response.data)
     if (!parsed) throw new LegacyPostUnavailableError()
     return parsed
@@ -243,12 +246,12 @@ async function getLegacyCollection(): Promise<LegacyCollection> {
     }
 }
 
-async function getLegacySlice(offset: number, limit: number): Promise<LegacySlice> {
+async function getLegacySlice(offset: number, limit: number, revalidate?: number): Promise<LegacySlice> {
     const pageNumber = limit > 0 ? Math.floor(offset / LEGACY_PAGE_SIZE) : 0
     const withinPage = offset % LEGACY_PAGE_SIZE
     let firstPage: LegacyPagePayload
     try {
-        firstPage = await fetchLegacyPage(pageNumber)
+        firstPage = await fetchLegacyPage(pageNumber, revalidate)
     } catch {
         return { items: [], totalElements: 0, unavailable: true }
     }
@@ -258,7 +261,7 @@ async function getLegacySlice(offset: number, limit: number): Promise<LegacySlic
     const remainingCount = limit - items.length
     if (remainingCount > 0 && pageNumber + 1 < firstPage.totalPages) {
         try {
-            const nextPage = await fetchLegacyPage(pageNumber + 1)
+            const nextPage = await fetchLegacyPage(pageNumber + 1, revalidate)
             items.push(...nextPage.content.slice(0, remainingCount))
         } catch {
             unavailable = true
@@ -279,12 +282,18 @@ export async function getAllPublicPostSummaries(): Promise<{
     return { items, legacyUnavailable: legacy.unavailable, legacyTruncated: legacy.truncated }
 }
 
-export async function getRecentPublicPosts(limit = 3): Promise<{
+export async function getRecentPublicPosts(
+    limit = 3,
+    options: { legacyRevalidate?: number; contentDirectory?: string } = {},
+): Promise<{
     items: PublicPostSummary[]
     legacyUnavailable: boolean
 }> {
     const safeLimit = Number.isSafeInteger(limit) && limit > 0 ? Math.min(limit, 20) : 3
-    const [localPosts, legacy] = await Promise.all([getPublishedLocalPosts(), getLegacySlice(0, safeLimit)])
+    const [localPosts, legacy] = await Promise.all([
+        getPublishedLocalPosts(options.contentDirectory),
+        getLegacySlice(0, safeLimit, options.legacyRevalidate),
+    ])
     const items: PublicPostSummary[] = [...localPosts, ...legacy.items.map(legacySummary)]
     items.sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
     return { items: items.slice(0, safeLimit), legacyUnavailable: legacy.unavailable }

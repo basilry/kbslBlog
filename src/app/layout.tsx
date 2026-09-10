@@ -1,17 +1,14 @@
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
-import localFont from "next/font/local"
-import { GoogleAnalytics } from "@next/third-parties/google"
+import Script from "next/script"
+
+import DeferredAnalytics from "@components/ui/DeferredAnalytics"
 import Providers from "./Providers"
 import "@styles/global.scss"
 import "@styles/font.scss"
-import "@styles/toast.scss"
-import "@styles/nprogress.scss"
-import "swiper/css"
-import "swiper/css/pagination"
-import "swiper/css/navigation"
 
-const pretendard = localFont({ src: "../../public/font/PretendardVariable.woff2", display: "swap" })
+import "@styles/nprogress.scss"
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://www.basilry.kim"),
     title: { default: "김바실리 — 개발 기록과 프로젝트", template: "%s | basilry.kim" },
@@ -23,11 +20,24 @@ export const metadata: Metadata = {
 }
 export const viewport: Viewport = { width: "device-width", initialScale: 1 }
 export default function RootLayout({ children }: { children: ReactNode }) {
-    return <html lang="ko" className={pretendard.className}>
+    const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-GZDS0N484J"
+    const measurementId = JSON.stringify(gaId).replace(/</g, "\\u003c")
+    return <html lang="ko">
         <body id="darkMode">
+            <Script id="blog-ga-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+                window.gtag('js', new Date());
+                window.gtag('config', ${measurementId}, { send_page_view: false });
+                window.gtag('event', 'page_view', {
+                    page_location: window.location.href,
+                    page_referrer: document.referrer,
+                    page_title: document.title
+                });
+            ` }} />
             <a className="skipLink" href="#main-content">본문으로 바로가기</a>
             <Providers>{children}</Providers>
-            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-GZDS0N484J"} />
+            <DeferredAnalytics gaId={gaId} />
         </body>
     </html>
 }

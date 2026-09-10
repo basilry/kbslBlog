@@ -7,8 +7,15 @@ describe("counter request validation", () => {
         expect(counterDay(new Date("2026-09-06T15:00:00Z"))).toBe("2026-09-07")
     })
 
-    it("requires a per-opening request ID, without a visitor identity", () => {
+    it("requires a per-opening request ID and accepts a separately validated browser ID", () => {
         const eventId = "ef31a8c0-334a-4f33-8b46-3778282a2f06"
+        const visitorId = "ab31a8c0-334a-4f33-8b46-3778282a2f06"
+        expect(parsePayload({ eventId, visitorId, path: null })).toEqual({ eventId, visitorId, path: null })
+        expect(parsePayload({ eventId, visitorId: visitorId.toUpperCase(), path: null })?.visitorId).toBe(visitorId)
+        expect(parsePayload({ eventId, visitorId: "bad", path: null })).toBeNull()
+        expect(parsePayload({ eventId, visitorId: null, path: null })).toBeNull()
+        // Tabs running the previous client still record post openings without
+        // claiming a new daily browser visit for every event.
         expect(parsePayload({ eventId, path: "/post/ai-progress-and-my-next-income" })).toEqual({ eventId, path: "/post/ai-progress-and-my-next-income" })
         expect(parsePayload({ eventId, path: null })).toEqual({ eventId, path: null })
         expect(parsePayload({ visitorId: eventId, path: null })).toBeNull()

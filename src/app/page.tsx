@@ -5,11 +5,12 @@ import { getRecentPublicPosts } from "@lib/content/posts"
 import TrackedLink from "@components/ui/TrackedLink"
 import styles from "@styles/pages/home.module.scss"
 
-export const dynamic = "force-dynamic"
+// Local posts change with deployments; legacy posts refresh on subsequent visits.
+export const revalidate = 300
 
 export const metadata = staticPageMetadata("/")
 export default async function Home() {
-    const posts = await getRecentPublicPosts(3)
+    const posts = await getRecentPublicPosts(3, { legacyRevalidate: revalidate })
     const featured = ["/projects/desk", "/projects/deskDefense", "/projects/haruWeather"]
         .map((href) => projects.find((project) => project.url === href))
         .filter((project) => project !== undefined)

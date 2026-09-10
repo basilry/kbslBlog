@@ -32,16 +32,18 @@ async function count(request: Request, env: Env, origin: string, recordView: boo
     const length = Number(request.headers.get("Content-Length"))
     if (!Number.isInteger(length) || length < 2 || length > 512) return json({ available: false }, 400, origin)
     const body = await request.json<unknown>()
-    const payload = recordView ? parsePayload(body) : parseStatsPayload(body)
+    const visitPayload = recordView ? parsePayload(body) : null
+    const payload = recordView ? visitPayload : parseStatsPayload(body)
     if (!payload) return json({ available: false }, 400, origin)
 
     const now = new Date()
     const day = counterDay(now)
     const statements: D1PreparedStatement[] = []
-    if ("eventId" in payload) {
-        const oldestDay = counterDay(new Date(now.getTime() - 7 * 24 * 60 * 60_000))
-        statements.push(env.DB.prepare("DELETE FROM page_view_events WHERE day < ?").bind(oldestDay))
-        statements.push(env.DB.prepare("INSERT OR IGNORE INTO page_view_events (event_id, day, path, created_at) VALUES (?, ?, ?, ?)").bind(payload.eventId, day, payload.path, now.toISOString()))
+    if (visitPayload) {
+        if (visitPayload.visitorId) {
+            statements.push(env.DB.prepare("INSERT OR IGNORE INTO daily_site_visitors (day, visitor_id) VALUES (?, ?)").bind(day, visitPayload.visitorId))
+        }
+        statements.push(env.DB.prepare("INSERT OR IGNORE INTO page_view_events (event_id, day, path, created_at) VALUES (?, ?, ?, ?)").bind(visitPayload.eventId, day, visitPayload.path, now.toISOString()))
     }
     statements.push(env.DB.prepare("SELECT COALESCE((SELECT views FROM daily_totals WHERE day = ?), 0) AS views").bind(day))
     statements.push(env.DB.prepare("SELECT views FROM site_totals WHERE id = 1"))
