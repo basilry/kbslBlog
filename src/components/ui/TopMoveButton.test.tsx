@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from "react-dom/server"
 import TopMoveButton from "./TopMoveButton"
 
 const state = vi.hoisted(() => ({ visible: false, darkMode: false }))
+vi.mock("@lib/i18n/context", () => ({ useLocale: () => "ko" }))
 vi.mock("react", async (importOriginal) => ({
     ...await importOriginal<typeof import("react")>(),
     useEffect: () => {},

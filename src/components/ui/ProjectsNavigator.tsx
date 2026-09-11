@@ -1,6 +1,9 @@
 "use client"
 
-import Link from "next/link"
+import { useLocale } from "@lib/i18n/context"
+import { translateText } from "@lib/i18n/translate"
+import { stripLocale } from "@lib/i18n/config"
+import Link from "@components/ui/LocaleLink"
 import { usePathname } from "next/navigation"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
@@ -20,8 +23,9 @@ const PROJECTS_NAME = [
 ]
 
 const ProjectsNavigator = (): React.JSX.Element => {
+    const locale = useLocale()
     const { darkMode } = useCoreStore()
-    const pathname = usePathname().split("/")[2]
+    const pathname = stripLocale(usePathname()).split("/")[2]
     const nowMenu = PROJECTS_NAME.filter((row) => row.id === pathname)[0]
     const prevIdx = nowMenu?.idx - 1 >= 0 ? nowMenu.idx - 1 : 4
     const nextIdx = nowMenu?.idx + 1 < 5 ? nowMenu.idx + 1 : 0
@@ -29,10 +33,10 @@ const ProjectsNavigator = (): React.JSX.Element => {
     return (
         <div className={classNames(styles.footerWrapper, darkMode && styles.dark)}>
             <Link href={`/projects/${PROJECTS_NAME[prevIdx].id}`} className={styles.link}>
-                <TextBasic size="xx-small" bold="bold">{`< ${PROJECTS_NAME[prevIdx]?.name}`}</TextBasic>
+                <TextBasic size="xx-small" bold="bold">{`< ${translateText(PROJECTS_NAME[prevIdx]?.name, locale)}`}</TextBasic>
             </Link>
             <Link href={`/projects/${PROJECTS_NAME[nextIdx].id}`} className={styles.link}>
-                <TextBasic size="xx-small" bold="bold">{` ${PROJECTS_NAME[nextIdx]?.name} >`}</TextBasic>
+                <TextBasic size="xx-small" bold="bold">{` ${translateText(PROJECTS_NAME[nextIdx]?.name, locale)} >`}</TextBasic>
             </Link>
         </div>
     )

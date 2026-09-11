@@ -1,3 +1,5 @@
+import { languageTag, localeHref, type Locale } from "./i18n/config"
+import { translateText } from "./i18n/translate"
 import type { Metadata } from "next"
 import { SITE_URL, type PublicPostSummary } from "./content/types"
 import projectDetails from "./json/projectDetails.json"
@@ -13,33 +15,37 @@ export const publicPages = {
     "/certification": { title: "자격증·교육 수료", description: "김바실리가 취득한 자격증과 교육 수료 이력을 정리했습니다." },
 } as const
 
-export function pageMetadata(path: string, title: string, description: string): Metadata {
-    const url = new URL(path, SITE_URL).href
-    const image = { url: `${SITE_URL}/myFace.png`, alt: "김바실리" }
+export function languageAlternates(path: string) {
+    return { ko: new URL(localeHref(path, "ko"), SITE_URL).href, en: new URL(localeHref(path, "en"), SITE_URL).href, "x-default": new URL(path, SITE_URL).href }
+}
+
+export function pageMetadata(path: string, title: string, description: string, locale?: Locale): Metadata {
+    const url = new URL(locale ? localeHref(path, locale) : path, SITE_URL).href
+    const image = { url: `${SITE_URL}/myFace.png`, alt: locale === "en" ? "Basilri Kim" : "김바실리" }
     return {
         title,
         description,
-        alternates: { canonical: url, types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
-        openGraph: { type: "website", url, title, description, siteName: "basilry.kim", locale: "ko_KR", images: [image] },
+        alternates: { canonical: url, ...(locale ? { languages: languageAlternates(path) } : {}), types: { "application/rss+xml": `${SITE_URL}${locale ? localeHref("/feed.xml", locale) : "/feed.xml"}` } },
+        openGraph: { type: "website", url, title, description, siteName: "basilry.kim", locale: locale === "en" ? "en_US" : "ko_KR", images: [image] },
         twitter: { card: "summary", title, description, images: [image.url] },
     }
 }
 
-export function staticPageMetadata(path: keyof typeof publicPages): Metadata {
+export function staticPageMetadata(path: keyof typeof publicPages, locale?: Locale): Metadata {
     const { title, description } = publicPages[path]
-    return pageMetadata(path, title, description)
+    return pageMetadata(path, translateText(title, locale ?? "ko"), translateText(description, locale ?? "ko"), locale)
 }
 
-export function projectMetadata(slug: string): Metadata {
+export function projectMetadata(slug: string, locale?: Locale): Metadata {
     const project = projectDetails.find((item) => item.slug === slug)
     if (!project) throw new Error(`Missing project metadata: ${slug}`)
-    return pageMetadata(`/projects/${slug}`, project.title, project.description)
+    return pageMetadata(`/projects/${slug}`, translateText(project.title, locale ?? "ko"), translateText(project.description, locale ?? "ko"), locale)
 }
 
-export function postListMetadata(page: number, category: PostCategoryFilter = "all"): Metadata {
+export function postListMetadata(page: number, category: PostCategoryFilter = "all", locale?: Locale): Metadata {
     const { description } = publicPages["/post"]
-    const title = category === "all" ? "글" : `${postCategoryLabel(category)} 글`
-    return pageMetadata(postListHref(page, category), page === 1 ? title : `${title} · ${page}페이지`, description)
+    const title = locale === "en" ? (category === "all" ? "Posts" : `${postCategoryLabel(category, locale)} posts`) : category === "all" ? "글" : `${postCategoryLabel(category)} 글`
+    return pageMetadata(postListHref(page, category), page === 1 ? title : locale === "en" ? `${title} · Page ${page}` : `${title} · ${page}페이지`, translateText(description, locale ?? "ko"), locale)
 }
 
 export function blogPosting(post: PublicPostSummary) {
@@ -53,10 +59,10 @@ export function blogPosting(post: PublicPostSummary) {
         datePublished: post.publishedAt,
         ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
         ...(post.thumbnail ? { image: [new URL(post.thumbnail, SITE_URL).href] } : {}),
-        author: { "@type": "Person", name: "김바실리", url: `${SITE_URL}/introduce` },
-        inLanguage: "ko-KR",
+        author: { "@type": "Person", name: post.locale === "en" ? "Basilri Kim" : "김바실리", url: `${SITE_URL}${post.locale ? localeHref("/introduce", post.locale) : "/introduce"}` },
+        inLanguage: languageTag(post.locale ?? "ko"),
         keywords: post.tags.join(", "),
-        ...(post.category ? { articleSection: postCategoryLabel(post.category) } : {}),
+        ...(post.category ? { articleSection: postCategoryLabel(post.category, post.locale ?? "ko") } : {}),
     }
 }
 

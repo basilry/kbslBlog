@@ -1,7 +1,10 @@
 "use client"
 
+import { useLocale } from "@lib/i18n/context"
+import { messages } from "@lib/i18n/messages"
+import { localeHref } from "@lib/i18n/config"
 import Form from "next/form"
-import Link from "next/link"
+import Link from "@components/ui/LocaleLink"
 import { useSyncExternalStore, type FormEvent } from "react"
 import { postCategoryLabel, type PostCategoryFilter } from "@lib/content/categories"
 import { MAX_SEARCH_QUERY_LENGTH, postSearchHref } from "@lib/content/search-query"
@@ -14,34 +17,36 @@ interface PostSearchFormProps {
 }
 
 export default function PostSearchForm({ query = "", category }: PostSearchFormProps) {
+    const locale = useLocale()
+    const m = messages(locale)
     const recent = useSyncExternalStore(subscribeRecentSearches, getRecentSearchesSnapshot, getServerRecentSearchesSnapshot)
     const submit = (event: FormEvent<HTMLFormElement>) => {
         addRecentSearch(new FormData(event.currentTarget).get("q"))
     }
     return <>
-        <Form action="/search" className={styles.searchForm} role="search" aria-label="포스팅 검색" onSubmit={submit}>
-            <label htmlFor="post-search">{category === "all" ? "포스팅 검색" : `${postCategoryLabel(category)}에서 검색`}</label>
+        <Form action={localeHref("/search", locale)} className={styles.searchForm} role="search" aria-label={m.searchTitle} onSubmit={submit}>
+            <label htmlFor="post-search">{category === "all" ? m.searchTitle : (locale === "en" ? `Search ${postCategoryLabel(category, locale)}` : `${postCategoryLabel(category)}에서 검색`)}</label>
             <div className={styles.searchControls}>
                 <input key={`${category}:${query}`} id="post-search" type="search" name="q" defaultValue={query}
-                    placeholder="제목, 본문, 태그 검색" maxLength={MAX_SEARCH_QUERY_LENGTH} autoComplete="off"
+                    placeholder={m.searchPlaceholder} maxLength={MAX_SEARCH_QUERY_LENGTH} autoComplete="off"
                     enterKeyHint="search" aria-describedby="post-search-hint" />
                 {category !== "all" && <input type="hidden" name="category" value={category} />}
-                <button type="submit">검색</button>
+                <button type="submit">{m.search}</button>
             </div>
-            <p id="post-search-hint">단어를 띄어 쓰면 모든 단어가 포함된 글을 찾습니다.</p>
+            <p id="post-search-hint">{m.searchHint}</p>
         </Form>
-        <section className={styles.recentSearches} aria-label="최근 검색어">
+        <section className={styles.recentSearches} aria-label={m.recentSearches}>
             <div className={styles.recentHeading}>
-                <h2>최근 검색어</h2>
-                <span>이 브라우저에만 저장됩니다.</span>
-                {recent.length > 0 && <button type="button" onClick={clearRecentSearches}>전체 삭제</button>}
+                <h2>{m.recentSearches}</h2>
+                <span>{m.browserOnly}</span>
+                {recent.length > 0 && <button type="button" onClick={clearRecentSearches}>{m.clearAll}</button>}
             </div>
             {recent.length ? <ul className={styles.recentList}>
                 {recent.map((term) => <li key={term}>
                     <Link href={postSearchHref(term, 1, category)} prefetch={false} onClick={() => addRecentSearch(term)} title={term}>{term}</Link>
-                    <button type="button" aria-label={`${term} 검색어 삭제`} onClick={() => removeRecentSearch(term)}><span aria-hidden="true">×</span></button>
+                    <button type="button" aria-label={(locale === "en" ? `Remove search: ${term}` : `${term} 검색어 삭제`)} onClick={() => removeRecentSearch(term)}><span aria-hidden="true">×</span></button>
                 </li>)}
-            </ul> : <p className={styles.recentEmpty}>최근 검색어가 없습니다.</p>}
+            </ul> : <p className={styles.recentEmpty}>{m.noRecent}</p>}
         </section>
     </>
 }

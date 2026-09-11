@@ -2,7 +2,7 @@
 
 import { ReactElement, useSyncExternalStore } from "react"
 import Image from "next/image"
-import Link from "next/link"
+import Link from "@components/ui/LocaleLink"
 import classNames from "classnames"
 import TextBasic from "@components/atom/TextBasic"
 import { IPagination } from "@interface/IRoot"

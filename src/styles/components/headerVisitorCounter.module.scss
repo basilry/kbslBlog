@@ -53,3 +53,8 @@
     .counter::before { background: Highlight; }
     .today, .label { color: CanvasText; }
 }
+@media (max-width: 480px) {
+    .counter { width: 88px; padding-left: 7px; padding-right: 2px; }
+    .value { font-size: 11px; }
+    .label { font-size: 9px; }
+}

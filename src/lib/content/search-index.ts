@@ -1,6 +1,8 @@
 import { htmlToDOM } from "html-react-parser"
 import { plainTextFromHtml } from "./markdown"
 import { getPublishedLocalPosts } from "./posts"
+import { getLocalizedPublishedPosts } from "./localized-posts"
+import type { Locale } from "../i18n/config"
 import type { SearchablePost } from "./search"
 
 function searchableText(html: string): string {
@@ -11,7 +13,7 @@ function searchableText(html: string): string {
 }
 
 // Called during the static page build. Only already-published local content is serialized to the browser.
-export async function buildPostSearchIndex(directory?: string): Promise<SearchablePost[]> {
-    const posts = await getPublishedLocalPosts(directory)
+export async function buildPostSearchIndex(directory?: string, locale?: Locale): Promise<SearchablePost[]> {
+    const posts = locale ? await getLocalizedPublishedPosts(locale, directory) : await getPublishedLocalPosts(directory)
     return posts.map(({ html, ...summary }) => ({ summary, text: searchableText(html) }))
 }

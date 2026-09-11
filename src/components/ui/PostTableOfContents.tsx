@@ -1,10 +1,13 @@
 "use client"
 
+import { useLocale } from "@lib/i18n/context"
+import { messages } from "@lib/i18n/messages"
 import { useEffect, useRef, useState, type MouseEvent } from "react"
 import type { PostHeading } from "@lib/content/outline"
 import styles from "@styles/components/postTableOfContents.module.scss"
 
 export default function PostTableOfContents({ headings }: { headings: PostHeading[] }) {
+    const m = messages(useLocale())
     const [activeId, setActiveId] = useState(headings[0]?.id ?? "")
     const desktopList = useRef<HTMLElement>(null)
     const minimumLevel = Math.min(...headings.map((heading) => heading.level))
@@ -80,14 +83,14 @@ export default function PostTableOfContents({ headings }: { headings: PostHeadin
         </li>
     ))}</ol>
 
-    return <aside className={styles.toc} aria-label="이 글의 목차">
+    return <aside className={styles.toc} aria-label={m.contents}>
         <div className={styles.desktop}>
-            <p className={styles.label}>이 글의 목차</p>
-            <nav ref={desktopList} aria-label="본문 목차" className={styles.list}>{links()}</nav>
+            <p className={styles.label}>{m.contents}</p>
+            <nav ref={desktopList} aria-label={m.contentsNav} className={styles.list}>{links()}</nav>
         </div>
         <details className={styles.mobile}>
-            <summary>이 글의 목차<span>{headings.length}개 항목 <span aria-hidden="true">⌄</span></span></summary>
-            <nav aria-label="본문 목차" className={styles.list}>{links()}</nav>
+            <summary>{m.contents}<span>{headings.length} <span aria-hidden="true">⌄</span></span></summary>
+            <nav aria-label={m.contentsNav} className={styles.list}>{links()}</nav>
         </details>
     </aside>
 }

@@ -1,5 +1,8 @@
 "use client"
 
+import { useLocale } from "@lib/i18n/context"
+import { messages } from "@lib/i18n/messages"
+import { counterPostPath, languageTag } from "@lib/i18n/config"
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import { usePathname } from "next/navigation"
 import { counterDay, type CounterResponse, type CounterSnapshot } from "@lib/counters/types"
@@ -13,7 +16,6 @@ type CounterState =
 
 const LOADING: CounterState = { status: "loading", snapshot: null }
 const CounterContext = createContext<CounterState>(LOADING)
-const POST_PATH = /^\/post\/[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 export function useVisitorCounterState() {
     return useContext(CounterContext)
@@ -22,7 +24,7 @@ export function useVisitorCounterState() {
 export function VisitorCounterProvider({ children }: { children: ReactNode }) {
     const pathname = usePathname()
     const activeView = useRef<{ pathname: string; eventId: string } | null>(null)
-    const postPath = POST_PATH.test(pathname) && pathname !== "/post/register" ? pathname : null
+    const postPath = counterPostPath(pathname)
     const [result, setResult] = useState<{ path: string | null; state: CounterState } | null>(null)
 
     useEffect(() => {
@@ -106,12 +108,14 @@ export function VisitorCounterProvider({ children }: { children: ReactNode }) {
 }
 
 export default function VisitorCounter({ postPath }: { postPath?: string }) {
+    const locale = useLocale()
+    const m = messages(locale)
     const state = useContext(CounterContext)
     if (postPath && state.status !== "ready") {
         const loading = state.status === "loading"
         return (
-            <span aria-live="polite" aria-busy={loading} title={loading ? "조회수를 불러오는 중입니다" : "조회수를 잠시 불러올 수 없습니다"}>
-                조회수 {loading ? "확인 중…" : "—"}
+            <span aria-live="polite" aria-busy={loading} title={loading ? m.loadingViews : m.unavailableViews}>
+                {m.views} {loading ? m.checking : "—"}
             </span>
         )
     }
@@ -119,10 +123,10 @@ export default function VisitorCounter({ postPath }: { postPath?: string }) {
     const snapshot = state.snapshot
     if (!postPath && snapshot.date !== counterDay(new Date(), snapshot.timeZone)) return null
     if (postPath) {
-        const count = snapshot.postViews[postPath]
-        if (!Number.isSafeInteger(count) || count < 0) return <span title="조회수를 잠시 불러올 수 없습니다">조회수 —</span>
-        return <span aria-live="polite" title="누적 열람 횟수 · 재방문과 새로고침 포함">조회수 {count.toLocaleString("ko-KR")}</span>
+        const count = snapshot.postViews[counterPostPath(postPath) ?? ""]
+        if (!Number.isSafeInteger(count) || count < 0) return <span title={m.unavailableViews}>{m.views} —</span>
+        return <span aria-live="polite" title={m.cumulativeViews}>{m.views} {count.toLocaleString(languageTag(locale))}</span>
     }
     if (!Number.isSafeInteger(snapshot.todayViews) || !Number.isSafeInteger(snapshot.totalViews) || snapshot.todayViews < 0 || snapshot.totalViews < 0) return null
-    return <span title="같은 브라우저는 한국 시간 기준 하루 1회 · 누적값에는 집계 기준 변경 전 기록 포함">오늘 방문 {snapshot.todayViews.toLocaleString("ko-KR")} · 누적 방문 {snapshot.totalViews.toLocaleString("ko-KR")}</span>
+    return <span title={locale === "en" ? "Each browser is counted once per day in Korea time. Totals include records from the earlier counting method." : "같은 브라우저는 한국 시간 기준 하루 1회 · 누적값에는 집계 기준 변경 전 기록 포함"}>{m.today} {snapshot.todayViews.toLocaleString(languageTag(locale))} · {m.total} {snapshot.totalViews.toLocaleString(languageTag(locale))}</span>
 }

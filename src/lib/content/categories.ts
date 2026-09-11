@@ -13,8 +13,14 @@ export function isPostCategory(value: unknown): value is PostCategoryId {
     return POST_CATEGORIES.some((category) => category.id === value)
 }
 
-export function postCategoryLabel(id: PostCategoryId = "other"): string {
+export function postCategoryLabel(id: PostCategoryId = "other", locale: "ko" | "en" = "ko"): string {
+    if (locale === "en") return ({ "ai-agents": "AI & agents", development: "Development & shipping", "work-life": "Work & life", other: "Other" })[id]
     return POST_CATEGORIES.find((category) => category.id === id)?.label ?? "기타"
+}
+
+export function postCategoryDescription(id: PostCategoryId, locale: "ko" | "en" = "ko"): string {
+    if (locale === "en") return ({ "ai-agents": "What I am building with AI and agents", development: "Lessons from building, shipping and running software", "work-life": "Thoughts on working as a developer", other: "Other topics and earlier posts" })[id]
+    return POST_CATEGORIES.find(category => category.id === id)?.description ?? ""
 }
 
 export function postListHref(page = 1, category: PostCategoryFilter = "all"): string {

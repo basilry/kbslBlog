@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@components/ui/LocaleLink"
 import type { ComponentProps } from "react"
 
 type Props = ComponentProps<typeof Link> & { eventName: string; label: string }

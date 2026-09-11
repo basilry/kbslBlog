@@ -1,10 +1,12 @@
 import type { PostCategoryCounts, PostCategoryFilter, PostCategoryId } from "./categories"
+import type { Locale } from "../i18n/config"
 
 export const SITE_URL = "https://www.basilry.kim"
 
 export type PublicPostSource = "local" | "legacy"
 
 export interface PublicPostSummary {
+    locale?: Locale
     id: string
     slug: string
     source: PublicPostSource

@@ -1,5 +1,8 @@
 "use client"
 
+import { useLocale } from "@lib/i18n/context"
+import { messages } from "@lib/i18n/messages"
+import { counterPostPath, languageTag } from "@lib/i18n/config"
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import type { PostViewsResponse } from "@lib/counters/types"
 import { counterEndpoint } from "@lib/counters/endpoint"
@@ -13,7 +16,7 @@ const LOADING: ViewState = { status: "loading", postViews: null }
 const ViewContext = createContext<ViewState>(LOADING)
 
 export function PostViewCountsProvider({ paths, children }: { paths: string[]; children: ReactNode }) {
-    const pathKey = paths.join("\n")
+    const pathKey = [...new Set(paths.map(counterPostPath).filter((p): p is string => p !== null))].join("\n")
     const [result, setResult] = useState<{ pathKey: string; state: ViewState } | null>(null)
 
     useEffect(() => {
@@ -64,16 +67,18 @@ export function PostViewCountsProvider({ paths, children }: { paths: string[]; c
 }
 
 export function PostViewCount({ postPath }: { postPath: string }) {
+    const locale = useLocale()
+    const m = messages(locale)
     const state = useContext(ViewContext)
     if (state.status !== "ready") {
         const loading = state.status === "loading"
         return (
-            <span aria-busy={loading} title={loading ? "조회수를 불러오는 중입니다" : "조회수를 잠시 불러올 수 없습니다"}>
-                조회수 {loading ? "확인 중…" : "—"}
+            <span aria-busy={loading} title={loading ? m.loadingViews : m.unavailableViews}>
+                {m.views} {loading ? m.checking : "—"}
             </span>
         )
     }
-    const count = state.postViews[postPath]
-    if (!Number.isSafeInteger(count) || count < 0) return <span title="조회수를 잠시 불러올 수 없습니다">조회수 —</span>
-    return <span title="누적 열람 횟수 · 재방문과 새로고침 포함">조회수 {count.toLocaleString("ko-KR")}</span>
+    const count = state.postViews[counterPostPath(postPath) ?? ""]
+    if (!Number.isSafeInteger(count) || count < 0) return <span title={m.unavailableViews}>{m.views} —</span>
+    return <span title={m.cumulativeViews}>{m.views} {count.toLocaleString(languageTag(locale))}</span>
 }

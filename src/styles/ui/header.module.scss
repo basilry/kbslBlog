@@ -82,6 +82,14 @@
 .quickLinks { display: flex; gap: 20px; font-size: 15px; margin-left: 24px; }
 .quickLinks a[aria-current="page"] { color: #b45bd1; }
 .rootLink { font-size: 22px; font-weight: 750; white-space: nowrap; }
+.languageForm {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    select { font: inherit; font-size: 13px; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 8px; min-height: 36px; width: 84px; padding: 4px; cursor: pointer; }
+    option { color: #151519; background: #fff; }
+    select:focus-visible { outline: 2px solid #a640c5; outline-offset: 3px; }
+}
 
 @media (max-width: 760px) {
     .headerWrapper { padding: 0 16px; }
@@ -104,4 +112,16 @@
         .leftWrapper .linkBlock .rootLink { font-size: 15px; padding-inline: 0; }
         .rightWrapper { gap: 6px; }
     }
+}
+@media (max-width: 480px) {
+    .domainSuffix { display: none; }
+    .headerWrapper {
+        padding-inline: 8px;
+        gap: 4px;
+        .leftWrapper { gap: 0; }
+        .leftWrapper .hamberger { padding: 6px; }
+        .leftWrapper .linkBlock .rootLink { font-size: 16px; padding-inline: 2px; }
+        .rightWrapper { gap: 4px; }
+    }
+    .languageForm select { width: 76px; font-size: 12px; }
 }
