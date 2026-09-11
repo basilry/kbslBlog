@@ -16,7 +16,7 @@
     display: grid;
     grid-template-columns: minmax(0, 820px) 216px;
     column-gap: clamp(28px, 4vw, 56px);
-    grid-template-areas: "back ." "header ." "content toc";
+    grid-template-areas: "back ." "header ." "content toc" "navigation .";
 }
 
 .backLink {
@@ -228,6 +228,40 @@
     padding-top: $space-8;
     border-top: 1px solid $separator-light;
 }
+.adjacentNavigation {
+    grid-area: navigation;
+    min-width: 0;
+    margin-bottom: $space-9;
+    padding-top: $space-6;
+    border-top: 1px solid $separator-light;
+}
+.adjacentHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    margin-bottom: $space-4;
+    h2 { font-size: $small-font; font-weight: $semi; }
+    a { padding: $space-3 0; color: $pink-pressed; font-size: $x-small-font; }
+}
+.adjacentCards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: $space-4; }
+.adjacentCard, .adjacentEmpty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-3;
+    min-width: 0;
+    padding: $space-5;
+    border: 1px solid $separator-light;
+    border-radius: $radius-md;
+    > span { color: $pink-pressed; font-size: $x-small-font; font-weight: $semi; }
+    strong { font-size: $medium-font; line-height: 1.5; font-weight: $semi; overflow-wrap: anywhere; }
+    time { margin-top: auto; color: $text-secondary; font-size: 12px; }
+}
+.adjacentCard { transition: background-color $duration-fast; &:hover { background: $surface-secondary; } }
+.adjacentNavigation a:focus-visible { outline: 2px solid $pink-pressed; outline-offset: 3px; }
+.adjacentEmpty { border-style: dashed; > span, p { color: $text-secondary; font-size: $x-small-font; } }
+.nextCard { text-align: right; align-items: flex-end; }
 
 .readerActions {
     position: fixed;
@@ -294,6 +328,11 @@
 }
 
 :global(#darkMode) {
+    .adjacentNavigation, .adjacentCard, .adjacentEmpty { border-color: $separator-dark; }
+    .adjacentHeading a, .adjacentCard > span { color: #d99aee; }
+    .adjacentCard time, .adjacentEmpty > span, .adjacentEmpty p { color: $black-400; }
+    .adjacentCard:hover { background: $dark-surface-secondary; }
+    .adjacentNavigation a:focus-visible { outline-color: #d99aee; }
     .category { color: #d99aee; }
     .header,
     .comments {
@@ -335,6 +374,7 @@
 }
 
 @include MOBILE {
+    .adjacentCards { grid-template-columns: 1fr; gap: $space-3; }
     .page {
         padding-top: $space-5;
     }

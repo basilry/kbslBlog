@@ -22,7 +22,7 @@ export default function Header() {
             </button>
             <div className={styles.linkBlock}><Link className={styles.rootLink} href="/" onClick={() => changeSideBarFold(false)}>basilry.kim</Link></div>
             <nav aria-label="빠른 이동" className={styles.quickLinks}>
-                <Link href="/post" aria-current={path.startsWith("/post") ? "page" : undefined}>글</Link>
+                <Link href="/post" aria-current={path.startsWith("/post") || path === "/search" ? "page" : undefined}>글</Link>
                 <Link href="/projects" aria-current={path.startsWith("/projects") ? "page" : undefined}>프로젝트</Link>
             </nav>
         </div>

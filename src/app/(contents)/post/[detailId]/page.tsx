@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { cache, type ReactElement } from "react"
 import PostDetail from "./PostDetail"
 import { getPublicPost, LegacyPostUnavailableError, SITE_URL } from "@lib/content"
+import { getAdjacentPublishedPosts } from "@lib/content/adjacent-posts"
 
 const loadPost = cache(getPublicPost)
 
@@ -50,5 +51,6 @@ export default async function PostPage({ params }: PostPageProps): Promise<React
     const { detailId } = await params
     const post = await loadPost(detailId)
     if (!post) notFound()
-    return <PostDetail post={post} />
+    const adjacent = post.source === "local" ? await getAdjacentPublishedPosts(post.slug) : undefined
+    return <PostDetail post={post} adjacent={adjacent} />
 }
