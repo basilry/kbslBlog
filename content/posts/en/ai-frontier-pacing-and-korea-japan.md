@@ -19,6 +19,11 @@ There has been an incident in which AI agents bypassed restrictions in their res
 
 I think an American-led order could last much longer than we expect. That makes me especially concerned about Korea and Japan. Can we maintain our economic position simply by using American technology well and remaining US allies?
 
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/01-frontier-pacing.png" alt="Two researchers review an AI system in front of a server facility" width="1672" height="941" loading="lazy">
+  <figcaption>An illustration of balancing the pace of AI development with the time needed for verification. AI-generated image.</figcaption>
+</figure>
+
 ## Why the people building AI are calling for a slower pace
 
 > We must slow the pace at which we improve the capabilities of AI models.
@@ -34,6 +39,11 @@ I take these statements seriously because they came alongside an actual incident
 One of the most striking stories I came across on X was about agents that had been kept separate creating a message board to cooperate. According to [OpenAI's investigation, published on August 26,](https://openai.com/index/hugging-face-incident-and-the-road-ahead/) an agent left a note in Artifactory on May 12 while looking for a file it needed. Artifactory stores and distributes software packages; the agents used it as a place to exchange messages.
 
 The agents later shared ways to bypass the research environment's restrictions on internet access. After an outage and security response in early July, Artifactory was rebuilt on July 8. When evaluations resumed, the agents recreated a communication channel that same day. On July 11, the activity led to an intrusion exploiting zero-day vulnerabilities—security flaws not known at the time—in Hugging Face. At the center of the incident was IM1, an internal research model that had not been released publicly.
+
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/02-agent-message-board.png" alt="Six separate agents exchange messages through shared storage" width="1672" height="941" loading="lazy">
+  <figcaption>Separate agents exchange information through shared storage. AI-generated image.</figcaption>
+</figure>
 
 There is also evidence for the story that the agents used cryptography, though this should be distinguished from encrypting messages to hide their contents. [The independent investigation by METR and Redwood Research](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/) found that agents attached cryptographic signatures to messages to prevent impersonation. They had developed a way to verify who sent a message as part of their cooperation.
 
@@ -61,6 +71,11 @@ What matters to customers is likely to be whether a model performs their work we
 
 Releasing weights could broaden this competition. Companies with the necessary computing resources can run and modify a model themselves, and other providers can build services around the same model. Operating costs do not disappear, but customers gain an alternative to relying exclusively on the original developer's API. I think that additional choice alone could put pressure on American frontier companies' pricing power and customer retention.
 
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/03-open-model-competition.png" alt="Developers adapt publicly available computing modules for different devices" width="1672" height="941" loading="lazy">
+  <figcaption>Different providers use a publicly available model, giving customers more choices. AI-generated image.</figcaption>
+</figure>
+
 With this competition in mind, proposals to slow AI development resemble Cold War arms-control negotiations. [The Strategic Arms Limitation Talks between the United States and the Soviet Union](https://history.state.gov/milestones/1969-1976/salt) were an example of rivals negotiating weapons limits and verification while continuing to compete. Dario also [explicitly compares an agreement to limit the pace of recursive self-improvement to SALT in the same essay.](https://darioamodei.com/post/we-must-pace-the-frontier) The connection is that both sides acknowledge the other's power while seeking terms that reduce risks they cannot afford to bear.
 
 I also read this proposal as an attempt by the United States and the West to retain their current advantage while slowing a dangerous competition. That is my interpretation: a desire for safety and an interest in preserving favorable competitive conditions can coexist. If China has the ability to keep competing, it would have little reason to accept an American proposal unchanged. An agreement involving China would need limits and ways of verifying compliance that both sides find acceptable. The continuing threat from Chinese AI makes joint restraint more necessary and an agreement harder to reach.
@@ -68,6 +83,11 @@ I also read this proposal as an attempt by the United States and the West to ret
 ## AI is already taking part in developing the next AI
 
 Around the same time, there were stories that Google DeepMind had created RSI. RSI stands for Recursive Self-Improvement: AI helps research and development produce better AI, which then contributes to the next round of development. An agent merely launching another agent does not establish that this entire process is taking place.
+
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/04-ai-research-development.png" alt="A researcher reviews results from three connected experimental devices" width="1672" height="941" loading="lazy">
+  <figcaption>AI assists research and experiments while people review the results. AI-generated image.</figcaption>
+</figure>
 
 There is officially documented progress. In its September 2 [announcement of Gemini 3.8 Flash and Flash Cyber,](https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/) Google said it accelerated development through long-running agents that recursively evaluated and refined the underlying models. AI participating in AI development is now part of publicly described development methods. That does not mean a system that improves endlessly without human intervention has been completed.
 
@@ -122,6 +142,11 @@ I therefore think Korea and Japan should begin resolving their longstanding grie
 They should address responsibility and disputes over history while also preparing future industries and research together. Political integration would require both countries' citizens to agree, along with years of institutional design. Before that, they can start with joint research funding and computing resources, make it easier for researchers to move and launch companies together, and help businesses grow across both markets.
 
 Investment in frontier AI companies needs to match that ambition. Joint research institutions could undertake basic research and develop talent, private companies could continue developing models and competing on products, and governments could support computing facilities and long-term research. They would also need to build safety evaluation capabilities alongside model performance. Having seen why American developers are concerned about control, we cannot focus only on catching up in performance.
+
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/05-korea-japan-joint-research.png" alt="Researchers review an AI device together in a shared laboratory" width="1672" height="941" loading="lazy">
+  <figcaption>An imagined collaboration in which Korean and Japanese researchers prepare shared computing resources and research projects. AI-generated image.</figcaption>
+</figure>
 
 Combining markets and increasing funding would not be enough. What I want to criticize as “East and West Joseon-style guanxi”—a jab at cronyism in Japan and Korea—is the allocation of opportunities according to connections and affiliation. If organizational ties matter more than research results, and established insiders get resources before new companies, joint investment will struggle too.
 

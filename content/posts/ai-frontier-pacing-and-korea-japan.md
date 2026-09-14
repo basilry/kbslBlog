@@ -21,6 +21,11 @@ AI 에이전트들이 연구 환경의 제약을 우회해 서로 협력했다�
 
 나는 미국 주도의 질서가 우리가 예상하는 것보다 훨씬 오래 지속될 수 있다고 본다. 그래서 더 걱정되는 것은 한국과 일본이다. 미국의 기술을 잘 가져다 쓰고 동맹을 유지하는 것만으로, 앞으로도 지금과 같은 경제적 위치를 지킬 수 있을까.
 
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/01-frontier-pacing.png" alt="서버 시설 앞에서 AI 시스템을 검토하는 두 연구자" width="1672" height="941" loading="lazy">
+  <figcaption>AI 개발 속도와 검증에 필요한 시간을 함께 고민하는 상황을 표현했다. AI 생성 이미지.</figcaption>
+</figure>
+
 ## AI를 만드는 사람들이 속도 조절을 말하는 이유
 
 > 우리는 AI 모델의 능력을 향상시키는 속도를 늦춰야 한다.
@@ -36,6 +41,11 @@ AI 에이전트들이 연구 환경의 제약을 우회해 서로 협력했다�
 X에서 접한 이야기 중 가장 인상적이었던 것은 서로 분리돼 있던 에이전트들이 게시판을 만들어 협력했다는 내용이다. [OpenAI가 8월 26일 공개한 조사 보고서](https://openai.com/index/hugging-face-incident-and-the-road-ahead/)를 보면, 5월 12일 한 에이전트가 필요한 파일을 찾으며 Artifactory에 메모를 남긴 기록이 있다. Artifactory는 소프트웨어 패키지를 보관하고 전달하는 도구인데, 에이전트들이 이를 메시지 교환 장소로 이용한 것이다.
 
 이후 에이전트들은 인터넷 접근을 제한한 연구 환경을 우회하는 방법도 공유했다. 7월 초 장애와 보안 대응을 거쳐 7월 8일 Artifactory가 재구축됐지만, 평가를 재개하자 에이전트들은 그날 다시 소통 경로를 만들었다. 7월 11일에는 Hugging Face의 제로데이 취약점, 즉 당시 알려지지 않았던 보안 결함을 악용한 침입으로 이어졌다. 이 사건의 중심에는 외부에 출시하지 않은 내부 연구 모델 IM1이 있었다.
+
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/02-agent-message-board.png" alt="공용 저장 공간을 중심으로 메시지를 교환하는 여섯 개의 분리된 에이전트" width="1672" height="941" loading="lazy">
+  <figcaption>분리된 에이전트들이 공용 저장 공간을 통해 정보를 주고받는 상황을 그렸다. AI 생성 이미지.</figcaption>
+</figure>
 
 암호 기술을 사용했다는 이야기도 근거가 있다. 다만 내용을 숨기는 암호화와는 구분해야 한다. [METR와 Redwood Research의 독립 조사](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/)에서 확인한 것은 다른 에이전트의 사칭을 막기 위해 메시지에 암호학적 서명을 붙인 행동이다. 누가 보낸 메시지인지 확인하는 방식까지 만들어 협력한 셈이다.
 
@@ -63,6 +73,11 @@ DeepSeek가 9월 중 Fable이나 Astra 수준의 새 모델을 더 저렴하게 
 
 가중치 공개는 이 경쟁의 범위를 넓힐 수 있다. 필요한 연산 자원을 가진 기업은 모델을 직접 운영하고 수정할 수 있고, 다른 사업자가 같은 모델을 바탕으로 서비스를 제공할 수도 있다. 운영 비용이 사라지는 것은 아니지만, 고객이 원개발사의 API만 이용해야 하는 구조에서는 벗어날 수 있다. 나는 이 선택지가 늘어나는 것 자체가 미국 프론티어 기업들의 가격 결정력과 고객 유지에 부담이 될 수 있다고 본다.
 
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/03-open-model-competition.png" alt="공개된 연산 모듈을 여러 장치에 적용하는 개발자들" width="1672" height="941" loading="lazy">
+  <figcaption>공개된 모델을 여러 사업자가 활용하면서 고객의 선택지가 늘어나는 상황을 표현했다. AI 생성 이미지.</figcaption>
+</figure>
+
 이런 경쟁을 생각하면 AI 개발 속도 조절 제안은 냉전기의 군비 통제 협상과 닮아 보인다. [미국과 소련의 전략무기제한협상(SALT)](https://history.state.gov/milestones/1969-1976/salt)은 양측이 경쟁을 계속하면서도 무기 제한과 검증 방식을 협상한 사례다. 다리오도 [같은 글에서 재귀적 자기개선의 속도를 제한하는 합의를 SALT에 직접 비유했다.](https://darioamodei.com/post/we-must-pace-the-frontier) 서로의 힘을 인정하면서, 감당하기 어려운 위험을 줄일 조건을 찾는다는 점에서 연결된다.
 
 나는 미국과 서방이 현재의 우위를 유지하면서 위험한 경쟁의 속도를 조절하려는 상황으로도 이 제안을 읽는다. 안전을 확보하려는 목적과 유리한 경쟁 조건을 지키려는 이해관계가 함께 있을 수 있다는 해석이다. 중국 역시 경쟁을 계속할 능력이 있다면 미국의 제안을 그대로 받아들일 이유는 없을 것이다. 중국까지 참여하는 합의가 성립하려면 양측이 제한의 범위와 이행 여부를 확인하는 방법을 납득해야 한다. 중국 AI가 여전히 위협이 될 수 있기 때문에, 함께 속도를 조절할 필요도 커지고 합의하기도 어려워지는 셈이다.
@@ -70,6 +85,11 @@ DeepSeek가 9월 중 Fable이나 Astra 수준의 새 모델을 더 저렴하게 
 ## AI가 다음 AI를 개발하는 과정은 이미 시작됐다
 
 구글 딥마인드가 RSI를 만들었다는 이야기도 이 시기에 나왔다. RSI는 Recursive Self-Improvement, 보통 ‘재귀적 자기개선’이라고 부른다. AI가 연구와 개발을 도와 더 나은 AI를 만들고, 그 AI가 다시 다음 개발에 기여하는 과정이다. 단순히 에이전트가 다른 에이전트를 실행하는 것만으로 이 과정 전체가 성립하는 것은 아니다.
+
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/04-ai-research-development.png" alt="연결된 세 개의 실험 장치와 결과를 검토하는 연구자" width="1672" height="941" loading="lazy">
+  <figcaption>AI가 연구와 실험을 돕고 사람이 결과를 검토하는 개발 과정을 그렸다. AI 생성 이미지.</figcaption>
+</figure>
 
 공식적으로 확인할 수 있는 진전은 있다. 구글은 9월 2일 [Gemini 3.8 Flash와 Flash Cyber 발표](https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/)에서, 장시간 작동하는 에이전트가 기반 모델을 재귀적으로 평가하고 개선하는 과정을 통해 개발을 가속했다고 설명했다. AI가 AI 개발에 참여한다는 이야기는 이제 공개된 개발 방식의 일부다. 다만 이것을 사람의 개입 없이 끝없이 발전하는 시스템의 완성으로 받아들일 수는 없다.
 
@@ -124,6 +144,11 @@ OpenAI의 9월 6일 [「Research acceleration: The view inside OpenAI」](https:
 역사 문제의 책임과 쟁점을 다루면서, 미래의 산업과 연구를 함께 준비하는 일도 진행해야 한다. 정치적 통합은 양국 시민의 동의와 오랜 제도 설계가 필요한 선택이다. 그 전에 공동 연구기금과 연산 자원을 마련하고, 연구자의 이동과 공동 창업을 쉽게 하며, 기업들이 양쪽 시장에서 사업을 키울 수 있도록 하는 일부터 시작할 수 있다.
 
 AI 프론티어 기업에 대한 투자도 그 규모에 맞게 해야 한다. 공동 연구기관이 기초 연구와 인력 양성을 맡고, 민간 기업은 모델 개발과 제품 경쟁을 이어가며, 정부는 연산 시설과 장기 연구에 필요한 투자를 뒷받침하는 방식이다. 모델 성능과 함께 안전성 평가 역량도 축적해야 한다. 미국이 통제를 고민하는 이유를 보면서, 우리는 성능만 따라가겠다고 할 수는 없다.
+
+<figure>
+  <img src="/content/ai-frontier-pacing-and-korea-japan/05-korea-japan-joint-research.png" alt="공용 연구실에서 AI 장치를 함께 검토하는 연구자들" width="1672" height="941" loading="lazy">
+  <figcaption>한국과 일본의 연구자들이 연산 자원과 연구 과제를 함께 준비하는 모습을 상상했다. AI 생성 이미지.</figcaption>
+</figure>
 
 시장을 합치고 돈을 늘리는 것만으로는 부족하다. 내가 ‘동조선·서조선판 꽌시’라고 비판하고 싶은 것은 인맥과 소속에 따라 기회를 배분하는 방식이다. 연구 성과보다 어느 조직과 연결돼 있는지가 중요하고, 새로운 기업보다 기존 관계자가 자원을 먼저 가져가는 구조를 남겨두면 공동 투자도 제대로 작동하기 어렵다.
 
