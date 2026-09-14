@@ -4,7 +4,7 @@ slug: iphone-duo-cyborg-communication-security
 description: >-
   아이폰 듀오의 출시 발표를 계기로 미래 통신기기를 상상한다. 신경계와 연결된 기기의 해킹 위험, 사이보그를 위한 보안과 국제 협력 기관,
   지금 준비하고 싶은 일을 생각해 본다.
-publishedAt: '2026-09-11'
+publishedAt: '2026-09-11T10:54:49.000+09:00'
 tags:
   - 미래기술
   - 뇌컴퓨터인터페이스

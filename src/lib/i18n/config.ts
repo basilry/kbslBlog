@@ -39,9 +39,13 @@ export function discussionTerm(path: string): string {
 }
 export function formatPostDate(value: string, locale: Locale): string {
     const date = new Date(value)
-    return Number.isFinite(date.getTime()) ? new Intl.DateTimeFormat(languageTag(locale), {
+    if (!Number.isFinite(date.getTime())) return value
+    const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(value)
+    const formatted = new Intl.DateTimeFormat(languageTag(locale), {
         year: "numeric", month: "long", day: "numeric", timeZone: "Asia/Seoul",
-    }).format(date) : value
+        ...(dateOnly ? {} : { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }),
+    }).format(date)
+    return dateOnly ? `${formatted} (${locale === "ko" ? "시간 미기록" : "time not recorded"})` : `${formatted} KST`
 }
 export function formatArchiveDate(value: string, monthOnly = false): string {
     if (!value) return "Present"

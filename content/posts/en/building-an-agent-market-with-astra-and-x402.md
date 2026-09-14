@@ -2,7 +2,7 @@
 title: "With Astra, I want to build a market where agents trade"
 slug: building-an-agent-market-with-astra-and-x402
 description: "I want to build a market where agents collaborate and trade. A developer's plans to offer services to agents using communication technology from ACP to A2A, together with x402."
-publishedAt: "2026-09-09"
+publishedAt: '2026-09-09T11:23:33.000+09:00'
 category: ai-agents
 tags:
   - AI

@@ -3,7 +3,23 @@ import { NextRequest } from "next/server"
 import { unstable_doesMiddlewareMatch as unstable_doesProxyMatch } from "next/experimental/testing/server"
 import { config, proxy } from "../../proxy"
 import { GET } from "../../app/language/route"
-import { LANGUAGE_COOKIE, counterPostPath, discussionTerm, localeHref, preferredLocale, safeReturnPath } from "./config"
+import { LANGUAGE_COOKIE, counterPostPath, discussionTerm, formatPostDate, localeHref, preferredLocale, safeReturnPath } from "./config"
+
+describe("publication date and time", () => {
+    it("shows the same Korean time in both languages across a UTC date boundary", () => {
+        for (const locale of ["ko", "en"] as const) {
+            const date = formatPostDate("2026-09-13T15:05:00Z", locale)
+            expect(date).toContain("14")
+            expect(date).toContain("00:05 KST")
+            expect(formatPostDate("2026-09-14T00:05:00+09:00", locale)).toBe(date)
+        }
+    })
+    it("does not invent a midnight publication time for a date-only record", () => {
+        expect(formatPostDate("2026-09-14", "ko")).toContain("시간 미기록")
+        expect(formatPostDate("2026-09-14", "en")).toContain("time not recorded")
+        expect(formatPostDate("unknown", "en")).toBe("unknown")
+    })
+})
 
 describe("country defaults and explicit language choices", () => {
     it("defaults Korea to Korean and all other or unknown countries to English", () => {

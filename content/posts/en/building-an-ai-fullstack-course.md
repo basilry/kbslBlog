@@ -2,7 +2,7 @@
 title: "In an age of AI-generated code, I want to teach developers how to ship"
 slug: building-an-ai-fullstack-course
 description: "I am building an Inflearn course with the working title 'Shipping a Production Full-Stack App with AI Agents.' Why I want to teach the process from requirements to verification, testing, deployment, and operations, and where the work stands."
-publishedAt: "2026-09-08"
+publishedAt: '2026-09-08T10:10:47.000+09:00'
 updatedAt: "2026-09-09"
 category: development
 tags:

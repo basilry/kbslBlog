@@ -2,7 +2,7 @@
 title: "The more AI amazes me, the more I worry about making a living"
 slug: ai-progress-and-my-next-income
 description: "The wonder and financial anxiety I feel using GPT-6 Astra, and why I am exploring lahamu, x402, blogging, and an Inflearn course as a freelance developer's next sources of income."
-publishedAt: "2026-09-07"
+publishedAt: '2026-09-07T14:36:47.000+09:00'
 updatedAt: "2026-09-09"
 category: ai-agents
 tags:

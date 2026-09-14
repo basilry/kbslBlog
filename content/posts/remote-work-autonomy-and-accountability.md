@@ -5,7 +5,7 @@ slug: remote-work-autonomy-and-accountability
 description: >-
   코로나 시절 재택근무를 하며 코딩에 더 집중할 수 있었다. 대면을 선호하는 관리 방식에 대한 불만과, 일하는 장소를 선택할 자유에 성과
   책임이 따라야 한다는 생각.
-publishedAt: '2026-09-10'
+publishedAt: '2026-09-10T10:02:01.000+09:00'
 tags:
   - 재택근무
   - 개발자

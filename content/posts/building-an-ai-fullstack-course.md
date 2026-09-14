@@ -5,7 +5,7 @@ slug: building-an-ai-fullstack-course
 description: >-
   인프런에 올릴 ‘AI 에이전트로 프로덕션 풀스택 출시하기’ 강의를 만들고 있다. 요구사항 정리부터 검증, 테스트, 배포와
   운영까지 끝내는 과정을 강의로 만들려는 이유와 현재 진행 상황을 기록한다.
-publishedAt: '2026-09-08'
+publishedAt: '2026-09-08T10:10:47.000+09:00'
 updatedAt: '2026-09-09'
 tags:
   - AI

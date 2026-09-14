@@ -12,7 +12,7 @@ vi.mock("next/navigation", async (importOriginal) => ({
 }))
 
 const index: SearchablePost[] = [
-    { summary: { id: "iphone", slug: "iphone", href: "/post/iphone", source: "local", title: "아이폰 이야기", description: "접히는 기기", publishedAt: "2026-09-11", category: "ai-agents", tags: [], likeCount: 0 }, text: "아이폰과 통신의 변화" },
+    { summary: { id: "iphone", slug: "iphone", href: "/post/iphone", source: "local", title: "아이폰 이야기", description: "접히는 기기", publishedAt: "2026-09-11T01:54:49Z", category: "ai-agents", tags: [], likeCount: 0 }, text: "아이폰과 통신의 변화" },
     { summary: { id: "android", slug: "android", href: "/post/android", source: "local", title: "안드로이드 이야기", description: "개발 기록", publishedAt: "2026-09-10", category: "development", tags: [], likeCount: 0 }, text: "통신 앱 만들기" },
 ]
 const render = () => renderToStaticMarkup(createElement(PostSearch, { index }))
@@ -27,6 +27,8 @@ describe("static search client", () => {
         expect(html).toContain('href="/ko/post/iphone"')
         expect(html).not.toContain('href="/ko/post/android"')
         expect(html).toContain('value="아이폰"')
+        expect(html).toContain('dateTime="2026-09-11T01:54:49Z"')
+        expect(html).toContain("10:54 KST")
         expect(html).not.toContain("이전 글 보관함을 모두 불러오지 못했습니다")
         expect(fetchMock).not.toHaveBeenCalled()
     })

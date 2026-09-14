@@ -265,6 +265,17 @@ async function main() {
     const draftAssetDir = path.join(draftRoot, "assets")
     const previewDir = path.join(outputRoot, ".content-preview")
     const outputPath = path.join(contentDir, `${metadata.slug}.md`)
+    // A draft's calendar date is not its publication instant. Stamp new public
+    // imports, but retain the original publication time when updating a post.
+    if (options.mode === "publish" && /^\d{4}-\d{2}-\d{2}$/.test(metadata.publishedAt)) {
+        try {
+            const existing = matter(await fs.readFile(outputPath, "utf8"))
+            metadata.publishedAt = isoDate(existing.data.publishedAt, "publishedAt")
+        } catch (error) {
+            if (error.code !== "ENOENT") throw error
+            metadata.publishedAt = new Date().toISOString()
+        }
+    }
     const assetDir = path.join(options.mode === "publish" ? publicDir : draftAssetDir, metadata.slug)
 
     console.log(JSON.stringify({ mode: options.mode, source: sourcePath, output: outputPath, metadata, attachments: assets.map((asset) => asset.fileName) }, null, 2))

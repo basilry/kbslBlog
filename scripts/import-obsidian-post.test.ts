@@ -30,11 +30,28 @@ describe("Obsidian importer", () => {
         const source = '---\ntitle: Categorized\nslug: categorized\ndescription: Category test\npublishedAt: "2026-09-07"\ncategory: ai-agents\ntags: []\ndraft: true\n---\nBody'
         await writeFile(note, source)
         const args = [path.resolve("scripts/import-obsidian-post.mjs"), "--source", note, "--output-root", fixture]
+        const started = Date.now()
         await execFileAsync(process.execPath, [...args, "--publish"])
         const imported = await readFile(path.join(fixture, "content", "posts", "categorized.md"), "utf8")
-        expect(parseMarkdownSource(imported).metadata.category).toBe("ai-agents")
+        const metadata = parseMarkdownSource(imported).metadata
+        expect(metadata.category).toBe("ai-agents")
+        expect(Date.parse(metadata.publishedAt)).toBeGreaterThanOrEqual(started)
+        expect(Date.parse(metadata.publishedAt)).toBeLessThanOrEqual(Date.now())
+        await execFileAsync(process.execPath, [...args, "--publish", "--force"])
+        const updated = parseMarkdownSource(await readFile(path.join(fixture, "content", "posts", "categorized.md"), "utf8"))
+        expect(updated.metadata.publishedAt).toBe(metadata.publishedAt)
         await writeFile(note, source.replace("category: ai-agents", "category: unknown"))
         await expect(execFileAsync(process.execPath, args)).rejects.toThrow(/category must be/)
+    })
+
+    it("preserves an explicit publication timestamp including its timezone", async () => {
+        const fixture = await mkdtemp(path.join(os.tmpdir(), "kbsl-import-"))
+        temporaryDirectories.push(fixture)
+        const note = path.join(fixture, "note.md")
+        await writeFile(note, '---\ntitle: Timed\nslug: timed\ndescription: Timestamp\npublishedAt: "2026-09-14T10:30:00+09:00"\ntags: []\ndraft: true\n---\nBody')
+        await execFileAsync(process.execPath, [path.resolve("scripts/import-obsidian-post.mjs"), "--source", note, "--output-root", fixture, "--publish"])
+        const post = parseMarkdownSource(await readFile(path.join(fixture, "content", "posts", "timed.md"), "utf8"))
+        expect(post.metadata.publishedAt).toBe("2026-09-14T10:30:00+09:00")
     })
 
     it("keeps draft attachments outside the public directory", async () => {

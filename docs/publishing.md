@@ -11,7 +11,7 @@
 title: "글 제목"
 slug: stable-lowercase-slug
 description: "검색 결과와 글 목록에 표시할 한두 문장"
-publishedAt: "2026-09-07"
+publishedAt: "2026-09-07T14:36:47+09:00"
 category: development
 tags:
   - nextjs
@@ -21,6 +21,10 @@ draft: true
 ```
 
 `title`, `slug`, `description`, `publishedAt`, `tags`, `draft`가 기본 필드입니다. `updatedAt`, `project`, `thumbnail`은 선택 사항입니다. thumbnail은 HTTPS URL만 허용하며 로컬 이미지는 본문 첨부로 넣습니다. slug는 영문 소문자, 숫자, 하이픈만 사용할 수 있고 기존 숫자 ID 글과 충돌하지 않도록 숫자만으로 만들 수 없습니다. 공개 주소는 `/post/{slug}`로 유지됩니다.
+
+발행 글의 `publishedAt`에는 시간대가 포함된 ISO 날짜·시간을 기록합니다. 화면의 게시 시각은 한국어와 영어 모두 한국 시간(Asia/Seoul, KST)으로 표시하며, RSS와 검색 메타데이터에도 같은 시각을 사용합니다. 영어 번역은 원문 글의 최초 발행 시각을 공유합니다.
+
+초안에는 날짜만 적어 둘 수 있습니다. 날짜만 있는 새 글을 `--publish`로 가져오면 실행 시각이 자동 기록됩니다. 같은 글을 `--publish --force`로 갱신할 때는 기존 발행 시각을 보존합니다. 명시한 날짜·시간은 그대로 사용하므로, 과거 글을 이전할 때는 확인된 시각을 넣습니다. 시간 기록이 없는 자료는 임의로 자정으로 표시하지 않습니다.
 
 저장소의 [초안 예시](../content/posts/publishing-pipeline-preview.md)는 비밀 정보가 없는 형식 샘플이며 웹 공개 데이터 조회에서 제외됩니다. 실제 작업 중인 초안은 아래 `--write` 흐름으로 Git 제외 영역에 보관합니다.
 

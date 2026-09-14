@@ -4,7 +4,7 @@ slug: humanoid-personhood-and-democracy
 description: >-
   각자 휴머노이드 로봇을 갖는 미래를 상상한다. 로봇이 감정과 자기만의 목표를 갖게 된다면, 소유권과 인격, 인간과 사이보그의 경계,
   민주주의의 시민 자격은 어떻게 달라져야 할까.
-publishedAt: '2026-09-10'
+publishedAt: '2026-09-10T15:22:08.000+09:00'
 tags:
   - AI
   - AGI

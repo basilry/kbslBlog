@@ -2,7 +2,7 @@
 title: "Communication devices after iPhone Duo, and security for cyborgs"
 slug: iphone-duo-cyborg-communication-security
 description: "The iPhone Duo announcement makes me imagine future communication devices: the risks of hacking devices connected to the nervous system, security for cyborgs, international cooperation, and the work I want to prepare for."
-publishedAt: "2026-09-11"
+publishedAt: '2026-09-11T10:54:49.000+09:00'
 category: ai-agents
 tags:
   - Future technology

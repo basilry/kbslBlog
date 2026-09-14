@@ -5,7 +5,7 @@ slug: building-an-agent-market-with-astra-and-x402
 description: >-
   Astra와 함께 에이전트들이 협업하고 거래하는 시장을 꿈꾼다. Agent Communication Protocol에서 A2A로 이어지는
   통신 기술과 x402를 활용해, 에이전트가 찾아오는 서비스를 만들고 싶은 개발자의 기록.
-publishedAt: '2026-09-09'
+publishedAt: '2026-09-09T11:23:33.000+09:00'
 tags:
   - AI
   - Astra

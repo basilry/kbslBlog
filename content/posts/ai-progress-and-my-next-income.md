@@ -5,7 +5,7 @@ slug: ai-progress-and-my-next-income
 description: >-
   GPT-6 Astra를 쓰며 느낀 경이로움과 생계에 대한 불안. 프리랜서 개발자인 내가 lahamu, x402, 블로그와 인프런 강의에서
   다음 수입의 가능성을 찾는 이유를 기록한다.
-publishedAt: '2026-09-07'
+publishedAt: '2026-09-07T14:36:47.000+09:00'
 updatedAt: '2026-09-09'
 tags:
   - AI

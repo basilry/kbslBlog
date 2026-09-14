@@ -2,7 +2,7 @@
 title: "I support remote work. It should come with accountability for results"
 slug: remote-work-autonomy-and-accountability
 description: "Working from home during the pandemic helped me focus on coding. My frustration with management's preference for face-to-face work, and why I think the freedom to choose where to work must come with responsibility for results."
-publishedAt: "2026-09-10"
+publishedAt: '2026-09-10T10:02:01.000+09:00'
 category: work-life
 tags:
   - Remote work

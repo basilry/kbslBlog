@@ -1,5 +1,6 @@
 import { translateData } from "@lib/i18n/translate"
 import { pageLocale, type LocalePageProps } from "@lib/i18n/server"
+import { formatPostDate } from "@lib/i18n/config"
 import Link from "@components/ui/LocaleLink"
 import { staticPageMetadata } from "@lib/seo"
 import originalProjects from "@lib/json/mainProjects.json"
@@ -31,7 +32,7 @@ export default async function Home({ params }: LocalePageProps) {
         <section aria-labelledby="recent-posts" className={styles.section}>
             <div className={styles.sectionHeading}><h2 id="recent-posts">{en ? "Recent posts" : "최근 글"}</h2><Link href="/post">{en ? "View all posts →" : "모든 글 보기 →"}</Link></div>
             {posts.items.length > 0 ? <div className={styles.posts}>{posts.items.map((post) => <article key={post.href} className={styles.post}>
-                <time dateTime={post.publishedAt}>{post.publishedAt.slice(0, 10)}</time>
+                <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt, locale)}</time>
                 <h3><Link href={post.href}>{post.title}</Link></h3><p>{post.description}</p>
             </article>)}</div> : <p className={styles.empty}>{posts.legacyUnavailable ? (en ? "The post list is temporarily unavailable. Please try again shortly." : "지금은 글 목록을 불러오지 못했습니다. 잠시 후 글 목록에서 다시 확인해 주세요.") : (en ? "No posts are published yet. Explore the projects in the meantime." : "아직 공개된 글이 없습니다. 진행 중인 프로젝트를 먼저 둘러보세요.")}</p>}
         </section>

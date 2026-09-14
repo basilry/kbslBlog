@@ -2,7 +2,7 @@
 title: "If humanoids have dreams, could we accept them as citizens?"
 slug: humanoid-personhood-and-democracy
 description: "Imagining a future in which everyone has a humanoid robot. If robots develop feelings, goals, and dreams of their own, how should ownership, personhood, the boundary between humans and cyborgs, and democratic citizenship change?"
-publishedAt: "2026-09-10"
+publishedAt: '2026-09-10T15:22:08.000+09:00'
 category: ai-agents
 tags:
   - AI
