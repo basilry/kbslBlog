@@ -1,0 +1,87 @@
+@use "@styles/variable.scss" as *;
+
+.likes {
+    grid-area: likes;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding: 16px 0 32px;
+    > p { flex: 1; min-width: 200px; color: $text-secondary; font-size: 14px; line-height: 1.6; }
+}
+.likeButton {
+    display: inline-flex; align-items: center; gap: 10px; min-height: 46px;
+    padding: 10px 20px; border: 1px solid $separator-light; border-radius: $radius-full;
+    background: transparent; color: $text-primary; cursor: pointer;
+    svg { fill: none; stroke: currentColor; stroke-width: 1.6; }
+    strong { font-variant-numeric: tabular-nums; font-size: 14px; }
+    &[aria-pressed="true"] { border-color: #efbdd1; background: #fff3f7; color: #ae225b; svg { fill: currentColor; } }
+}
+.community { width: min(820px, 100%); margin: 0 auto; padding-bottom: 48px; scroll-margin-top: 104px; }
+.heading { margin-bottom: 24px; h2 { display: flex; gap: 12px; align-items: baseline; font-size: 24px; font-weight: 650; } h2 span { color: $pink-pressed; font-size: 18px; } p { margin-top: 8px; color: $text-secondary; font-size: 14px; line-height: 1.7; } }
+.community button, .likes button {
+    font: inherit; font-size: 14px; cursor: pointer;
+    &:disabled { cursor: default; opacity: .55; }
+    &:focus-visible { outline: 2px solid $pink-pressed; outline-offset: 4px; }
+}
+.composer { padding: 24px; background: $surface-secondary; border: 1px solid $separator-light; border-radius: 16px; }
+.composer label, .inlineForm label { display: block; font-size: 13px; font-weight: 600; }
+.composer input, .composer textarea, .inlineForm textarea, .inlineForm select {
+    width: 100%; min-width: 0; border: 1px solid #c8c8d0; border-radius: 9px; background: $white; color: $text-primary;
+    padding: 12px 14px; font: inherit; font-size: 15px; line-height: 1.65; box-sizing: border-box;
+    &::placeholder { color: #76767c; }
+    &:focus { outline: 2px solid $pink-pressed; outline-offset: 2px; }
+}
+.composer input { max-width: 300px; margin-bottom: 16px; min-height: 44px; }
+.composer textarea, .inlineForm textarea { display: block; resize: vertical; min-height: 132px; }
+.nameRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; min-height: 24px; }
+.textButton, .commentActions button { border: 0; background: transparent; color: $text-secondary; text-decoration: underline; text-underline-offset: 3px; padding: 8px 0; }
+.composerFooter { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin: 10px 0 20px; color: $text-secondary; font-size: 12px; line-height: 1.6; span { margin-left: auto; font-variant-numeric: tabular-nums; } }
+.primary { min-height: 44px; border: 1px solid $pink-pressed; border-radius: 9px; padding: 10px 20px; background: $pink-pressed; color: white; font-weight: 600; }
+.login { > p { margin: 0 0 12px; font-size: 13px; color: $text-secondary; } }
+.loginButtons { display: flex; flex-wrap: wrap; gap: 10px; button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; padding: 10px 18px; border-radius: 9px; font-weight: 550; } }
+.google { background: white; border: 1px solid #747775; color: #1f1f1f; font-family: "Google Sans", Arial, $Pretendard; }
+.kakao { background: #fee500; border: 1px solid #fee500; color: #191919; svg { fill: #191919; } }
+.feedback { display: block; color: $text-secondary; font-size: 13px; line-height: 1.65; &:empty { display: none; } }
+.composer > .feedback { margin-top: 16px; }
+.feedback[role="alert"], .reportCount { color: #a52b3f; }
+.error { margin-bottom: 20px; padding: 16px; border: 1px solid #e5bdc4; border-radius: 10px; color: #852a3a; background: #fff8f9; font-size: 14px; line-height: 1.7; button { margin-top: 8px; padding: 8px 14px; border: 1px solid currentColor; border-radius: 8px; background: transparent; color: inherit; } }
+.loading, .empty { padding: 20px 0; color: $text-secondary; font-size: 14px; }
+.empty { text-align: center; margin: 24px 0; }
+.commentList, .replies { margin: 0; padding: 0; list-style: none; }
+.comment { padding: 24px 0; border-bottom: 1px solid $separator-light; scroll-margin-top: 112px; }
+.commentHeader { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 13px; strong { font-weight: 650; overflow-wrap: anywhere; } time, > span:last-child:not(.avatar):not(.badge) { color: $text-secondary; font-size: 12px; } time { margin-left: auto; } }
+.avatar { display: inline-grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #f1e8f5; color: #833599; font-weight: 600; }
+.badge { padding: 2px 7px; border-radius: 4px; color: #873398; background: #f5ebf8; font-size: 11px; }
+.commentBody { margin: 12px 0 4px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; line-height: 1.85; }
+.commentActions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; button, span { font-size: 12px; } button { min-height: 36px; } }
+.tombstone { margin-top: 12px; color: $text-secondary; font-size: 14px; }
+.replies { margin-top: 12px; padding-left: 20px; border-left: 2px solid $separator-light; .comment:last-child { padding-bottom: 0; border-bottom: 0; } }
+.inlineForm { display: grid; gap: 12px; padding: 16px; margin: 12px 0; border-radius: 10px; background: $surface-secondary; font-size: 14px; line-height: 1.6; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; button { min-height: 40px; padding: 8px 16px; border: 1px solid #bdbdc4; border-radius: 8px; background: transparent; color: inherit; } .primary { background: $pink-pressed; border-color: $pink-pressed; color: white; } .danger { background: #a82a42; border-color: #a82a42; color: white; } }
+.replying { display: flex; align-items: center; gap: 12px; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid $separator-light; color: $pink-pressed; font-size: 13px; overflow-wrap: anywhere; button { flex-shrink: 0; padding: 8px; border: 0; background: transparent; color: inherit; } }
+.loadMore { display: block; width: 100%; min-height: 44px; padding: 12px; margin: 20px 0; border: 1px solid $separator-light; border-radius: 9px; background: transparent; color: inherit; }
+.legacy { margin-top: 32px; padding-top: 20px; border-top: 1px solid $separator-light; summary { cursor: pointer; padding: 8px 0; color: $text-secondary; font-size: 14px; &:focus-visible { outline: 2px solid $pink-pressed; outline-offset: 4px; } } > p { margin: 10px 0 24px; color: $text-secondary; font-size: 13px; line-height: 1.6; } }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+:global(#darkMode) {
+    .likes > p, .heading p, .composerFooter, .login > p, .feedback, .loading, .empty, .tombstone, .textButton, .commentActions button, .legacy summary, .legacy > p { color: #c1c1c9; }
+    .heading h2 span, .replying { color: #d99aee; }
+    .likeButton, .composer, .comment, .replies, .legacy, .loadMore, .replying { border-color: #44444c; }
+    .likeButton { color: #f1f1f2; &[aria-pressed="true"] { background: #391e2c; color: #ffb2d0; border-color: #864565; } }
+    .composer, .inlineForm { background: #1c1c1e; }
+    .composer input, .composer textarea, .inlineForm textarea, .inlineForm select { border-color: #595961; background: #111113; color: #f1f1f2; &::placeholder { color: #a5a5af; } }
+    .community button:focus-visible, .likes button:focus-visible, .composer input:focus, .composer textarea:focus, .inlineForm textarea:focus { outline-color: #d99aee; }
+    .commentHeader time, .commentHeader > span:last-child:not(.avatar):not(.badge) { color: #b1b1ba; }
+    .avatar, .badge { background: #36243e; color: #dfb3ec; }
+    .error { background: #2e1c23; border-color: #784153; color: #ffc1d0; }
+    .feedback[role="alert"], .reportCount { color: #ffb3c2; }
+}
+@media (max-width: 600px) {
+    .composer { padding: 16px; }
+    .likes { padding-top: 4px; > p { flex-basis: 100%; } }
+    .loginButtons { flex-direction: column; button { width: 100%; } }
+    .commentHeader { time { flex-basis: 100%; margin: 0 0 0 38px; } }
+    .replies { padding-left: 12px; }
+    .composerFooter span { width: 100%; text-align: right; }
+}

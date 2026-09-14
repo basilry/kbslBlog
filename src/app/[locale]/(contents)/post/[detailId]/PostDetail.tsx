@@ -12,6 +12,10 @@ import type { PublicPost } from "@lib/content"
 import type { AdjacentPosts } from "@lib/content/adjacent-posts"
 import { blogPosting, serializeJsonLd } from "@lib/seo"
 import PostReaderShell from "./PostReaderShell"
+import { communityOptions } from "@lib/community/config"
+import PostCommunityProvider from "@components/community/PostCommunityProvider"
+import PostLikes from "@components/community/PostLikes"
+import PostComments from "@components/community/PostComments"
 import styles from "@styles/pages/postDetail.module.scss"
 
 interface PostDetailProps {
@@ -24,8 +28,10 @@ export default function PostDetail({ post, adjacent }: PostDetailProps): ReactEl
     const m = messages(locale)
     const formatDate = (value: string) => formatPostDate(value, locale)
     const outline = buildPostOutline(post.html)
+    const community = communityOptions()
     return (
-        <PostReaderShell legacyPost={post.legacyEditorPost}>
+        <PostReaderShell legacyPost={community.enabled ? undefined : post.legacyEditorPost}>
+            <PostCommunityProvider key={post.slug} postId={post.slug} locale={locale} options={community}>
             <Wrapper>
                 <div className={styles.page} data-post-page="detail">
                     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPosting(post)) }} />
@@ -52,6 +58,7 @@ export default function PostDetail({ post, adjacent }: PostDetailProps): ReactEl
                         </header>
                         <PostTableOfContents key={post.id} headings={outline.headings} />
                         <div id="post-content" className={styles.content} dangerouslySetInnerHTML={{ __html: outline.html }} />
+                        {community.enabled && <PostLikes />}
                         {adjacent && <nav className={styles.adjacentNavigation} aria-label={m.postNavigation}>
                             <div className={styles.adjacentHeading}><h2>{m.morePosts}</h2><Link href="/post">{m.viewAll}</Link></div>
                             <div className={styles.adjacentCards}>
@@ -69,10 +76,11 @@ export default function PostDetail({ post, adjacent }: PostDetailProps): ReactEl
                         </nav>}
                     </article>
                     <section className={styles.comments} aria-label={m.comments}>
-                        <Giscus emotion={false} />
+                        {community.enabled ? <PostComments /> : <Giscus emotion={false} />}
                     </section>
                 </div>
             </Wrapper>
+            </PostCommunityProvider>
         </PostReaderShell>
     )
 }

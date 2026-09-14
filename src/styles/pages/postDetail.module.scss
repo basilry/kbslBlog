@@ -16,7 +16,7 @@
     display: grid;
     grid-template-columns: minmax(0, 820px) 216px;
     column-gap: clamp(28px, 4vw, 56px);
-    grid-template-areas: "back ." "header ." "content toc" "navigation .";
+    grid-template-areas: "back ." "header ." "content toc" "likes ." "navigation .";
 }
 
 .backLink {
