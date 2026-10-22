@@ -4,9 +4,12 @@ Next.js 기반 개발 블로그와 프로젝트 포트폴리오입니다. 기존
 
 ## 시작하기
 
-Node.js 22 LTS 이상과 npm을 사용합니다. `.nvmrc`는 22를 지정합니다.
+Node.js 24 LTS의 **24.22.1 이상**과 npm을 사용합니다. `.nvmrc`는 24.22.1을 지정하며, `package.json`과 `.npmrc`는 수정 전 버전 및 다른 메이저 버전에서의 설치를 차단합니다. Cloudflare Worker의 로컬 개발 도구에도 같은 기준을 적용합니다.
+
+이 최소 버전은 [2026년 10월 21일 Node.js 보안 업데이트](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases)의 Brotli 압축 해제, TLS 인증서 검증 등 수정 사항을 포함합니다. 시스템에 설치된 Node도 업데이트한 뒤 아래 명령을 실행합니다.
 
 ```sh
+node --version
 npm ci
 npm run dev
 ```
@@ -61,6 +64,8 @@ npm start
 별도 EC2 환경에서 PM2를 사용한다면 검증된 빌드 후 기존 설정으로 `pm2 startOrReload ecosystem.config.js --update-env`를 실행합니다. PM2는 운영 환경에 별도 설치되어 있어야 합니다. 기존 프로세스와 환경변수·프록시 설정을 확인하고 이전 릴리스로 돌아갈 수 있게 배포합니다. 운영 환경에서는 개발 서버를 사용하지 않습니다.
 
 현재 `www.basilry.kim` 운영 환경은 **Vercel**이며, GitHub `master` 브랜치에 연결된 배포를 사용합니다. GitHub Actions는 push/PR 시 설치·lint·타입·테스트·빌드를 검사합니다. Vercel 배포와 Actions 검사는 별도로 진행되므로, 푸시 후 두 결과를 모두 확인해야 합니다.
+
+[Vercel은 Node의 메이저 버전만 선택하고 세부 보안 패치는 직접 배포합니다](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions). `engines.node`는 24.x를 선택하며, 설치 시 최소 24.22.1을 요구합니다. `npm run build`가 출력하는 실제 버전을 배포 로그에서 확인합니다. 공급자의 런타임 패치 적용 여부도 확인해야 하며, 설정 파일 변경만으로 기존 배포가 업데이트됐다고 판단하지 않습니다.
 
 운영 배포 절차:
 
