@@ -76,7 +76,7 @@ const Editor = (props: IEditorProps): ReactElement => {
     const titleEditor = useEditor({
         extensions: [
             CustomDocument,
-            StarterKit.configure({ document: false }),
+            StarterKit.configure({ document: false, link: false, underline: false, trailingNode: false }),
             Placeholder.configure({ placeholder: "제목" }),
             CharacterCount.configure({
                 limit: 50,
@@ -94,8 +94,8 @@ const Editor = (props: IEditorProps): ReactElement => {
         extensions: [
             // 구글 드라이브 이미지 확장을 먼저 등록
             GoogleDriveImageExtension,
-            // 기본 StarterKit 사용
-            StarterKit,
+            // v3 StarterKit 기본 포함 Link/Underline은 아래 별도 설정 사용, TrailingNode는 v2 출력 유지 위해 비활성화
+            StarterKit.configure({ link: false, underline: false, trailingNode: false }),
             // 명시 버튼
             TextAlign.configure({
                 types: ["heading", "paragraph"],
@@ -191,14 +191,14 @@ const Editor = (props: IEditorProps): ReactElement => {
 
     useEffect(() => {
         if (!titleEditor || titleEditor.getText() === title) return
-        titleEditor.commands.setContent(createTitleDocument(title), false)
+        titleEditor.commands.setContent(createTitleDocument(title), { emitUpdate: false })
     }, [title, titleEditor])
 
     useEffect(() => {
         if (!contentsEditor) return
         const nextContents = contents || "<p></p>"
         if (contentsEditor.getHTML() !== nextContents) {
-            contentsEditor.commands.setContent(nextContents, false)
+            contentsEditor.commands.setContent(nextContents, { emitUpdate: false })
         }
     }, [contentsEditor, contents])
 
