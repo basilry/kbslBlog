@@ -234,10 +234,10 @@
   },
   {
     "id": 15,
-    "title": "티머니 | Dooray SaaS 연동",
+    "title": "티머니 | Dooray SaaS 연동 (SSO·EDMS)",
     "period": "2026.08 ~ 현재 | 진행 중",
     "logos": [],
-    "description": "티머니 그룹웨어의 Dooray SaaS 이관 사업에서 SSO 연동과 EDMS 구축을 담당하며, 시퀀스·연동규격·화면을 설계하고 있습니다.",
+    "description": "티머니 그룹웨어의 Dooray SaaS 이관 사업에서 SSO 중계 서버와 EDMS를 Java·Spring Boot·Thymeleaf·Oracle로 개발하고, RHEL 서버에 CLI로 배포·운영하고 있습니다.",
     "url": "/projects/tmoney"
   }
 ]
