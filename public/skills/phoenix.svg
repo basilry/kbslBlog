@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Phoenix">
+  <rect width="120" height="120" rx="20" fill="#FD4F00"/>
+  <path d="M60 16C70 30 82 38 82 56C82 70 72 80 60 80C48 80 38 70 38 56C38 46 44 40 48 34C48 44 52 50 58 50C54 38 56 26 60 16Z" fill="#FFFFFF"/>
+  <text x="60" y="101" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#FFFFFF">PHOENIX</text>
+</svg>

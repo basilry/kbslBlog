@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Oban">
+  <rect width="120" height="120" rx="20" fill="#1F2937"/>
+  <rect x="28" y="22" width="64" height="12" rx="6" fill="#FFFFFF"/>
+  <rect x="28" y="40" width="52" height="12" rx="6" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="28" y="58" width="40" height="12" rx="6" fill="#FFFFFF" opacity="0.6"/>
+  <text x="60" y="101" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="1" fill="#FFFFFF">OBAN</text>
+</svg>

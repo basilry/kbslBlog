@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Elixir">
+  <rect width="120" height="120" rx="20" fill="#4B275F"/>
+  <path d="M60 16C48 32 36 46 36 58C36 71 47 80 60 80C73 80 84 71 84 58C84 46 72 32 60 16Z" fill="#FFFFFF"/>
+  <text x="60" y="101" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="1" fill="#FFFFFF">ELIXIR</text>
+</svg>
