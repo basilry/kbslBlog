@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Render">
+  <rect width="120" height="120" rx="20" fill="#111111"/>
+  <path d="M42 78V30H62A14 14 0 0 1 62 58H42M60 58L80 78" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="101" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="1" fill="#FFFFFF">RENDER</text>
+</svg>

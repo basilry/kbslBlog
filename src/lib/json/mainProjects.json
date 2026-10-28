@@ -239,5 +239,20 @@
     "logos": [],
     "description": "티머니 그룹웨어의 Dooray SaaS 이관 사업에서 SSO 중계 서버와 EDMS를 Java·Spring Boot·Thymeleaf·Oracle로 개발하고, RHEL 서버에 CLI로 배포·운영하고 있습니다.",
     "url": "/projects/tmoney"
+  },
+  {
+    "id": 16,
+    "title": "Tickmark (감사인-AI 협업 Work OS)",
+    "period": "2026.10 ~ 현재 | 진행 중",
+    "logos": [
+      {
+        "src": "/myFace.png",
+        "alt": "myFace",
+        "width": 30,
+        "height": 30
+      }
+    ],
+    "description": "회계감사 분개 테스트를 위한 감사인-AI 협업 Work OS입니다. Elixir·Phoenix LiveView로 GL 적재, 룰 8종 병렬 실행, AI 트리아지, 검토 승인, 감사 로그까지 하나의 흐름으로 연결했습니다.",
+    "url": "/projects/tickmark"
   }
 ]

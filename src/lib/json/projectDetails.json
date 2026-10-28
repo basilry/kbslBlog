@@ -680,5 +680,189 @@
       }
     ],
     "noImageMessage": "진행 중인 사내 업무 시스템으로, 화면과 내부 연동 상세는 공개하지 않습니다."
+  },
+  {
+    "id": 16,
+    "slug": "tickmark",
+    "title": "Tickmark | 감사인-AI 협업 Work OS (분개 테스트)",
+    "period": "2026.10 ~ 현재 | 진행 중",
+    "logos": [
+      {
+        "src": "/myFace.png",
+        "alt": "myFace",
+        "width": 30,
+        "height": 30
+      }
+    ],
+    "description": "회계감사의 분개 테스트(Journal Entry Testing)를 감사인과 AI 에이전트가 함께 수행하는 Work OS입니다. 삼정KPMG Audit Innovation Software Engineer 지원 포트폴리오로, Elixir를 처음 배우며 1인으로 개발하고 있습니다. 총계정원장(GL)을 적재해 룰 8종을 병렬로 실행하고, 위험 점수로 고른 전표에 AI 트리아지 제안을 붙인 뒤, 작성자 결론과 검토자 승인·반려를 변경할 수 없는 감사 로그로 남깁니다. \"AI는 제안하고, 판단과 서명은 사람이 한다\"는 원칙을 데이터 모델과 DB 제약으로 보장했습니다.",
+    "role": [
+      "1인 전 과정 개발 (기획·설계·구현·테스트·배포)",
+      "감사 도메인 분석: 분개 테스트 룰, 위험 점수, 직무분리(SoD) 워크플로 설계",
+      "Elixir·Phoenix LiveView 풀스택 개발과 Oban 비동기 파이프라인 설계",
+      "AI 에이전트(Claude, Codex) 병렬 개발 오케스트레이션과 코드 리뷰"
+    ],
+    "techStack": [
+      "elixir",
+      "phoenix",
+      "postgresql",
+      "oban",
+      "claude",
+      "docker",
+      "render"
+    ],
+    "teamSize": "1인 개발 (AI 에이전트 병렬 개발 오케스트레이션)",
+    "url": "https://github.com/basilry/kpmg-elixir",
+    "achievementsTitle": "주요 구현과 성과",
+    "achievements": [
+      {
+        "title": "분개 테스트 워크플로 (GL 적재부터 감사 로그까지)",
+        "details": [
+          "GL 적재 -> 룰 8종 병렬 실행 -> 위험 점수로 전표 선별 -> AI 트리아지 제안 -> 작성자 결론 -> 검토자 승인·반려 -> 감사 로그로 이어지는 흐름을 한 화면 흐름으로 구현",
+          "기말 수기 전표, 라운드 금액, 승인 통제 이탈, 증빙일 괴리, 주말·공휴일 전기, 업무시간 외 입력, 중복 전표 의심, 희귀 계정 조합 등 룰 8종을 룰당 파일 하나로 구현",
+          "적중한 룰의 가중치 합으로 전표별 위험 점수(최대 100)를 계산하고, 실행마다 저장한 기준점수(기본 25) 이상인 전표만 검토 큐와 AI 트리아지 대상으로 선별"
+        ]
+      },
+      {
+        "title": "감사 추적성과 직무분리(SoD)",
+        "details": [
+          "상태 변경·감사 이벤트·Oban job을 Ecto.Multi로 한 트랜잭션에 커밋하고, DB 트리거로 감사 로그의 UPDATE·DELETE를 거부하는 append-only 구조 구현",
+          "결론을 낸 사람이 자신의 결론을 승인하지 못하도록 컨텍스트 코드와 DB 제약(CHECK, 복합 FK) 양쪽에서 직무분리 보장",
+          "AI 제안은 별도 테이블에 불변으로 저장해 전표 상태를 바꾸지 않고, 결론이 참고한 제안을 ai_triage_id로 추적"
+        ]
+      },
+      {
+        "title": "Oban 비동기 처리와 실시간 화면",
+        "details": [
+          "Oban Pro의 Batch 없이 OSS 기능만으로 실행 하나를 룰 수만큼 fan-out하고, 부모 행을 먼저 FOR UPDATE로 잠그는 순서로 동시 마감과 교착을 방지",
+          "조회 기반인 Oban unique 대신 조건부 UPDATE로 상태가 실제로 바뀐 행만 job으로 넣어 중복 실행 방지",
+          "커밋 뒤 Phoenix PubSub로 방송해 룰 진행률, 결론 제출, 새 감사 이벤트를 별도 프런트엔드 상태 관리 없이 LiveView에 실시간 반영"
+        ]
+      },
+      {
+        "title": "LLM 연동 안정성",
+        "details": [
+          "LLM 클라이언트를 behaviour 뒤에 두고 Claude API(Req 직접 호출)와 결정적인 Fake 구현을 분리해, API 키 없이도 전체 흐름과 테스트가 동작",
+          "모든 AI 제안에 모델 ID, 프롬프트 버전, 입력 해시를 저장하고, 같은 입력이면 API를 다시 호출하지 않도록 구현",
+          "적요·거래처 등 원문을 untrusted_text로 감싸 프롬프트 주입에 대비하고, 오류를 값으로 나눠 워커가 재시도·대기(snooze)·취소를 선택"
+        ]
+      },
+      {
+        "title": "검증과 성능 개선",
+        "details": [
+          "시드 기반 합성 GL 생성기(기본 시드 전표 8,341건, 행 19,804개)와 정답 라벨을 만들고, 시드 2개로 룰 판정 결과를 정답과 대조하는 시험 작성",
+          "기본 시드에서 15초 DB 제한을 넘던 룰 쿼리를 실행 계획(Repo.explain)으로 분석하고, 제한 시간을 늘리지 않고 집계 순서와 쿼리 구조를 바꿔 해결",
+          "경고 0 컴파일·포맷·테스트를 묶은 mix precommit으로 매 변경을 검증하며, 2026-10-28 기준 599개 테스트 통과"
+        ]
+      }
+    ],
+    "extraSections": [
+      {
+        "title": "화면 구성",
+        "items": [
+          {
+            "subtitle": "S1 감사 대상 목록·S2 상세",
+            "details": [
+              "감사 대상 생성, 멤버와 역할(작성자·검토자) 관리, GL 적재 이력과 테스트 실행 이력"
+            ]
+          },
+          {
+            "subtitle": "S3 GL 불러오기",
+            "details": [
+              "CSV 업로드 또는 시드 기반 합성 GL 생성"
+            ]
+          },
+          {
+            "subtitle": "S4 테스트 실행",
+            "details": [
+              "룰 8종의 실시간 진행률과 위험 전표 목록"
+            ]
+          },
+          {
+            "subtitle": "S5 전표 검토",
+            "details": [
+              "분개 라인, 룰 근거, 점수 계산식, AI 제안 요청, 작성자 결론과 검토자 승인·반려"
+            ]
+          },
+          {
+            "subtitle": "S6 감사 로그",
+            "details": [
+              "행위자(사람·AI·시스템)와 전표번호 필터, 실시간 새 이벤트 알림"
+            ]
+          },
+          {
+            "subtitle": "문서 위키·인증",
+            "details": [
+              "기획·설계·도메인 문서와 개발 기록을 /docs에서 읽는 MDEx 위키, phx.gen.auth 기반 메일 링크·비밀번호 로그인"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "배포와 운영",
+        "items": [
+          {
+            "subtitle": "구성",
+            "details": [
+              "Elixir release를 Docker 이미지로 빌드해 Render(싱가포르)에 배포하고, Neon PostgreSQL에는 인증서와 호스트 이름을 검증하는 TLS로 연결",
+              "Oban의 LISTEN/NOTIFY가 동작하도록 pooled 연결 대신 직접 연결 사용"
+            ]
+          },
+          {
+            "subtitle": "무료 플랜 대응",
+            "details": [
+              "셸과 one-off job이 없는 환경이라 컨테이너 시작 때 마이그레이션을 실행하고, 데모 데이터는 부팅 시드로 한 번만 생성"
+            ]
+          },
+          {
+            "subtitle": "운영 점검·보안",
+            "details": [
+              "커스텀 도메인에 맞춰 LiveView WebSocket의 check_origin 설정을 조정하고, 의존성 보안 권고에 따라 plug_crypto 2.2.1로 갱신",
+              "DB 접속 정보·세션 키·데모 비밀번호는 Render 대시보드 환경 변수로만 관리하고 저장소와 문서에 남기지 않음"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "개발 방식",
+        "items": [
+          {
+            "subtitle": "계약 우선 병렬 개발",
+            "details": [
+              "메인 세션이 작업을 나누고 공유 계약(스키마, 함수 시그니처, PubSub 메시지)을 먼저 문서로 확정한 뒤, AI 에이전트들이 각자 git worktree와 브랜치에서 병렬 구현"
+            ]
+          },
+          {
+            "subtitle": "리뷰와 병합",
+            "details": [
+              "메인 세션이 diff와 테스트 출력을 직접 확인하고 하나씩 병합"
+            ]
+          },
+          {
+            "subtitle": "문서화",
+            "details": [
+              "요구사항 명세서, 기능 정의서, API 연동 규격서, 화면설계서, WBS와 날짜별 개발 기록 30편 작성"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "진행 중인 작업",
+        "items": [
+          {
+            "subtitle": "남은 기능",
+            "details": [
+              "S4의 AI 열과 일괄 AI 요청, 동시 접속 표시(Phoenix Presence)"
+            ]
+          },
+          {
+            "subtitle": "2단계 검토",
+            "details": [
+              "OpenTelemetry(관측성), Ash Framework, ClickHouse(대량 분개 분석), Terraform + Microsoft Azure(인프라)"
+            ]
+          }
+        ]
+      }
+    ],
+    "noImageMessage": "화면 이미지는 준비 중입니다. 구현 내용과 설계 문서는 GitHub 저장소에서 확인할 수 있습니다."
   }
 ]
