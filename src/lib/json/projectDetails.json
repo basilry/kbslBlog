@@ -499,11 +499,11 @@
     "id": 13,
     "slug": "deskDefense",
     "title": "Desk Defense",
-    "period": "2026.02 ~ 현재 | 진행 중",
+    "period": "2026.02 ~ 2026.03 | MVP 완성 후 종료",
     "logos": [
       { "src": "/myFace.png", "alt": "myFace", "width": 30, "height": 30 }
     ],
-    "description": "OSINT 기반 글로벌 안보분석 플랫폼으로, 전 세계 분쟁/안보 데이터를 실시간으로 수집·분석하여 3D 지구본 위에 시각화하는 서비스입니다.",
+    "description": "OSINT 기반 글로벌 안보분석 플랫폼으로, 전 세계 분쟁/안보 데이터를 실시간으로 수집·분석하여 3D 지구본 위에 시각화하는 서비스입니다. 방산 챌린지 사업 신청을 위한 MVP로 제작했으며, MVP 완성 후 프로젝트를 종료했습니다.",
     "role": ["서비스 기획 및 프로덕트 오너", "풀스택 개발: Next.js 기반 프론트엔드 및 데이터 파이프라인 구축", "OSINT 데이터 소스 통합 및 시각화 설계"],
     "techStack": ["typescript", "nextjs", "sass", "vercel"],
     "teamSize": "1인 개발",
@@ -535,15 +535,15 @@
     "id": 14,
     "slug": "deskOntology",
     "title": "Desk Ontology (기업 의사결정 보조)",
-    "period": "2026.03 ~ 현재 | 진행 중",
+    "period": "2026.03 ~ 2026.04 | MVP 완성 후 종료",
     "logos": [
       { "src": "/myFace.png", "alt": "myFace", "width": 30, "height": 30 }
     ],
-    "description": "온톨로지 기반으로 기업 도메인 지식을 구조화하고, AI 에이전트가 의사결정을 보조하는 플랫폼입니다.",
+    "description": "온톨로지 기반으로 기업 도메인 지식을 구조화하고, AI 에이전트가 의사결정을 보조하는 플랫폼입니다. 오픈이노베이션·건설 과제 신청을 위한 B2B PoC로 제작했으며, MVP 완성 후 프로젝트를 종료했습니다.",
     "role": ["서비스 기획 및 프로덕트 오너", "풀스택 개발: Next.js + React 기반 프론트엔드 구현", "AI 에이전트 파이프라인 설계"],
     "techStack": ["typescript", "nextjs", "sass", "vercel"],
     "teamSize": "1인 개발",
-    "url": "https://desk-ontology-web.vercel.app",
+    "url": "https://ontology.6esk.com",
     "achievements": [
       {
         "title": "온톨로지 기반 도메인 지식 구조화",

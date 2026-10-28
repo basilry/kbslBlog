@@ -19,7 +19,7 @@ export default async function Home({ params }: LocalePageProps) {
     const en = locale === "en"
     const projects = translateData(originalProjects, locale)
     const posts = await getLocalizedRecentPosts(locale, 3)
-    const featured = ["/projects/desk", "/projects/deskDefense", "/projects/haruWeather"]
+    const featured = ["/projects/desk", "/projects/tickmark", "/projects/haruWeather"]
         .map((href) => projects.find((project) => project.url === href))
         .filter((project) => project !== undefined)
     return <div className={styles.home}>
